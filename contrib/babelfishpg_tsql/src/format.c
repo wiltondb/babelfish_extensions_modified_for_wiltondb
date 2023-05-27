@@ -19,7 +19,9 @@
 #include "pltsql-2.h"
 
 #include <string.h>
+#ifndef _MSC_VER
 #include <strings.h>
+#endif // !_MSC_VER
 #include <time.h>
 
 #include "utils/syscache.h"

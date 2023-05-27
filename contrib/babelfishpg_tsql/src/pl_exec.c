@@ -64,6 +64,10 @@
 #include "guc.h"
 #include "catalog.h"
 
+#ifdef _MSC_VER
+#include "src/tsql_win.h"
+#endif // _MSC_VER
+
 uint64 rowcount_var = 0;
 List *columns_updated_list = NIL;
 static char *original_query_string = NULL;

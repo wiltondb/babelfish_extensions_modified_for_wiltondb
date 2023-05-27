@@ -85,15 +85,21 @@
 #include <security.h>
 #undef SECURITY_WIN32
 
+#ifdef _MSC_VER
+#define strncasecmp _strnicmp
+#endif // _MSC_VER
+
 #ifndef ENABLE_GSS
 /*
  * Define a fake structure compatible with GSSAPI on Unix.
  */
+#ifndef _MSC_VER
 typedef struct
 {
 	void	   *value;
 	int			length;
 } gss_buffer_desc;
+#endif // !_MSC_VER
 #endif
 #endif							/* ENABLE_SSPI */
 

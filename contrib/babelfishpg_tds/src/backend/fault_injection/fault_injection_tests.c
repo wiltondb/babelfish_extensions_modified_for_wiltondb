@@ -239,11 +239,15 @@ throw_error_buffer(void *arg ,int *num_occurrences)
 	int  can = 0;
 	char tem[10] = "aaaaaaaaaa";
 
+#ifndef _MSC_VER
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Warray-bounds"
 #pragma GCC diagnostic ignored "-Wstringop-overflow"
+#endif // !_MSC_VER
 	memcpy(buffer,tem,10);
+#ifndef _MSC_VER
 #pragma GCC diagnostic pop
+#endif // !_MSC_VER
 	if (can !=0)
 		elog(LOG,"Buffer overflowed \n");
 	else

@@ -40,7 +40,12 @@ typedef int (*TdsSendTypeFunction)(FmgrInfo *finfo, Datum value,
 									  void *vMetaData);
 
 /* COLMETADATA entry for types like INTEGER and SMALLINT */
+#ifndef _MSC_VER
 typedef struct __attribute__((packed)) ColMetaEntry1
+#else // _MSC_VER
+__pragma(pack(push, 1))
+typedef struct ColMetaEntry1
+#endif // !_MSC_VER
 {
 	uint16_t		flags;
 	uint8_t			tdsTypeId;
@@ -48,7 +53,11 @@ typedef struct __attribute__((packed)) ColMetaEntry1
 } ColMetaEntry1;
 
 /* COLMETADATA entry for types like NVARCHAR */
+#ifndef _MSC_VER
 typedef struct __attribute__((packed)) ColMetaEntry2
+#else // _MSC_VER
+typedef struct ColMetaEntry2
+#endif // !_MSC_VER
 {
 	uint16_t		flags;
 	uint8_t			tdsTypeId;
@@ -63,7 +72,11 @@ typedef struct __attribute__((packed)) ColMetaEntry2
 
 
 /* COLMETADATA entry for types like TEXT */
+#ifndef _MSC_VER
 typedef struct __attribute__((packed)) ColMetaEntry3
+#else // _MSC_VER
+typedef struct ColMetaEntry3
+#endif // !_MSC_VER
 {
 	uint16_t		flags;
 	uint8_t			tdsTypeId;
@@ -77,14 +90,22 @@ typedef struct __attribute__((packed)) ColMetaEntry3
 } ColMetaEntry3;
 
 /* COLMETADATA entry for type like DATE */
+#ifndef _MSC_VER
 typedef struct __attribute__((packed)) ColMetaEntry4
+#else // _MSC_VER
+typedef struct ColMetaEntry4
+#endif // !_MSC_VER
 {
 	uint16_t		flags;
 	uint8_t			tdsTypeId;
 } ColMetaEntry4;
 
 /* COLMETADATA entry for type NUMERIC */
+#ifndef _MSC_VER
 typedef struct __attribute__((packed)) ColMetaEntry5
+#else // _MSC_VER
+typedef struct ColMetaEntry5
+#endif // !_MSC_VER
 {
 	uint16_t                flags;
 	uint8_t                 tdsTypeId;
@@ -94,7 +115,11 @@ typedef struct __attribute__((packed)) ColMetaEntry5
 } ColMetaEntry5;
 
 /* COLMETADATA entry for type like TIME, DATETIME2, DATETIMEOFFSET */
+#ifndef _MSC_VER
 typedef struct __attribute__((packed)) ColMetaEntry6
+#else // _MSC_VER
+typedef struct ColMetaEntry6
+#endif // !_MSC_VER
 {
 	uint16_t		flags;
 	uint8_t			tdsTypeId;
@@ -102,7 +127,11 @@ typedef struct __attribute__((packed)) ColMetaEntry6
 } ColMetaEntry6;
 
 /* COLMETADATA entry for types like BINARY VARBINARY */
+#ifndef _MSC_VER
 typedef struct __attribute__((packed)) ColMetaEntry7
+#else // _MSC_VER
+typedef struct ColMetaEntry7
+#endif // !_MSC_VER
 {
 	uint16_t		flags;
 	uint8_t			tdsTypeId;
@@ -110,12 +139,19 @@ typedef struct __attribute__((packed)) ColMetaEntry7
 } ColMetaEntry7;
 
 /* COLMETADATA entry for type like IMAGE */
+#ifndef _MSC_VER
 typedef struct __attribute__((packed)) ColMetaEntry8
+#else // _MSC_VER
+typedef struct ColMetaEntry8
+#endif // !_MSC_VER
 {
         uint16_t                flags;
         uint8_t                 tdsTypeId;
         uint32_t                maxSize;
 } ColMetaEntry8;
+#ifdef _MSC_VER
+__pragma(pack(pop))
+#endif // _MSC_VER
 
 typedef union ColMetaEntry
 {

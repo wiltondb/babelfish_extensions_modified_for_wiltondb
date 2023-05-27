@@ -50,8 +50,10 @@ typedef struct FormData_sysdatabases
 	NameData 	owner;
 	NameData    default_collation;
 	text		name;
+#ifndef _MSC_VER
 	TimestampTz crdate;
 	text		properties;
+#endif // !_MSC_VER
 } FormData_sysdatabases;
 
 typedef FormData_sysdatabases *Form_sysdatabases;
@@ -68,9 +70,11 @@ typedef struct FormData_authid_login_ext
 	TimestampTz	create_date;
 	TimestampTz	modify_date;
 	VarChar		default_database_name;
+#ifndef _MSC_VER
 	VarChar		default_language_name;
 	Jsonb		properties;
 	VarChar		orig_loginname;
+#endif // !_MSC_VER
 } FormData_authid_login_ext;
 
 typedef FormData_authid_login_ext *Form_authid_login_ext;
@@ -152,6 +156,7 @@ typedef struct FormData_authid_user_ext
 	NameData  	rolname;
 	NameData	login_name;
 	BpChar		type;
+#ifndef _MSC_VER
 	int32		owning_principal_id;
 	int32		is_fixed_role;
 	int32		authentication_type;
@@ -165,6 +170,7 @@ typedef struct FormData_authid_user_ext
 	VarChar		default_language_name;
 	VarChar		authentication_type_desc;
 	int32		user_can_connect;
+#endif // !_MSC_VER
 } FormData_authid_user_ext;
 
 typedef FormData_authid_user_ext *Form_authid_user_ext;
@@ -196,12 +202,14 @@ typedef struct FormData_bbf_view_def
 {
 	int16		dbid;
 	VarChar		schema;
+#ifndef _MSC_VER
 	VarChar		object_name;
 	text		definition;
 	uint64		flag_validity;
 	uint64		flag_values;
 	Timestamp	create_date;
 	Timestamp	modify_date;
+#endif // !_MSC_VER
 } FormData_bbf_view_def;
 
 typedef FormData_bbf_view_def *Form_bbf_view_def;
@@ -236,6 +244,7 @@ typedef struct FormData_bbf_function_ext
 {
 	NameData	schema;
 	NameData	funcname;
+#ifndef _MSC_VER
 	VarChar		orig_name;
 	text		function_signature;
 	text		default_positions;
@@ -244,6 +253,7 @@ typedef struct FormData_bbf_function_ext
 	Timestamp	create_date;
 	Timestamp	modify_date;
 	text		definition;
+#endif // !_MSC_VER
 } FormData_bbf_function_ext;
 
 typedef FormData_bbf_function_ext *Form_bbf_function_ext;

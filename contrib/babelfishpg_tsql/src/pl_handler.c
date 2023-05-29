@@ -480,7 +480,7 @@ pltsql_pre_parse_analyze(ParseState *pstate, RawStmt *parseTree)
 					{
 						ResTarget  *col = (ResTarget *) lfirst(lc);
 
-						if (strcasecmp(col->name, "dbid") == 0)
+						if (pg_strcasecmp(col->name, "dbid") == 0)
 							found = true;
 					}
 					if (found)
@@ -536,7 +536,7 @@ pltsql_pre_parse_analyze(ParseState *pstate, RawStmt *parseTree)
 				if (trigStmt->args != NIL)
 				{
 					trig_schema = ((String *) list_nth(((CreateTrigStmt *) trigStmt)->args, 0))->sval;
-					if ((trigStmt->relation->schemaname != NULL && strcasecmp(trig_schema, trigStmt->relation->schemaname) != 0)
+					if ((trigStmt->relation->schemaname != NULL && pg_strcasecmp(trig_schema, trigStmt->relation->schemaname) != 0)
 						|| trigStmt->relation->schemaname == NULL)
 					{
 						ereport(ERROR,

@@ -3600,7 +3600,7 @@ append_if_tsql_identifier(int tok, int start_len, int start_loc,
 		tsql_ident_len = strlen(ident);
 
 		if ((tsql_ident_len > 0 && (ident[0] == '@' || ident[0] == '#'))
-           || ( tsql_ident_len > 2 && strcasecmp(ident, "@@error") ==0 ))
+           || ( tsql_ident_len > 2 && pg_strcasecmp(ident, "@@error") ==0 ))
 		{
 			tident_ref = palloc(sizeof(tsql_ident_ref));
 			tident_ref->location = (start_len - 1) +

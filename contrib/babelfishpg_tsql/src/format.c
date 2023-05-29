@@ -1278,27 +1278,27 @@ get_currency_decimal_digits(const char *culture)
 static int
 get_compact_decimal_digits(const char *data_type)
 {
-	if (strcasecmp(data_type, "smallint") == 0)
+	if (pg_strcasecmp(data_type, "smallint") == 0)
 	{
 		return 5;
 	}
-	else if (strcasecmp(data_type, "integer") == 0)
+	else if (pg_strcasecmp(data_type, "integer") == 0)
 	{
 		return 10;
 	}
-	else if (strcasecmp(data_type, "bigint") == 0)
+	else if (pg_strcasecmp(data_type, "bigint") == 0)
 	{
 		return 19;
 	}
-	else if (strcasecmp(data_type, "numeric") == 0)
+	else if (pg_strcasecmp(data_type, "numeric") == 0)
 	{
 		return 29;
 	}
-	else if (strcasecmp(data_type, "real") == 0)
+	else if (pg_strcasecmp(data_type, "real") == 0)
 	{
 		return 7;
 	}
-	else if (strcasecmp(data_type, "float") == 0)
+	else if (pg_strcasecmp(data_type, "float") == 0)
 	{
 		return 15;
 	}

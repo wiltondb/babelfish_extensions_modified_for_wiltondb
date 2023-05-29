@@ -37,6 +37,11 @@
 #include "../../contrib/babelfishpg_tsql/src/pltsql.h"
 #include "../../contrib/babelfishpg_tsql/src/pltsql-2.h"
 
+#ifdef _MSC_VER
+#include "uint128_win.h"
+#define uint128 uint128_win
+#endif // _MSC_VER
+
 #define TDS_PACKET_HEADER_SIZE 8
 
 /*

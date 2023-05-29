@@ -68,8 +68,13 @@
 #define FIXEDDECIMAL_MAX (INT64_MAX/FIXEDDECIMAL_MULTIPLIER)
 #define FIXEDDECIMAL_MIN (INT64_MIN/FIXEDDECIMAL_MULTIPLIER)
 
+#ifndef _MSC_VER
 /* Compiler must have a working 128 int type */
 typedef __int128 int128;
+#else // _MSC_VER
+#include "int128_win.h"
+typedef int128_win int128;
+#endif // !_MSC_VER
 
 #ifdef PG_MODULE_MAGIC
 PG_MODULE_MAGIC;
@@ -1696,6 +1701,7 @@ fixeddecimalmul(PG_FUNCTION_ARGS)
 	 * FIXEDDECIMAL_MULTIPLIER, we must divide the result by this to get
 	 * the correct result.
 	 */
+#ifndef _MSC_VER
 	result = (int128) arg1 * arg2 / FIXEDDECIMAL_MULTIPLIER;
 
 	if (result != ((int64) result))
@@ -1704,6 +1710,20 @@ fixeddecimalmul(PG_FUNCTION_ARGS)
 				 errmsg("fixeddecimal out of range")));
 
 	PG_RETURN_INT64((int64) result);
+#else // _MSC_VER
+	int128 a1 = int128_win_from_int64(arg1);
+	int128 a2 = int128_win_from_int64(arg2);
+	int128 fm = int128_win_from_int64(FIXEDDECIMAL_MULTIPLIER);
+	int128 product = int128_win_multiply(a1, a2);
+	result = int128_win_divide(product, fm, NULL);
+
+	if (0 != result.high && -1 != result.high)
+		ereport(ERROR,
+				(errcode(ERRCODE_NUMERIC_VALUE_OUT_OF_RANGE),
+				 errmsg("fixeddecimal out of range")));
+
+	PG_RETURN_INT64((int64) result.low);
+#endif // !_MSC_VER
 }
 
 Datum
@@ -1731,6 +1751,7 @@ fixeddecimaldiv(PG_FUNCTION_ARGS)
 	 * this can't overflow, but we can end up with a number that's too big for
 	 * int64
 	 */
+#ifndef _MSC_VER
 	result = (int128) dividend * FIXEDDECIMAL_MULTIPLIER / divisor;
 
 	if (result != ((int64) result))
@@ -1739,6 +1760,20 @@ fixeddecimaldiv(PG_FUNCTION_ARGS)
 				 errmsg("fixeddecimal out of range")));
 
 	PG_RETURN_INT64((int64) result);
+#else // _MSC_VER
+	int128 d1 = int128_win_from_int64(dividend);
+	int128 d2 = int128_win_from_int64(divisor);
+	int128 fm = int128_win_from_int64(FIXEDDECIMAL_MULTIPLIER);
+	int128 product = int128_win_multiply(d1, fm);
+	result = int128_win_divide(product, d2, NULL);
+
+	if (0 != result.high && -1 != result.high)
+		ereport(ERROR,
+				(errcode(ERRCODE_NUMERIC_VALUE_OUT_OF_RANGE),
+				 errmsg("fixeddecimal out of range")));
+
+	PG_RETURN_INT64((int64) result.low);
+#endif // !_MSC_VER
 }
 
 /* fixeddecimalabs()

@@ -1168,7 +1168,7 @@ checksum(PG_FUNCTION_ARGS)
 	if (success)
 	{
 		md5[8] = '\0';
-		result = (int) strtol(md5, NULL, 16);
+		result = (int) strtoll(md5, NULL, 16);
 	}
 	else
 		ereport(ERROR,

@@ -1061,7 +1061,7 @@ ReadBcpPlp(ParameterToken temp, StringInfo *message, TDSRequestBulkLoad request)
 	uint64_t	plpTok;
 	Plp			plpTemp,
 				plpPrev = NULL;
-	unsigned long lenCheck = 0;
+	uint64_t lenCheck = 0;
 
 	CheckPlpMessageHasEnoughBytesToRead(message, sizeof(plpTok));
 	memcpy(&plpTok, &(*message)->data[offset], sizeof(plpTok));

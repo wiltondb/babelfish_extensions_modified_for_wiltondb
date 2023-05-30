@@ -54,7 +54,7 @@ CountLeapYears(struct pg_tm *t)
 static inline int
 GetDayDifference(struct pg_tm *t1, struct pg_tm *t2)
 {
-	long int	n1,
+	int64_t	n1,
 				n2;
 	int			i;
 

@@ -3182,7 +3182,7 @@ find_cached_batch(int handle)
 
 	MemSet(&hashkey, 0, sizeof(PLtsql_func_hashkey));
 	/* use upper 32bit for funcOid */
-	hashkey.funcOid = ((long) handle) << 32;
+	hashkey.funcOid = ((int64_t) handle) << 32;
 	hashkey.isTrigger = false;
 	hashkey.isEventTrigger = false;
 	hashkey.inputCollation = -1;
@@ -3199,7 +3199,7 @@ cache_compiled_batch(PLtsql_function *func)
 	int			handle = cur_handle_id;
 
 	MemSet(&hashkey, 0, sizeof(PLtsql_func_hashkey));
-	hashkey.funcOid = ((long) handle) << 32;	/* use upper 32bit for funcOid */
+	hashkey.funcOid = ((int64_t) handle) << 32;	/* use upper 32bit for funcOid */
 	hashkey.isTrigger = false;
 	hashkey.isEventTrigger = false;
 	hashkey.inputCollation = -1;

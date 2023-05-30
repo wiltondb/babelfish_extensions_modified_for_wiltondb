@@ -8,6 +8,8 @@
 
 #include "postgres.h"
 
+#include <inttypes.h>
+
 #include "access/xact.h"
 #include "executor/spi.h"
 #include "fmgr.h"
@@ -222,7 +224,7 @@ ApplockPrintMessage(const char *fmt,...)
                                                     (void *) &(ID), \
                                                     HASH_REMOVE, NULL); \
         if (hentry == NULL) \
-		    ApplockPrintMessage("failed to delete app lock entry for key %ld", ID); \
+		    ApplockPrintMessage("failed to delete app lock entry for key %" PRId64, ID); \
 } while(0)
 
 #define ApplockSetLockTimeout(val) \

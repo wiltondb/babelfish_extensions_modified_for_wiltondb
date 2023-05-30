@@ -15,6 +15,8 @@
 
 #include "postgres.h"
 
+#include <inttypes.h>
+
 #include "utils/memutils.h"
 
 #include "pltsql.h"
@@ -1361,7 +1363,7 @@ dump_cursor_direction(PLtsql_stmt_fetch *stmt)
 		printf("\n");
 	}
 	else
-		printf("%ld\n", stmt->how_many);
+		printf("%" PRId64 "\n", stmt->how_many);
 
 	dump_indent -= 2;
 }

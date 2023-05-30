@@ -415,7 +415,7 @@ post_exec_measure(uint64_t trace_mode, ExecStat *stat, struct timeval *stmt_begi
 	if (trace_exec_time_enabled(trace_mode))
 	{
 		struct timeval stmt_end;
-		long		seconds,
+		int64_t		seconds,
 					microseconds;
 		size_t	   *cur_duration = (size_t *) vec_at(stat->durations, pc);
 
@@ -441,7 +441,7 @@ finalize_trace(uint64_t trace_mode, ExecCodes *exec_codes, ExecStat *stat, struc
 {
 	if (trace_exec_enabled(trace_mode))
 	{
-		long		seconds,
+		int64_t		seconds,
 					microseconds;
 		StringInfoData buf;
 		struct timeval proc_end;

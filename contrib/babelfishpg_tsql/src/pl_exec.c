@@ -381,7 +381,7 @@ static Datum exec_eval_expr(PLtsql_execstate *estate,
 							Oid *rettype,
 							int32 *rettypmod);
 static int	exec_run_select(PLtsql_execstate *estate,
-							PLtsql_expr *expr, long maxtuples, Portal *portalP);
+							PLtsql_expr *expr, int64_t maxtuples, Portal *portalP);
 static int	exec_for_query(PLtsql_execstate *estate, PLtsql_stmt_forq *stmt,
 						   Portal portal, bool prefetch_ok);
 static ParamListInfo setup_param_list(PLtsql_execstate *estate,
@@ -4607,7 +4607,7 @@ exec_stmt_execsql(PLtsql_execstate *estate,
 				  PLtsql_stmt_execsql *stmt)
 {
 	ParamListInfo paramLI;
-	long		tcount;
+	int64_t		tcount;
 	int			rc;
 	PLtsql_expr *expr = stmt->sqlstmt;
 	Portal		portal = NULL;
@@ -6045,7 +6045,7 @@ static int
 exec_stmt_fetch(PLtsql_execstate *estate, PLtsql_stmt_fetch *stmt)
 {
 	PLtsql_var *curvar;
-	long		how_many = stmt->how_many;
+	int64_t		how_many = stmt->how_many;
 	SPITupleTable *tuptab;
 	Portal		portal;
 	char	   *curname;
@@ -7282,7 +7282,7 @@ exec_eval_expr(PLtsql_execstate *estate,
  */
 static int
 exec_run_select(PLtsql_execstate *estate,
-				PLtsql_expr *expr, long maxtuples, Portal *portalP)
+				PLtsql_expr *expr, int64_t maxtuples, Portal *portalP)
 {
 	ParamListInfo paramLI;
 	int			rc;

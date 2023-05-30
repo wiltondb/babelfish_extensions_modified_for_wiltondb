@@ -16,6 +16,7 @@
 #include "postgres.h"
 
 #include <ctype.h>
+#include <inttypes.h>
 #include <limits.h>
 #include <math.h>
 
@@ -2640,7 +2641,7 @@ int8fixeddecimal_internal(int64 arg, const char *typename)
 	if(unlikely(pg_mul_s64_overflow(arg, FIXEDDECIMAL_MULTIPLIER, &result)))
 		ereport(ERROR,
 				(errcode(ERRCODE_NUMERIC_VALUE_OUT_OF_RANGE),
-				 errmsg("value \"%ld\" is out of range for type %s", arg, typename)));
+				 errmsg("value \"%" PRId64 "\" is out of range for type %s", arg, typename)));
 
 	return result;
 }

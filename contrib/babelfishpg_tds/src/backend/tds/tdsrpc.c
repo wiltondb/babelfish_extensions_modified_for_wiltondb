@@ -147,7 +147,7 @@ static void SPPrepExec(TDSRequestSP req);
 static void SPCustomType(TDSRequestSP req);
 static void SPUnprepare(TDSRequestSP req);
 static void TDSLogStatementCursorHandler(TDSRequestSP req, char *stmt, int option);
-static InlineCodeBlockArgs* DeclareVariables(TDSRequestSP req, FunctionCallInfo *fcinfo, unsigned long options);
+static InlineCodeBlockArgs* DeclareVariables(TDSRequestSP req, FunctionCallInfo *fcinfo, uint64_t options);
 List *tvp_lookup_list = NIL;
 bool lockForFaultInjection = false;
 
@@ -176,7 +176,7 @@ CreateArgs(int nargs)
  * up TVP lookup.
  */
 static InlineCodeBlockArgs*
-DeclareVariables(TDSRequestSP req, FunctionCallInfo *fcinfo, unsigned long options)
+DeclareVariables(TDSRequestSP req, FunctionCallInfo *fcinfo, uint64_t options)
 {
 	InlineCodeBlockArgs		*args = NULL;
 	ParameterToken			token = NULL;
@@ -1277,7 +1277,7 @@ ReadPlp(ParameterToken temp, StringInfo message, uint64_t *mainOffset)
 
 	uint64_t plpTok;
 	Plp plpTemp, plpPrev = NULL;
-	unsigned long lenCheck = 0;
+	uint64_t lenCheck = 0;
 	uint64_t offset = *mainOffset;
 
 	memcpy(&plpTok , &message->data[offset], sizeof(plpTok));

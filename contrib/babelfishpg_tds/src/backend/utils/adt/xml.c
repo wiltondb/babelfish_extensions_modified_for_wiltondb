@@ -147,7 +147,7 @@ typedef struct XmlTableBuilderData
 {
 	int			magic;
 	int			natts;
-	long int	row_count;
+	int64_t	row_count;
 	PgXmlErrorContext *xmlerrcxt;
 	xmlParserCtxtPtr ctxt;
 	xmlDocPtr	doc;

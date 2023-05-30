@@ -1914,7 +1914,7 @@ StringToInteger(char *str)
 
 	len = strlen(str);
 
-	for (	; i < len; i++)
+	for (	; i < len; i++) {
 		uint64_t add_low = (uint64_t) (str[i] - '0');
 		uint128 add = { .low = add_low, .high = 0 };
 		num = uint128_win_multiply(num, ten);

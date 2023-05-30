@@ -888,7 +888,7 @@ typedef struct PLtsql_stmt_fetch
 	PLtsql_variable *target;	/* target (record or row) */
 	int			curvar;			/* cursor variable to fetch from */
 	FetchDirection direction;	/* fetch direction */
-	long		how_many;		/* count, if constant (expr is NULL) */
+	int64_t		how_many;		/* count, if constant (expr is NULL) */
 	PLtsql_expr *expr;			/* count, if expression */
 	bool		is_move;		/* is this a fetch or move? */
 	bool		returns_multiple_rows;	/* can return more than one row? */
@@ -1140,7 +1140,7 @@ typedef struct InlineCodeBlockArgs
 	char			**argnames;
 	char			*argmodes;
 	int				*varnos;
-	unsigned long 	options;
+	uint64_t 	options;
 	int 		handle;
 } InlineCodeBlockArgs;
 
@@ -1204,7 +1204,7 @@ typedef struct PLtsql_function
 
 	/* these fields change when the function is used */
 	struct PLtsql_execstate *cur_estate;
-	unsigned long use_count;
+	uint64_t use_count;
 
     /* execution codes for new executor */
     struct ExecCodes   *exec_codes;

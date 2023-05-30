@@ -1527,11 +1527,11 @@ pltsql_sequence_validate_increment(int64 increment_by,
 									int64 max_value,
 									int64 min_value)
 {
-	unsigned long inc;
-	unsigned long min_max_diff;
+	uint64_t inc;
+	uint64_t min_max_diff;
 
-	inc = increment_by >= 0 ? (unsigned long)increment_by : (unsigned long) (-1L * increment_by);
-	min_max_diff = (unsigned long) (max_value - min_value);
+	inc = increment_by >= 0 ? (uint64_t)increment_by : (uint64_t) (-1L * increment_by);
+	min_max_diff = (uint64_t) (max_value - min_value);
 
 	if(inc > min_max_diff)
 		ereport(ERROR,

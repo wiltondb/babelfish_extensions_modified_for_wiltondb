@@ -224,8 +224,8 @@ typedef struct TdsColumnMetaData
 /* Partial Length Prefixed-bytes */
 typedef struct PlpData
 {
-	unsigned long offset;
-	unsigned long len;
+	uint64_t offset;
+	uint64_t len;
 	struct PlpData *next;
 } PlpData;
 typedef PlpData *Plp;

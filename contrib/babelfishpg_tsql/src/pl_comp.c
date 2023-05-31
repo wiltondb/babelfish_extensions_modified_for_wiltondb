@@ -143,7 +143,7 @@ static void pltsql_HashTableInsert(PLtsql_function *function,
 static void pltsql_HashTableDelete(PLtsql_function *function);
 static void delete_function(PLtsql_function *func);
 
-extern Portal ActivePortal;
+extern PGDLLIMPORT Portal ActivePortal;
 extern bool pltsql_function_parse_error_transpose(const char *prosrc);
 
 /* ----------

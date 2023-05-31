@@ -170,7 +170,7 @@ extern bool pltsql_ansi_null_dflt_off;
 extern bool pltsql_concat_null_yields_null;
 extern bool pltsql_numeric_roundabort;
 extern bool pltsql_xact_abort;
-extern bool pltsql_case_insensitive_identifiers;
+extern PGDLLIMPORT bool pltsql_case_insensitive_identifiers;
 extern bool inited_ht_tsql_cast_info;
 extern bool inited_ht_tsql_datatype_precedence_info;
 

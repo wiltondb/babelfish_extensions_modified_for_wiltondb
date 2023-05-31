@@ -38,10 +38,10 @@
 #include "pltsql.h"
 
 /* Hooks for engine*/
-extern find_coercion_pathway_hook_type find_coercion_pathway_hook;
-extern determine_datatype_precedence_hook_type determine_datatype_precedence_hook;
-extern func_select_candidate_hook_type func_select_candidate_hook;
-extern coerce_string_literal_hook_type coerce_string_literal_hook;
+extern PGDLLIMPORT find_coercion_pathway_hook_type find_coercion_pathway_hook;
+extern PGDLLIMPORT determine_datatype_precedence_hook_type determine_datatype_precedence_hook;
+extern PGDLLIMPORT func_select_candidate_hook_type func_select_candidate_hook;
+extern PGDLLIMPORT coerce_string_literal_hook_type coerce_string_literal_hook;
 
 PG_FUNCTION_INFO_V1(init_tsql_coerce_hash_tab);
 PG_FUNCTION_INFO_V1(init_tsql_datatype_precedence_hash_tab);

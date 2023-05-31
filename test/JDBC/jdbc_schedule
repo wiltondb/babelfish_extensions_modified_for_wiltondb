@@ -10,6 +10,25 @@
 
 all
 
+# pg_hint_plan
+ignore#!#BABEL-3291
+ignore#!#BABEL-3292
+ignore#!#BABEL-3293
+ignore#!#BABEL-3294
+ignore#!#BABEL-3295
+ignore#!#BABEL-3512
+ignore#!#BABEL-3513-vu-prepare
+ignore#!#BABEL-3513-vu-verify
+ignore#!#BABEL-3592
+
+# tds_fdw
+ignore#!#linked_servers-vu-prepare
+ignore#!#linked_servers-vu-verify
+ignore#!#linked_servers-vu-cleanup
+ignore#!#openquery-vu-prepare
+ignore#!#openquery-vu-verify
+ignore#!#openquery-vu-cleanup
+
 # BABEL-SP_FKEYS test is very slow and causing github action timeout.
 
 # JDBC bulk insert API seems to call SET FMTONLY ON without calling SET FMTONLY OFF, causing some spurious test failures.

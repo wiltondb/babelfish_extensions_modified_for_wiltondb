@@ -1320,7 +1320,8 @@ int exec_stmt_iterative(PLtsql_execstate *estate, ExecCodes *exec_codes, ExecCon
 	PLtsql_stmt *stmt = NULL;
 	bool		terminate_batch = false;
 	int			active_non_tsql_procs = pltsql_non_tsql_proc_entry_count;
-	int			active_sys_functions = pltsql_sys_func_entry_count ;
+	int			active_sys_functions = pltsql_sys_func_entry_count;
+	sigjmp_buf	local_sigjmp_buf;
 
     if (!exec_codes)
         ereport(ERROR, (errcode(ERRCODE_INTERNAL_ERROR), errmsg("Empty execution code")));
@@ -1368,9 +1369,9 @@ int exec_stmt_iterative(PLtsql_execstate *estate, ExecCodes *exec_codes, ExecCon
 				/* Want to run statements inside function's memory context */
 				MemoryContextSwitchTo(cur_err_ctx->oldcontext);
 
-				if (sigsetjmp(cur_err_ctx->local_sigjmp_buf, 0) == 0)
+				if (sigsetjmp(local_sigjmp_buf, 0) == 0)
 				{
-					PG_exception_stack = &cur_err_ctx->local_sigjmp_buf;
+					PG_exception_stack = &local_sigjmp_buf;
 
 					estate->err_text = NULL;
 

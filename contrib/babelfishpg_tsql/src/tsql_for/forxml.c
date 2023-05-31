@@ -20,7 +20,12 @@
 #include "catalog/pg_type.h"
 #include "catalog/namespace.h"
 
+#ifndef _MSC_VER
 #include <regex.h>
+#else // _MSC_VER
+#include "regex/regex.h"
+#include "src/tsql_win.h"
+#endif // _MSC_VER
 
 #include "tsql_for.h"
 
@@ -130,12 +135,16 @@ for_xml_ffunc(PG_FUNCTION_ARGS)
 		regmatch_t		match, pmatch[1];
 		StringInfoData	root;
 		
+#ifndef _MSC_VER
 		if (regcomp(&preg, pattern, REG_EXTENDED) != 0)
 			ereport(ERROR,
 						(errcode(ERRCODE_INTERNAL_ERROR),
 							errmsg("unexpected error parsing xml root tag")));
 		
 		if (regexec(&preg, state, 1, pmatch, 0) != 0)
+#else // _MSC_VER
+		if (regexec_win(pattern, state, 1, pmatch, 0) != 0)
+#endif // !_MSC_VER
 			ereport(ERROR,
 						(errcode(ERRCODE_INTERNAL_ERROR),
 							errmsg("unexpected error parsing xml root tag")));

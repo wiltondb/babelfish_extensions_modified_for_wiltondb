@@ -11,6 +11,10 @@
  *-------------------------------------------------------------------------
  */
 
+#ifndef PQ_SEND_BUFFER_SIZE
+#define PQ_SEND_BUFFER_SIZE 8192
+#endif
+
 /*---- Function declarations ----*/
 
 static void	pe_create_server_ports(void);

@@ -417,7 +417,7 @@ datetimeoffset_pl_interval(PG_FUNCTION_ARGS)
 	}
 
 	tmp += span->time;
-	result->tsql_ts = tmp + df->tsql_tz * USECS_PER_MINUTE;
+	result->tsql_ts = tmp;
 	result->tsql_tz = df->tsql_tz;
 	CheckDatetimeoffsetRange(result);
 

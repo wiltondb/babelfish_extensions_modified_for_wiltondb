@@ -82,7 +82,7 @@ core_yyfree(void *ptr, core_yyscan_t yyscanner);
 void
 pgtsql_core_yyfree(void *ptr, core_yyscan_t yyscanner)
 {
-	pgtsql_core_yyfree(ptr, yyscanner);
+	core_yyfree(ptr, yyscanner);
 }
 
 #define core_yyset_extra pgtsql_core_yyset_extra

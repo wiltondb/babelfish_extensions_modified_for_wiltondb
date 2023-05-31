@@ -93,10 +93,6 @@
 #include "utils/syscache.h"
 #include "utils/xml.h"
  
-/* GUC variables */
-int			xmlbinary;
-int			xmloption;
- 
 #ifdef USE_LIBXML
  
 /* random number to identify PgXmlErrorContext */

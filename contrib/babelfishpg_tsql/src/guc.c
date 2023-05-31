@@ -74,7 +74,7 @@ static const struct config_enum_entry explain_format_options[] = {
 	{NULL, 0, false}
 };
 
-extern bool Transform_null_equals;
+extern PGDLLIMPORT bool Transform_null_equals;
 
 /* Dump and Restore */
 bool babelfish_dump_restore = false;

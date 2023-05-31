@@ -206,13 +206,13 @@ typedef struct TdsParamNameData
 
 typedef TdsParamNameData *TdsParamName;
 
-extern PGDLLIMPORT uint32_t MyTdsClientVersion;
-extern PGDLLIMPORT char* MyTdsLibraryName;
-extern PGDLLIMPORT char* MyTdsHostName;
-extern PGDLLIMPORT uint32_t MyTdsClientPid;
-extern PGDLLIMPORT uint32_t MyTdsProtocolVersion;
-extern PGDLLIMPORT uint32_t MyTdsPacketSize;
-extern PGDLLIMPORT int MyTdsEncryptOption;
+extern uint32_t MyTdsClientVersion;
+extern char *MyTdsLibraryName;
+extern char *MyTdsHostName;
+extern uint32_t MyTdsClientPid;
+extern uint32_t MyTdsProtocolVersion;
+extern uint32_t MyTdsPacketSize;
+extern int MyTdsEncryptOption;
 
 /* XXX: Should be removed */
 /* Stores mapping between TVP and underlying table */

@@ -701,7 +701,7 @@ host_os(PG_FUNCTION_ARGS)
 	pg_version = pstrdup(PG_VERSION_STR);
 	sscanf(pg_version, "PostgreSQL %*s on %s, compiled by %*s", host_str);
 
-	if (strstr(host_str, "w64") || strstr(host_str, "w32") || strstr(host_str, "mingw") || strstr(host_str, "visual studio"))
+	if (strstr(pg_version, "Visual C++"))
 	{
 		host_os_res = pstrdup("Windows");
 	}

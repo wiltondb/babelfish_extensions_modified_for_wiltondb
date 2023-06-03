@@ -31,6 +31,7 @@ ignore#!#openquery-vu-cleanup
 
 # linux specific
 ignore#!#BABEL-2785
+ignore#!#sys-dm_os_host_info-vu-verify
 
 # BABEL-SP_FKEYS test is very slow and causing github action timeout.
 

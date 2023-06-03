@@ -59,20 +59,20 @@ append_file($postgresql_conf, "shared_preload_libraries = 'babelfishpg_tds'\n");
 make_path($pg_log_dir);
 runcmd("$pg_ctl start -D $pg_data -l $pg_log");
 
-runcmd("$psql -d postgres    -c \"CREATE USER jdbc_user WITH SUPERUSER CREATEDB CREATEROLE PASSWORD '12345678' INHERIT;\"");
-runcmd("$psql -d postgres    -c \"CREATE DATABASE jdbc_testdb OWNER jdbc_user;\"");
-runcmd("$psql -d jdbc_testdb -c \"SET allow_system_table_mods = ON;\"");
-runcmd("$psql -d jdbc_testdb -c \"CREATE EXTENSION IF NOT EXISTS babelfishpg_tds CASCADE;\"");
-runcmd("$psql -d jdbc_testdb -c \"GRANT ALL ON SCHEMA sys to jdbc_user;\"");
-runcmd("$psql -d jdbc_testdb -c \"ALTER SYSTEM SET babelfishpg_tsql.database_name = 'jdbc_testdb';\"");
-#runcmd("$psql -d jdbc_testdb -c \"ALTER DATABASE jdbc_testdb SET babelfishpg_tsql.migration_mode = 'multi-db';\"");
-runcmd("$psql -d jdbc_testdb -c \"SELECT pg_reload_conf();\"");
-runcmd("$psql -d jdbc_testdb -c \"CALL sys.initialize_babelfish('jdbc_user');\"");
+runcmd("$psql -U $ENV{USERNAME} -d postgres    -c \"CREATE USER jdbc_user WITH SUPERUSER CREATEDB CREATEROLE PASSWORD '12345678' INHERIT;\"");
+runcmd("$psql -U $ENV{USERNAME} -d postgres    -c \"CREATE DATABASE jdbc_testdb OWNER jdbc_user;\"");
+runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"SET allow_system_table_mods = ON;\"");
+runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"CREATE EXTENSION IF NOT EXISTS babelfishpg_tds CASCADE;\"");
+runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"GRANT ALL ON SCHEMA sys to jdbc_user;\"");
+runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"ALTER SYSTEM SET babelfishpg_tsql.database_name = 'jdbc_testdb';\"");
+#runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"ALTER DATABASE jdbc_testdb SET babelfishpg_tsql.migration_mode = 'multi-db';\"");
+runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"SELECT pg_reload_conf();\"");
+runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"CALL sys.initialize_babelfish('jdbc_user');\"");
 
 if ($debug) {
   runcmd("mvn test -Dmaven.surefire.debug=true", "best effort");
 } else {
-  runcmd("mvn test", "best effort");
+  runcmd("mvn -B test", "best effort");
 }
 
 runcmd("$pg_ctl stop -D $pg_data -l $pg_log");

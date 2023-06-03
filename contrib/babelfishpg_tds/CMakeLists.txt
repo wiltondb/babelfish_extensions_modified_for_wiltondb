@@ -109,8 +109,12 @@ target_link_libraries ( ${PROJECT_NAME} PRIVATE
     shlwapi
     ws2_32 )
 
-install ( TARGETS ${PROJECT_NAME}
+install ( TARGETS ${PROJECT_NAME} RUNTIME
     DESTINATION $ENV{PGWIN_INSTALL_DIR}/lib )
+
+install( FILES
+    $<TARGET_PDB_FILE:${PROJECT_NAME}>
+    DESTINATION $ENV{PGWIN_INSTALL_DIR}/symbols )
 
 install ( FILES
     ${PROJECT_NAME}--1.0.0.sql

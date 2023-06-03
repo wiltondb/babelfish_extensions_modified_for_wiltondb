@@ -21,7 +21,7 @@ use File::Spec::Functions qw(catfile);
 
 my $root_dir = dirname(abs_path(__FILE__));
 my $cmake_gen_name = "Visual Studio 17 2022";
-my $cmake_build_type = "Release";
+my $cmake_build_type = "RelWithDebInfo";
 if (defined($ARGV[0]) && (uc($ARGV[0]) eq 'DEBUG')) {
   $cmake_build_type = "Debug";
 }

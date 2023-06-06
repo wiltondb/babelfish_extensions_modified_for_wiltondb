@@ -54,7 +54,7 @@ if (-f $postmaster_pid) {
   runcmd("$pg_ctl stop -D $pg_data -l $pg_log", "best effort");
 }
 remove_tree($pg_data);
-runcmd("$initdb -D $pg_data -E UTF8 --locale en_US.UTF-8");
+runcmd("$initdb -D $pg_data -E UTF8 --locale C");
 append_file($postgresql_conf, "shared_preload_libraries = 'babelfishpg_tds'\n");
 make_path($pg_log_dir);
 runcmd("$pg_ctl start -D $pg_data -l $pg_log");

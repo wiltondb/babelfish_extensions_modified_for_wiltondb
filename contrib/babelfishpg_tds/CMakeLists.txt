@@ -98,8 +98,7 @@ target_compile_options ( ${PROJECT_NAME} PRIVATE
 
 target_compile_definitions ( ${PROJECT_NAME} PRIVATE
     _CRT_SECURE_NO_WARNINGS
-    USE_LIBXML
-    FAULT_INJECTOR )
+    USE_LIBXML )
 
 target_link_libraries ( ${PROJECT_NAME} PRIVATE
     $ENV{PGWIN_INSTALL_DIR}/lib/postgres.lib

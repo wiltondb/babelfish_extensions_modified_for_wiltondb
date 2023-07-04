@@ -245,7 +245,16 @@ check_arithabort(bool *newval, void **extra, GucSource source)
 static bool
 check_babelfish_dump_restore_min_oid(char **newval, void **extra, GucSource source)
 {
-	return *newval == NULL || OidIsValid(atooid(*newval));
+	int64_t val64;
+	if (NULL == *newval)
+	{
+		return true;
+	}
+	val64 = strtoull(*newval, NULL, 10);
+	if (val64 > OID_MAX) {
+		return false;
+	}
+	return OidIsValid((Oid) val64);
 }
 
 static bool

@@ -17,7 +17,8 @@ PG_CPPFLAGS += -I$(TSQL_SRC) -I$(PG_SRC) -I$(tds_top_dir)
 # files are included in another c file)
 tds_exclude_files = $(tds_backend)/tds/support_funcs.c \
 					$(tds_backend)/tds/tds_data_map.c \
-					$(tds_backend)/tds/tdsprinttup.c
+					$(tds_backend)/tds/tdsprinttup.c \
+					$(tds_backend)/tds/tds_win.c
 
 tds_temp_srcs = $(shell find $(tds_top_dir) -name "*.c")
 tds_srcs = $(filter-out $(tds_exclude_files), $(tds_temp_srcs))

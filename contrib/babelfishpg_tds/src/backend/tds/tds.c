@@ -43,6 +43,7 @@
 #include "utils/lsyscache.h"
 
 #include "src/include/err_handler.h"
+#include "src/include/tds_int.h"
 
 
 /* ----------

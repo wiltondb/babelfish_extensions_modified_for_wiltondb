@@ -1049,6 +1049,7 @@ ReverseString(char *res)
 static inline void
 Integer2String(uint128 num, char *str)
 {
+#ifndef _MSC_VER
 	int			i = 0,
 				rem = 0;
 
@@ -1058,6 +1059,16 @@ Integer2String(uint128 num, char *str)
 		str[i++] = rem + '0';
 		num = num / 10;
 	}
+#else // _MSC_VER
+	int i = 0;
+	uint128 rem = {.low = 0, .high = 0};
+	uint128 ten = {.low = 10, .high = 0};
+	while (num.high > 0 || num.low > 0)
+	{
+		num = uint128_win_divide(num, ten, &rem);
+		str[i++] = rem.low + '0';
+	}
+#endif // !_MSC_VER
 	str[i++] = '-';
 	ReverseString(str);
 }
@@ -1072,14 +1083,23 @@ TdsTypeNumericToDatum(StringInfo buf, int scale)
 	char	   *decString;
 	int			temp1,
 				temp2;
+#ifndef _MSC_VER
 	uint128		num = 0;
+#else // _MSC_VER
+	uint128		num = {.low = 0, .high = 0};
+#endif // !_MSC_VER
 
 	/* fetch the sign from the actual data which is the first byte */
 	sign = (uint8_t) GetMsgInt(buf, 1);
 
 	/* fetch the data but ignore the sign byte now */
 	{
+#ifndef _MSC_VER
 		uint128		n128 = 0;
+#else // _MSC_VER
+		uint128		n128 = {.low = 0, .high = 0};
+#endif // !_MSC_VER
+
 
 		memcpy(&n128, &buf->data[buf->cursor], TDS_MAXLEN_NUMERIC - 1);
 		buf->cursor += TDS_MAXLEN_NUMERIC - 1;
@@ -1089,7 +1109,11 @@ TdsTypeNumericToDatum(StringInfo buf, int scale)
 
 	decString = (char *) palloc0(sizeof(char) * 40);
 
+#ifndef _MSC_VER
 	if (num != 0)
+#else // _MSC_VER
+	if (num.low != 0 || num.high != 0)
+#endif // !_MSC_VER
 		Integer2String(num, decString);
 	else
 		decString[0] = '0';
@@ -1102,7 +1126,11 @@ TdsTypeNumericToDatum(StringInfo buf, int scale)
 	 * Since there is a '-' at the start of decString, we should ignore it
 	 * before appending and then add it later.
 	 */
+#ifndef _MSC_VER
 	if (num != 0 && scale >= len)
+#else // _MSC_VER
+	if ((num.low != 0 || num.high != 0) && scale >= len)
+#endif // !_MSC_VER
 	{
 		int			diff = scale - len + 1;
 		char	   *zeros = palloc0(sizeof(char) * diff + 1);
@@ -1121,7 +1149,11 @@ TdsTypeNumericToDatum(StringInfo buf, int scale)
 		len = strlen(decString) - 1;
 		pfree(tempString);
 	}
+#ifndef _MSC_VER
 	if (num != 0)
+#else // _MSC_VER
+	if (num.low != 0 || num.high != 0)
+#endif // !_MSC_VER
 	{
 		while (scale)
 		{
@@ -1142,7 +1174,11 @@ TdsTypeNumericToDatum(StringInfo buf, int scale)
 		}
 	}
 
+#ifndef _MSC_VER
 	if (sign == 1 && num != 0)
+#else // _MSC_VER
+	if (sign == 1 && (num.low != 0 || num.high != 0))
+#endif // !_MSC_VER
 		decString++;
 
 	res = TdsSetVarFromStrWrapper(decString);
@@ -1968,6 +2004,7 @@ StringToInteger(char *str)
 {
 	int			i = 0,
 				len = 0;
+#ifndef _MSC_VER
 	uint128		num = 0;
 
 	if (!str)
@@ -1977,6 +2014,22 @@ StringToInteger(char *str)
 
 	for (; i < len; i++)
 		num = num * 10 + (str[i] - '0');
+#else // _MSC_VER
+	uint128 num = {.low = 0, .high = 0};
+	uint128 ten = {.low = 10, .high = 0};
+
+	if (!str)
+		return num;
+
+	len = strlen(str);
+
+	for (	; i < len; i++)
+		uint64_t add_low = (uint64_t) (str[i] - '0');
+		uint128 add = { .low = add_low, .high = 0 };
+		num = uint128_win_multiply(num, ten);
+		num = uint128_win_add(num, add);
+	}
+#endif // !_MSC_VER
 
 	return num;
 }
@@ -1998,7 +2051,11 @@ TdsRecvTypeNumeric(const char *message, const ParameterToken token)
 			   *wholeString;
 	int			temp1,
 				temp2;
+#ifndef _MSC_VER
 	uint128		num = 0;
+#else // _MSC_VER
+	uint128		num = {.low = 0, .high = 0};
+#endif // !_MSC_VER
 	TdsColumnMetaData col = token->paramMeta;
 
 	StringInfo	buf = TdsGetStringInfoBufferFromToken(message, token);
@@ -2011,7 +2068,11 @@ TdsRecvTypeNumeric(const char *message, const ParameterToken token)
 
 	/* fetch the data but ignore the sign byte now */
 	{
+#ifndef _MSC_VER
 		uint128		n128 = 0;
+#else // _MSC_VER
+		uint128		n128 = {.low = 0, .high = 0};
+#endif // !_MSC_VER
 
 		if ((token->len - 1) > sizeof(n128))
 			ereport(ERROR,
@@ -2027,7 +2088,11 @@ TdsRecvTypeNumeric(const char *message, const ParameterToken token)
 
 	decString = (char *) palloc0(sizeof(char) * 40);
 
+#ifndef _MSC_VER
 	if (num != 0)
+#else // _MSC_VER
+	if (num.low != 0 || num.high != 0)
+#endif // !_MSC_VER
 		Integer2String(num, decString);
 	else
 		decString[0] = '0';
@@ -2041,7 +2106,11 @@ TdsRecvTypeNumeric(const char *message, const ParameterToken token)
 	 * Since there is a '-' at the start of decString, we should ignore it
 	 * before appending and then add it later.
 	 */
+#ifndef _MSC_VER
 	if (num != 0 && scale >= len)
+#else // _MSC_VER
+	if ((num.low != 0 || num.high != 0) && scale >= len)
+#endif // !_MSC_VER
 	{
 		int			diff = scale - len + 1;
 		char	   *zeros = palloc0(sizeof(char) * diff + 1);
@@ -2060,7 +2129,11 @@ TdsRecvTypeNumeric(const char *message, const ParameterToken token)
 		len = strlen(decString) - 1;
 		pfree(tempString);
 	}
+#ifndef _MSC_VER
 	if (num != 0)
+#else // _MSC_VER
+	if (num.low != 0 || num.high != 0)
+#endif // !_MSC_VER
 	{
 		while (scale)
 		{
@@ -2087,7 +2160,11 @@ TdsRecvTypeNumeric(const char *message, const ParameterToken token)
 	 */
 	wholeString = decString;
 
+#ifndef _MSC_VER
 	if (sign == 1 && num != 0)
+#else // _MSC_VER
+	if (sign == 1 && (num.low != 0 || num.high != 0))
+#endif // !_MSC_VER
 		decString++;
 
 	res = TdsSetVarFromStrWrapper(decString);
@@ -3039,7 +3116,11 @@ TdsSendTypeNumeric(FmgrInfo *finfo, Datum value, void *vMetaData)
 				length = 0;
 	char	   *out,
 			   *decString;
+#ifndef _MSC_VER
 	uint128		num = 0;
+#else // _MSC_VER
+	uint128	num = {.low = 0, .high = 0};
+#endif // !_MSC_VER
 	TdsColumnMetaData *col = (TdsColumnMetaData *) vMetaData;
 	uint8_t		max_scale = col->metaEntry.type5.scale;
 	uint8_t		max_precision = col->metaEntry.type5.precision;
@@ -3282,8 +3363,13 @@ TdsTypeSqlVariantToDatum(StringInfo buf)
 	char	   *decString,
 				temp1,
 				temp2;
+#ifndef _MSC_VER
 	uint128		n128 = 0,
 				num = 0;
+#else // _MSC_VER
+	uint128   n128 = {.low = 0, .high = 0},
+				num = {.low = 0, .high = 0};
+#endif // !_MSC_VER
 	StringInfoData strbuf;
 	tsql_datetimeoffset *tdt = (tsql_datetimeoffset *) palloc0(DATETIMEOFFSET_LEN);
 
@@ -3546,13 +3632,21 @@ TdsTypeSqlVariantToDatum(StringInfo buf)
 		memcpy(&n128, &buf->data[VARIANT_TYPE_METALEN_FOR_NUMERIC_DATATYPES], dataLen);
 		num = LEtoh128(n128);
 		decString = (char *) palloc0(sizeof(char) * 40);
+#ifndef _MSC_VER
 		if (num != 0)
+#else // _MSC_VER
+		if (num.low != 0 || num.high != 0)
+#endif // !_MSC_VER
 			Integer2String(num, decString);
 		else
 			decString[0] = '0';
 		len = strlen(decString);
 		temp1 = '.';
+#ifndef _MSC_VER
 		if (num != 0)
+#else // _MSC_VER
+		if (num.low != 0 || num.high != 0)
+#endif // !_MSC_VER
 		{
 			while (tempScale)
 			{
@@ -3573,7 +3667,11 @@ TdsTypeSqlVariantToDatum(StringInfo buf)
 			}
 		}
 
+#ifndef _MSC_VER
 		if (sign == 1 && num != 0)
+#else // _MSC_VER
+		if (sign == 1 && (num.low != 0 || num.high != 0))
+#endif // !_MSC_VER
 			decString++;
 		res = TdsSetVarFromStrWrapper(decString);
 		memcpy(READ_DATA(result, variantHeaderLen), (bytea *) DatumGetPointer(res), dataLen);
@@ -3644,7 +3742,11 @@ TdsSendTypeSqlvariant(FmgrInfo *finfo, Datum value, void *vMetaData)
 				sign = 1,
 				i = 0,
 				temp = 0;
+#ifndef _MSC_VER
 	uint128		num = 0;
+#else // _MSC_VER
+	uint128		num = {.low = 0, .high = 0};
+#endif // !_MSC_VER
 	Timestamp	timestamp = 0;
 	TimestampTz timestamptz = 0;
 

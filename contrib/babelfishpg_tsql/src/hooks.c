@@ -66,6 +66,10 @@
 #include "tsql_analyze.h"
 #include "table_variable_mvcc.h"
 
+#ifdef _MSC_VER
+#include "src/tsql_win.h"
+#endif // _MSC_VER
+
 #define TDS_NUMERIC_MAX_PRECISION	38
 extern bool babelfish_dump_restore;
 extern char *babelfish_dump_restore_min_oid;

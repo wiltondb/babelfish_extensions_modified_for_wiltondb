@@ -88,29 +88,49 @@
  * for decimal types, precision and scale are encoded
  * for datetime2, datetimeoffset it is scale
  */
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed)) svhdr_1B
+#else // _MSC_VER
+__pragma(pack(push, 1))
+typedef struct svhdr_1B
+#endif // !_MSC_VER
 {
 	uint8_t		metadata;
 } svhdr_1B_t;
 
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed)) svhdr_2B
+#else // _MSC_VER
+typedef struct svhdr_2B
+#endif // !_MSC_VER
 {
 	uint8_t		metadata;
 	int8_t		typmod;
 } svhdr_2B_t;
 
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed)) svhdr_3B
+#else // _MSC_VER
+typedef struct svhdr_3B
+#endif // !_MSC_VER
 {
 	uint8_t		metadata;
 	int16_t		typmod;
 } svhdr_3B_t;
 
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed)) svhdr_5B
+#else // _MSC_VER
+typedef struct svhdr_5B
+#endif // !_MSC_VER
 {
 	uint8_t		metadata;
 	int16_t		typmod;
 	uint16_t	collid;
 } svhdr_5B_t;
+#ifdef _MSC_VER
+__pragma(pack(pop))
+#endif // _MSC_VER
 
 extern bytea *gen_sqlvariant_bytea_from_type_datum(size_t typcode, Datum data);
 extern bytea *convertVarcharToSQLVariantByteA(VarChar *vch, Oid coll);

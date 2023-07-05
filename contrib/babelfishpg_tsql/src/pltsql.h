@@ -51,10 +51,17 @@
 	(pltsql_instr_plugin_ptr && (*pltsql_instr_plugin_ptr) && \
 	 (*pltsql_instr_plugin_ptr)->pltsql_instr_increment_metric)
 
+#ifndef _MSC_VER
 #define TSQLInstrumentation(metric)												\
 ({	if ((pltsql_instr_plugin_ptr && (*pltsql_instr_plugin_ptr) && (*pltsql_instr_plugin_ptr)->pltsql_instr_increment_metric))		\
 		(*pltsql_instr_plugin_ptr)->pltsql_instr_increment_metric(metric);		\
 })
+#else // _MSC_VER
+#define TSQLInstrumentation(metric)												\
+		if ((pltsql_instr_plugin_ptr && (*pltsql_instr_plugin_ptr) && (*pltsql_instr_plugin_ptr)->pltsql_instr_increment_metric))	{	\
+		(*pltsql_instr_plugin_ptr)->pltsql_instr_increment_metric(metric);		\
+}
+#endif // !_MSC_VER
 
 #define TSQL_TXN_NAME_LIMIT 64	/* Transaction name limit */
 

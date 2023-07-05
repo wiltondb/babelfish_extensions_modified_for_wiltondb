@@ -279,7 +279,7 @@ pe_authenticate(Port *port, const char **username)
 	 */
 	if (PostmasterContext == NULL)
 		PostmasterContext = AllocSetContextCreate(TopMemoryContext,
-												  MC_Postmaster,
+												  "MC_Postmaster",
 												  ALLOCSET_DEFAULT_SIZES);
 
 	if (!load_hba())

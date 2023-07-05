@@ -40,7 +40,12 @@ typedef int (*TdsSendTypeFunction) (FmgrInfo *finfo, Datum value,
 									void *vMetaData);
 
 /* COLMETADATA entry for types like INTEGER and SMALLINT */
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed))
+#else // _MSC_VER
+__pragma(pack(push, 1))
+typedef struct
+#endif // !_MSC_VER
 ColMetaEntry1
 {
 	uint16_t	flags;
@@ -49,7 +54,11 @@ ColMetaEntry1
 } ColMetaEntry1;
 
 /* COLMETADATA entry for types like NVARCHAR */
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed))
+#else // _MSC_VER
+typedef struct
+#endif // !_MSC_VER
 ColMetaEntry2
 {
 	uint16_t	flags;
@@ -66,7 +75,11 @@ ColMetaEntry2
 
 
 /* COLMETADATA entry for types like TEXT */
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed))
+#else // _MSC_VER
+typedef struct
+#endif // !_MSC_VER
 ColMetaEntry3
 {
 	uint16_t	flags;
@@ -82,7 +95,11 @@ ColMetaEntry3
 } ColMetaEntry3;
 
 /* COLMETADATA entry for type like DATE */
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed))
+#else // _MSC_VER
+typedef struct
+#endif // !_MSC_VER
 ColMetaEntry4
 {
 	uint16_t	flags;
@@ -90,7 +107,11 @@ ColMetaEntry4
 } ColMetaEntry4;
 
 /* COLMETADATA entry for type NUMERIC */
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed))
+#else // _MSC_VER
+typedef struct
+#endif // !_MSC_VER
 ColMetaEntry5
 {
 	uint16_t	flags;
@@ -101,7 +122,11 @@ ColMetaEntry5
 } ColMetaEntry5;
 
 /* COLMETADATA entry for type like TIME, DATETIME2, DATETIMEOFFSET */
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed))
+#else // _MSC_VER
+typedef struct
+#endif // !_MSC_VER
 ColMetaEntry6
 {
 	uint16_t	flags;
@@ -110,7 +135,11 @@ ColMetaEntry6
 } ColMetaEntry6;
 
 /* COLMETADATA entry for types like BINARY VARBINARY */
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed))
+#else // _MSC_VER
+typedef struct
+#endif // !_MSC_VER
 ColMetaEntry7
 {
 	uint16_t	flags;
@@ -119,13 +148,20 @@ ColMetaEntry7
 } ColMetaEntry7;
 
 /* COLMETADATA entry for type like IMAGE */
+#ifndef _MSC_VER
 typedef struct __attribute__ ((packed))
+#else // _MSC_VER
+typedef struct
+#endif // !_MSC_VER
 ColMetaEntry8
 {
 	uint16_t	flags;
 	uint8_t		tdsTypeId;
 	uint32_t	maxSize;
 } ColMetaEntry8;
+#ifdef _MSC_VER
+__pragma(pack(pop))
+#endif // _MSC_VER
 
 typedef union ColMetaEntry
 {

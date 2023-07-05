@@ -15,6 +15,9 @@
 #include "src/include/tds_response.h"
 #include "src/include/err_handler.h"
 #include "src/include/tds_instr.h"
+#ifdef _MSC_VER
+#include "src/include/tds_win.h"
+#endif // _MSC_VER
 
 static bool is_user_defined_error(int pg_error_code);
 

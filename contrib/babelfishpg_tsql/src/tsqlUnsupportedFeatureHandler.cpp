@@ -1,27 +1,43 @@
+
+#ifdef _MSC_VER
+#define fstat microsoft_native_fstat
+#define stat microsoft_native_stat
+#endif // _MSC_VER
+
 #include <iostream>
 #include <strstream>
 #include <unordered_map>
 
+#ifndef _MSC_VER
 #pragma GCC diagnostic ignored "-Wattributes"
+#endif // !_MSC_VER
 
 #include "antlr4-runtime.h" // antlr4-cpp-runtime
 #include "tree/ParseTreeWalker.h" // antlr4-cpp-runtime
 #include "tree/ParseTreeProperty.h" // antlr4-cpp-runtime
 
-#include "../antlr/antlr4cpp_generated_src/TSqlLexer/TSqlLexer.h"
-#include "../antlr/antlr4cpp_generated_src/TSqlParser/TSqlParser.h"
+#include "TSqlLexer.h"
+#include "TSqlParser.h"
 #include "tsqlIface.hpp"
 
+#ifndef _MSC_VER
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wregister"
+#endif // !_MSC_VER
 extern "C" {
 #include "pltsql_instr.h"
 #include "pltsql.h"
 #include "guc.h"
 }
+#ifndef _MSC_VER
 #pragma GCC diagnostic pop
+#endif // !_MSC_VER
 
-extern bool pltsql_allow_antlr_to_unsupported_grammar_for_testing;
+#ifdef _MSC_VER
+#undef DELETE
+#endif // _MSC_VER
+
+extern "C" bool pltsql_allow_antlr_to_unsupported_grammar_for_testing;
 
 /* escape hatches */
 typedef struct escape_hatch_t {
@@ -30,7 +46,7 @@ typedef struct escape_hatch_t {
 } escape_hatch_t;
 
 #define declare_escape_hatch(name) \
-	extern int name; \
+	extern "C" int name; \
 	struct escape_hatch_t st_##name = {	#name, &name };
 
 declare_escape_hatch(escape_hatch_storage_options);

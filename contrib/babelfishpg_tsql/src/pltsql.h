@@ -1290,7 +1290,8 @@ typedef struct
 	/* for error handling */
 	sigjmp_buf *save_exception_stack;
 	ErrorContextCallback *save_context_stack;
-	sigjmp_buf	local_sigjmp_buf;
+	// https://gitlab.freedesktop.org/freetype/freetype/-/issues/1037
+	// sigjmp_buf	local_sigjmp_buf;
 
 	/* location of error handling statements */
 	int			target_pc;

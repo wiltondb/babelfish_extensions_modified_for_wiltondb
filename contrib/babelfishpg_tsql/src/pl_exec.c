@@ -4412,6 +4412,8 @@ execute_txn_command(PLtsql_execstate *estate, PLtsql_stmt_execsql *stmt)
 		ereport(ERROR,
 				(errcode(ERRCODE_INVALID_TRANSACTION_TERMINATION),
 				 errmsg("invalid transaction command")));
+
+	return PLTSQL_RC_EXIT;
 }
 
 /*

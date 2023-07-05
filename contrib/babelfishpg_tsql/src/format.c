@@ -472,6 +472,8 @@ format_validate_and_culture(const char *culture, const char *config_name)
 				 errmsg("The culture parameter \"%s\" provided in the function call is not supported.", culture),
 				 errhint("Invalid/Unsupported culture value.")));;
 	}
+
+	return NULL;
 }
 
 /*

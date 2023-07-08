@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -21,7 +22,7 @@ import static com.sqlsamples.Statistics.sla;
 
 public class TestQueryFile {
     
-    static String timestamp = new SimpleDateFormat("dd-MM-yyyy'T'HH:mm:ss.SSS").format(new Date());
+    static String timestamp = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss_SSS").format(new Date());
     static String generatedFilesDirectoryPath = testFileRoot + "/expected/";
     static String sqlServerGeneratedFilesDirectoryPath = testFileRoot + "/sql_expected/";
     static String outputFilesDirectoryPath = testFileRoot + "/output/";
@@ -402,7 +403,7 @@ public class TestQueryFile {
         File outputFile = new File(outputFilesDirectoryPath + outputFileName + ".out");
 
         // generate buffer reader associated with the file
-        FileWriter fw = new FileWriter(outputFile);
+        FileWriter fw = new FileWriter(outputFile, StandardCharsets.UTF_8);
         BufferedWriter bw = new BufferedWriter(fw);
         curr_exec_time = 0L;
         batch_run.batch_run_sql(connection_bbl, bw, testFilePath, logger);

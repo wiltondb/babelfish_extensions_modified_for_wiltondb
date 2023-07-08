@@ -3,6 +3,7 @@ package com.sqlsamples;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.*;
 
@@ -56,7 +57,7 @@ public class batch_run {
             fstream = new FileInputStream(testFilePath);
             // get the object of DataInputStream
             in = new DataInputStream(fstream);
-            br = new BufferedReader(new InputStreamReader(in));
+            br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 
             // each iteration will process one line(SQL statement) from input file and compare result sets from SQL server and Babel instance
             while ((strLine = br.readLine()) != null) {
@@ -273,7 +274,7 @@ public class batch_run {
                     // execute statement as a normal SQL statement
                     if (isSQLFile) {
                         if (!strLine.equalsIgnoreCase("GO")) {
-                            sqlBatch.append(strLine).append(System.lineSeparator());
+                            sqlBatch.append(strLine).append("\n");
                             continue;
                         } else {
                             SQL = sqlBatch.toString();

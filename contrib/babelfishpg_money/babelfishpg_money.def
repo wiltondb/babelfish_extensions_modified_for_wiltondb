@@ -1,0 +1,155 @@
+; Copyright 2023 alex@staticlibs.net
+;
+; Licensed under the Apache License, Version 2.0 (the "License"    
+; you may not use this file except in compliance with the License.
+; You may obtain a copy of the License at
+;
+; http://www.apache.org/licenses/LICENSE-2.0
+;
+; Unless required by applicable law or agreed to in writing, software
+; distributed under the License is distributed on an "AS IS" BASIS,
+; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+; See the License for the specific language governing permissions and
+; limitations under the License.
+
+EXPORTS
+    fixeddecimalin
+    fixeddecimaltypmodin
+    fixeddecimaltypmodout
+    fixeddecimalout
+    fixeddecimalrecv
+    fixeddecimalsend
+
+    fixeddecimaleq
+    fixeddecimalne
+    fixeddecimallt
+    fixeddecimalgt
+    fixeddecimalle
+    fixeddecimalge
+    fixeddecimal_cmp
+
+    fixeddecimal_int2_eq
+    fixeddecimal_int2_ne
+    fixeddecimal_int2_lt
+    fixeddecimal_int2_gt
+    fixeddecimal_int2_le
+    fixeddecimal_int2_ge
+    fixeddecimal_int2_cmp
+
+    int2_fixeddecimal_eq
+    int2_fixeddecimal_ne
+    int2_fixeddecimal_lt
+    int2_fixeddecimal_gt
+    int2_fixeddecimal_le
+    int2_fixeddecimal_ge
+    int2_fixeddecimal_cmp
+
+    fixeddecimal_int4_eq
+    fixeddecimal_int4_ne
+    fixeddecimal_int4_lt
+    fixeddecimal_int4_gt
+    fixeddecimal_int4_le
+    fixeddecimal_int4_ge
+    fixeddecimal_int4_cmp
+
+    int4_fixeddecimal_eq
+    int4_fixeddecimal_ne
+    int4_fixeddecimal_lt
+    int4_fixeddecimal_gt
+    int4_fixeddecimal_le
+    int4_fixeddecimal_ge
+    int4_fixeddecimal_cmp
+
+
+    fixeddecimal_int8_eq
+    fixeddecimal_int8_ne
+    fixeddecimal_int8_lt
+    fixeddecimal_int8_gt
+    fixeddecimal_int8_le
+    fixeddecimal_int8_ge
+    fixeddecimal_int8_cmp
+
+    int8_fixeddecimal_eq
+    int8_fixeddecimal_ne
+    int8_fixeddecimal_lt
+    int8_fixeddecimal_gt
+    int8_fixeddecimal_le
+    int8_fixeddecimal_ge
+    int8_fixeddecimal_cmp
+
+    fixeddecimal_numeric_cmp
+    fixeddecimal_numeric_eq
+    fixeddecimal_numeric_ne
+    fixeddecimal_numeric_lt
+    fixeddecimal_numeric_gt
+    fixeddecimal_numeric_le
+    fixeddecimal_numeric_ge
+    numeric_fixeddecimal_cmp
+    numeric_fixeddecimal_eq
+    numeric_fixeddecimal_ne
+    numeric_fixeddecimal_lt
+    numeric_fixeddecimal_gt
+    numeric_fixeddecimal_le
+    numeric_fixeddecimal_ge
+    fixeddecimal_hash
+    fixeddecimalum
+    fixeddecimalup
+    fixeddecimalpl
+    fixeddecimalmi
+    fixeddecimalmul
+    fixeddecimaldiv
+    fixeddecimalabs
+    fixeddecimallarger
+    fixeddecimalsmaller
+    fixeddecimalint8pl
+    fixeddecimalint8mi
+    fixeddecimalint8mul
+    fixeddecimalint8div
+    int8fixeddecimalpl
+    int8fixeddecimalmi
+    int8fixeddecimalmul
+    int8fixeddecimaldiv
+    fixeddecimalint4pl
+    fixeddecimalint4mi
+    fixeddecimalint4mul
+    fixeddecimalint4div
+    fixeddecimal
+    int4fixeddecimalpl
+    int4fixeddecimalmi
+    int4fixeddecimalmul
+    int4fixeddecimaldiv
+    fixeddecimalint2pl
+    fixeddecimalint2mi
+    fixeddecimalint2mul
+    fixeddecimalint2div
+    int2fixeddecimalpl
+    int2fixeddecimalmi
+    int2fixeddecimalmul
+    int2fixeddecimaldiv
+    int8fixeddecimal
+    fixeddecimalint8
+    int4fixeddecimal
+    fixeddecimalint4
+    int2fixeddecimal
+    fixeddecimalint2
+    fixeddecimaltod
+    dtofixeddecimal
+    fixeddecimaltof
+    ftofixeddecimal
+    numeric_fixeddecimal
+    fixeddecimal_numeric
+    fixeddecimal_avg_accum
+    fixeddecimal_avg
+    fixeddecimal_sum
+    fixeddecimalaggstatecombine
+    fixeddecimalaggstateserialize
+    fixeddecimalaggstatedeserialize
+
+    fixeddecimalaggstatein
+    fixeddecimalaggstateout
+    fixeddecimalaggstatesend
+    fixeddecimalaggstaterecv
+
+    char_to_fixeddecimal
+    int8_to_money
+    int8_to_smallmoney

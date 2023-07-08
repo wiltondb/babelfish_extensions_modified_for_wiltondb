@@ -1,0 +1,256 @@
+; Copyright 2023 alex@staticlibs.net
+;
+; Licensed under the Apache License, Version 2.0 (the "License"    
+; you may not use this file except in compliance with the License.
+; You may obtain a copy of the License at
+;
+; http://www.apache.org/licenses/LICENSE-2.0
+;
+; Unless required by applicable law or agreed to in writing, software
+; distributed under the License is distributed on an "AS IS" BASIS,
+; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+; See the License for the specific language governing permissions and
+; limitations under the License.
+
+EXPORTS
+    _PG_init
+    _PG_fini
+
+    ; runtime/functions.c
+    babelfish_integrity_checker
+    bbf_get_context_info
+    bbf_set_context_info
+    bigint_degrees
+    bigint_power
+    bigint_radians
+    bit_ceiling
+    bit_floor
+    checksum
+    datalength
+    datefirst
+    default_domain
+    error
+    get_current_full_xact_id
+    get_enr_list
+    has_dbaccess
+    host_name
+    host_os
+    int_ceiling
+    int_degrees
+    int_floor
+    int_power
+    int_radians
+    is_member
+    language
+    numeric_degrees
+    numeric_radians
+    object_id
+    object_name
+    object_schema_name
+    options
+    pgerror
+    procid
+    rowcount_big
+    schema_id
+    schema_name
+    servername
+    servicename
+    smallint_degrees
+    smallint_power
+    smallint_radians
+    sp_datatype_info_helper
+    sp_serveroption_internal
+    trancount
+    tsql_exp
+    tsql_random
+    tsql_stat_get_activity
+    tsql_stat_get_activity_deprecated_in_2_2_0
+    user_id_noarg
+    version
+    xact_state
+
+    ; applock.c
+    APPLOCK_MODE
+    APPLOCK_TEST
+    sp_getapplock_function
+    sp_releaseapplock_function
+    
+    ; catalog.c
+    babelfish_helpdb
+    babelfish_inconsistent_metadata
+    bbf_get_login_default_db
+    init_catalog
+    update_user_catalog_for_guest
+    
+    ; collation.c
+    collation_list
+    get_server_collation_oid
+    init_collid_trans_tab
+    init_like_ilike_table
+    init_server_collation
+    init_server_collation_oid
+    is_collated_ci_as_internal
+    
+    ; collationproperty.c
+    collationproperty
+    
+    ; cursor.c
+    cursor_list
+    cursor_rows
+    cursor_status
+    init_tsql_cursor_hash_tab
+    pltsql_cursor_show_textptr_only_column_indexes
+    pltsql_get_last_cursor_handle
+    pltsql_get_last_stmt_handle
+    
+    ; databasepropertyex.c
+    databasepropertyex
+    
+    ; dbcmds.c
+    create_builtin_dbs
+    create_guest_schema_for_all_dbs
+    create_msdb_if_not_exists
+    drop_all_dbs
+    
+    ; err_handler.c
+    babel_list_mapped_error
+    babel_list_mapped_error_deprecated_in_2_2_0
+    pltsql_error_line
+    pltsql_error_message
+    pltsql_error_number
+    pltsql_error_procedure
+    pltsql_error_severity
+    pltsql_error_state
+    
+    ; format.c
+    format_datetime
+    format_numeric
+    
+    ; json_funcs.c
+    tsql_isjson
+    tsql_json_query
+    tsql_json_value
+    tsql_openjson_with
+    
+    ; linked_servers.c
+    openquery_internal
+    
+    ; multidb.c
+    get_current_physical_schema_name
+    is_shared_schema_wrapper
+    
+    ; pl_funcs-2.c
+    columnsupdated
+    fetch_status
+    get_last_identity
+    get_scope_identity
+    rowcount
+    updated
+    pltsql_call_handler
+    pltsql_inline_handler
+    pltsql_truncate_identifier_func
+    pltsql_validator
+    
+    ; pl_handler.c
+    pltsql_call_handler
+    pltsql_inline_handler
+    pltsql_truncate_identifier_func
+    pltsql_validator
+    
+    ; pltsql_coerce.c
+    dtrunci2
+    dtrunci4
+    dtrunci8
+    ftrunci2
+    ftrunci4
+    ftrunci8
+    init_tsql_coerce_hash_tab
+    init_tsql_datatype_precedence_hash_tab
+    pltsql_bpchar_name
+    pltsql_text_name
+    
+    ; pltsql_identity.c
+    get_identity_current
+    get_identity_param
+    
+    ; pltsql_ruleutils.c
+    tsql_get_constraintdef
+    tsql_get_expr
+    tsql_get_functiondef
+    tsql_get_returnTypmodValue
+    
+    ; pltsql_utils.c
+    get_pltsql_function_signature
+    
+    ; procedures.c
+    create_xp_instance_regread_in_master_dbo_internal
+    create_xp_qv_in_master_dbo_internal
+    sp_addlinkedserver_internal
+    sp_addlinkedsrvlogin_internal
+    sp_addrole
+    sp_addrolemember
+    sp_babelfish_configure
+    sp_babelfish_volatility
+    sp_describe_first_result_set_internal
+    sp_describe_undeclared_parameters_internal
+    sp_droplinkedsrvlogin_internal
+    sp_droprole
+    sp_droprolemember
+    sp_dropserver_internal
+    sp_prepare
+    sp_rename_internal
+    sp_unprepare
+    xp_instance_regread_internal
+    xp_qv_internal
+
+    
+    ; properties.c
+    connectionproperty
+    fulltextserviceproperty
+    serverproperty
+    sessionproperty
+    
+    ; rolecmds.c
+    add_existing_users_to_catalog
+    babelfish_add_domain_mapping_entry_internal
+    babelfish_remove_domain_mapping_entry_internal
+    babelfish_set_role
+    babelfish_truncate_domain_mapping_table_internal
+    drop_all_logins
+    drop_all_users
+    initialize_logins
+    is_rolemember
+    role_id
+    suser_id
+    suser_name
+    user_id
+    user_name
+    
+    ; session.c
+    babelfish_db_id
+    babelfish_db_name
+    session_context
+    sp_set_session_context
+    
+    ; string.c
+    float_str
+    formatmessage
+    hashbytes
+    quotename
+    string_escape
+    tsql_varchar_substr
+    
+    ; tsql_for/forjson.c
+    tsql_query_to_json_ffunc
+    tsql_query_to_json_sfunc
+    tsql_query_to_json_text
+    
+    ; tsql_for/forxml.c
+    tsql_query_to_xml_ffunc
+    tsql_query_to_xml_sfunc
+    tsql_query_to_xml_text_ffunc
+    tsql_query_to_xml
+    tsql_query_to_xml_text
+    
+    ; tsqlHandler.c
+    antlr_parser

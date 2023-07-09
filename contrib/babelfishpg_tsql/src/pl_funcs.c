@@ -800,6 +800,7 @@ void
 pltsql_free_function_memory(PLtsql_function *func)
 {
 	int			i;
+	MemoryContext func_cxt = NULL;
 
 	/* Better not call this on an in-use function */
 	Assert(func->use_count == 0);
@@ -866,8 +867,11 @@ pltsql_free_function_memory(PLtsql_function *func)
 	 * fn_extra pointers to it).
 	 */
 	if (func->fn_cxt)
-		MemoryContextDelete(func->fn_cxt);
-	func->fn_cxt = NULL;
+	{
+		func_cxt = func->fn_cxt;
+		func->fn_cxt = NULL;
+		MemoryContextDelete(func_cxt);
+	}
 }
 
 

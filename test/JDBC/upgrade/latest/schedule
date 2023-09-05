@@ -452,6 +452,7 @@ linked_srv_4229
 BABEL-4175
 sp_who
 BABEL_4330
+<<<<<<< HEAD
 BABEL-4606
 sys_availability_groups
 sys_availability_replicas
@@ -460,3 +461,4 @@ BABEL-4231
 babel_table_type
 babel_726
 BABEL-4869
+Test_ISNULL

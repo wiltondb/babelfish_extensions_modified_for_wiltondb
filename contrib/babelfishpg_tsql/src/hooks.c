@@ -148,6 +148,7 @@ static bool pltsql_bbfCustomProcessUtility(ParseState *pstate,
 static void pltsql_bbfSelectIntoAddIdentity(IntoClause *into,  List *tableElts);
 extern void pltsql_bbfSelectIntoUtility(ParseState *pstate, PlannedStmt *pstmt, const char *queryString, 
 					QueryEnvironment *queryEnv, ParamListInfo params, QueryCompletion *qc);
+static Oid select_common_type_for_isnull(ParseState *pstate, List *exprs);
 
 /*****************************************
  * 			Executor Hooks
@@ -233,6 +234,7 @@ static set_local_schema_for_func_hook_type prev_set_local_schema_for_func_hook =
 static called_from_tsql_insert_exec_hook_type pre_called_from_tsql_insert_exec_hook = NULL;
 static exec_tsql_cast_value_hook_type pre_exec_tsql_cast_value_hook = NULL;
 static pltsql_pgstat_end_function_usage_hook_type prev_pltsql_pgstat_end_function_usage_hook = NULL;
+
 
 /*****************************************
  * 			Install / Uninstall
@@ -395,6 +397,8 @@ InstallExtendedHooks(void)
 
 	prev_pltsql_pgstat_end_function_usage_hook = pltsql_pgstat_end_function_usage_hook;
 	pltsql_pgstat_end_function_usage_hook = is_function_pg_stat_valid;
+
+	select_common_type_hook = select_common_type_for_isnull;
 }
 
 void
@@ -1359,9 +1363,7 @@ resolve_target_list_unknowns(ParseState *pstate, List *targetlist)
 		}
 		else
 		{
-			Oid			sys_nspoid = get_namespace_oid("sys", false);
-			Oid			sys_varchartypoid = GetSysCacheOid2(TYPENAMENSP, Anum_pg_type_oid,
-															CStringGetDatum("varchar"), ObjectIdGetDatum(sys_nspoid));
+			Oid			sys_varchartypoid = get_sys_varcharoid();
 
 			tle->expr = (Expr *) coerce_type(pstate, (Node *) con,
 											 restype, sys_varchartypoid, -1,
@@ -3954,4 +3956,45 @@ is_function_pg_stat_valid(FunctionCallInfo fcinfo, PgStat_FunctionCallUsage *fcu
 	}
 
 	pgstat_end_function_usage(fcu, finalize);
+}
+
+/*
+ * select_common_type_for_isnull - Deduce common data type for ISNULL(check_expression , replacement_value) 
+ * function.
+ * This function should return same as check_expression. If that expression is NULL then reyurn the data type of
+ * replacement_value. If replacement_value is also NULL then return INT.
+ */
+static Oid
+select_common_type_for_isnull(ParseState *pstate, List *exprs)
+{
+	Node	   *pexpr;
+	Oid		   ptype;
+
+	Assert(exprs != NIL);
+	pexpr = (Node *) linitial(exprs);
+	ptype = exprType(pexpr);
+
+	/* Check if first arg (check_expression) is NULL literal */
+	if (IsA(pexpr, Const) && ((Const *) pexpr)->constisnull && ptype == UNKNOWNOID)
+	{
+		Node *nexpr = (Node *) lfirst(list_second_cell(exprs));
+		Oid ntype = exprType(nexpr);
+		/* Check if second arg (replace_expression) is NULL literal */
+		if (IsA(nexpr, Const) && ((Const *) nexpr)->constisnull && ntype == UNKNOWNOID)
+		{
+			return INT4OID;
+		}
+		/* If second argument is non-null string literal */
+		if (ntype == UNKNOWNOID)
+		{
+			return get_sys_varcharoid();
+		}
+		return ntype;
+	}
+	/* If first argument is non-null string literal */
+	if (ptype == UNKNOWNOID)
+	{
+		return get_sys_varcharoid();
+	}
+	return ptype;
 }

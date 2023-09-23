@@ -12,7 +12,7 @@ message(STATUS "CMAKE_C_FLAGS=${CMAKE_C_FLAGS}")
 
 # add antrl4cpp artifacts to project environment
 #include_directories($ENV{ANTLR4_RUNTIME_INCLUDE_DIR})
-SET (MYDIR /usr/local/include/antlr4-runtime/)
+SET (MYDIR /usr/include/antlr4-runtime/)
 include_directories(${MYDIR})
 
 # set variable pointing to the antlr tool that supports C++

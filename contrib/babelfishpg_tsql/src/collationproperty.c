@@ -28,7 +28,7 @@ collationproperty(PG_FUNCTION_ARGS)
 	bytea	   *result64 = NULL;
 	int			result32 = -1;
 
-	if (strcasecmp(property, "tdscollation") == 0)
+	if (pg_strcasecmp(property, "tdscollation") == 0)
 	{
 		result64 = tsql_tdscollationproperty_helper(collationname, property);
 		if (result64 != NULL)

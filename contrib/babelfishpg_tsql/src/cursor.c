@@ -629,13 +629,13 @@ cursor_status(PG_FUNCTION_ARGS)
 	curtype = text_to_cstring(PG_GETARG_TEXT_PP(0));
 	refname = text_to_cstring(PG_GETARG_TEXT_PP(1));
 
-	if (strcasecmp(curtype, "global") == 0)
+	if (pg_strcasecmp(curtype, "global") == 0)
 	{
 		/* GLOBAL cursor is not supported yet. We will find nothing */
 		PG_RETURN_INT32(-3);
 	}
 
-	if ((strcasecmp(curtype, "local") != 0) && (strcasecmp(curtype, "variable") != 0))
+	if ((pg_strcasecmp(curtype, "local") != 0) && (pg_strcasecmp(curtype, "variable") != 0))
 		ereport(ERROR,
 				(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
 				 errmsg("cursor_status() has an invalid parameter for cursor_source")));
@@ -647,12 +647,12 @@ cursor_status(PG_FUNCTION_ARGS)
 		{
 			PLtsql_var *var = (PLtsql_var *) estate->datums[i];
 
-			if (is_cursor_datatype(var->datatype->typoid) && strcasecmp(var->refname, refname) == 0)
+			if (is_cursor_datatype(var->datatype->typoid) && pg_strcasecmp(var->refname, refname) == 0)
 			{
 				/* ignore cursor not matching with cursor source */
-				if ((strcasecmp(curtype, "local") == 0) && !var->isconst)
+				if ((pg_strcasecmp(curtype, "local") == 0) && !var->isconst)
 					continue;
-				if ((strcasecmp(curtype, "variable") == 0) && var->isconst)
+				if ((pg_strcasecmp(curtype, "variable") == 0) && var->isconst)
 					continue;
 
 				PG_RETURN_INT32(cursor_status_impl(var));

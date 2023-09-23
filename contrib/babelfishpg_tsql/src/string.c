@@ -60,15 +60,15 @@ hashbytes(PG_FUNCTION_ARGS)
 	const uint8 *data = (unsigned char *) VARDATA_ANY(in);
 	bytea	   *result;
 
-	if (strcasecmp(algorithm, "MD2") == 0)
+	if (pg_strcasecmp(algorithm, "MD2") == 0)
 	{
 		PG_RETURN_NULL();
 	}
-	else if (strcasecmp(algorithm, "MD4") == 0)
+	else if (pg_strcasecmp(algorithm, "MD4") == 0)
 	{
 		PG_RETURN_NULL();
 	}
-	else if (strcasecmp(algorithm, "MD5") == 0)
+	else if (pg_strcasecmp(algorithm, "MD5") == 0)
 	{
 		unsigned char buf[MD5_RESULTLEN];
 		const char *errstr = NULL;
@@ -88,8 +88,8 @@ hashbytes(PG_FUNCTION_ARGS)
 
 		PG_RETURN_BYTEA_P(result);
 	}
-	else if (strcasecmp(algorithm, "SHA") == 0 ||
-			 strcasecmp(algorithm, "SHA1") == 0)
+	else if (pg_strcasecmp(algorithm, "SHA") == 0 ||
+			 pg_strcasecmp(algorithm, "SHA1") == 0)
 	{
 		unsigned char buf[SHA1_RESULTLEN];
 
@@ -102,7 +102,7 @@ hashbytes(PG_FUNCTION_ARGS)
 
 		PG_RETURN_BYTEA_P(result);
 	}
-	else if (strcasecmp(algorithm, "SHA2_256") == 0)
+	else if (pg_strcasecmp(algorithm, "SHA2_256") == 0)
 	{
 		pg_cryptohash_ctx *ctx = pg_cryptohash_create(PG_SHA256);
 		unsigned char buf[PG_SHA256_DIGEST_LENGTH];
@@ -122,7 +122,7 @@ hashbytes(PG_FUNCTION_ARGS)
 
 		PG_RETURN_BYTEA_P(result);
 	}
-	else if (strcasecmp(algorithm, "SHA2_512") == 0)
+	else if (pg_strcasecmp(algorithm, "SHA2_512") == 0)
 	{
 		unsigned char buf[SHA512_RESULTLEN];
 

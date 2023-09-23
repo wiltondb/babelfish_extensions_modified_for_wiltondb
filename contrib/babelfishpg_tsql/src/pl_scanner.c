@@ -303,8 +303,8 @@ pltsql_yylex(void)
 		TokenAuxData aux2;
 		int			tok2 = internal_yylex(&aux2);
 
-		if (tok2 == IDENT && (strcasecmp(aux2.lval.str, "transaction") == 0 ||
-							  strcasecmp(aux2.lval.str, "tran") == 0))
+		if (tok2 == IDENT && (pg_strcasecmp(aux2.lval.str, "transaction") == 0 ||
+							  pg_strcasecmp(aux2.lval.str, "tran") == 0))
 			tok1 = T_WORD;
 		push_back_token(tok2, &aux2);
 	}

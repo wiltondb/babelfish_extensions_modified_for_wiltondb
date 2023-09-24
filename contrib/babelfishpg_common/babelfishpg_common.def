@@ -1,0 +1,328 @@
+; Copyright 2023 alex@staticlibs.net
+;
+; Licensed under the Apache License, Version 2.0 (the "License"    
+; you may not use this file except in compliance with the License.
+; You may obtain a copy of the License at
+;
+; http://www.apache.org/licenses/LICENSE-2.0
+;
+; Unless required by applicable law or agreed to in writing, software
+; distributed under the License is distributed on an "AS IS" BASIS,
+; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+; See the License for the specific language governing permissions and
+; limitations under the License.
+
+EXPORTS
+    _PG_init
+    _PG_fini
+
+    ; bit.c
+    bitin
+    bitout
+    bitrecv
+    bitsend
+    int2bit
+    int4bit
+    int8bit
+    numeric_bit
+    ftobit
+    dtobit
+    bitneg
+    biteq
+    bitne
+    bitlt
+    bitle
+    bitgt
+    bitge
+    bit_cmp
+    bit2int2
+    bit2int4
+    bit2int8
+    bit2numeric
+    bit2fixeddec
+    varchar2bit
+    int4biteq
+    int4bitne
+    int4bitlt
+    int4bitle
+    int4bitgt
+    int4bitge
+    bitint4eq
+    bitint4ne
+    bitint4lt
+    bitint4le
+    bitint4gt
+    bitint4ge
+
+    ; coerce.c
+    dtrunci8
+    dtrunci4
+    dtrunci2
+    ftrunci8
+    ftrunci4
+    ftrunci2
+    pltsql_text_name
+    pltsql_bpchar_name
+
+    ; collation.c
+    get_babel_server_collation_oid
+    babelfish_update_server_collation_name
+
+    ; datetime.c
+    datetime_in
+    datetime_out
+    ;datetime_recv
+    date_datetime
+    time_datetime
+    timestamp_datetime
+    timestamptz_datetime
+    datetime_varchar
+    varchar_datetime
+    datetime_char
+    char_datetime
+    datetime_pl_int4
+    int4_mi_datetime
+    int4_pl_datetime
+    datetime_mi_int4
+    datetime_pl_float8
+    datetime_mi_float8
+    float8_pl_datetime
+    float8_mi_datetime
+    datetime_pl_datetime
+    datetime_mi_datetime
+
+    ; datetime2.c
+    datetime2_in
+    ;datetime2_out
+    ;datetime2_recv
+    date_datetime2
+    time_datetime2
+    timestamp_datetime2
+    timestamptz_datetime2
+    datetime2_scale
+    datetime2_varchar
+    varchar_datetime2
+    datetime2_char
+    char_datetime2
+
+    ; datetimeoffset.c
+    datetimeoffset_in
+    datetimeoffset_out
+    datetimeoffset_recv
+    datetimeoffset_send
+    datetimeoffset_eq
+    datetimeoffset_ne
+    datetimeoffset_lt
+    datetimeoffset_le
+    datetimeoffset_gt
+    datetimeoffset_ge
+    datetimeoffset_cmp
+    datetimeoffset_larger
+    datetimeoffset_smaller
+    datetimeoffset_pl_interval
+    datetimeoffset_mi_interval
+    interval_pl_datetimeoffset
+    datetimeoffset_mi
+    datetimeoffset_hash
+    ;datetimeoffset_hash_extended
+    timestamp_datetimeoffset
+    datetimeoffset_timestamp
+    date_datetimeoffset
+    datetimeoffset_date
+    time_datetimeoffset
+    datetimeoffset_time
+    smalldatetime_datetimeoffset
+    datetimeoffset_smalldatetime
+    datetime_datetimeoffset
+    datetimeoffset_datetime
+    datetime2_datetimeoffset
+    datetimeoffset_datetime2
+    datetimeoffset_scale
+    get_datetimeoffset_tzoffset_internal
+
+    ; numeric.c
+    tsql_numeric_round
+    tsql_numeric_trunc
+    bigint_sum
+    bigint_avg
+    int4int2_sum
+    int4int2_avg
+
+    ; smalldtetime.c
+    smalldatetime_in
+    ;smalldatetime_recv
+    time_smalldatetime
+    date_smalldatetime
+    timestamp_smalldatetime
+    timestamptz_smalldatetime
+    smalldatetime_varchar
+    varchar_smalldatetime
+    smalldatetime_char
+    char_smalldatetime
+    smalldatetime_pl_int4
+    int4_mi_smalldatetime
+    int4_pl_smalldatetime
+    smalldatetime_mi_int4
+    smalldatetime_pl_float8
+    smalldatetime_mi_float8
+    float8_pl_smalldatetime
+    float8_mi_smalldatetime
+    smalldatetime_pl_smalldatetime
+    smalldatetime_mi_smalldatetime
+
+    ; sqlvariant.c
+    sqlvariantin
+    sqlvariantout
+    sqlvariantrecv
+    sqlvariantsend
+    datetime2sqlvariant
+    datetime22sqlvariant
+    smalldatetime2sqlvariant
+    datetimeoffset2sqlvariant
+    date2sqlvariant
+    time2sqlvariant
+    float2sqlvariant
+    real2sqlvariant
+    numeric2sqlvariant
+    money2sqlvariant
+    smallmoney2sqlvariant
+    bigint2sqlvariant
+    int2sqlvariant
+    smallint2sqlvariant
+    tinyint2sqlvariant
+    bit2sqlvariant
+    varchar2sqlvariant
+    nvarchar2sqlvariant
+    char2sqlvariant
+    nchar2sqlvariant
+    bbfvarbinary2sqlvariant
+    bbfbinary2sqlvariant
+    uniqueidentifier2sqlvariant
+    sqlvariant2timestamp
+    sqlvariant2datetime2
+    sqlvariant2datetimeoffset
+    sqlvariant2date
+    sqlvariant2time
+    sqlvariant2float
+    sqlvariant2real
+    sqlvariant2numeric
+    sqlvariant2fixeddecimal
+    sqlvariant2bigint
+    sqlvariant2int
+    sqlvariant2smallint
+    sqlvariant2bit
+    sqlvariant2varchar
+    sqlvariant2char
+    sqlvariant2bbfvarbinary
+    sqlvariant2bbfbinary
+    sqlvariant2uniqueidentifier
+    sql_variant_property
+    sqlvarianteq
+    sqlvariantne
+    sqlvariantlt
+    sqlvariantle
+    sqlvariantgt
+    sqlvariantge
+    sqlvariant_cmp
+    sqlvariant_hash
+    datalength_sqlvariant
+
+    ; typecode.c
+    init_tcode_trans_tab
+    typecode_list
+    translate_pg_type_to_tsql
+
+    ; uniqueidentifier.c
+    uniqueidentifier_in
+    uniqueidentifier_out
+    varchar2uniqueidentifier
+    varbinary2uniqueidentifier
+    uniqueidentifier2varbinary
+    uniqueidentifier2binary
+
+    ; varbinary.c
+    varbinaryin
+    varbinaryout
+    varbinaryrecv
+    varbinarysend
+    varbinary
+    binary
+    varbinarytypmodin
+    varbinarytypmodout
+    byteavarbinary
+    varbinarybytea
+    varbinaryrowversion
+    rowversionbinary
+    rowversionvarbinary
+    varcharvarbinary
+    bpcharvarbinary
+    varbinaryvarchar
+    varcharbinary
+    bpcharbinary
+    varcharrowversion
+    bpcharrowversion
+    int2varbinary
+    int4varbinary
+    int8varbinary
+    int2binary
+    int4binary
+    int8binary
+    int2rowversion
+    int4rowversion
+    int8rowversion
+    varbinaryint2
+    varbinaryint4
+    varbinaryint8
+    binaryint2
+    binaryint4
+    binaryint8
+    float4varbinary
+    float8varbinary
+    varbinaryfloat4
+    varbinaryfloat8
+    float4binary
+    float8binary
+    binaryfloat4
+    binaryfloat8
+    varbinary_eq
+    varbinary_neq
+    varbinary_gt
+    varbinary_geq
+    varbinary_lt
+    varbinary_leq
+    varbinary_cmp
+    varbinary_length
+    int4varbinary_div
+    varbinaryint4_div
+
+    ; varchar.c
+    bpcharin
+    bpchar
+    nchar
+    bpcharrecv
+    bpchar2int2
+    bpchar2int4
+    bpchar2int8
+    bpchar2float4
+    bpchar2float8
+    varcharin
+    varchar
+    nvarchar
+    varcharrecv
+    varchareq
+    varcharne
+    varcharlt
+    varcharle
+    varchargt
+    varcharge
+    varcharcmp
+    hashvarchar
+    varchar2int2
+    varchar2int4
+    varchar2int8
+    varchar2float4
+    varchar2float8
+    varchar2date
+    varchar2time
+    varchar2money
+    varchar2numeric

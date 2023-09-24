@@ -17,10 +17,17 @@ extern void init_instr(void);
 #define INSTR_ENABLED()	\
 	(instr_plugin_ptr && instr_plugin_ptr->instr_increment_metric)
 
+#ifndef _MSC_VER
 #define INSTR_METRIC_INC(metric)												\
 ({	if (INSTR_ENABLED())		\
 		instr_plugin_ptr->instr_increment_metric(metric);		\
 })
+#else // _MSC_VER
+#define INSTR_METRIC_INC(metric)												\
+  	if (INSTR_ENABLED()) {	\
+		instr_plugin_ptr->instr_increment_metric(metric);		\
+}
+#endif // !_MSC_VER
 
 /* copy from pltsql_instr.h */
 typedef enum PgTsqlInstrMetricType

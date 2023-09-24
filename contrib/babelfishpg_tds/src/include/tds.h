@@ -27,7 +27,14 @@ typedef struct TdsInstrPlugin
 
 extern TdsInstrPlugin **tds_instr_plugin_ptr;
 
+#ifndef _MSC_VER
 #define TDSInstrumentation(metric)												\
 ({	if ((tds_instr_plugin_ptr && (*tds_instr_plugin_ptr) && (*tds_instr_plugin_ptr)->tds_instr_increment_metric))	\
 		(*tds_instr_plugin_ptr)->tds_instr_increment_metric(metric);		\
 })
+#else // _MSC_VER
+#define TDSInstrumentation(metric)												\
+if ((tds_instr_plugin_ptr && (*tds_instr_plugin_ptr) && (*tds_instr_plugin_ptr)->tds_instr_increment_metric)) {	\
+		(*tds_instr_plugin_ptr)->tds_instr_increment_metric(metric);		\
+}
+#endif // !_MSC_VER

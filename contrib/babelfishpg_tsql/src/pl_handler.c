@@ -88,6 +88,10 @@
 
 #include "access/xact.h"
 
+#ifdef _MSC_VER
+#include "src/tsql_win.h"
+#endif // _MSC_VER
+
 extern bool escape_hatch_unique_constraint;
 extern bool pltsql_recursive_triggers;
 extern bool restore_tsql_tabletype;
@@ -255,9 +259,11 @@ static tsql_has_linked_srv_permissions_hook_type prev_tsql_has_linked_srv_permis
 plansource_complete_hook_type prev_plansource_complete_hook = NULL;
 plansource_revalidate_hook_type prev_plansource_revalidate_hook = NULL;
 planner_node_transformer_hook_type prev_planner_node_transformer_hook = NULL;
+#ifndef _MSC_VER
 check_lang_as_clause_hook_type check_lang_as_clause_hook = NULL;
 write_stored_proc_probin_hook_type write_stored_proc_probin_hook = NULL;
 make_fn_arguments_from_stored_proc_probin_hook_type make_fn_arguments_from_stored_proc_probin_hook = NULL;
+#endif // !_MSC_VER
 pltsql_nextval_hook_type prev_pltsql_nextval_hook = NULL;
 pltsql_resetcache_hook_type prev_pltsql_resetcache_hook = NULL;
 pltsql_setval_hook_type prev_pltsql_setval_hook = NULL;

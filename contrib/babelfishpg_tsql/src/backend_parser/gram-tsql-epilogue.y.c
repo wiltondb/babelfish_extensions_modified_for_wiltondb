@@ -235,6 +235,7 @@ TsqlFunctionIdentityInto(TypeName *typename, Node *seed, Node *increment, int lo
 {
 	ereport(ERROR, (errcode(ERRCODE_SYNTAX_ERROR), errmsg("IDENTITY() function in SELECT INTO is not supported.")));
 	// Temporarily throw Syntax error instaed of reverting code until Select into identity function with order by is fixed 
+	return NULL;
 }
 
 /* TsqlFunctionParse -- Implements the PARSE and TRY_PARSE functions.

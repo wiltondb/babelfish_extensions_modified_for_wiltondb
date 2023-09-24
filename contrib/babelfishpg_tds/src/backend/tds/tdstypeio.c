@@ -315,6 +315,8 @@ TdsEncodingConversion(const char *s, int len, pg_enc src_encoding, pg_enc dest_e
 		ereport(ERROR,
 				(errcode(ERRCODE_INTERNAL_ERROR),
 				 errmsg("Could not encode the string to the client encoding")));
+
+	return NULL;
 }
 
 coll_info_t

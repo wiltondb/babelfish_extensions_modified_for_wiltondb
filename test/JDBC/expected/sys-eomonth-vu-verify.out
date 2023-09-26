@@ -51,7 +51,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Adding a value to a 'date' column caused an overflow.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Adding a value to a 'date' column caused an overflow.)~~
 
 
 --when offset is negative edge cases where yyyy can go upto 0000 after that it will throw an error.
@@ -70,7 +70,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Adding a value to a 'date' column caused an overflow.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Adding a value to a 'date' column caused an overflow.)~~
 
 
 
@@ -154,7 +154,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The date exceeds T-SQL compatibility limits.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The date exceeds T-SQL compatibility limits.)~~
 
 
 --In this test case we are checking if it’s the last date of BC it should throw a BC error. After this date the date change to AD.
@@ -164,7 +164,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The date exceeds T-SQL compatibility limits.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The date exceeds T-SQL compatibility limits.)~~
 
 
 --In this test case we are checking if it’s the last date of BC. If we add an offset 1 it will give the value as its not a BC year anymore
@@ -184,7 +184,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Adding a value to a 'date' column caused an overflow.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Adding a value to a 'date' column caused an overflow.)~~
 
 
 --In this test case we are checking if the year is within T-SQL range and offset is 1 it
@@ -195,7 +195,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Adding a value to a 'date' column caused an overflow.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Adding a value to a 'date' column caused an overflow.)~~
 
 
 --In this test case we are checking if the year is outside T-SQL range, it should return T-SQL compatibility error.
@@ -205,7 +205,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The date exceeds T-SQL compatibility limits.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The date exceeds T-SQL compatibility limits.)~~
 
 
 --In this test case we are checking if the year is outside T-SQL range and offset is -1, so after adding offest its within the T-SQL range and it should return the value. 

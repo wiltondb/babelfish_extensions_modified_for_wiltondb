@@ -282,7 +282,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The culture parameter "aa-DJ" provided in the function call is not supported.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The culture parameter "aa-DJ" provided in the function call is not supported.)~~
 
 SELECT FORMAT(si, 'C6', 'en-us') from smallint_testing;
 GO

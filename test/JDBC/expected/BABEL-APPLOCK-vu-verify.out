@@ -156,7 +156,7 @@ GO
 smallint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The statement or function must be executed in the context of a user transaction.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The statement or function must be executed in the context of a user transaction.)~~
 
 
 BEGIN TRAN

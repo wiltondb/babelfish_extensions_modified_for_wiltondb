@@ -118,8 +118,8 @@ insert into t1 (a) values ( cast('0E984725-C51C-4BF4-9960-E1C80E27ABA0wrong' as 
 go
 
 -- DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select a from t1 order by id;
-go
+# select a from t1 order by id;
+# go
 
 -- Test CAST from SQL_VARIANT
 -- datetime2
@@ -278,8 +278,8 @@ select cast(cast(cast('0E984725-C51C-4BF4-9960-E1C80E27ABA0' as uniqueidentifier
 go
 
 -- Test DATALENGTH for SQL_VARIANT TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select datalength(a), a from t1;
-go
+# select datalength(a), a from t1;
+# go
 
 -- SQL_VARAINT_PROPERTY function
 CREATE SEQUENCE t2_sec start with 1 increment by 1;
@@ -519,23 +519,23 @@ go
 go
 
 -- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from t4 where a = b order by id;
-go
+# select * from t4 where a = b order by id;
+# go
 -- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from t4 where a <> b order by id;
-go
+# select * from t4 where a <> b order by id;
+# go
 -- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from t4 where a > b order by id;
-go
+# select * from t4 where a > b order by id;
+# go
 -- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from t4 where a < b order by id;
-go
+# select * from t4 where a < b order by id;
+# go
 -- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from t4 where a >= b order by id;
-go
+# select * from t4 where a >= b order by id;
+# go
 -- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from t4 where a <= b order by id;
-go
+# select * from t4 where a <= b order by id;
+# go
 
 -- comparison between different types
 truncate table t4;

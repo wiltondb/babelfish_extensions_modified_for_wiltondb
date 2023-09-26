@@ -12,7 +12,7 @@ GO
 ntext
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: option binary base64 is not supported)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). option binary base64 is not supported)~~
 
 
 SELECT * FROM forxml_subquery_vu_v_cte2;

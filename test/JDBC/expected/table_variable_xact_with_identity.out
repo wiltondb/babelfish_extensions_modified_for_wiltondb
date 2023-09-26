@@ -189,7 +189,7 @@ GO
 smallmoney
 ~~ERROR (Code: 293)~~
 
-~~ERROR (Message: invalid characters found: cannot cast value "ABC" to money)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid characters found: cannot cast value "ABC" to money)~~
 
 
 DECLARE @tvp2 tabvar_type_function_error

@@ -76,7 +76,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 SELECT CONVERT(SMALLDATETIME, CAST(-2.5 as BIGINT))
 GO
@@ -84,7 +84,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 SELECT CONVERT(SMALLDATETIME, CAST(-2.5 as SMALLINT))
 GO
@@ -92,7 +92,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 SELECT CONVERT(SMALLDATETIME, CAST(-2.5 as MONEY))
 GO
@@ -100,7 +100,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 SELECT CONVERT(SMALLDATETIME, CAST(-2.5 as SMALLMONEY))
 GO
@@ -108,7 +108,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 
 -- Should all fail
@@ -230,7 +230,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "decimal" to date)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "decimal" to date)~~
 
 SELECT CONVERT(DATE, CAST(-2.5 as NUMERIC(30,8)))
 GO
@@ -238,7 +238,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to date)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to date)~~
 
 SELECT CONVERT(DATE, CAST(-2.5 as FLOAT))
 GO
@@ -246,7 +246,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type double precision to date)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type double precision to date)~~
 
 SELECT CONVERT(DATE, CAST(-2.5 as REAL))
 GO
@@ -254,7 +254,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type real to date)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type real to date)~~
 
 SELECT CONVERT(DATE, CAST(-2.5 as INT))
 GO
@@ -262,7 +262,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to date)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to date)~~
 
 SELECT CONVERT(DATE, CAST(-2.5 as BIGINT))
 GO
@@ -270,7 +270,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type bigint to date)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type bigint to date)~~
 
 SELECT CONVERT(DATE, CAST(-2.5 as SMALLINT))
 GO
@@ -278,7 +278,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type smallint to date)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type smallint to date)~~
 
 SELECT CONVERT(DATE, CAST(-2.5 as MONEY))
 GO
@@ -286,7 +286,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type money to date)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type money to date)~~
 
 SELECT CONVERT(DATE, CAST(-2.5 as SMALLMONEY))
 GO
@@ -294,7 +294,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type smallmoney to date)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type smallmoney to date)~~
 
 
 -- Should all fail
@@ -304,7 +304,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "decimal" to time without time zone)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "decimal" to time without time zone)~~
 
 SELECT CONVERT(TIME, CAST(-2.5 as NUMERIC(30,8)))
 GO
@@ -312,7 +312,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to time without time zone)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to time without time zone)~~
 
 SELECT CONVERT(TIME, CAST(-2.5 as FLOAT))
 GO
@@ -320,7 +320,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type double precision to time without time zone)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type double precision to time without time zone)~~
 
 SELECT CONVERT(TIME, CAST(-2.5 as REAL))
 GO
@@ -328,7 +328,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type real to time without time zone)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type real to time without time zone)~~
 
 SELECT CONVERT(TIME, CAST(-2.5 as INT))
 GO
@@ -336,7 +336,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to time without time zone)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to time without time zone)~~
 
 SELECT CONVERT(TIME, CAST(-2.5 as BIGINT))
 GO
@@ -344,7 +344,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type bigint to time without time zone)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type bigint to time without time zone)~~
 
 SELECT CONVERT(TIME, CAST(-2.5 as SMALLINT))
 GO
@@ -352,7 +352,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type smallint to time without time zone)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type smallint to time without time zone)~~
 
 SELECT CONVERT(TIME, CAST(-2.5 as MONEY))
 GO
@@ -360,7 +360,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type money to time without time zone)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type money to time without time zone)~~
 
 SELECT CONVERT(TIME, CAST(-2.5 as SMALLMONEY))
 GO
@@ -368,7 +368,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type smallmoney to time without time zone)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type smallmoney to time without time zone)~~
 
 
 CREATE VIEW Datetime_view5 as (

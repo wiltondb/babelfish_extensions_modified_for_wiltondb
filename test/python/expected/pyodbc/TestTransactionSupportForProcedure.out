@@ -94,7 +94,7 @@ exec txnproc1;
 ~~ROW COUNT: 1~~
 
 ~~ERROR (Code: 266)~~
-~~ERROR (Message: [25000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 0 current count 1 (266) (SQLMoreResults))~~
+~~ERROR (Message: [25000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 0 current count 1 (266) (SQLMoreResults))~~
 
 select @@trancount
 ~~START~~
@@ -149,7 +149,7 @@ exec txnproc1;
 ~~ROW COUNT: 1~~
 
 ~~ERROR (Code: 266)~~
-~~ERROR (Message: [25000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 0 current count 1 (266) (SQLMoreResults))~~
+~~ERROR (Message: [25000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 0 current count 1 (266) (SQLMoreResults))~~
 
 select @@trancount
 ~~START~~
@@ -388,7 +388,7 @@ exec txnproc1;
 ~~ROW COUNT: 1~~
 
 ~~ERROR (Code: 266)~~
-~~ERROR (Message: [25000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 1 current count 0 (266) (SQLMoreResults))~~
+~~ERROR (Message: [25000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 1 current count 0 (266) (SQLMoreResults))~~
 
 select @@trancount
 ~~START~~
@@ -454,7 +454,7 @@ exec txnproc1;
 ~~ROW COUNT: 1~~
 
 ~~ERROR (Code: 266)~~
-~~ERROR (Message: [25000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 1 current count 0 (266) (SQLMoreResults))~~
+~~ERROR (Message: [25000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 1 current count 0 (266) (SQLMoreResults))~~
 
 select @@trancount
 ~~START~~
@@ -824,7 +824,7 @@ exec txnproc1;
 ~~ROW COUNT: 6~~
 
 ~~ERROR (Code: 266)~~
-~~ERROR (Message: [25000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 1 current count 2 (266) (SQLMoreResults))~~
+~~ERROR (Message: [25000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 1 current count 2 (266) (SQLMoreResults))~~
 
 select @@trancount
 ~~START~~
@@ -907,7 +907,7 @@ exec txnproc1;
 ~~ROW COUNT: 1~~
 
 ~~ERROR (Code: 266)~~
-~~ERROR (Message: [25000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 1 current count 2 (266) (SQLMoreResults))~~
+~~ERROR (Message: [25000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Transaction count after execution indicates a mismatch number of BEGIN and COMMIT statements. Previous count 1 current count 2 (266) (SQLMoreResults))~~
 
 select @@trancount
 ~~START~~

@@ -5,5 +5,5 @@ GO
 nvarchar#!#nvarchar#!#nvarchar#!#int#!#nvarchar#!#nvarchar#!#tinyint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The database 'hello' does not exist. Supply a valid database name. To see available databases, use sys.databases.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The database 'hello' does not exist. Supply a valid database name. To see available databases, use sys.databases.)~~
 

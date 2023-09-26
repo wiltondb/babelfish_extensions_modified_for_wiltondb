@@ -4,7 +4,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP VIEW BABEL_3748_vu_prepare_v1
 GO
@@ -15,7 +15,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP PROCEDURE BABEL_3748_vu_prepare_p1
 GO
@@ -26,7 +26,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP FUNCTION BABEL_3748_vu_prepare_f1()
 GO
@@ -37,7 +37,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP VIEW BABEL_3748_vu_prepare_v2
 GO
@@ -48,7 +48,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP PROCEDURE BABEL_3748_vu_prepare_p2
 GO
@@ -59,7 +59,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP FUNCTION BABEL_3748_vu_prepare_f2()
 GO
@@ -130,7 +130,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP VIEW BABEL_3748_vu_prepare_v5
 GO
@@ -141,7 +141,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP PROCEDURE BABEL_3748_vu_prepare_p5
 GO
@@ -152,7 +152,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP FUNCTION BABEL_3748_vu_prepare_f5()
 GO
@@ -163,7 +163,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP VIEW BABEL_3748_vu_prepare_v6
 GO
@@ -174,7 +174,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP PROCEDURE BABEL_3748_vu_prepare_p6
 GO
@@ -185,7 +185,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP FUNCTION BABEL_3748_vu_prepare_f6()
 GO
@@ -196,7 +196,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP VIEW BABEL_3748_vu_prepare_v7
 GO
@@ -207,7 +207,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP PROCEDURE BABEL_3748_vu_prepare_p7
 GO
@@ -218,7 +218,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP FUNCTION BABEL_3748_vu_prepare_f7()
 GO
@@ -289,7 +289,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP VIEW BABEL_3748_vu_prepare_v10
 GO
@@ -300,7 +300,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP PROCEDURE BABEL_3748_vu_prepare_p10
 GO
@@ -311,7 +311,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type integer to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type integer to xml.)~~
 
 DROP FUNCTION BABEL_3748_vu_prepare_f10()
 GO
@@ -322,7 +322,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP VIEW BABEL_3748_vu_prepare_v11
 GO
@@ -333,7 +333,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP PROCEDURE BABEL_3748_vu_prepare_p11
 GO
@@ -344,7 +344,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP FUNCTION BABEL_3748_vu_prepare_f11()
 GO

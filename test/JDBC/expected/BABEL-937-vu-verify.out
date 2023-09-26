@@ -21,7 +21,7 @@ go
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: property cannot be found on the specified JSON path)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). property cannot be found on the specified JSON path)~~
 
 select * from babel_937_not_append_knp_3
 go
@@ -29,7 +29,7 @@ go
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: property cannot be found on the specified JSON path)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). property cannot be found on the specified JSON path)~~
 
 
 -- Key exists, append
@@ -46,7 +46,7 @@ go
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: array cannot be found in the specified JSON path)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). array cannot be found in the specified JSON path)~~
 
 select * from babel_937_append_kp_notarr_3
 go
@@ -54,7 +54,7 @@ go
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: array cannot be found in the specified JSON path)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). array cannot be found in the specified JSON path)~~
 
 
 select * from babel_937_append_kp_arr
@@ -80,7 +80,7 @@ go
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: property cannot be found on the specified JSON path)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). property cannot be found on the specified JSON path)~~
 
 select * from babel_937_append_knp_notarr_3
 go
@@ -88,7 +88,7 @@ go
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: property cannot be found on the specified JSON path)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). property cannot be found on the specified JSON path)~~
 
 
 -- Tests to check if the function works for case-sensitive cases
@@ -98,7 +98,7 @@ go
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: JSON path is not properly formatted)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). JSON path is not properly formatted)~~
 
 select * from babel_937_case_sensitive_2
 go
@@ -106,7 +106,7 @@ go
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: JSON path is not properly formatted)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). JSON path is not properly formatted)~~
 
 
 --Test to check wrong keyword in the path argument
@@ -116,7 +116,7 @@ go
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: JSON path is not properly formatted)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). JSON path is not properly formatted)~~
 
 
 -- Test to check when there are spaces in path argument

@@ -403,7 +403,7 @@ go
 bigint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: nextval: reached maximum value of sequence "seq_tinyint" (255))~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). nextval: reached maximum value of sequence "seq_tinyint" (255))~~
 
 
 CREATE SEQUENCE seq_smallint
@@ -432,7 +432,7 @@ go
 bigint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: nextval: reached maximum value of sequence "seq_smallint" (32767))~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). nextval: reached maximum value of sequence "seq_smallint" (32767))~~
 
 
 CREATE SEQUENCE seq_int
@@ -461,7 +461,7 @@ go
 bigint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: nextval: reached maximum value of sequence "seq_int" (2147483647))~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). nextval: reached maximum value of sequence "seq_int" (2147483647))~~
 
 
 CREATE SEQUENCE seq_bigint
@@ -490,7 +490,7 @@ go
 bigint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: nextval: reached maximum value of sequence "seq_bigint" (9223372036854775807))~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). nextval: reached maximum value of sequence "seq_bigint" (9223372036854775807))~~
 
 
 CREATE SEQUENCE seq_numeric
@@ -519,7 +519,7 @@ go
 bigint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: nextval: reached maximum value of sequence "seq_numeric" (9223372036854775807))~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). nextval: reached maximum value of sequence "seq_numeric" (9223372036854775807))~~
 
 
 CREATE SEQUENCE seq_decimal
@@ -548,7 +548,7 @@ go
 bigint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: nextval: reached maximum value of sequence "seq_decimal" (9223372036854775807))~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). nextval: reached maximum value of sequence "seq_decimal" (9223372036854775807))~~
 
 
 -- Test faulty sequence creation

@@ -18,7 +18,7 @@ INSERT INTO updatable_cursor_table values(211234, 9780, 891372401, 56, 1)
 # Try opening an updatable (i.e. dynamic) cursor using SQL Batch
 DECLARE updatable_cursor CURSOR DYNAMIC FOR SELECT a FROM updatable_cursor_table; OPEN updatable_cursor; CLOSE updatable_cursor; DEALLOCATE updatable_cursor;
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]'DYNAMIC CURSOR' is not currently supported in Babelfish (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]'DYNAMIC CURSOR' is not currently supported in Babelfish (33557097) (SQLExecDirectW))~~
 
 
 # Drop table

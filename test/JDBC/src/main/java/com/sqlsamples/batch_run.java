@@ -3,6 +3,7 @@ package com.sqlsamples;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.*;
 
@@ -58,7 +59,7 @@ public class batch_run {
             fstream = new FileInputStream(testFilePath);
             // get the object of DataInputStream
             in = new DataInputStream(fstream);
-            br = new BufferedReader(new InputStreamReader(in));
+            br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
 
             // each iteration will process one line(SQL statement) from input file and compare result sets from SQL server and Babel instance
             while ((strLine = br.readLine()) != null) {
@@ -281,7 +282,7 @@ public class batch_run {
                     // execute statement as a normal SQL statement
                     if (isSQLFile) {
                         if (!strLine.equalsIgnoreCase("GO")) {
-                            sqlBatch.append(strLine).append(System.lineSeparator());
+                            sqlBatch.append(strLine).append("\n");
                             continue;
                         } else if (bashMode){
                             bashMode = false;
@@ -290,7 +291,12 @@ public class batch_run {
 
                             logger.info("Executing bash: " + sqlBatch.toString());
                             try{
-                                Process p = r.exec(sqlBatch.toString());
+                                final Process p;
+                                if (System.getProperty("os.name").startsWith("Windows")) {
+                                    p = r.exec(sqlBatch.toString().replace("/bin/bash", "C:/msys64/usr/bin/bash.exe"));
+                                } else {
+                                    p = r.exec(sqlBatch.toString());
+                                }
                                 BufferedReader exec_reader =
                                     new BufferedReader(new InputStreamReader(p.getInputStream()));
                                 String inputLine;
@@ -298,7 +304,14 @@ public class batch_run {
                                     bw.write(inputLine);
                                     bw.newLine();
                                 }
-                                exec_reader.close();
+                                BufferedReader exec_error_reader =
+                                    new BufferedReader(new InputStreamReader(p.getErrorStream()));
+                                String errorLine;
+                                while ((errorLine = exec_error_reader.readLine()) != null) {
+                                    bw.write(errorLine);
+                                    bw.newLine();
+                                }
+                                exec_error_reader.close();
                             }catch (Exception exeception){
                                 bw.write(exeception.getMessage());
                                 bw.newLine();

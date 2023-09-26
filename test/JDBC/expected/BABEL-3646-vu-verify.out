@@ -4,7 +4,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to date.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to date.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v1
 GO
@@ -15,7 +15,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to date.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to date.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p1
 GO
@@ -26,7 +26,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to date.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to date.)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f1()
 GO
@@ -97,7 +97,7 @@ GO
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "binary" to double precision.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "binary" to double precision.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v4
 GO
@@ -108,7 +108,7 @@ GO
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "binary" to double precision.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "binary" to double precision.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p4
 GO
@@ -119,7 +119,7 @@ GO
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "binary" to double precision.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "binary" to double precision.)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f4()
 GO
@@ -130,7 +130,7 @@ GO
 real
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "binary" to real.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "binary" to real.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v5
 GO
@@ -141,7 +141,7 @@ GO
 real
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "binary" to real.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "binary" to real.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p5
 GO
@@ -152,7 +152,7 @@ GO
 real
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "binary" to real.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "binary" to real.)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f5()
 GO
@@ -163,7 +163,7 @@ GO
 uniqueidentifier
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to uniqueidentifier.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to uniqueidentifier.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v6
 GO
@@ -174,7 +174,7 @@ GO
 uniqueidentifier
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to uniqueidentifier.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to uniqueidentifier.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p6
 GO
@@ -185,7 +185,7 @@ GO
 uniqueidentifier
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to uniqueidentifier.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to uniqueidentifier.)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f6()
 GO
@@ -196,7 +196,7 @@ GO
 image
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to image.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to image.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v7
 GO
@@ -207,7 +207,7 @@ GO
 image
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to image.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to image.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p7
 GO
@@ -231,7 +231,7 @@ GO
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to "bit".)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to "bit".)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v8
 GO
@@ -242,7 +242,7 @@ GO
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to "bit".)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to "bit".)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p8
 GO
@@ -253,7 +253,7 @@ GO
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to "bit".)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to "bit".)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f8()
 GO
@@ -264,7 +264,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to money.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to money.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v9
 GO
@@ -275,7 +275,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to money.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to money.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p9
 GO
@@ -286,7 +286,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to money.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to money.)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f9()
 GO
@@ -382,7 +382,7 @@ GO
 datetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data precision out of range for datetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data precision out of range for datetime)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f12()
 GO
@@ -505,7 +505,7 @@ GO
 datetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: invalid input syntax for type datetime2: "5")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid input syntax for type datetime2: "5")~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f16()
 GO
@@ -516,7 +516,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v17
 GO
@@ -527,7 +527,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p17
 GO
@@ -538,7 +538,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f17()
 GO
@@ -549,7 +549,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v18
 GO
@@ -560,7 +560,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p18
 GO
@@ -571,7 +571,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type numeric to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type numeric to xml.)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f18()
 GO
@@ -642,7 +642,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to time without time zone.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to time without time zone.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v22
 GO
@@ -653,7 +653,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to time without time zone.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to time without time zone.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p22
 GO
@@ -664,7 +664,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to time without time zone.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to time without time zone.)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f22()
 GO
@@ -675,7 +675,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to money.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to money.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v24
 GO
@@ -686,7 +686,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to money.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to money.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p24
 GO
@@ -697,7 +697,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to money.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to money.)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f24()
 GO
@@ -708,7 +708,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type datetime to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type datetime to xml.)~~
 
 DROP VIEW BABEL_3646_vu_prepare_v25
 GO
@@ -719,7 +719,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type datetime to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type datetime to xml.)~~
 
 DROP PROCEDURE BABEL_3646_vu_prepare_p25
 GO
@@ -730,7 +730,7 @@ GO
 xml
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type datetime to xml.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type datetime to xml.)~~
 
 DROP FUNCTION BABEL_3646_vu_prepare_f25()
 GO

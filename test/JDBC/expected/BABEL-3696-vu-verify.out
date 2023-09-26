@@ -68,7 +68,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: JSON path is not properly formatted)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). JSON path is not properly formatted)~~
 
 
 EXEC babel_3696_10

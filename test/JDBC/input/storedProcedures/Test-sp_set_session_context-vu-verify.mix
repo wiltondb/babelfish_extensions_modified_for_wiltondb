@@ -170,7 +170,7 @@ GO
 EXEC sp_set_session_context 'ÀÀ', 'accents';
 go
 
-SELECT CAST(session_context(N'àà') AS NVARCHAR);
+SELECT CAST(session_context(N'ÀÀ') AS NVARCHAR);
 go
 
 SELECT CAST(session_context(N'áá') AS NVARCHAR);

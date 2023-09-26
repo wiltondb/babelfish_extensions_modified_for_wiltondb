@@ -17,7 +17,7 @@ This test framework currently supports two ODBC drivers: the SQL Server ODBC dri
 The config.txt should be filled like the example below.
 
 ```
-MSSQL_ODBC_DRIVER_NAME=ODBC Driver 17 for SQL Server
+MSSQL_ODBC_DRIVER_NAME=ODBC Driver 18 for SQL Server
 MSSQL_BABEL_DB_SERVER=localhost
 MSSQL_BABEL_DB_PORT=1433
 MSSQL_BABEL_DB_USER=jdbc_user

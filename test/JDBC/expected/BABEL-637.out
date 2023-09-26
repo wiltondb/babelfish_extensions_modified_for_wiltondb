@@ -927,7 +927,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT babel_637_add_one_smallmoney(cast(41.9 as float));
@@ -944,7 +944,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT babel_637_add_one_smallmoney(cast(41.9 as fixeddecimal));
@@ -961,7 +961,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT babel_637_add_one_smallmoney(cast(41.9 as numeric(8,4)));
@@ -978,7 +978,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT babel_637_add_one_smallmoney(cast(41.9 as money));
@@ -995,7 +995,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT babel_637_add_one_smallmoney(cast(41.9 as smallmoney));
@@ -1043,7 +1043,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT babel_637_add_one_smallmoney(cast(41 as smallint));
@@ -1300,7 +1300,7 @@ GO
 int
 ~~ERROR (Code: 8115)~~
 
-~~ERROR (Message: integer out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). integer out of range)~~
 
 
 SELECT babel_637_add_one_int4(cast(41.9 as numeric(8,4)));
@@ -1317,7 +1317,7 @@ GO
 int
 ~~ERROR (Code: 8115)~~
 
-~~ERROR (Message: integer out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). integer out of range)~~
 
 
 SELECT babel_637_add_one_int4(cast(41.9 as money));
@@ -1334,7 +1334,7 @@ GO
 int
 ~~ERROR (Code: 8115)~~
 
-~~ERROR (Message: integer out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). integer out of range)~~
 
 
 SELECT babel_637_add_one_int4(cast(41.9 as smallmoney));
@@ -1469,7 +1469,7 @@ GO
 smallint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 
 SELECT babel_637_add_one_smallint(cast(41.9 as numeric(8,4)));
@@ -1486,7 +1486,7 @@ GO
 smallint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 
 SELECT babel_637_add_one_smallint(cast(41.9 as money));
@@ -1503,7 +1503,7 @@ GO
 smallint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 
 SELECT babel_637_add_one_smallint(cast(41.9 as smallmoney));
@@ -1520,7 +1520,7 @@ GO
 smallint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 
 SELECT babel_637_add_one_smallint(cast(41 as bigint));
@@ -1638,7 +1638,7 @@ GO
 tinyint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 
 SELECT babel_637_add_one_tinyint(cast(41.9 as numeric(8,4)));
@@ -1655,7 +1655,7 @@ GO
 tinyint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 
 SELECT babel_637_add_one_tinyint(cast(41.9 as money));
@@ -1672,7 +1672,7 @@ GO
 tinyint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 
 SELECT babel_637_add_one_tinyint(cast(41.9 as smallmoney));
@@ -1689,7 +1689,7 @@ GO
 tinyint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 
 SELECT babel_637_add_one_tinyint(cast(41 as bigint));
@@ -1736,7 +1736,7 @@ GO
 tinyint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain tinyint violates check constraint "tinyint_check")~~
 
 
 SELECT babel_637_add_one_tinyint(cast(41 as tinyint));

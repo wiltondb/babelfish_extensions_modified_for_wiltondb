@@ -128,7 +128,7 @@ GO
 int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: A TOP or FETCH clause contains an invalid value.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). A TOP or FETCH clause contains an invalid value.)~~
 
 
 -- not a single row
@@ -138,7 +138,7 @@ GO
 int
 ~~ERROR (Code: 512)~~
 
-~~ERROR (Message: more than one row returned by a subquery used as an expression)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). more than one row returned by a subquery used as an expression)~~
 
 
 -- not a single column

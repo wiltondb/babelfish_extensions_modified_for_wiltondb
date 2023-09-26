@@ -63,7 +63,7 @@ GO
 tinyint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: function master_dbo.isoweek("varchar") does not exist)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). function master_dbo.isoweek("varchar") does not exist)~~
 
 
 CREATE FUNCTION table_3101_2()
@@ -103,7 +103,7 @@ GO
 int
 ~~ERROR (Code: 8134)~~
 
-~~ERROR (Message: division by zero)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). division by zero)~~
 
 
 DROP FUNCTION my_splitstring_3101

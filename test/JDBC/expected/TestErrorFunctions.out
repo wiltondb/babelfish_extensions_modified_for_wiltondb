@@ -451,7 +451,7 @@ int
 smallmoney
 ~~ERROR (Code: 293)~~
 
-~~ERROR (Message: invalid characters found: cannot cast value "ABC" to money)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid characters found: cannot cast value "ABC" to money)~~
 
 
 begin transaction
@@ -471,7 +471,7 @@ int
 smallmoney
 ~~ERROR (Code: 293)~~
 
-~~ERROR (Message: invalid characters found: cannot cast value "ABC" to money)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid characters found: cannot cast value "ABC" to money)~~
 
 
 -- @@trancount should be 0
@@ -500,7 +500,7 @@ go
 int
 ~~ERROR (Code: 8134)~~
 
-~~ERROR (Message: division by zero)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). division by zero)~~
 
 
 select @@trancount

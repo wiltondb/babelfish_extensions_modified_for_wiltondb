@@ -506,7 +506,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: date field value out of range: 10-55-10)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). date field value out of range: 10-55-10)~~
 
 select datefromparts('2020', 55, 100.1);
 GO
@@ -514,7 +514,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: date field value out of range: 2020-55-100)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). date field value out of range: 2020-55-100)~~
 
 
 -- test DATETIMEFROMPARTS function
@@ -2111,7 +2111,7 @@ GO
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: value overflows for numeric format)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value overflows for numeric format)~~
 
 select ROUND(col, -3) from t1;
 GO

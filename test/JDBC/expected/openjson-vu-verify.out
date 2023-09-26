@@ -88,7 +88,7 @@ GO
 nvarchar#!#nvarchar#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: JSON object does not contain key "a")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). JSON object does not contain key "a")~~
 
 DROP PROCEDURE BABEL_3702_vu_prepare_p5
 GO

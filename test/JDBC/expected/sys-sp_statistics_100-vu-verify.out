@@ -12,7 +12,7 @@ go
 varchar#!#varchar#!#varchar#!#smallint#!#varchar#!#varchar#!#smallint#!#smallint#!#varchar#!#varchar#!#int#!#int#!#varchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: negative substring length not allowed)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). negative substring length not allowed)~~
 
 
 exec [sys].sp_statistics_100 @table_name = 'sys_sp_statistics_100_vu_prepare_t2', @table_owner = 'dbo'
@@ -21,7 +21,7 @@ go
 varchar#!#varchar#!#varchar#!#smallint#!#varchar#!#varchar#!#smallint#!#smallint#!#varchar#!#varchar#!#int#!#int#!#varchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: negative substring length not allowed)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). negative substring length not allowed)~~
 
 
 exec [sys].sp_statistics_100 @table_name = 'sys_sp_statistics_100_vu_prepare_t2', @table_qualifier = 'master'
@@ -30,7 +30,7 @@ go
 varchar#!#varchar#!#varchar#!#smallint#!#varchar#!#varchar#!#smallint#!#smallint#!#varchar#!#varchar#!#int#!#int#!#varchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: negative substring length not allowed)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). negative substring length not allowed)~~
 
 
 exec [sys].sp_statistics_100 'sys_sp_statistics_100_vu_prepare_t1', 'dbo'
@@ -39,7 +39,7 @@ go
 varchar#!#varchar#!#varchar#!#smallint#!#varchar#!#varchar#!#smallint#!#smallint#!#varchar#!#varchar#!#int#!#int#!#varchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: negative substring length not allowed)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). negative substring length not allowed)~~
 
 
 exec sp_statistics_100 N'sys_sp_statistics_100_vu_prepare_t1',N'dbo',NULL,N'%',N'Y',N'Q'

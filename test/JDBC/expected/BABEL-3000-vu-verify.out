@@ -35,7 +35,7 @@ go
 bit#!#int#!#varchar#!#bit#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#varchar#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#varchar#!#varchar#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#smallint#!#smallint#!#smallint#!#int#!#int#!#int#!#tinyint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: relation "isc_udt" does not exist)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). relation "isc_udt" does not exist)~~
 
 
 exec sp_describe_first_result_set N'select * from master..babel_3000_vu_prepare_num_identity'
@@ -92,5 +92,5 @@ go
 bit#!#int#!#varchar#!#bit#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#varchar#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#varchar#!#varchar#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#smallint#!#smallint#!#smallint#!#int#!#int#!#int#!#tinyint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: relation "babel_3000_vu_prepare_nums" does not exist)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). relation "babel_3000_vu_prepare_nums" does not exist)~~
 

@@ -70,7 +70,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 SELECT CAST(CAST(-2.5 as BIGINT) as SMALLDATETIME)
 GO
@@ -78,7 +78,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 SELECT CAST(CAST(-2.5 as SMALLINT) as SMALLDATETIME)
 GO
@@ -86,7 +86,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 SELECT CAST(CAST(-2.5 as MONEY) as SMALLDATETIME)
 GO
@@ -94,7 +94,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 SELECT CAST(CAST(-2.5 as SMALLMONEY) as SMALLDATETIME)
 GO
@@ -102,7 +102,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 
 CREATE VIEW Datetime_view6 as (

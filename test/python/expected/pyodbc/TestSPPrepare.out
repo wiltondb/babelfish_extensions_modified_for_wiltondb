@@ -11,7 +11,7 @@ str
 ~~END~~
 
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]handle argument of sp_execute is null (33557097) (SQLMoreResults))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]handle argument of sp_execute is null (33557097) (SQLMoreResults))~~
 
 --- Simple SP_PREPEXEC
 DECLARE @handle int;
@@ -111,7 +111,7 @@ SELECT @var
 EXEC SP_UNPREPARE @handle;
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]handle argument of sp_execute is null (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]handle argument of sp_execute is null (33557097) (SQLExecDirectW))~~
 
 --- SP_PREPEXEC Batch Support
 DECLARE @handle int;
@@ -148,19 +148,19 @@ DECLARE @handle int;
 EXEC SP_PREPEXEC @handle + 1 OUTPUT, NULL, 'SELECT 1'
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near '+' at line 3 and character position 25 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near '+' at line 3 and character position 25 (33557097) (SQLExecDirectW))~~
 
 DECLARE @handle VARCHAR(20)
 EXEC SP_PREPEXEC @handle OUTPUT, NULL, 'SELECT 1'
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]invalid prepared_handle param datatype (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]invalid prepared_handle param datatype (33557097) (SQLExecDirectW))~~
 
 DECLARE @handle int;
 EXEC SP_PREPEXEC @handle, NULL, 'SELECT 1'
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]prepared_handle param is not specified as OUTPUT (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]prepared_handle param is not specified as OUTPUT (33557097) (SQLExecDirectW))~~
 
 --- Corner case 1: empty batch
 DECLARE @handle int;
@@ -169,7 +169,7 @@ EXEC SP_EXECUTE @handle
 EXEC SP_UNPREPARE @handle
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]query argument of sp_prepare is null (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]query argument of sp_prepare is null (33557097) (SQLExecDirectW))~~
 
 DECLARE @handle int;
 EXEC SP_PREPEXEC @handle out, NULL, NULL
@@ -177,7 +177,7 @@ EXEC SP_EXECUTE @handle
 EXEC SP_UNPREPARE @handle
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]batch string argument of sp_prepexec is null (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]batch string argument of sp_prepexec is null (33557097) (SQLExecDirectW))~~
 
 --- Corner case 2: nested prepare
 DECLARE @handle int;
@@ -246,7 +246,7 @@ int
 ~~END~~
 
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]param 1 defined as mode i but received mode b (33557097) (SQLMoreResults))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]param 1 defined as mode i but received mode b (33557097) (SQLMoreResults))~~
 
 --- Prepare DML statement
 CREATE TABLE t1 (a int, b int); 
@@ -503,7 +503,7 @@ EXEC SP_PREPARE @handle OUT, NULL, 'SELECT * FROM t1'
 SELECT @handle IS NOT NULL as 'Prepared'
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
 
 -- prepare time error 1-2
 DECLARE @handle int;
@@ -511,7 +511,7 @@ EXEC SP_PREPARE @handle OUT, NULL, 'DECLARE @var int; SELECT * FROM t1 WHERE c =
 SELECT @handle IS NOT NULL as 'Prepared'
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
 
 -- prepare time error 2
 DECLARE @handle int;
@@ -519,7 +519,7 @@ EXEC SP_PREPARE @handle OUT, NULL, 'EXEC my_proc'
 SELECT @handle IS NOT NULL as 'Prepared'
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
 
 -- prepare time error 2-2
 DECLARE @handle int;
@@ -527,7 +527,7 @@ EXEC SP_PREPARE @handle OUT, NULL, 'DECLARE @var int; EXEC my_proc @var'
 SELECT @handle IS NOT NULL as 'Prepared'
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
 
 -- runtime error 1
 DECLARE @handle int;
@@ -536,7 +536,7 @@ SELECT @handle IS NOT NULL as 'Prepared'
 EXEC SP_EXECUTE @handle
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
 
 -- runtime error 2
 DECLARE @handle int;
@@ -545,7 +545,7 @@ SELECT @handle IS NOT NULL as 'Prepared'
 EXEC SP_EXECUTE @handle
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
 
 -- runtime error 3
 DECLARE @handle int;
@@ -554,7 +554,7 @@ SELECT @handle IS NOT NULL as 'Prepared'
 EXEC SP_EXECUTE @handle
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
 
 -- runtime error 4
 DECLARE @handle int;
@@ -563,5 +563,5 @@ SELECT @handle IS NOT NULL as 'Prepared'
 EXEC SP_EXECUTE @handle
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near 'IS' at line 4 and character position 15 (33557097) (SQLExecDirectW))~~
 

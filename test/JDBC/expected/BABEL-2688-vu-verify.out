@@ -22,7 +22,7 @@ GO
 int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: relation "@tv_does_not_exist" does not exist)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). relation "@tv_does_not_exist" does not exist)~~
 
 
 SELECT * FROM babel_2688_fn6()
@@ -39,5 +39,5 @@ GO
 int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: relation "@tv_does_not_exist" does not exist)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). relation "@tv_does_not_exist" does not exist)~~
 

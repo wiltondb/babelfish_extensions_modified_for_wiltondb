@@ -9,7 +9,7 @@ ConnectionObject::ConnectionObject(string driver, string server, string port, st
   db_dbname_ = dbname;
   
   if (alternativeConnectionString) {
-    connection_string_ = "DRIVER={" + db_driver_ + "};SERVER=" + db_server_ + "," + db_port_ + ";UID=" + db_uid_ + ";PWD=" + db_pwd_ + ";DATABASE=" + db_dbname_;
+    connection_string_ = "DRIVER={" + db_driver_ + "};SERVER=" + db_server_ + "," + db_port_ + ";UID=" + db_uid_ + ";PWD=" + db_pwd_ + ";DATABASE=" + db_dbname_ + ";TrustServerCertificate=yes";
   }
   else {
     connection_string_ = "DRIVER={" + db_driver_ + "};SERVER=" + db_server_ + ";PORT=" + db_port_ + ";UID=" + db_uid_ + ";PWD=" + db_pwd_ + ";DATABASE=" + db_dbname_;

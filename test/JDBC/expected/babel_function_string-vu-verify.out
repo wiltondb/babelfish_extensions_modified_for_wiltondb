@@ -497,7 +497,7 @@ GO
 varchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Invalid separator: )~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Invalid separator: )~~
 
 
 SELECT STRING_SPLIT('asdf', NULL)
@@ -594,7 +594,7 @@ GO
 varchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Invalid separator: too many chars)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Invalid separator: too many chars)~~
 
 
 SELECT value FROM STRING_SPLIT('Lorem ipsum dolor sit amet.', ' ')

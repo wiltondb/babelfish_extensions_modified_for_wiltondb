@@ -4,7 +4,7 @@ prepst#!# INSERT INTO TINYINT_dt(a) values(?) #!#TINYINT|-|a|-|0
 
 prepst#!#exec#!#TINYINT|-|a|-|-10
 ~~ERROR (Code: 220)~~
-~~ERROR (Message: [22003] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]value for domain tinyint violates check constraint "tinyint_check" (220) (SQLExecDirectW))~~
+~~ERROR (Message: [22003] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]value for domain tinyint violates check constraint "tinyint_check" (220) (SQLExecDirectW))~~
 
 prepst#!#exec#!#TINYINT|-|a|-|100
 ~~ROW COUNT: 1~~
@@ -67,7 +67,7 @@ INSERT INTO TINYINT_dt(a) values(86)
 
 INSERT INTO TINYINT_dt(a) values(1000)
 ~~ERROR (Code: 220)~~
-~~ERROR (Message: [22003] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]value for domain tinyint violates check constraint "tinyint_check" (220) (SQLExecDirectW))~~
+~~ERROR (Message: [22003] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]value for domain tinyint violates check constraint "tinyint_check" (220) (SQLExecDirectW))~~
 
 INSERT INTO TINYINT_dt(a) values(255)
 ~~ROW COUNT: 1~~

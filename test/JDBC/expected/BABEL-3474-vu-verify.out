@@ -302,7 +302,7 @@ GO
 datetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The datepart microsecond is not supported by date function dateadd for data type datetime.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The datepart microsecond is not supported by date function dateadd for data type datetime.)~~
 
 DROP FUNCTION BABEL_3474_vu_prepare_f4
 GO
@@ -313,7 +313,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The datepart microsecond is not supported by date function dateadd for data type smalldatetime.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The datepart microsecond is not supported by date function dateadd for data type smalldatetime.)~~
 
 DROP FUNCTION BABEL_3474_vu_prepare_f5
 GO
@@ -354,7 +354,7 @@ GO
 datetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The datepart nanosecond is not supported by date function dateadd for data type datetime.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The datepart nanosecond is not supported by date function dateadd for data type datetime.)~~
 
 DROP FUNCTION BABEL_3474_vu_prepare_f9
 GO
@@ -365,7 +365,7 @@ GO
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The datepart nanosecond is not supported by date function dateadd for data type smalldatetime.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The datepart nanosecond is not supported by date function dateadd for data type smalldatetime.)~~
 
 DROP FUNCTION BABEL_3474_vu_prepare_f10
 GO
@@ -376,7 +376,7 @@ GO
 time
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The datepart day is not supported by date function dateadd for data type time.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The datepart day is not supported by date function dateadd for data type time.)~~
 
 DROP FUNCTION BABEL_3474_vu_prepare_f11
 GO
@@ -387,7 +387,7 @@ GO
 date
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The datepart second is not supported by date function dateadd for data type date.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The datepart second is not supported by date function dateadd for data type date.)~~
 
 DROP FUNCTION BABEL_3474_vu_prepare_f12
 GO

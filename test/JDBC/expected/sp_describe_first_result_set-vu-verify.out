@@ -16,7 +16,7 @@ bit#!#int#!#varchar#!#bit#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#varc
 bit#!#int#!#varchar#!#bit#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#varchar#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#varchar#!#varchar#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#smallint#!#smallint#!#smallint#!#int#!#int#!#int#!#tinyint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: syntax error near '<EOF>' at line 1 and character position 8000)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). syntax error near '<EOF>' at line 1 and character position 8000)~~
 
 
 EXEC sp_describe_first_result_set_vu_prepare_procedure2;

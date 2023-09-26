@@ -1,23 +1,23 @@
 #1 CREATE TABLE with primary and unique keyword
 CREATE TABLE tmp(a int PRIMARY KEY, b int UNIQUE);
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Nullable UNIQUE constraint is not supported. Please use babelfishpg_tsql.escape_hatch_unique_constraint to ignore or add a NOT NULL constraint (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Nullable UNIQUE constraint is not supported. Please use babelfishpg_tsql.escape_hatch_unique_constraint to ignore or add a NOT NULL constraint (33557097) (SQLExecDirectW))~~
 
 INSERT INTO tmp(a,b) values(1,1);
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]relation "tmp" does not exist (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]relation "tmp" does not exist (33557097) (SQLExecDirectW))~~
 
 INSERT INTO tmp(a,b) values(2,2);
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]relation "tmp" does not exist (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]relation "tmp" does not exist (33557097) (SQLExecDirectW))~~
 
 SELECT * FROM tmp;
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]relation "tmp" does not exist (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]relation "tmp" does not exist (33557097) (SQLExecDirectW))~~
 
 DROP TABLE tmp;
 ~~ERROR (Code: 3701)~~
-~~ERROR (Message: [42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]table "tmp" does not exist (3701) (SQLExecDirectW))~~
+~~ERROR (Message: [42S02] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]table "tmp" does not exist (3701) (SQLExecDirectW))~~
 
 
 #2 2 table with foreign key relation
@@ -358,13 +358,13 @@ DROP TABLE tmp;
 #13 invoke simple stored procedure using EXECUTE
 EXECUTE tmp;
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]procedure tmp() does not exist (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]procedure tmp() does not exist (33557097) (SQLExecDirectW))~~
 
 
 #14 invoke simple stored procedure using EXEC
 EXEC tmp;
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]procedure tmp() does not exist (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]procedure tmp() does not exist (33557097) (SQLExecDirectW))~~
 
 
 #DROP PROCEDURE tmp;
@@ -824,7 +824,7 @@ date
 
 ALTER TABLE DATE_dt ALTER COLUMN a DATETIME;
 ~~ERROR (Code: 517)~~
-~~ERROR (Message: [22007] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]data out of range for datetime (517) (SQLExecDirectW))~~
+~~ERROR (Message: [22007] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]data out of range for datetime (517) (SQLExecDirectW))~~
 
 SELECT * FROM DATE_dt;
 ~~START~~

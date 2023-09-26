@@ -366,7 +366,7 @@ go
 varchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Invalid separator: abc)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Invalid separator: abc)~~
 
 
 

@@ -1265,7 +1265,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 select CAST(¢314748.3647 AS smallmoney);
 GO
@@ -1273,7 +1273,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 select CAST(¤314748.3647 AS smallmoney);
 GO
@@ -1281,7 +1281,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 select CAST(฿314748.3647 AS smallmoney);
 GO
@@ -1289,7 +1289,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 select CAST(₠314748.3647 AS smallmoney);
 GO
@@ -1297,7 +1297,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 select CAST(₨314748.3647 AS smallmoney);
 GO
@@ -1305,7 +1305,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 -- min value with currency symbol
@@ -1359,7 +1359,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 select CAST(¢-224748.3648 AS smallmoney);
 GO
@@ -1367,7 +1367,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 select CAST(¤-224748.3648 AS smallmoney);
 GO
@@ -1375,7 +1375,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 select CAST(฿-224748.3648 AS smallmoney);
 GO
@@ -1383,7 +1383,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 select CAST(₠-224748.3648 AS smallmoney);
 GO
@@ -1391,7 +1391,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 select CAST(₨-224748.3648 AS smallmoney);
 GO
@@ -1399,7 +1399,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 -- negative test

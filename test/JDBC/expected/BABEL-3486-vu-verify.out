@@ -514,7 +514,7 @@ GO
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type time without time zone to "bit".)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type time without time zone to "bit".)~~
 
 DROP VIEW BABEL_3486_vu_prepare_v29_2
 GO
@@ -525,7 +525,7 @@ GO
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type time without time zone to "bit".)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type time without time zone to "bit".)~~
 
 DROP PROCEDURE BABEL_3486_vu_prepare_p29_2
 GO
@@ -536,7 +536,7 @@ GO
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type time without time zone to "bit".)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type time without time zone to "bit".)~~
 
 DROP FUNCTION BABEL_3486_vu_prepare_f29_2()
 GO
@@ -697,7 +697,7 @@ GO
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type time without time zone to numeric.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type time without time zone to numeric.)~~
 
 DROP VIEW BABEL_3486_vu_prepare_v35
 GO
@@ -708,7 +708,7 @@ GO
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type time without time zone to numeric.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type time without time zone to numeric.)~~
 
 DROP PROCEDURE BABEL_3486_vu_prepare_p35
 GO
@@ -719,7 +719,7 @@ GO
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type time without time zone to numeric.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type time without time zone to numeric.)~~
 
 DROP FUNCTION BABEL_3486_vu_prepare_f35()
 GO
@@ -739,7 +739,7 @@ GO
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The scale 2 for 'numeric' datatype must be within the range 0 to precision 1)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The scale 2 for 'numeric' datatype must be within the range 0 to precision 1)~~
 
 
 DROP FUNCTION BABEL_3486_vu_prepare_f35_2()
@@ -938,7 +938,7 @@ GO
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The scale 2 for 'decimal' datatype must be within the range 0 to precision 1)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The scale 2 for 'decimal' datatype must be within the range 0 to precision 1)~~
 
 DROP FUNCTION BABEL_3486_vu_prepare_f42()
 GO
@@ -1099,7 +1099,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to money.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to money.)~~
 
 DROP VIEW BABEL_3486_vu_prepare_v47_2
 GO
@@ -1110,7 +1110,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to money.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to money.)~~
 
 DROP PROCEDURE BABEL_3486_vu_prepare_p47_2
 GO
@@ -1121,7 +1121,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to money.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to money.)~~
 
 DROP FUNCTION BABEL_3486_vu_prepare_f47_2()
 GO
@@ -1252,7 +1252,7 @@ GO
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to double precision.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to double precision.)~~
 
 DROP VIEW BABEL_3486_vu_prepare_v52
 GO
@@ -1263,7 +1263,7 @@ GO
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to double precision.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to double precision.)~~
 
 DROP PROCEDURE BABEL_3486_vu_prepare_p52
 GO
@@ -1274,7 +1274,7 @@ GO
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type date to double precision.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type date to double precision.)~~
 
 DROP FUNCTION BABEL_3486_vu_prepare_f52()
 GO
@@ -1285,7 +1285,7 @@ GO
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type time without time zone to double precision.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type time without time zone to double precision.)~~
 
 DROP VIEW BABEL_3486_vu_prepare_v53
 GO
@@ -1296,7 +1296,7 @@ GO
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type time without time zone to double precision.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type time without time zone to double precision.)~~
 
 DROP PROCEDURE BABEL_3486_vu_prepare_p53
 GO
@@ -1307,7 +1307,7 @@ GO
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type time without time zone to double precision.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type time without time zone to double precision.)~~
 
 DROP FUNCTION BABEL_3486_vu_prepare_f53()
 GO
@@ -1948,7 +1948,7 @@ GO
 text
 ~~ERROR (Code: 512)~~
 
-~~ERROR (Message: more than one row returned by a subquery used as an expression)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). more than one row returned by a subquery used as an expression)~~
 
 DROP VIEW BABEL_3486_vu_prepare_v75
 GO
@@ -1970,7 +1970,7 @@ GO
 varchar
 ~~ERROR (Code: 512)~~
 
-~~ERROR (Message: more than one row returned by a subquery used as an expression)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). more than one row returned by a subquery used as an expression)~~
 
 DROP FUNCTION BABEL_3486_vu_prepare_f75()
 GO
@@ -2803,7 +2803,7 @@ GO
 datetime2
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Specified scale 10 is invalid. 'datetime2' datatype must have scale between 0 and 7)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Specified scale 10 is invalid. 'datetime2' datatype must have scale between 0 and 7)~~
 
 DROP FUNCTION BABEL_3486_vu_prepare_f102_2()
 GO
@@ -3052,9 +3052,8 @@ SELECT * FROM BABEL_3486_vu_prepare_v111
 GO
 ~~START~~
 sql_variant
-~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
+2017-08-25 13:01:59 +12:15
+~~END~~
 
 DROP VIEW BABEL_3486_vu_prepare_v111
 GO
@@ -3063,9 +3062,8 @@ EXEC BABEL_3486_vu_prepare_p111
 GO
 ~~START~~
 sql_variant
-~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
+2017-08-25 13:01:59 +12:15
+~~END~~
 
 DROP PROCEDURE BABEL_3486_vu_prepare_p111
 GO
@@ -3074,9 +3072,8 @@ SELECT BABEL_3486_vu_prepare_f111()
 GO
 ~~START~~
 sql_variant
-~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
+2017-08-25 13:01:59 +12:15
+~~END~~
 
 DROP FUNCTION BABEL_3486_vu_prepare_f111()
 GO

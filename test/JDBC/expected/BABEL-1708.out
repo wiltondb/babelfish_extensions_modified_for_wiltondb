@@ -71,7 +71,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT CAST(-214748.3649 AS smallmoney);
@@ -80,7 +80,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT CAST('214748.3648' AS smallmoney);
@@ -89,7 +89,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT CAST('-214748.3649' AS smallmoney);
@@ -98,7 +98,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 -- Test out of range values for money

@@ -28,7 +28,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Unsupported use case in sp_describe_undeclared_parameters)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Unsupported use case in sp_describe_undeclared_parameters)~~
 
 
 EXEC sp_describe_undeclared_parameters @tsql = N'INSERT INTO simpletable VALUES (@P1), (@P2)'
@@ -37,7 +37,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Unsupported use case in sp_describe_undeclared_parameters)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Unsupported use case in sp_describe_undeclared_parameters)~~
 
 
 EXEC sp_describe_undeclared_parameters @tsql = N'INSERT INTO simpletable VALUES (@P1), (@P2), (@P3)'
@@ -46,7 +46,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Unsupported use case in sp_describe_undeclared_parameters)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Unsupported use case in sp_describe_undeclared_parameters)~~
 
 
 exec sys.sp_describe_undeclared_parameters N'insert into pg_shadow (a,b,c,d,e,f) values (@a,@b,@c,@d,@e,@f)'
@@ -55,7 +55,7 @@ go
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: column "a" of relation "pg_shadow" does not exist)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). column "a" of relation "pg_shadow" does not exist)~~
 
 
 
@@ -249,7 +249,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 213)~~
 
-~~ERROR (Message: Column name or number of supplied values does not match table definition.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Column name or number of supplied values does not match table definition.)~~
 
 declare @err int = @@error; if (@err > 0 and @@trancount > 0) select cast('does not respect xact_abort flag' as text) else if @err > 0 select cast('respects xact_abort flag' as text);
 if @@trancount > 0 rollback transaction;

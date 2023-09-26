@@ -5,7 +5,7 @@ GO
 bigint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Arithmetic overflow error converting expression to data type bigint.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Arithmetic overflow error converting expression to data type bigint.)~~
 
 
 SELECT SUM( sumint ) AS sum_int FROM babel_3144_vu_prepare_t1
@@ -14,7 +14,7 @@ GO
 int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Arithmetic overflow error converting expression to data type int.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Arithmetic overflow error converting expression to data type int.)~~
 
 
 -- empty table return value should be NULL
@@ -127,7 +127,7 @@ GO
 bigint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Arithmetic overflow error converting expression to data type bigint.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Arithmetic overflow error converting expression to data type bigint.)~~
 
 
 SELECT SUM( sumint ) AS sum_int FROM babel_3144_vu_prepare_t5
@@ -136,7 +136,7 @@ GO
 int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Arithmetic overflow error converting expression to data type int.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Arithmetic overflow error converting expression to data type int.)~~
 
 
 --GROUP BY CLAUSE

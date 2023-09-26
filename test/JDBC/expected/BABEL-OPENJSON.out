@@ -56,7 +56,7 @@ GO
 nvarchar#!#nvarchar#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Object or array cannot be found in the specified JSON path.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Object or array cannot be found in the specified JSON path.)~~
 
 -- check lax/strict path
 select * from openjson(N'{"obj":{"a":1}}', 'lax $.a')
@@ -71,7 +71,7 @@ go
 nvarchar#!#nvarchar#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: JSON object does not contain key "a")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). JSON object does not contain key "a")~~
 
 -- check non-ascii characters
 select * from openjson(N'{"nonascii":"ちょまど@初詣おみくじ凶\n - description: ( *ﾟ▽ﾟ* っ)З腐女子！絵描き！| H26新卒文系SE (入社して4ヶ月目の8月にSIer(適応障害になった)を辞職し開発者に転職) | H26秋応用情報合格！| 自作bot (in PHP) chomado_bot | プログラミングガチ初心者\n"}')
@@ -99,7 +99,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: invalid input syntax for type json)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid input syntax for type json)~~
 
 -- test cases with invalid path params
 select * from openjson(N'{"a":1}', 'strict $.a') with (a nvarchar(20))
@@ -108,7 +108,7 @@ go
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Value referenced by JSON path is not an array or object and cannot be opened with OPENJSON.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Value referenced by JSON path is not an array or object and cannot be opened with OPENJSON.)~~
 
 select * from openjson(N'{"a":1}', '$.a') with (a nvarchar(20))
 go
@@ -234,7 +234,7 @@ GO
 nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: JSON object does not contain key "b")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). JSON object does not contain key "b")~~
 
 -- check non-ascii characters
 select * from openjson(N'{"nonascii":"ちょまど@初詣おみくじ凶\n - description: ( *ﾟ▽ﾟ* っ)З腐女子！絵描き！| H26新卒文系SE (入社して4ヶ月目の8月にSIer(適応障害になった)を辞職し開発者に転職) | H26秋応用情報合格！| 自作bot (in PHP) chomado_bot | プログラミングガチ初心者\n"}') with 

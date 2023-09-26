@@ -197,7 +197,7 @@ go
 sql_variant
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The parameters supplied for the function "session_context" are not valid.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The parameters supplied for the function "session_context" are not valid.)~~
 
 
 declare @key nvarchar(4000) = cast (REPLICATE('a', 128) as nvarchar(4000));
@@ -325,7 +325,7 @@ true
 EXEC sp_set_session_context 'ÀÀ', 'accents';
 go
 
-SELECT CAST(session_context(N'àà') AS NVARCHAR);
+SELECT CAST(session_context(N'ÀÀ') AS NVARCHAR);
 go
 ~~START~~
 nvarchar

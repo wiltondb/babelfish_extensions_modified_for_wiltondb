@@ -22,7 +22,7 @@ prepst#!#exec#!#VARCHAR|-|a|-|abcdefghijklmnopqrst#!#NVARCHAR|-|b|-|abcdefghijkl
 
 prepst#!#exec#!#VARCHAR|-|a|-|abcdefghijklmnopqrstu#!#NVARCHAR|-|b|-|abcdefghijklmnopqrstuvwxy
 ~~ERROR (Code: 20)~~
-~~ERROR (Message: [22001] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]value too long for type character varying(20) (8152) (SQLExecDirectW))~~
+~~ERROR (Message: [22001] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]value too long for type character varying(20) (8152) (SQLExecDirectW))~~
 
 prepst#!#exec#!#VARCHAR|-|a|-| #!#NVARCHAR|-|b|-|😊😋😎😍😅😆
 ~~ROW COUNT: 1~~

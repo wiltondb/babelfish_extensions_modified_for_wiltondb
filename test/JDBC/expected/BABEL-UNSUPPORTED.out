@@ -2624,7 +2624,7 @@ GO
 binary
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: To use @@DBTS, set 'babelfishpg_tsql.escape_hatch_rowversion' to 'ignore')~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). To use @@DBTS, set 'babelfishpg_tsql.escape_hatch_rowversion' to 'ignore')~~
 
 
 -- CREATE TYPE WITH (10788)

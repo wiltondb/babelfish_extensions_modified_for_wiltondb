@@ -261,7 +261,7 @@ GO
 datetimeoffset
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Cannot construct data type datetimeoffset, some of the arguments have values which are not valid.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Cannot construct data type datetimeoffset, some of the arguments have values which are not valid.)~~
 
 DROP FUNCTION BABEL_2449_vu_prepare_f3
 GO
@@ -272,7 +272,7 @@ GO
 datetimeoffset
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Cannot construct data type datetimeoffset, some of the arguments have values which are not valid.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Cannot construct data type datetimeoffset, some of the arguments have values which are not valid.)~~
 
 DROP FUNCTION BABEL_2449_vu_prepare_f4
 GO
@@ -293,7 +293,7 @@ GO
 datetimeoffset
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Cannot construct data type datetimeoffset, some of the arguments have values which are not valid.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Cannot construct data type datetimeoffset, some of the arguments have values which are not valid.)~~
 
 DROP FUNCTION BABEL_2449_vu_prepare_f6
 GO
@@ -304,7 +304,7 @@ GO
 datetimeoffset
 ~~ERROR (Code: 201)~~
 
-~~ERROR (Message: function datetimeoffsetfromparts expects parameter "p_minute", which was not supplied.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). function datetimeoffsetfromparts expects parameter "p_minute", which was not supplied.)~~
 
 DROP FUNCTION BABEL_2449_vu_prepare_f7
 GO
@@ -315,7 +315,7 @@ GO
 datetimeoffset
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Scale argument is not valid. Valid expressions for data type datetimeoffset scale argument are integer constants and integer constant expressions.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Scale argument is not valid. Valid expressions for data type datetimeoffset scale argument are integer constants and integer constant expressions.)~~
 
 DROP FUNCTION BABEL_2449_vu_prepare_f8
 GO
@@ -336,7 +336,7 @@ GO
 datetimeoffset
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Scale argument is not valid. Valid expressions for data type datetimeoffset scale argument are integer constants and integer constant expressions.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Scale argument is not valid. Valid expressions for data type datetimeoffset scale argument are integer constants and integer constant expressions.)~~
 
 DROP FUNCTION BABEL_2449_vu_prepare_f10
 GO
@@ -357,7 +357,7 @@ GO
 datetimeoffset
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Scale argument is not valid. Valid expressions for data type datetimeoffset scale argument are integer constants and integer constant expressions)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Scale argument is not valid. Valid expressions for data type datetimeoffset scale argument are integer constants and integer constant expressions)~~
 
 DROP FUNCTION BABEL_2449_vu_prepare_f12
 GO

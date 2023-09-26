@@ -162,7 +162,7 @@ SET @ParamDef = N'@a INT, @b INT, @c INT, @d INT';
 EXEC sp_executesql @SQLString, @ParamDef, @b = 2, @c = 3, 1, @d = 4;
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near '1' at line 7 and character position 58 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near '1' at line 7 and character position 58 (33557097) (SQLExecDirectW))~~
 
 /* 2. Number mismatch of param defs and given params */
 DECLARE @SQLString NVARCHAR(100);
@@ -172,7 +172,7 @@ SET @ParamDef = N'@a INT, @b INT, @c INT, @d INT';
 EXEC sp_executesql @SQLString, @ParamDef, 1, 2, 3;
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]param definition mismatches with inputs (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]param definition mismatches with inputs (33557097) (SQLExecDirectW))~~
 
 /* 3. Invalid param name */
 DECLARE @SQLString NVARCHAR(100);
@@ -182,7 +182,7 @@ SET @ParamDef = N'@a INT, @b INT, @c INT, @d INT';
 EXEC sp_executesql @SQLString, @ParamDef, @a = 1, @b = 2, @c = 3, @e = 4;
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]param "@e" not defined (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]param "@e" not defined (33557097) (SQLExecDirectW))~~
 
 /* 4. Invalid param def */
 DECLARE @SQLString NVARCHAR(100);
@@ -192,7 +192,7 @@ SET @ParamDef = N'@a INT, @b INT, @c, @d INT';
 EXEC sp_executesql @SQLString, @ParamDef, 1, 2, 3, 4;
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error at or near "," (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error at or near "," (33557097) (SQLExecDirectW))~~
 
 /* 5. Unsupported implicit cast */
 -- IN param
@@ -203,7 +203,7 @@ SET @ParamDef = N'@a INT, @b INT, @c INT, @d INT';
 EXEC sp_executesql @SQLString, @ParamDef, 1, 3.14, 'hello', 4;
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]invalid input syntax for type integer: "hello" (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]invalid input syntax for type integer: "hello" (33557097) (SQLExecDirectW))~~
 
 -- OUT param
 DECLARE @SQLString NVARCHAR(100);
@@ -214,7 +214,7 @@ DECLARE @p FLOAT;
 EXEC sp_executesql @SQLString, @ParamDef, @a = @p OUT;
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]invalid input syntax for type double precision: "abc" (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]invalid input syntax for type double precision: "abc" (33557097) (SQLExecDirectW))~~
 
 /* 6. Invalid OUT param */
 DECLARE @SQLString NVARCHAR(100);
@@ -224,7 +224,7 @@ SET @ParamDef = N'@a INT OUT';
 EXEC sp_executesql @SQLString, @ParamDef, @a = 10 OUT;
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]syntax error near ';' at line 6 and character position 53 (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]syntax error near ';' at line 6 and character position 53 (33557097) (SQLExecDirectW))~~
 
 /* 7. Param declared as IN but called as OUT */
 DECLARE @SQLString NVARCHAR(100);
@@ -235,7 +235,7 @@ DECLARE @p INT;
 EXEC sp_executesql @SQLString, @ParamDef, @a = @p OUT;
 GO
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]param @a defined as mode i but received mode b (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]param @a defined as mode i but received mode b (33557097) (SQLExecDirectW))~~
 
 /* Clean up */
 DROP TABLE spExecutesqlTable1;

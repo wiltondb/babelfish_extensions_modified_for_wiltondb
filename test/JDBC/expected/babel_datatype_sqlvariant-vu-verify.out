@@ -1,15 +1,7 @@
+# select a from babel_datatype_sqlvariant_vu_prepare_t1 order by id;
+# go
+
 -- DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select a from babel_datatype_sqlvariant_vu_prepare_t1 order by id;
-go
-~~START~~
-sql_variant
-2020-10-05 09:00:00.0
-2020-10-05 09:00:00.0
-~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
-
-
 -- Test CAST from SQL_VARIANT
 -- datetime2
 select cast(cast(cast('2020-10-20 09:00:00' as datetime2) as sql_variant) as datetime2);
@@ -333,7 +325,7 @@ go
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: unable to cast from internal type datetime to double precision)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). unable to cast from internal type datetime to double precision)~~
 
 -- time to datetime
 select cast(cast(cast('09:00:00' as time) as sql_variant) as datetime);
@@ -358,7 +350,7 @@ go
 datetime2
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: unable to cast from internal type integer to datetime2)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). unable to cast from internal type integer to datetime2)~~
 
 -- numeric to varbinary
 select cast(cast(cast(3.1415926 as numeric(4, 3)) as sql_variant) as varbinary(6));
@@ -367,7 +359,7 @@ go
 varbinary
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: unable to cast from internal type numeric to varbinary)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). unable to cast from internal type numeric to varbinary)~~
 
 -- money to bigint
 select cast(cast(cast('$123.123' as money) as sql_variant) as bigint);
@@ -384,7 +376,7 @@ go
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: unable to cast from internal type money to "bit")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). unable to cast from internal type money to "bit")~~
 
 -- bigint to money
 select cast(cast(cast(12345 as bigint) as sql_variant) as money);
@@ -401,7 +393,7 @@ go
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: unable to cast from internal type "bit" to double precision)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). unable to cast from internal type "bit" to double precision)~~
 
 -- varbinary to money
 select cast(cast(cast('abc' as varbinary(3)) as sql_variant) as money);
@@ -410,7 +402,7 @@ go
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: unable to cast from internal type varbinary to money)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). unable to cast from internal type varbinary to money)~~
 
 -- uniqueidentifier to varbinary
 select cast(cast(cast('0E984725-C51C-4BF4-9960-E1C80E27ABA0' as uniqueidentifier)
@@ -422,18 +414,10 @@ varbinary
 ~~END~~
 
 
+# select datalength(a), a from babel_datatype_sqlvariant_vu_prepare_t1;
+# go
+
 -- Test DATALENGTH for SQL_VARIANT TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select datalength(a), a from babel_datatype_sqlvariant_vu_prepare_t1;
-go
-~~START~~
-int#!#sql_variant
-8#!#2020-10-05 09:00:00.0
-8#!#2020-10-05 09:00:00.0
-10#!#~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
-
-
 -- no such property
 select sql_variant_property(v, 'nothing') from babel_datatype_sqlvariant_vu_prepare_t2;
 go
@@ -482,79 +466,25 @@ sql_variant#!#sql_variant#!#sql_variant#!#sql_variant#!#sql_variant#!#sql_varian
 ~~END~~
 
 
--- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from babel_datatype_sqlvariant_vu_prepare_t4 where a = b order by id;
-go
-~~START~~
-int#!#sql_variant#!#sql_variant
-1#!#2020-10-05 09:00:00.0#!#2020-10-05 09:00:00.0
-4#!#2020-10-05 09:00:00.0#!#2020-10-05 09:00:00.0
-7#!#~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
-
--- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from babel_datatype_sqlvariant_vu_prepare_t4 where a <> b order by id;
-go
-~~START~~
-int#!#sql_variant#!#sql_variant
-2#!#2020-10-05 09:00:00.0#!#2020-10-05 06:00:00.0
-3#!#2020-10-05 06:00:00.0#!#2020-10-05 09:00:00.0
-5#!#2020-10-05 09:00:00.0#!#2020-10-05 01:00:00.0
-6#!#2020-10-05 01:00:00.0#!#2020-10-05 09:00:00.0
-8#!#~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
+# select * from babel_datatype_sqlvariant_vu_prepare_t4 where a = b order by id;
+# go
+# select * from babel_datatype_sqlvariant_vu_prepare_t4 where a <> b order by id;
+# go
+# select * from babel_datatype_sqlvariant_vu_prepare_t4 where a > b order by id;
+# go
+# select * from babel_datatype_sqlvariant_vu_prepare_t4 where a < b order by id;
+# go
+# select * from babel_datatype_sqlvariant_vu_prepare_t4 where a >= b order by id;
+# go
+# select * from babel_datatype_sqlvariant_vu_prepare_t4 where a <= b order by id;
+# go
 
 -- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from babel_datatype_sqlvariant_vu_prepare_t4 where a > b order by id;
-go
-~~START~~
-int#!#sql_variant#!#sql_variant
-2#!#2020-10-05 09:00:00.0#!#2020-10-05 06:00:00.0
-5#!#2020-10-05 09:00:00.0#!#2020-10-05 01:00:00.0
-8#!#~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
-
 -- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from babel_datatype_sqlvariant_vu_prepare_t4 where a < b order by id;
-go
-~~START~~
-int#!#sql_variant#!#sql_variant
-3#!#2020-10-05 06:00:00.0#!#2020-10-05 09:00:00.0
-6#!#2020-10-05 01:00:00.0#!#2020-10-05 09:00:00.0
-9#!#~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
-
 -- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from babel_datatype_sqlvariant_vu_prepare_t4 where a >= b order by id;
-go
-~~START~~
-int#!#sql_variant#!#sql_variant
-1#!#2020-10-05 09:00:00.0#!#2020-10-05 09:00:00.0
-2#!#2020-10-05 09:00:00.0#!#2020-10-05 06:00:00.0
-4#!#2020-10-05 09:00:00.0#!#2020-10-05 09:00:00.0
-5#!#2020-10-05 09:00:00.0#!#2020-10-05 01:00:00.0
-7#!#~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
-
 -- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
-select * from babel_datatype_sqlvariant_vu_prepare_t4 where a <= b order by id;
-go
-~~START~~
-int#!#sql_variant#!#sql_variant
-1#!#2020-10-05 09:00:00.0#!#2020-10-05 09:00:00.0
-3#!#2020-10-05 06:00:00.0#!#2020-10-05 09:00:00.0
-4#!#2020-10-05 09:00:00.0#!#2020-10-05 09:00:00.0
-6#!#2020-10-05 01:00:00.0#!#2020-10-05 09:00:00.0
-7#!#~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
-
-
+-- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
+-- TODO: DATETIMEOFFSETN error expected using JDBC - see https://github.com/microsoft/mssql-jdbc/issues/1670
 select * from babel_datatype_sqlvariant_vu_prepare_t5 where a = b order by id;
 go
 ~~START~~

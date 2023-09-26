@@ -23,5 +23,5 @@ GO
 int
 ~~ERROR (Code: 8134)~~
 
-~~ERROR (Message: division by zero)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). division by zero)~~
 

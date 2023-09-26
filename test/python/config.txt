@@ -17,7 +17,7 @@ printLogsToConsole = true
 # SPECIFY WHICH JDBC DRIVER TO USE. CHOOSE FROM "pyodbc" OR "pymssql"
 driver = pyodbc
 
-provider = ODBC Driver 17 for SQL Server
+provider = ODBC Driver 18 for SQL Server
 
 # SPECIFY IF YOU WANT TO GENERATE A PERFORMANCE REPORT
 performanceTest = false

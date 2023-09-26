@@ -143,7 +143,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: value "922337203685478" is out of range for type fixeddecimal)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value "922337203685478" is out of range for type fixeddecimal)~~
 
 
 DECLARE @in bigint = -922337203685478;
@@ -153,7 +153,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: value "-922337203685478" is out of range for type fixeddecimal)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value "-922337203685478" is out of range for type fixeddecimal)~~
 
 
 -- To test out of range values for money
@@ -301,7 +301,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: value "922337203685478" is out of range for type money)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value "922337203685478" is out of range for type money)~~
 
 
 DECLARE @in bigint = -922337203685478;
@@ -311,7 +311,7 @@ GO
 money
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: value "-922337203685478" is out of range for type money)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value "-922337203685478" is out of range for type money)~~
 
 
 
@@ -330,7 +330,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT * FROM babel_3556_vu_prepare_v12;
@@ -339,7 +339,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 INSERT INTO babel_3556_vu_prepare_t6 VALUES($214748.3648);
@@ -363,7 +363,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT * FROM babel_3556_vu_prepare_v14;
@@ -372,7 +372,7 @@ GO
 smallmoney
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain smallmoney violates check constraint "smallmoney_check")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain smallmoney violates check constraint "smallmoney_check")~~
 
 
 SELECT * FROM babel_3556_vu_prepare_v15;
@@ -483,7 +483,7 @@ GO
 smallmoney
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: value "922337203685478" is out of range for type smallmoney)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value "922337203685478" is out of range for type smallmoney)~~
 
 
 DECLARE @in bigint = -922337203685478;
@@ -493,7 +493,7 @@ GO
 smallmoney
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: value "-922337203685478" is out of range for type smallmoney)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). value "-922337203685478" is out of range for type smallmoney)~~
 
 
 

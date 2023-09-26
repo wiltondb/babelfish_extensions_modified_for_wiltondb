@@ -156,7 +156,7 @@ go
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: An empty or space-only string cannot be converted into numeric/decimal data type)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). An empty or space-only string cannot be converted into numeric/decimal data type)~~
 
 select cast(' ' as decimal);
 go
@@ -164,7 +164,7 @@ go
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: An empty or space-only string cannot be converted into numeric/decimal data type)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). An empty or space-only string cannot be converted into numeric/decimal data type)~~
 
 select cast('1' as decimal);
 go
@@ -302,7 +302,7 @@ go
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: An empty or space-only string cannot be converted into numeric/decimal data type)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). An empty or space-only string cannot be converted into numeric/decimal data type)~~
 
 select cast(' ' as numeric);
 go
@@ -310,7 +310,7 @@ go
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: An empty or space-only string cannot be converted into numeric/decimal data type)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). An empty or space-only string cannot be converted into numeric/decimal data type)~~
 
 select cast('1' as numeric);
 go

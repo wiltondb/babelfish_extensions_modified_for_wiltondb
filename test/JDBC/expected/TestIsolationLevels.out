@@ -27,7 +27,7 @@ go
 text
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: set_config not allowed for option default_transaction_isolation)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). set_config not allowed for option default_transaction_isolation)~~
 
 select set_config('default_transaction_isolation', 'read committed', false);
 go
@@ -35,7 +35,7 @@ go
 text
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: set_config not allowed for option default_transaction_isolation)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). set_config not allowed for option default_transaction_isolation)~~
 
 select set_config('default_transaction_isolation', 'repeatable read', false);
 go
@@ -43,7 +43,7 @@ go
 text
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: set_config not allowed for option default_transaction_isolation)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). set_config not allowed for option default_transaction_isolation)~~
 
 select set_config('default_transaction_isolation', 'snapshot', false);
 go
@@ -51,7 +51,7 @@ go
 text
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: set_config not allowed for option default_transaction_isolation)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). set_config not allowed for option default_transaction_isolation)~~
 
 select set_config('default_transaction_isolation', 'serializable', false);
 go
@@ -59,7 +59,7 @@ go
 text
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: set_config not allowed for option default_transaction_isolation)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). set_config not allowed for option default_transaction_isolation)~~
 
 
 select set_config('transaction_isolation', 'read uncommitted', false);
@@ -68,7 +68,7 @@ go
 text
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: set_config not allowed for option transaction_isolation)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). set_config not allowed for option transaction_isolation)~~
 
 select set_config('transaction_isolation', 'read committed', false);
 go
@@ -76,7 +76,7 @@ go
 text
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: set_config not allowed for option transaction_isolation)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). set_config not allowed for option transaction_isolation)~~
 
 select set_config('transaction_isolation', 'repeatable read', false);
 go
@@ -84,7 +84,7 @@ go
 text
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: set_config not allowed for option transaction_isolation)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). set_config not allowed for option transaction_isolation)~~
 
 select set_config('transaction_isolation', 'snapshot', false);
 go
@@ -92,7 +92,7 @@ go
 text
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: set_config not allowed for option transaction_isolation)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). set_config not allowed for option transaction_isolation)~~
 
 select set_config('transaction_isolation', 'serializable', false);
 go
@@ -100,5 +100,5 @@ go
 text
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: set_config not allowed for option transaction_isolation)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). set_config not allowed for option transaction_isolation)~~
 

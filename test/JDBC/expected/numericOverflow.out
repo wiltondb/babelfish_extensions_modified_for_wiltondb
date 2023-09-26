@@ -14,7 +14,7 @@ go
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Arithmetic overflow error for data type numeric.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Arithmetic overflow error for data type numeric.)~~
 
 
 SELECT amount * 10 from overflow_test;
@@ -35,7 +35,7 @@ go
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Arithmetic overflow error for data type numeric.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Arithmetic overflow error for data type numeric.)~~
 
 
 SELECT avg(amount) from overflow_test;
@@ -44,7 +44,7 @@ go
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Arithmetic overflow error for data type numeric.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Arithmetic overflow error for data type numeric.)~~
 
 
 DROP TABLE overflow_test;
@@ -69,7 +69,7 @@ go
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Arithmetic overflow error for data type numeric.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Arithmetic overflow error for data type numeric.)~~
 
 
 DROP TABLE overflow_test;
@@ -98,7 +98,7 @@ go
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: numeric field overflow)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). numeric field overflow)~~
 
 
 drop table num_t1;

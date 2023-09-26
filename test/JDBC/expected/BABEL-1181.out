@@ -46,7 +46,7 @@ go
 int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: A TOP or FETCH clause contains an invalid value.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). A TOP or FETCH clause contains an invalid value.)~~
 
 
 declare @a int;

@@ -905,7 +905,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Format g is not supported currently! Please try again with another format)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Format g is not supported currently! Please try again with another format)~~
 
 select FORMAT(ti, 'R','en-us') from time_testing;
 GO

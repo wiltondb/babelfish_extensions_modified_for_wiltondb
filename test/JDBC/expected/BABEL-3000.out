@@ -56,7 +56,7 @@ go
 bit#!#int#!#varchar#!#bit#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#varchar#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#varchar#!#varchar#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#smallint#!#smallint#!#smallint#!#int#!#int#!#int#!#tinyint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: relation "isc_udt" does not exist)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). relation "isc_udt" does not exist)~~
 
 
 exec sp_describe_first_result_set N'select * from master..num_identity'
@@ -100,7 +100,7 @@ go
 bit#!#int#!#varchar#!#bit#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#varchar#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#varchar#!#varchar#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#smallint#!#smallint#!#smallint#!#int#!#int#!#int#!#tinyint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: relation "master_sc_result_set.nums" does not exist)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). relation "master_sc_result_set.nums" does not exist)~~
 
 
 create table sc_result_set.nums(a int, b smallint, c bigint, d float, e real, f numeric(5,3))
@@ -132,7 +132,7 @@ go
 bit#!#int#!#varchar#!#bit#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#varchar#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#varchar#!#varchar#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#smallint#!#smallint#!#smallint#!#int#!#int#!#int#!#tinyint
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: relation "nums" does not exist)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). relation "nums" does not exist)~~
 
 
 -- clean-up

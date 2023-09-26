@@ -309,7 +309,7 @@ class Conn(threading.Thread):
         self.stopEvent = threading.Event()
         self.sess = sess
         self.logger = self.sess.parentTestSpec.logger
-        self.cnxn = pyodbc.connect('DRIVER={};SERVER={},{};DATABASE={};UID={};PWD={}'.format(
+        self.cnxn = pyodbc.connect('DRIVER={};SERVER={},{};DATABASE={};UID={};PWD={};TrustServerCertificate=yes'.format(
             cfg['provider'],
             cfg['fileGenerator_URL'],
             cfg['fileGenerator_port'],

@@ -265,7 +265,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Scalar value cannot be found in the specified JSON path.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Scalar value cannot be found in the specified JSON path.)~~
 
 select JSON_VALUE(vc, 'strict $.info.type'), JSON_VALUE(nvc, 'strict $.info.type'), JSON_VALUE(t, 'strict $.info.type') from json_value_query_table;
 go
@@ -287,7 +287,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Scalar value cannot be found in the specified JSON path.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Scalar value cannot be found in the specified JSON path.)~~
 
 select JSON_VALUE(vc, 'strict $.info.tags'), JSON_VALUE(nvc, 'strict $.info.tags'), JSON_VALUE(t, 'strict $.info.tags') from json_value_query_table
 go
@@ -295,7 +295,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Scalar value cannot be found in the specified JSON path.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Scalar value cannot be found in the specified JSON path.)~~
 
 select JSON_VALUE(vc, 'strict $.info.type[0]'), JSON_VALUE(nvc, 'strict $.info.type[0]'), JSON_VALUE(t, 'strict $.info.type[0]') from json_value_query_table
 go
@@ -303,7 +303,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: jsonpath array accessor can only be applied to an array)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). jsonpath array accessor can only be applied to an array)~~
 
 select JSON_VALUE(vc, 'strict $.info.tags[0]'), JSON_VALUE(nvc, 'strict $.info.tags[0]'), JSON_VALUE(t, 'strict $.info.tags[0]') from json_value_query_table
 go
@@ -318,7 +318,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: JSON object does not contain key "none")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). JSON object does not contain key "none")~~
 
 
 -- JSON_QUERY()
@@ -378,7 +378,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Object or array cannot be found in the specified JSON path.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Object or array cannot be found in the specified JSON path.)~~
 
 select JSON_QUERY(vc, '$.info.none'), JSON_QUERY(nvc, '$.info.none'), JSON_QUERY(t, '$.info.none') from json_value_query_table
 go
@@ -409,7 +409,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Object or array cannot be found in the specified JSON path.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Object or array cannot be found in the specified JSON path.)~~
 
 select JSON_QUERY(vc, 'strict $.info.address.town'), JSON_QUERY(nvc, 'strict $.info.address.town'), JSON_QUERY(t, 'strict $.info.address.town') from json_value_query_table
 go
@@ -417,7 +417,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Object or array cannot be found in the specified JSON path.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Object or array cannot be found in the specified JSON path.)~~
 
 select JSON_QUERY(vc, 'strict $.info."address"'), JSON_QUERY(nvc, 'strict $.info."address"'), JSON_QUERY(t, 'strict $.info."address"') from json_value_query_table
 go
@@ -439,7 +439,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: jsonpath array accessor can only be applied to an array)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). jsonpath array accessor can only be applied to an array)~~
 
 select JSON_QUERY(vc, 'strict $.info.tags[0]'), JSON_QUERY(nvc, 'strict $.info.tags[0]'), JSON_QUERY(t, 'strict $.info.tags[0]') from json_value_query_table
 go
@@ -447,7 +447,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Object or array cannot be found in the specified JSON path.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Object or array cannot be found in the specified JSON path.)~~
 
 select JSON_QUERY(vc, 'strict $.info.none'), JSON_QUERY(nvc, 'strict $.info.none'), JSON_QUERY(t, 'strict $.info.none') from json_value_query_table
 go
@@ -455,7 +455,7 @@ go
 nvarchar#!#nvarchar#!#nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: JSON object does not contain key "none")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). JSON object does not contain key "none")~~
 
 
 DROP TABLE valid_json_strings

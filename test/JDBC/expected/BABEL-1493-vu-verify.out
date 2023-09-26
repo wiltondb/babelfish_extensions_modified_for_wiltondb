@@ -142,7 +142,7 @@ GO
 datetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Conversion failed when converting date and/or time from character string.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Conversion failed when converting date and/or time from character string.)~~
 
 DROP FUNCTION BABEL_1493_vu_prepare_f5()
 GO

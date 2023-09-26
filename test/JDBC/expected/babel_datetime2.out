@@ -378,7 +378,7 @@ go
 smalldatetime
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: data out of range for smalldatetime)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). data out of range for smalldatetime)~~
 
 
 -- Test datetime

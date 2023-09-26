@@ -167,7 +167,7 @@ GO
 smallint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 -- out of range
 select CAST(CAST(214748.3647 as smallmoney) As smallint);
@@ -176,7 +176,7 @@ GO
 smallint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 select CAST(CAST(1.56 as MONEY) AS smallint);
 GO
@@ -199,7 +199,7 @@ GO
 smallint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 -- out of range
 select CAST(CAST(-922337203685477.5808 as MONEY) AS smallint);
@@ -208,7 +208,7 @@ GO
 smallint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: smallint out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
 
 
 -- Casting from money/smallmoney to int
@@ -261,7 +261,7 @@ GO
 int
 ~~ERROR (Code: 8115)~~
 
-~~ERROR (Message: integer out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). integer out of range)~~
 
 -- out of range
 select CAST(CAST(-922337203685477.5808 as MONEY) AS int);
@@ -270,7 +270,7 @@ GO
 int
 ~~ERROR (Code: 8115)~~
 
-~~ERROR (Message: integer out of range)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). integer out of range)~~
 
 
 -- Casting from money/smallmoney to bigint

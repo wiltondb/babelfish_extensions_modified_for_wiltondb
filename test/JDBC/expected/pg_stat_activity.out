@@ -25,7 +25,7 @@ select query from pg_stat_activity where pid = pg_backend_pid();
 prepst#!#select query from pg_stat_activity where pid = pg_backend_pid();select ? as a#!#int|-|a|-|1
 ~~START~~
 text
-select query from pg_stat_activity where pid = pg_backend_pid();select @P0 as a
+select query from pg_stat_activity where pid = pg_backend_pid();select  @P0 as a
 ~~END~~
 
 ~~START~~
@@ -36,7 +36,7 @@ int
 prepst#!#exec#!#int|-|a|-|1
 ~~START~~
 text
-select query from pg_stat_activity where pid = pg_backend_pid();select @P0 as a
+select query from pg_stat_activity where pid = pg_backend_pid();select  @P0 as a
 ~~END~~
 
 ~~START~~

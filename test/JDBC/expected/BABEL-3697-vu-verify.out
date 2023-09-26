@@ -28,7 +28,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: invalid input syntax for type json)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid input syntax for type json)~~
 
 
 SELECT * FROM babel_3697_5
@@ -37,7 +37,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: invalid input syntax for type json)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid input syntax for type json)~~
 
 
 EXEC babel_3697_6

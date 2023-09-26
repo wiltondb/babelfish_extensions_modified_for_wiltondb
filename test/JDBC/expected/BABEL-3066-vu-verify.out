@@ -185,7 +185,7 @@ numeric
 1234.46
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: numeric field overflow)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). numeric field overflow)~~
 
 SELECT CAST(col1 as numeric(30,20)) as value_casted_to_decimal_30_20 from babel_3066_vu_prepare_t1;
 GO
@@ -198,7 +198,7 @@ numeric
 1234.46496582031250000000
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: numeric field overflow)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). numeric field overflow)~~
 
 SELECT CAST(col1 as numeric(30,4)) as value_casted_to_decimal_30_4 from babel_3066_vu_prepare_t1;
 GO
@@ -211,7 +211,7 @@ numeric
 1234.4650
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: numeric field overflow)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). numeric field overflow)~~
 
 SELECT CAST(col1 as numeric(38,38)) as value_casted_to_decimal_38_38 from babel_3066_vu_prepare_t1;
 GO
@@ -219,7 +219,7 @@ GO
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: numeric field overflow)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). numeric field overflow)~~
 
 
 INSERT INTO babel_3066_vu_prepare_t2 values (CAST(1234.156 as real)), (CAST(-3256.55 as real)), (CAST(1234.6513 as real)), (CAST(1324567.45267781 as real)), (CAST(12.2 as real)), (CAST(122.34562 as real)), (CAST(735412.97354 as real));

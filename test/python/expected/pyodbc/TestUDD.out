@@ -17,21 +17,21 @@ INSERT INTO udd_dt VALUES ('Apple', N'red', 1, 'Delhi', N'Sad😞',  '2000-12-13
 #throws error: duplicate key value violates unique constraint 
 INSERT INTO udd_dt VALUES ('Apple', N'blue', 2, 'Chennai', N'Neutral😐',  '2006-11-11 22:47:23.128', 512.4);
 ~~ERROR (Code: 2627)~~
-~~ERROR (Message: [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]duplicate key value violates unique constraint "udd_dt_a_key" (2627) (SQLExecDirectW))~~
+~~ERROR (Message: [23000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]duplicate key value violates unique constraint "udd_dt_a_key" (2627) (SQLExecDirectW))~~
 
 
 #passing a non unique value in column c
 #throws error: duplicate key value violates unique constraint
 INSERT INTO udd_dt VALUES ('Banana', N'green', 1, 'Bangalore', N'Crying😭',  '2007-01-14 23:34:23.749', 908.7);
 ~~ERROR (Code: 2627)~~
-~~ERROR (Message: [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]duplicate key value violates unique constraint "udd_dt_pkey" (2627) (SQLExecDirectW))~~
+~~ERROR (Message: [23000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]duplicate key value violates unique constraint "udd_dt_pkey" (2627) (SQLExecDirectW))~~
 
 
 #passing a NULL value in column c
 #throws error: null value in column "c" violates not-null constraint
 INSERT INTO udd_dt VALUES ('Guava', N'yellow', NULL, 'Mumbai', N'Smirk😏',  '1907-05-09 11:14:13.749', 245.6);
 ~~ERROR (Code: 515)~~
-~~ERROR (Message: [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]null value in column "c" of relation "udd_dt" violates not-null constraint (515) (SQLExecDirectW))~~
+~~ERROR (Message: [23000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]null value in column "c" of relation "udd_dt" violates not-null constraint (515) (SQLExecDirectW))~~
 
 
 #passing no value for column d
@@ -43,14 +43,14 @@ INSERT INTO udd_dt(a, b, c, e, f, g) VALUES ('Orange', NULL, 3, N'Happy😀',  '
 #throws error: domain udd_nchar does not allow null values
 INSERT INTO udd_dt VALUES ('Kiwi', N'purple', 4, 'Kolkata', NULL,  '1907-05-09 11:14:13.749', 874.0);
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]domain udd_nchar does not allow null values (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]domain udd_nchar does not allow null values (33557097) (SQLExecDirectW))~~
 
 
 #passing a value less than 103.5 in column g
 #throws error: new row for relation "udd_dt" violates check constraint "udd_dt_g_check"
 INSERT INTO udd_dt VALUES ('Grape', N'white', 5, 'Pune', N'Angry😠',  '2000-02-28 23:59:59.989', 100.1);
 ~~ERROR (Code: 547)~~
-~~ERROR (Message: [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]new row for relation "udd_dt" violates check constraint "udd_dt_g_check" (547) (SQLExecDirectW))~~
+~~ERROR (Message: [23000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]new row for relation "udd_dt" violates check constraint "udd_dt_g_check" (547) (SQLExecDirectW))~~
 
 
 SELECT * FROM udd_dt;
@@ -73,35 +73,35 @@ prepst#!#INSERT INTO udd_dt VALUES (?, ?, ?, ?, ?, ?, ?)#!#varchar|-|a|-|Apple#!
 #throws error: duplicate key value violates unique constraint 
 prepst#!#exec#!#varchar|-|a|-|Apple#!#nvarchar|-|b|-|blue#!#int|-|c|-|2#!#char|-|d|-|Chennai#!#nchar|-|e|-|Neutral😐#!#datetime|-|f|-|2006-11-11 22:47:23.128#!#numeric|-|g|-|512.4|-|4|-|1
 ~~ERROR (Code: 2627)~~
-~~ERROR (Message: [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]duplicate key value violates unique constraint "udd_dt_a_key" (2627) (SQLExecDirectW))~~
+~~ERROR (Message: [23000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]duplicate key value violates unique constraint "udd_dt_a_key" (2627) (SQLExecDirectW))~~
 
 
 #passing a non unique value in column c
 #throws error: duplicate key value violates unique constraint
 prepst#!#exec#!#varchar|-|a|-|Banana#!#nvarchar|-|b|-|green#!#int|-|c|-|1#!#char|-|d|-|Bangalore#!#nchar|-|e|-|Crying😭#!#datetime|-|f|-|2007-01-14 23:34:23.749#!#numeric|-|g|-|908.7|-|4|-|1
 ~~ERROR (Code: 2627)~~
-~~ERROR (Message: [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]duplicate key value violates unique constraint "udd_dt_pkey" (2627) (SQLExecDirectW))~~
+~~ERROR (Message: [23000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]duplicate key value violates unique constraint "udd_dt_pkey" (2627) (SQLExecDirectW))~~
 
 
 #passing a NULL value in column c
 #throws error: null value in column "c" violates not-null constraint
 prepst#!#exec#!#varchar|-|a|-|Guava#!#nvarchar|-|b|-|yellow#!#int|-|c|-|<NULL>#!#char|-|d|-|Mumbai#!#nchar|-|e|-|Smirk😏'#!#datetime|-|f|-|1907-05-09 11:14:13.749#!#numeric|-|g|-|245.6|-|4|-|1
 ~~ERROR (Code: 515)~~
-~~ERROR (Message: [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]null value in column "c" of relation "udd_dt" violates not-null constraint (515) (SQLExecDirectW))~~
+~~ERROR (Message: [23000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]null value in column "c" of relation "udd_dt" violates not-null constraint (515) (SQLExecDirectW))~~
 
 
 #passing a NULL value in column e
 #throws error: domain udd_nchar does not allow null values
 prepst#!#exec#!#varchar|-|a|-|Kiwi#!#nvarchar|-|b|-|purple#!#int|-|c|-|4#!#char|-|d|-|Kolkata#!#nchar|-|e|-|<NULL>#!#datetime|-|f|-|1907-05-09 11:14:13.749#!#numeric|-|g|-|874.0|-|4|-|1
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]domain udd_nchar does not allow null values (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]domain udd_nchar does not allow null values (33557097) (SQLExecDirectW))~~
 
 
 #passing a value less than 103.5 in column g
 #throws error: new row for relation "udd_dt" violates check constraint "udd_dt_g_check"
 prepst#!#exec#!#varchar|-|a|-|Grape#!#nvarchar|-|b|-|white#!#int|-|c|-|5#!#char|-|d|-|Pune#!#nchar|-|e|-|Angry😠#!#datetime|-|f|-|2000-02-28 23:59:59.989#!#numeric|-|g|-|100.1|-|4|-|1
 ~~ERROR (Code: 547)~~
-~~ERROR (Message: [23000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]new row for relation "udd_dt" violates check constraint "udd_dt_g_check" (547) (SQLExecDirectW))~~
+~~ERROR (Message: [23000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]new row for relation "udd_dt" violates check constraint "udd_dt_g_check" (547) (SQLExecDirectW))~~
 
 
 #passing no value for column d

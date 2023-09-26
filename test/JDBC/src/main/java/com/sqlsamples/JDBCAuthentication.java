@@ -83,6 +83,7 @@ public class JDBCAuthentication {
                 + ";" + "databaseName=" + connectionPropertiesBabel.get("database")
                 + ";" + "user=" + connectionPropertiesBabel.get("user")
                 + ";" + "password=" + connectionPropertiesBabel.get("password")
+                + ";encrypt=true;trustServerCertificate=true;loginTimeout=5"
                 + ";" + other_prop;
     }
 }

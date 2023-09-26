@@ -72,7 +72,7 @@ GO
 float
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: invalid input syntax for type double precision: "Product A")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid input syntax for type double precision: "Product A")~~
 
 
 SELECT VAR(SalesAmount) AS SalesAmountStdev

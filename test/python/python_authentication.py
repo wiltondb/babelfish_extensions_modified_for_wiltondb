@@ -43,5 +43,5 @@ def create_connection_string(result, connection_properties, other_prop):
         else:
             property = result[i].split("|-|")
             connection_properties[property[0]] =  property[1]
-    connection_str = 'DRIVER={};SERVER={},{};DATABASE={};UID={};PWD={}'.format(cfg["provider"], connection_properties["serverName"], connection_properties["portNumber"], connection_properties["database"], connection_properties["user"], connection_properties["password"])
+    connection_str = 'DRIVER={};SERVER={},{};DATABASE={};UID={};PWD={};TrustServerCertificate=yes'.format(cfg["provider"], connection_properties["serverName"], connection_properties["portNumber"], connection_properties["database"], connection_properties["user"], connection_properties["password"])
     return connection_str + ";" + other_prop

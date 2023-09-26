@@ -133,7 +133,7 @@ GO
 datetime2
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Specified scale 80 is invalid. 'datetime2' datatype must have scale between 0 and 7)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Specified scale 80 is invalid. 'datetime2' datatype must have scale between 0 and 7)~~
 
 DROP FUNCTION BABEL_3614_vu_prepare_f5()
 GO
@@ -174,7 +174,7 @@ GO
 datetime2
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "decimal" to datetime2.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "decimal" to datetime2.)~~
 
 DROP VIEW BABEL_3614_vu_prepare_v7
 GO
@@ -185,7 +185,7 @@ GO
 datetime2
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "decimal" to datetime2.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "decimal" to datetime2.)~~
 
 DROP PROCEDURE BABEL_3614_vu_prepare_p7
 GO
@@ -196,7 +196,7 @@ GO
 datetime2
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type "decimal" to datetime2.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type "decimal" to datetime2.)~~
 
 DROP FUNCTION BABEL_3614_vu_prepare_f7()
 GO
@@ -447,7 +447,7 @@ GO
 datetime2
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to datetime2.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to datetime2.)~~
 
 DROP VIEW BABEL_3614_vu_prepare_v16
 GO
@@ -458,7 +458,7 @@ GO
 datetime2
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to datetime2.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to datetime2.)~~
 
 DROP PROCEDURE BABEL_3614_vu_prepare_p16
 GO
@@ -469,7 +469,7 @@ GO
 datetime2
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot cast type xml to datetime2.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). cannot cast type xml to datetime2.)~~
 
 DROP FUNCTION BABEL_3614_vu_prepare_f16()
 GO

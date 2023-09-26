@@ -98,7 +98,7 @@ go
 int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: relation "schema_resolution_func_vu_prepare_t1" does not exist)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). relation "schema_resolution_func_vu_prepare_t1" does not exist)~~
 
 
 drop function schema_resolution_func_vu_prepare_s1.schema_resolution_func_vu_prepare_f1()

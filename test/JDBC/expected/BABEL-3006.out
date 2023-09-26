@@ -199,7 +199,7 @@ go
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Operand data type bit is invalid for min operator.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Operand data type bit is invalid for min operator.)~~
 
 select max(b) from t3006_b;
 go
@@ -207,7 +207,7 @@ go
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Operand data type bit is invalid for max operator.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Operand data type bit is invalid for max operator.)~~
 
 select sum(b) from t3006_b;
 go
@@ -215,7 +215,7 @@ go
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Operand data type bit is invalid for sum operator.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Operand data type bit is invalid for sum operator.)~~
 
 select avg(b) from t3006_b;
 go
@@ -223,7 +223,7 @@ go
 bit
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Operand data type bit is invalid for avg operator.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Operand data type bit is invalid for avg operator.)~~
 
 
 drop table t3006_i;

@@ -14,7 +14,7 @@ GO
 int#!#int#!#datetime#!#nvarchar#!#nvarchar#!#int#!#int#!#nvarchar#!#nvarchar#!#smallint#!#int#!#int#!#datetime#!#datetime#!#int#!#varchar#!#int#!#varchar#!#int#!#uniqueidentifier#!#uniqueidentifier#!#varbinary
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The user does not have permission to perform this action)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). The user does not have permission to perform this action)~~
 
 
 -- tsql
@@ -23,7 +23,7 @@ select net_transport, protocol_type, protocol_version, endpoint_id, encrypt_opti
 GO
 ~~START~~
 nvarchar#!#nvarchar#!#int#!#int#!#nvarchar
-TCP#!#TSQL#!#1946157060#!#4#!#FALSE
+TCP#!#TSQL#!#1946157060#!#4#!#TRUE
 ~~END~~
 
 

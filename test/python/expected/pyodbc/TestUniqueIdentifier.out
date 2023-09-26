@@ -117,7 +117,7 @@ INSERT INTO uniqueidentifier_dt VALUES ('51f178a6-53c7-472c-9be1-1c08942342d7thi
 
 prepst#!#exec#!#uniqueidentifier|-|a|-|767392df-87d0-450d-9b24-85a86c02811dthisIsTooLong
 ~~ERROR (Code: 0)~~
-~~ERROR (Message: [07002] [Microsoft][ODBC Driver 17 for SQL Server]COUNT field incorrect or syntax error (0) (SQLExecDirectW))~~
+~~ERROR (Message: [07002] [Microsoft][ODBC Driver 18 for SQL Server]COUNT field incorrect or syntax error (0) (SQLExecDirectW))~~
 
 SELECT * FROM uniqueidentifier_dt;
 ~~START~~

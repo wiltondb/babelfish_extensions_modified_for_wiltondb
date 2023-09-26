@@ -13,7 +13,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: column expressions and data sources without names or aliases cannot be formatted as JSON text using FOR JSON clause. Add alias to the unnamed column or table)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). column expressions and data sources without names or aliases cannot be formatted as JSON text using FOR JSON clause. Add alias to the unnamed column or table)~~
 
 
 SELECT * FROM forjson_subquery_vu_v_with
@@ -39,7 +39,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: binary types are not supported with FOR JSON)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). binary types are not supported with FOR JSON)~~
 
 
 SELECT * FROM forjson_subquery_vu_v_varbinary_strings
@@ -48,7 +48,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: binary types are not supported with FOR JSON)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). binary types are not supported with FOR JSON)~~
 
 
 -- Rowversion and timestamp
@@ -58,7 +58,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: binary types are not supported with FOR JSON)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). binary types are not supported with FOR JSON)~~
 
 
 SELECT * FROM forjson_subquery_vu_v_timestamp
@@ -67,7 +67,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: binary types are not supported with FOR JSON)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). binary types are not supported with FOR JSON)~~
 
 
 -- BABEL-3569/BABEL-3690 return 0 rows for empty rowset

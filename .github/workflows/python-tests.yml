@@ -18,14 +18,9 @@ jobs:
         if: always() && steps.install-dependencies.outcome == 'success'
         uses: ./.github/composite-actions/build-modified-postgres
       
-      - name: Compile ANTLR
-        id: compile-antlr
-        if: always() && steps.build-modified-postgres.outcome == 'success'
-        uses: ./.github/composite-actions/compile-antlr
-      
       - name: Build Extensions
         id: build-extensions
-        if: always() && steps.compile-antlr.outcome == 'success'
+        if: always() && steps.build-modified-postgres.outcome == 'success'
         uses: ./.github/composite-actions/build-extensions
       
       - name: Install Extensions
@@ -33,9 +28,14 @@ jobs:
         if: always() && steps.build-extensions.outcome == 'success'
         uses: ./.github/composite-actions/install-extensions
 
+      - name: Enable SSL
+        id: enable-ssl
+        if: always() && steps.install-extensions.outcome == 'success'
+        uses: ./.github/composite-actions/enable-ssl
+
       - name: Install Python
         id: install-python
-        if: always() && steps.install-extensions.outcome == 'success'
+        if: always() && steps.enable-ssl.outcome == 'success'
         uses: actions/setup-python@v2
         with:
           python-version: 3.7
@@ -51,7 +51,7 @@ jobs:
           cd sqltoolsservice
           wget https://github.com/microsoft/sqltoolsservice/releases/download/4.4.0.12/Microsoft.SqlTools.ServiceLayer-rhel-x64-net6.0.tar.gz && tar -xzvf Microsoft.SqlTools.ServiceLayer-rhel-x64-net6.0.tar.gz
           cd ../
-          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17 python3-dev
+          sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 python3-dev
           pip3 install pyodbc==4.0.35 pymssql pytest pytest-xdist
       
       - name: Run Python Tests
@@ -62,7 +62,7 @@ jobs:
             driver=pyodbc \
             runInParallel=false \
             testName=all \
-            provider="ODBC Driver 17 for SQL Server" \
+            provider="ODBC Driver 18 for SQL Server" \
             fileGenerator_URL=localhost \
             fileGenerator_port=1433 \
             fileGenerator_databaseName=master \

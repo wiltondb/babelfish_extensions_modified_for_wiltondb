@@ -40,14 +40,9 @@ jobs:
           tap_tests: 'yes'
         uses: ./.github/composite-actions/build-modified-postgres
 
-      - name: Compile ANTLR
-        id: compile-antlr
-        if: always() && steps.build-modified-postgres.outcome == 'success'
-        uses: ./.github/composite-actions/compile-antlr
-
       - name: Build Extensions
         id: build-extensions
-        if: always() && steps.compile-antlr.outcome == 'success'
+        if: always() && steps.build-modified-postgres.outcome == 'success'
         uses: ./.github/composite-actions/build-extensions
 
       - name: Run TAP Tests

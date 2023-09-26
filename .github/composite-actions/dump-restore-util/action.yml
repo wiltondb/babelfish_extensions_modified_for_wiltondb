@@ -93,8 +93,15 @@ runs:
         sed -i "/BABEL-3513/d" test/JDBC/upgrade/$base_dir/schedule
       shell: bash
 
+    - name: Enable SSL
+      id: enable-ssl
+      if: always() && steps.run-pg_dump-restore.outcome == 'success'
+      uses: ./.github/composite-actions/enable-ssl
+      with:
+        install_dir: ${{ inputs.pg_new_dir }}
+
     - name: Run Verify Tests
-      if: always() && steps.run-pg_dump-restore.outcome == 'success' && inputs.is_final_ver == 'true'
+      if: always() && steps.enable-ssl.outcome == 'success' && inputs.is_final_ver == 'true'
       uses: ./.github/composite-actions/run-verify-tests
       with:
         is_final_ver: ${{ inputs.is_final_ver }}

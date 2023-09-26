@@ -33,15 +33,8 @@ runs:
         engine_branch: ${{ inputs.engine_branch }}
         install_dir: ${{ inputs.install_dir }}
 
-    - name: Compile ANTLR
-      id: compile-antlr
-      if: always() && steps.build-modified-postgres.outcome == 'success'
-      uses: ./.github/composite-actions/compile-antlr
-      with:
-        install_dir: ${{ inputs.install_dir }}
-
     - name: Set env variables and build extensions
-      if: always() && steps.compile-antlr.outcome == 'success'
+      if: always() && steps.build-modified-postgres.outcome == 'success'
       uses: ./.github/composite-actions/build-extensions
       with: 
         install_dir: ${{ inputs.install_dir }}
@@ -96,6 +89,13 @@ runs:
         sudo ~/${{ inputs.install_dir}}/bin/psql -d jdbc_testdb -U runner -c "ALTER SYSTEM SET babelfishpg_tsql.migration_mode = 'multi-db';"
         sudo ~/${{ inputs.install_dir}}/bin/psql -d jdbc_testdb -U runner -c "SELECT pg_reload_conf();"
       shell: bash
+
+    - name: Enable SSL
+      id: enable-ssl
+      if: always() && steps.change-migration-mode.outcome == 'success'
+      uses: ./.github/composite-actions/enable-ssl
+      with: 
+        install_dir: ${{ inputs.install_dir }}
 
     - name: Run JDBC Upgrade Tests
       id: jdbc-upgrade-tests

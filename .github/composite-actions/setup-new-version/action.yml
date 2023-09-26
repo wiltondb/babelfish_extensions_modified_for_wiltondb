@@ -21,15 +21,9 @@ runs:
         engine_branch: ${{ inputs.engine_branch }}
         install_dir: ${{ inputs.pg_new_dir }}
 
-    - name: Copy ANTLR
-      id: copy-antlr
-      if: always() && steps.build-modified-postgres-new.outcome == 'success'
-      run: cp "/usr/local/lib/libantlr4-runtime.so.4.9.3" ~/${{ inputs.pg_new_dir }}/lib/
-      shell: bash
-
     - name: Build Extensions
       id: build-extensions-new
-      if: always() && steps.copy-antlr.outcome == 'success'
+      if: always() && steps.build-modified-postgres-new.outcome == 'success'
       uses: ./.github/composite-actions/build-extensions
       with:
         install_dir: ${{ inputs.pg_new_dir }}

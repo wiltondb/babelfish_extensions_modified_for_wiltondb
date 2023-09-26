@@ -1,5 +1,5 @@
 name: Major Version Upgrade Tests for empty database
-on: [push, pull_request]
+on: workflow_dispatch
 
 jobs:
   run-babelfish-mvu-tests:
@@ -33,13 +33,6 @@ jobs:
           cd contrib && make && sudo make install
         shell: bash
       
-      - name: Compile ANTLR
-        id: compile-antlr
-        if: always() && steps.build-modified-postgres-old.outcome == 'success'
-        uses: ./.github/composite-actions/compile-antlr
-        with:
-          install_dir: ${{env.OLD_INSTALL_DIR}}
-
       - uses: actions/checkout@v2
         with:
           repository: babelfish-for-postgresql/babelfish_extensions
@@ -47,7 +40,7 @@ jobs:
       
       - name: Build Extensions using ${{env.EXTENSION_BRANCH_FROM}}
         id: build-extensions-old
-        if: always() && steps.compile-antlr.outcome == 'success'
+        if: always() && steps.build-modified-postgres-old.outcome == 'success'
         run: |
           export PG_CONFIG=~/${{env.OLD_INSTALL_DIR}}/bin/pg_config
           export PG_SRC=~/work/babelfish_extensions/postgresql_modified_for_babelfish
@@ -88,9 +81,6 @@ jobs:
         uses: ./.github/composite-actions/build-modified-postgres
         with:
           install_dir: ${{env.NEW_INSTALL_DIR}}
-
-      - name: Copy ANTLR
-        run: cp "/usr/local/lib/libantlr4-runtime.so.4.9.3" ~/${{env.NEW_INSTALL_DIR}}/lib/
 
       - name: Build Extensions using latest version
         id: build-extensions-new

@@ -20,14 +20,9 @@ jobs:
         if: always() && steps.install-dependencies.outcome == 'success'
         uses: ./.github/composite-actions/build-modified-postgres
       
-      - name: Compile ANTLR
-        id: compile-antlr
-        if: always() && steps.build-modified-postgres.outcome == 'success'
-        uses: ./.github/composite-actions/compile-antlr
-      
       - name: Build Extensions
         id: build-extensions
-        if: always() && steps.compile-antlr.outcome == 'success'
+        if: always() && steps.build-modified-postgres.outcome == 'success'
         uses: ./.github/composite-actions/build-extensions
 
       - name: Build tds_fdw Extension
@@ -40,9 +35,14 @@ jobs:
         if: always() && steps.build-extensions.outcome == 'success'
         uses: ./.github/composite-actions/install-extensions
 
+      - name: Enable SSL
+        id: enable-ssl
+        if: always() && steps.install-extensions.outcome == 'success'
+        uses: ./.github/composite-actions/enable-ssl
+
       - name: Run JDBC Tests
         id: jdbc
-        if: always() && steps.install-extensions.outcome == 'success'
+        if: always() && steps.enable-ssl.outcome == 'success'
         timeout-minutes: 60
         run: |
           export PATH=~/${{env.INSTALL_DIR}}/bin:$PATH

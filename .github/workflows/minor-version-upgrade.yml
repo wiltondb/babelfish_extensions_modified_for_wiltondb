@@ -1,5 +1,5 @@
 name: Minor Version Upgrade Tests for empty database
-on: [push, pull_request]
+on: workflow_dispatch
 
 jobs:
   extension-tests:
@@ -25,11 +25,6 @@ jobs:
         with:
           engine_branch: ${{env.ENGINE_VER_FROM}}
 
-      - name: Compile ANTLR
-        id: compile-antlr
-        if: always() && steps.build-modified-postgres-older.outcome == 'success'
-        uses: ./.github/composite-actions/compile-antlr
-
       - uses: actions/checkout@v2
         with:
           repository: babelfish-for-postgresql/babelfish_extensions
@@ -37,7 +32,7 @@ jobs:
 
       - name: Set env variables and build extensions using ${{env.EXTENSION_VER_FROM}}
         id: build-extensions-older
-        if: always() && steps.compile-antlr.outcome == 'success'
+        if: always() && steps.build-modified-postgres-older.outcome == 'success'
         uses: ./.github/composite-actions/build-extensions
 
       - name: Build tds_fdw Extension

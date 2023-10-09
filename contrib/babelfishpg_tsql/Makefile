@@ -75,7 +75,6 @@ OBJS += src/linked_servers.o
 OBJS += src/table_variable_mvcc.o
 OBJS += src/extendedproperty.o
 
-export ANTLR4_JAVA_BIN=java
 export ANTLR4_RUNTIME_LIB=-lantlr4-runtime
 export ANTLR4_RUNTIME_INCLUDE_DIR=/usr/include/antlr4-runtime
 
@@ -88,9 +87,12 @@ PG_CXXFLAGS += -Wno-register # otherwise C++17 gags on PostgreSQL headers
 PG_CXXFLAGS += -I$(ANTLR4_RUNTIME_INCLUDE_DIR)
 PG_CXXFLAGS += -Iantlr/antlr4cpp_generated_src/TSqlLexer
 PG_CXXFLAGS += -Iantlr/antlr4cpp_generated_src/TSqlParser
+PG_CXXFLAGS += --std=c++14
 PG_CFLAGS += -g -Werror
 PG_CFLAGS += -fstack-protector-strong
-PG_CPPFLAGS += -I$(TSQLSRC) -I$(PG_SRC) -DFAULT_INJECTOR
+PG_CFLAGS += -Wno-error=maybe-uninitialized
+PG_CFLAGS += -Wno-error=date-time
+PG_CPPFLAGS += -I$(TSQLSRC) -I$(PG_SRC)
 
 SHLIB_LINK += $(ANTLR4_RUNTIME_LIB) -lcrypto
 
@@ -170,7 +172,7 @@ GEN_KEYWORDLIST_DEPS = $(TOOLSDIR)/gen_keywordlist.pl $(TOOLSDIR)/PerfectHash.pm
 TSQLSRC = .
 
 antlr/Makefile: antlr/CMakeLists.txt antlr/TSqlLexer.g4 antlr/TSqlLexer.g4
-	cd antlr && $(cmake) . && cd ..
+	cd antlr && cmake . && cd ..
 
 .PHONY: antlr/libantlr_tsql.a  # to allow CMake's make check the build
 antlr/libantlr_tsql.a: antlr/Makefile

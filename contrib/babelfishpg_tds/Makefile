@@ -11,6 +11,7 @@ TSQL_SRC = ../babelfishpg_tsql
 
 PG_CFLAGS += -Werror
 PG_CFLAGS += -fstack-protector-strong
+PG_CFLAGS += -Wno-error=stringop-overflow
 PG_CPPFLAGS += -I$(TSQL_SRC) -I$(PG_SRC) -I$(tds_top_dir)
 
 # Exclude the following files from the build (sometimes these

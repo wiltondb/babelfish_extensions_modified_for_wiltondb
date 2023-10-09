@@ -92,7 +92,7 @@
 #include "src/tsql_win.h"
 #endif // _MSC_VER
 
-extern bool escape_hatch_unique_constraint;
+extern int escape_hatch_unique_constraint;
 extern bool pltsql_recursive_triggers;
 extern bool restore_tsql_tabletype;
 extern bool babelfish_dump_restore;

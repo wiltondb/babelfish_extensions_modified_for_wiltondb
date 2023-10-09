@@ -8,9 +8,9 @@ runs:
         sudo apt clean && sudo apt-get update --fix-missing -y
         curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
         curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
-        sudo add-apt-repository -y ppa:wiltondb/antlr4-cpp-runtime
+        sudo add-apt-repository -y ppa:wiltondb/wiltondb
         sudo apt-get update --fix-missing -y
-        sudo apt-get install uuid-dev openjdk-8-jre libicu-dev libxml2-dev openssl libssl-dev python3-dev libossp-uuid-dev libpq-dev cmake pkg-config g++ build-essential bison mssql-tools unixodbc-dev libsybdb5 freetds-dev freetds-common libantlr4-runtime-dev
+        sudo apt-get install uuid-dev openjdk-17-jre libicu-dev libxml2-dev openssl libssl-dev python3-dev libossp-uuid-dev libpq-dev cmake pkg-config g++ build-essential bison mssql-tools unixodbc-dev libsybdb5 freetds-dev freetds-common libantlr4-runtime-dev
         sudo apt install -y ccache
         sudo /usr/sbin/update-ccache-symlinks
         echo 'export PATH="/usr/lib/ccache:$PATH"' | tee -a ~/.bashrc

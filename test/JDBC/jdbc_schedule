@@ -175,6 +175,11 @@ ignore#!#load_tenk
 ignore#!#load_stud_emp
 ignore#!#load_student
 
+# These tests are running in multidb mode in upgrade and singledb mode in JDBC
+ignore#!#BABEL-4279-vu-prepare
+ignore#!#BABEL-4279-vu-verify
+ignore#!#BABEL-4279-vu-cleanup
+
 ignore#!#newid_before_14_12_or_15_7_or_16_3-vu-prepare
 ignore#!#newid_before_14_12_or_15_7_or_16_3-vu-verify
 ignore#!#newid_before_14_12_or_15_7_or_16_3-vu-cleanup

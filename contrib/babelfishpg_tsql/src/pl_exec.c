@@ -6953,7 +6953,7 @@ exec_eval_datum(PLtsql_execstate *estate,
 				*typeid = tbl->tbltypeid;
 				*typetypmod = -1;
 				*value = CStringGetDatum(tbl->tblname);
-				*isnull = false;
+				*isnull = !tbl->tblname ? true : false;
 				break;
 			}
 

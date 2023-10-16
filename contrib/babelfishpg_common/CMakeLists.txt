@@ -170,6 +170,7 @@ install ( FILES
     sql/upgrades/${PROJECT_NAME}--2.5.0--3.0.0.sql
     sql/upgrades/${PROJECT_NAME}--3.0.0--3.1.0.sql
     sql/upgrades/${PROJECT_NAME}--3.1.0--3.2.0.sql
+    sql/upgrades/${PROJECT_NAME}--3.1.0--3.3.0.sql
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}--${EXTVERSION}.sql
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.control
     DESTINATION $ENV{PGWIN_INSTALL_DIR}/share/extension )

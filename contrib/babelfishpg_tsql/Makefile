@@ -80,16 +80,17 @@ export ANTLR4_RUNTIME_INCLUDE_DIR=/usr/include/antlr4-runtime
 
 OBJS += src/pltsql_bulkcopy.o
 
-PG_CXXFLAGS += -g -Werror
+CXXSTANDARD ?= 14
+PG_CXXFLAGS += -Werror
 PG_CXXFLAGS += -Wno-deprecated -Wno-error=attributes -Wno-suggest-attribute=format # disable some warnings from ANTLR runtime header
 PG_CXXFLAGS += -Wno-undef -Wall -Wcpp
 PG_CXXFLAGS += -Wno-register # otherwise C++17 gags on PostgreSQL headers
+PG_CXXFLAGS += -std=gnu++$(CXXSTANDARD)
+PG_CXXFLAGS += -DUSE_UTF8_INSTEAD_OF_CODECVT
 PG_CXXFLAGS += -I$(ANTLR4_RUNTIME_INCLUDE_DIR)
 PG_CXXFLAGS += -Iantlr/antlr4cpp_generated_src/TSqlLexer
 PG_CXXFLAGS += -Iantlr/antlr4cpp_generated_src/TSqlParser
-PG_CXXFLAGS += --std=c++14
-PG_CFLAGS += -g -Werror
-PG_CFLAGS += -fstack-protector-strong
+PG_CFLAGS += -Werror
 PG_CFLAGS += -Wno-error=maybe-uninitialized
 PG_CFLAGS += -Wno-error=date-time
 PG_CPPFLAGS += -I$(TSQLSRC) -I$(PG_SRC)
@@ -137,6 +138,12 @@ GE91		 = $(call test, $(MAJORVER), -ge, 91)
 PGXS := $(shell $(PG_CONFIG) --pgxs)
 include $(PGXS)
 
+# export flags to pass them to cmake
+export CFLAGS="$(CFLAGS)"
+export CXXFLAGS="$(CXXFLAGS)"
+export CPPFLAGS="$(CPPFLAGS)"
+export LDFLAGS="$(LDFLAGS)"
+
 ifeq ($(GE91),yes)
 all: sql/$(EXTENSION)--$(EXTVERSION).sql $(UPGRADES)
 endif
@@ -176,7 +183,7 @@ antlr/Makefile: antlr/CMakeLists.txt antlr/TSqlLexer.g4 antlr/TSqlLexer.g4
 
 .PHONY: antlr/libantlr_tsql.a  # to allow CMake's make check the build
 antlr/libantlr_tsql.a: antlr/Makefile
-	$(MAKE) -C $(@D) all
+	$(MAKE) -C $(@D) VERBOSE=1 all
 
 # See notes in src/backend/parser/Makefile about the following two rules
 src/pl_gram.h: src/pl_gram.c

@@ -1,20 +1,24 @@
 # minimum required CMAKE version
 CMAKE_MINIMUM_REQUIRED(VERSION 3.7 FATAL_ERROR)
 
+project ( babelfishpg_tsql_antlr C CXX )
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake-dir)
 
 # compiler must be 11 or 14
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC -O2 -ggdb -w -Wno-deprecated")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -O2 -ggdb -w -Wno-deprecated")
+if ( DEFINED ENV{CXXSTANDARD} )
+	set( CMAKE_CXX_STANDARD $ENV{CXXSTANDARD} )
+else ()
+	set( CMAKE_CXX_STANDARD 14 )
+endif ()
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -DUSE_UTF8_INSTEAD_OF_CODECVT")
 
 message(STATUS "CMAKE_C_FLAGS=${CMAKE_C_FLAGS}")
 message(STATUS "CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}")
 
 # add antrl4cpp artifacts to project environment
-#include_directories($ENV{ANTLR4_RUNTIME_INCLUDE_DIR})
-SET (MYDIR /usr/include/antlr4-runtime/)
-include_directories(${MYDIR})
+include_directories ( /usr/include/antlr4-runtime/ )
 
 # set variable pointing to the antlr tool that supports C++
 # this is not required if the jar file can be found under PATH environment

@@ -17,6 +17,9 @@
 
 #define NOMINMAX
 #include "antlr4-runtime.h" // antlr4-cpp-runtime
+#if ANTLRCPP_VERSION_MAJOR >= 4 && ANTLRCPP_VERSION_MINOR >= 10
+	#include "support/Utf8.h" // antlr4-cpp-runtime
+#endif
 #include "tree/ParseTreeWalker.h" // antlr4-cpp-runtime
 #include "tree/ParseTreeProperty.h" // antlr4-cpp-runtime
 
@@ -498,7 +501,11 @@ format_errmsg(const char *fmt, const char *arg1, const char *arg2);
 
 inline std::u32string utf8_to_utf32(const char* s)
 {
+#if ANTLRCPP_VERSION_MAJOR >= 4 && ANTLRCPP_VERSION_MINOR >= 10
+	return antlrcpp::Utf8::lenientDecode(std::string_view(s, strlen(s)));
+#else
 	return antlrcpp::utf8_to_utf32(s, s + strlen(s));
+#endif
 }
 
 class MyInputStream : public ANTLRInputStream
@@ -512,7 +519,11 @@ public:
     
 		void setText(size_t pos, const char *newText)
 		{
+#if ANTLRCPP_VERSION_MAJOR >= 4 && ANTLRCPP_VERSION_MINOR >= 10
+			std::u32string	newText32 = utf8_to_utf32(newText);
+#else
 			UTF32String	newText32 = utf8_to_utf32(newText);
+#endif
 
 			_data.replace(pos, newText32.size(), newText32);
 		}
@@ -595,7 +606,11 @@ void PLtsql_expr_query_mutator::run()
 		rewritten_query += query.substr(cursor); // copy remaining expr->query
 
 	// update query string with quoted one
+#if ANTLRCPP_VERSION_MAJOR >= 4 && ANTLRCPP_VERSION_MINOR >= 10
+	std::string new_query = antlrcpp::Utf8::lenientEncode(rewritten_query);
+#else
 	std::string new_query = antlrcpp::utf32_to_utf8(rewritten_query);
+#endif
 	expr->query = pstrdup(new_query.c_str());
 }
 

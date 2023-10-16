@@ -1,29 +1,31 @@
 #find_package(Java QUIET COMPONENTS Runtime)
 
-if(NOT ANTLR_EXECUTABLE)
-  find_program(ANTLR_EXECUTABLE
-               NAMES antlr.jar antlr4.jar antlr-4.jar antlr-4.9.3-complete.jar)
-endif()
+if ( DEFINED ENV{ANTLR_CLASSPATH} )
+  set ( ANTLR_CLASSPATH $ENV{ANTLR_CLASSPATH} )
+else ()
+  set ( ANTLR_CLASSPATH ${CMAKE_CURRENT_LIST_DIR}/../thirdparty/antlr/antlr-4.9.3-complete.jar )
+endif ()
 
 set(Java_JAVA_EXECUTABLE $ENV{ANTLR4_JAVA_BIN})
+set ( ANTLR_MAIN_CLASS org.antlr.v4.Tool )
 
 message(STATUS "java executable=${Java_JAVA_EXECUTABLE}")
 
 if(ANTLR_EXECUTABLE AND Java_JAVA_EXECUTABLE)
   execute_process(
-      COMMAND ${Java_JAVA_EXECUTABLE} -jar ${ANTLR_EXECUTABLE}
+      COMMAND ${Java_JAVA_EXECUTABLE} -cp ${ANTLR_CLASSPATH} ${ANTLR_MAIN_CLASS}
       OUTPUT_VARIABLE ANTLR_COMMAND_OUTPUT
       ERROR_VARIABLE ANTLR_COMMAND_ERROR
       RESULT_VARIABLE ANTLR_COMMAND_RESULT
       OUTPUT_STRIP_TRAILING_WHITESPACE)
 
   if(ANTLR_COMMAND_RESULT EQUAL 0)
-    string(REGEX MATCH "Version [0-9]+(\\.[0-9])*" ANTLR_VERSION ${ANTLR_COMMAND_OUTPUT})
+    string(REGEX MATCH "Version [0-9]+(\\.[0-9]+)*" ANTLR_VERSION ${ANTLR_COMMAND_OUTPUT})
     string(REPLACE "Version " "" ANTLR_VERSION ${ANTLR_VERSION})
   else()
     message(
         SEND_ERROR
-        "Command '${Java_JAVA_EXECUTABLE} -jar ${ANTLR_EXECUTABLE}' "
+        "Command '${Java_JAVA_EXECUTABLE} -cp ${ANTLR_CLASSPATH} ${ANTLR_MAIN_CLASS}' "
         "failed with the output '${ANTLR_COMMAND_ERROR}'")
   endif()
 
@@ -107,7 +109,7 @@ if(ANTLR_EXECUTABLE AND Java_JAVA_EXECUTABLE)
 
     add_custom_command(
         OUTPUT ${ANTLR_${Name}_OUTPUTS}
-        COMMAND ${Java_JAVA_EXECUTABLE} -jar ${ANTLR_EXECUTABLE}
+        COMMAND ${Java_JAVA_EXECUTABLE} -cp ${ANTLR_CLASSPATH} ${ANTLR_MAIN_CLASS}
                 ${InputFile}
                 -o ${ANTLR_${Name}_OUTPUT_DIR}
                 -no-listener
@@ -119,10 +121,10 @@ if(ANTLR_EXECUTABLE AND Java_JAVA_EXECUTABLE)
         COMMENT "Building ${Name} with ANTLR ${ANTLR_VERSION}")
   endmacro(ANTLR_TARGET)
 
-endif(ANTLR_EXECUTABLE AND Java_JAVA_EXECUTABLE)
+endif ()
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(
     ANTLR
-    REQUIRED_VARS ANTLR_EXECUTABLE Java_JAVA_EXECUTABLE
+    REQUIRED_VARS ANTLR_CLASSPATH Java_JAVA_EXECUTABLE
     VERSION_VAR ANTLR_VERSION)

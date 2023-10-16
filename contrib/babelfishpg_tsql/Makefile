@@ -139,10 +139,9 @@ PGXS := $(shell $(PG_CONFIG) --pgxs)
 include $(PGXS)
 
 # export flags to pass them to cmake
-export CFLAGS="$(CFLAGS)"
-export CXXFLAGS="$(CXXFLAGS)"
-export CPPFLAGS="$(CPPFLAGS)"
-export LDFLAGS="$(LDFLAGS)"
+export CXXFLAGS=$(CXXFLAGS)
+export CPPFLAGS=$(CPPFLAGS)
+export LDFLAGS=$(LDFLAGS)
 
 ifeq ($(GE91),yes)
 all: sql/$(EXTENSION)--$(EXTVERSION).sql $(UPGRADES)
@@ -179,7 +178,7 @@ GEN_KEYWORDLIST_DEPS = $(TOOLSDIR)/gen_keywordlist.pl $(TOOLSDIR)/PerfectHash.pm
 TSQLSRC = .
 
 antlr/Makefile: antlr/CMakeLists.txt antlr/TSqlLexer.g4 antlr/TSqlLexer.g4
-	cd antlr && cmake . && cd ..
+	cd antlr && cmake -DCMAKE_CXX_COMPILER=$(CXX) . && cd ..
 
 .PHONY: antlr/libantlr_tsql.a  # to allow CMake's make check the build
 antlr/libantlr_tsql.a: antlr/Makefile

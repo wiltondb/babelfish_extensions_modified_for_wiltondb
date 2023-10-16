@@ -1,7 +1,7 @@
 # minimum required CMAKE version
 CMAKE_MINIMUM_REQUIRED(VERSION 3.7 FATAL_ERROR)
 
-project ( babelfishpg_tsql_antlr C CXX )
+project ( babelfishpg_tsql_antlr CXX )
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake-dir)
 
@@ -11,10 +11,11 @@ if ( DEFINED ENV{CXXSTANDARD} )
 else ()
 	set( CMAKE_CXX_STANDARD 14 )
 endif ()
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -DUSE_UTF8_INSTEAD_OF_CODECVT")
+if ( DEFINED ENV{CPPFLAGS} )
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} $ENV{CPPFLAGS}")
+endif ()
 
-message(STATUS "CMAKE_C_FLAGS=${CMAKE_C_FLAGS}")
 message(STATUS "CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}")
 
 # add antrl4cpp artifacts to project environment

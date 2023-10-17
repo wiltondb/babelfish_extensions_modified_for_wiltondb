@@ -85,6 +85,7 @@ PG_CXXFLAGS += -Werror
 PG_CXXFLAGS += -Wno-deprecated -Wno-error=attributes -Wno-suggest-attribute=format # disable some warnings from ANTLR runtime header
 PG_CXXFLAGS += -Wno-undef -Wall -Wcpp
 PG_CXXFLAGS += -Wno-register # otherwise C++17 gags on PostgreSQL headers
+PG_CXXFLAGS += -Wno-error=overloaded-virtual
 PG_CXXFLAGS += -std=gnu++$(CXXSTANDARD)
 PG_CXXFLAGS += -DUSE_UTF8_INSTEAD_OF_CODECVT
 PG_CXXFLAGS += -I$(ANTLR4_RUNTIME_INCLUDE_DIR)

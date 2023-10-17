@@ -50,7 +50,7 @@ SELECT * FROM babel_3696_7
 GO
 ~~START~~
 nvarchar
-{"a": "{\"x\": \"some string\"}"}
+{"a": "{\"x\":\"some string\"}"}
 ~~END~~
 
 
@@ -68,7 +68,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: An error occurred during the current command (Done status 0). JSON path is not properly formatted)~~
+~~ERROR (Message: JSON path is not properly formatted)~~
 
 
 EXEC babel_3696_10
@@ -85,4 +85,3 @@ GO
 nvarchar
 {"Suspect": {"Name": "Homer Simpson", "Address": {"City": "Dunedin", "Region": "Otago", "Country": "New Zealand"}, "Hobbies": ["Chess", "Brain Surgery"]}}
 ~~END~~
-

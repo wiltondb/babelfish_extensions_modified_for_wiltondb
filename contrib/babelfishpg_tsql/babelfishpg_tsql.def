@@ -17,6 +17,7 @@ EXPORTS
     _PG_fini
 
     ; runtime/functions.c
+    babelfish_concat_wrapper
     babelfish_integrity_checker
     bbf_get_context_info
     bbf_set_context_info

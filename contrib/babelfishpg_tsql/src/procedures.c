@@ -1104,7 +1104,7 @@ sp_describe_undeclared_parameters_internal(PG_FUNCTION_ARGS)
 			default:
 				ereport(ERROR,
 						(errcode(ERRCODE_FEATURE_NOT_SUPPORTED),
-						 errmsg("Unsupported use case in sp_describe_undeclared_parameters")));
+						 errmsg("Unsupported statement type for sp_describe_undeclared_parameters")));
 				break;
 		}
 

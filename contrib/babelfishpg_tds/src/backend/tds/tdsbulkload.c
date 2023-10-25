@@ -1008,6 +1008,7 @@ ProcessBCPRequest(TDSRequest request)
 				int			ret = 0;
 
 				HOLD_CANCEL_INTERRUPTS();
+				HOLD_INTERRUPTS();
 
 				/*
 				 * Discard remaining TDS_BULK_LOAD packets only if End of
@@ -1029,6 +1030,7 @@ ProcessBCPRequest(TDSRequest request)
 									req->rowCount, req->colCount),
 							 errhidestmt(true)));
 
+				RESUME_INTERRUPTS();
 				PG_RE_THROW();
 			}
 			PG_END_TRY();

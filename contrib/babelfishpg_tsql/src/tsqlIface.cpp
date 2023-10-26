@@ -199,6 +199,7 @@ static bool does_msg_exceeds_params_limit(const std::string& msg);
 static std::string getProcNameFromExecParam(TSqlParser::Execute_parameterContext *exParamCtx);
 static std::string getIDName(TerminalNode *dq, TerminalNode *sb, TerminalNode *id);
 static ANTLR_result antlr_parse_query(const char *sourceText, bool useSSLParsing);
+static PLtsql_stmt *makeChangeDbOwnerStatement(TSqlParser::Alter_authorizationContext *ctx);
 
 /*
  * Structure / Utility function for general purpose of query string modification
@@ -1649,14 +1650,29 @@ public:
 	void enterDdl_statement(TSqlParser::Ddl_statementContext *ctx) override
 	{
 		// See the comments in enterDml_statement() for an explanation of this code
-		graft(makeSQL(ctx), peekContainer());
+		PLtsql_stmt *stmt;
+		if (ctx->alter_authorization())
+		{
+			stmt = makeChangeDbOwnerStatement(ctx->alter_authorization());
+		}
+		else 
+		{
+			stmt = makeSQL(ctx);
+		}
+		graft(stmt, peekContainer());
 
 		// clean up object_name positions maps before entering
-		rewritten_query_fragment.clear();
+		clear_rewritten_query_fragment();
 	}
 
 	void exitDdl_statement(TSqlParser::Ddl_statementContext *ctx) override
 	{
+		if (ctx->alter_authorization()) 
+		{
+			// Exit in case of Change DB owner
+			return;
+		}
+		
 		PLtsql_stmt_execsql *stmt = (PLtsql_stmt_execsql *) getPLtsql_fragment(ctx);
 		Assert(stmt);
 		// record that the stmt is ddl
@@ -6796,4 +6812,23 @@ getIDName(TerminalNode *dq, TerminalNode *sb, TerminalNode *id)
 	{
 		return std::string(id->getSymbol()->getText());
 	}
+}
+
+PLtsql_stmt *
+makeChangeDbOwnerStatement(TSqlParser::Alter_authorizationContext *ctx)
+{
+	PLtsql_stmt_change_dbowner *result = (PLtsql_stmt_change_dbowner *) palloc0(sizeof(*result));
+
+	result->cmd_type = PLTSQL_STMT_CHANGE_DBOWNER;
+	result->lineno = getLineNo(ctx);
+	
+	// 'table' represents the actual database name in the grammar
+	std::string db_name_str = stripQuoteFromId(ctx->entity_name()->table);
+	result->db_name = pstrdup(downcase_truncate_identifier(db_name_str.c_str(), db_name_str.length(), true));
+	
+	// Login name for the new owner
+	std::string new_owner_name_str = stripQuoteFromId(ctx->authorization_grantee()->id());
+	result->new_owner_name = pstrdup(downcase_truncate_identifier(new_owner_name_str.c_str(), new_owner_name_str.length(), true));
+
+	return (PLtsql_stmt *) result;
 }

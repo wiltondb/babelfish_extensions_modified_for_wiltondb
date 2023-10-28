@@ -16,7 +16,7 @@ jobs:
         path: test/JDBC/Info
         retention-days: 1
     - name: upload-dist
-      if: false
+      if: true
       uses: actions/upload-artifact@v3
       with:
         name: dist

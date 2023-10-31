@@ -1,3 +1,12 @@
+Babelfish extensions modified for WiltonDB
+==========================================
+
+This fork contains the Babelfish codebase with a number of patches applied
+to support Windows MSVC builds along with Linux ones.
+
+Original readme:
+================
+
 ## Babelfish for PostgreSQL
 
 [![Build Status](https://github.com/babelfish-for-postgresql/babelfish_extensions/workflows/CI/badge.svg)](https://github.com/babelfish-for-postgresql/babelfish_extensions/actions?query=workflow%3A%22CI%22)

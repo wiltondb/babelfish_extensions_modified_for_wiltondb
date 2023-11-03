@@ -168,7 +168,7 @@ public class JDBCPreparedStatement {
                         pstmt.setSQLXML(j - 1, sqlxml);
                     }
                 } else if (parameter[0].equalsIgnoreCase("tvp")) {
-                    FileInputStream fstream = new FileInputStream(parameter[2]);
+                    FileInputStream fstream = new FileInputStream(Paths.get(Paths.get("").toAbsolutePath().toString(), parameter[2]).toString());
                     DataInputStream in = new DataInputStream(fstream);
                     BufferedReader br = new BufferedReader(new InputStreamReader(in));
 

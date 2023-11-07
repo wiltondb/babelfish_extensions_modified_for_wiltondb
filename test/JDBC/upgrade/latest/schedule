@@ -445,6 +445,8 @@ test_windows_sp_helpuser
 TestXML
 timefromparts
 triggers_with_transaction
+typeid-typename
+typeid-typename-dep
 alter_authorization_change_db_owner
 datetimeoffset-timezone
 BABEL-4046

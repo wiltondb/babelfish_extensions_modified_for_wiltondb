@@ -57,6 +57,7 @@ cast_numeric_types_to_smalldatetime
 routines_definition
 column_domain_usage
 constraint_column_usage
+select-strip-parens-before-15_5
 sp_describe_first_result_set
 sys-host_name
 SYSTEM_USER
@@ -86,7 +87,6 @@ sys-trigger_nestlevel
 schema_resolution_proc
 BABEL-404
 BABEL-493
-BABEL_539
 BABEL-621
 BABEL-775
 BABEL-1206
@@ -227,7 +227,7 @@ sys-schemas-dep
 sys-sp_tables_view-dep
 sys-sysforeignkeys-dep
 sys-tables-dep
-sys-types-dep
+sys-types-before-dep
 sys-views-dep
 sys-check_constraints-dep
 sys-computed_columns-dep
@@ -237,7 +237,7 @@ sys-sp_databases-dep
 sys-syscolumns-dep
 sys-dm_exec_connections-dep
 sys-dm_exec_sessions-dep
-sys-table_types-dep
+sys-table_types-before-dep
 sys-all_sql_modules-dep
 sys-sql_modules-dep
 sys-system_sql_modules-dep
@@ -270,6 +270,7 @@ BABEL-3000-dep
 Test-sp_helprole-dep
 Test-sp_helprolemember-dep
 format
+format-dep
 msdb-dbo-syspolicy_system_health_state
 dateadd_internal_df
 sys-all_columns
@@ -403,8 +404,17 @@ binary-index
 BABEL-4078
 BABEL-3215
 orderby
-BABEL-4046
-getdate
+babel_int4_varbinary_div
+babel_varbinary_int4_div
+sys-sql_expression_dependencies
+smalldatetimefromparts-dep
 BABEL_4330
-BABEL-4606
+BABEL-4231
+BABEL-4384
+GRANT_SCHEMA
+default_params
+BABEL-3326
+cast_eliminate
+TestDatatypeAggSort
+babel_index_nulls_order-before-15-5
 BABEL-2999

@@ -4,7 +4,9 @@
 #include "funcapi.h"
 
 #include "access/table.h"
+#include "access/attmap.h"
 #include "catalog/namespace.h"
+#include "catalog/pg_attribute.h"
 #include "catalog/pg_language.h"
 #include "commands/proclang.h"
 #include "executor/tstoreReceiver.h"
@@ -59,6 +61,7 @@ static bool is_char_identstart(char c);
 static bool is_char_identpart(char c);
 
 void		read_param_def(InlineCodeBlockArgs *args, const char *paramdefstr);
+bool  		called_from_tsql_insert_exec(void);
 void		cache_inline_args(PLtsql_function *func, InlineCodeBlockArgs *args);
 InlineCodeBlockArgs *create_args(int numargs);
 InlineCodeBlockArgs *clone_inline_args(InlineCodeBlockArgs *args);
@@ -96,6 +99,7 @@ extern SPIPlanPtr prepare_stmt_exec(PLtsql_execstate *estate, PLtsql_function *f
 extern int	sp_prepare_count;
 
 BulkCopyStmt *cstmt = NULL;
+bool		called_from_tsql_insert_execute = false;
 
 int			insert_bulk_rows_per_batch = DEFAULT_INSERT_BULK_ROWS_PER_BATCH;
 int			insert_bulk_kilobytes_per_batch = DEFAULT_INSERT_BULK_PACKET_SIZE;
@@ -2846,6 +2850,13 @@ exec_stmt_grantdb(PLtsql_execstate *estate, PLtsql_stmt_grantdb *stmt)
 	return PLTSQL_RC_OK;
 }
 
+bool called_from_tsql_insert_exec()
+{
+	if (sql_dialect != SQL_DIALECT_TSQL)
+		return false;
+	return called_from_tsql_insert_execute;
+}
+
 /*
  * For naked SELECT stmt in INSERT ... EXECUTE, instead of pushing the result to
  * the client, we accumulate the result in estate->tuple_store (similar to
@@ -2869,10 +2880,11 @@ exec_stmt_insert_execute_select(PLtsql_execstate *estate, PLtsql_expr *query)
 	/* Use eval_mcontext for tuple conversion work */
 	oldcontext = MemoryContextSwitchTo(get_eval_mcontext(estate));
 
+	called_from_tsql_insert_execute = true;
 	tupmap = convert_tuples_by_position(portal->tupDesc,
 										estate->tuple_store_desc,
 										gettext_noop("structure of query does not match function result type"));
-
+	called_from_tsql_insert_execute = false;
 	while (true)
 	{
 		uint64		i;
@@ -2890,7 +2902,11 @@ exec_stmt_insert_execute_select(PLtsql_execstate *estate, PLtsql_expr *query)
 			HeapTuple	tuple = SPI_tuptable->vals[i];
 
 			if (tupmap)
+			{
+				called_from_tsql_insert_execute = true;
 				tuple = execute_attr_map_tuple(tuple, tupmap);
+				called_from_tsql_insert_execute = false;
+			}
 			tuplestore_puttuple(estate->tuple_store, tuple);
 			if (tupmap)
 				heap_freetuple(tuple);

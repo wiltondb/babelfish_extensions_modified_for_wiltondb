@@ -157,6 +157,11 @@ static void pltsql_ExecutorEnd(QueryDesc *queryDesc);
 static bool plsql_TriggerRecursiveCheck(ResultRelInfo *resultRelInfo);
 static bool bbf_check_rowcount_hook(int es_processed);
 
+extern bool called_from_tsql_insert_exec();
+extern Datum pltsql_exec_tsql_cast_value(Datum value, bool *isnull,
+							 Oid valtype, int32 valtypmod,
+							 Oid reqtype, int32 reqtypmod);
+
 /*****************************************
  * 			Replication Hooks
  *****************************************/
@@ -217,6 +222,8 @@ static table_variable_satisfies_update_hook_type prev_table_variable_satisfies_u
 static table_variable_satisfies_vacuum_hook_type prev_table_variable_satisfies_vacuum = NULL;
 static table_variable_satisfies_vacuum_horizon_hook_type prev_table_variable_satisfies_vacuum_horizon = NULL;
 static drop_relation_refcnt_hook_type prev_drop_relation_refcnt_hook = NULL;
+static called_from_tsql_insert_exec_hook_type pre_called_from_tsql_insert_exec_hook = NULL;
+static exec_tsql_cast_value_hook_type pre_exec_tsql_cast_value_hook = NULL;
 
 /*****************************************
  * 			Install / Uninstall
@@ -367,6 +374,12 @@ InstallExtendedHooks(void)
 
 	prev_drop_relation_refcnt_hook = drop_relation_refcnt_hook;
 	drop_relation_refcnt_hook = pltsql_drop_relation_refcnt_hook;
+
+	pre_called_from_tsql_insert_exec_hook = called_from_tsql_insert_exec_hook;
+	called_from_tsql_insert_exec_hook = called_from_tsql_insert_exec;
+
+	pre_exec_tsql_cast_value_hook = exec_tsql_cast_value_hook;
+	exec_tsql_cast_value_hook = pltsql_exec_tsql_cast_value;
 }
 
 void
@@ -425,6 +438,7 @@ UninstallExtendedHooks(void)
 	IsToastRelationHook = PrevIsToastRelationHook;
 	IsToastClassHook = PrevIsToastClassHook;
 	drop_relation_refcnt_hook = prev_drop_relation_refcnt_hook;
+	called_from_tsql_insert_exec_hook = pre_called_from_tsql_insert_exec_hook;
 }
 
 /*****************************************

@@ -745,7 +745,7 @@ host_os(PG_FUNCTION_ARGS)
 
 	/* filter out host info */
 	pg_version = pstrdup(PG_VERSION_STR);
-	sscanf(pg_version, "PostgreSQL %*s on %s, compiled by %*s", host_str);
+	sscanf(pg_version, "PostgreSQL %*255s on %255s, compiled by %*255s", host_str);
 
 	if (strstr(pg_version, "Visual C++"))
 	{

@@ -245,6 +245,7 @@ throw_error_buffer(void *arg, int *num_occurrences)
 #pragma GCC diagnostic ignored "-Warray-bounds"
 #pragma GCC diagnostic ignored "-Wstringop-overflow"
 #endif // !_MSC_VER
+	/* cppcheck-suppress bufferAccessOutOfBounds */
 	memcpy(buffer, tem, 10);
 #ifndef _MSC_VER
 #pragma GCC diagnostic pop

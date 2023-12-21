@@ -91,6 +91,7 @@ extern "C"
 
 	extern PLtsql_type *parse_datatype(const char *string, int location);
 	extern bool is_tsql_text_ntext_or_image_datatype(Oid oid);
+	extern bool is_tsql_binary_or_varbinary_datatype(Oid oid);
 
 	extern int CurrentLineNumber;
 
@@ -4360,6 +4361,14 @@ makeDeclareStmt(TSqlParser::Declare_statementContext *ctx)
 		const char *name = downcase_truncate_identifier(nameStr.c_str(), nameStr.length(), true);
 		check_dup_declare(name);
 		PLtsql_type *type = parse_datatype(typeStr.c_str(), 0);
+		
+		/* (N)(VAR)CHAR and BINARY datatype length is treated as 1 when nothing is provided */
+		if (type->atttypmod == -1 && (is_tsql_any_char_datatype(type->typoid)
+			|| is_tsql_binary_or_varbinary_datatype(type->typoid)))
+		{
+			std::string newTypeStr = typeStr + "(1)"; 
+			type = parse_datatype(newTypeStr.c_str(), 0);
+		}
 
 		PLtsql_variable *var = pltsql_build_variable(name, 0, type, true);
 
@@ -4386,7 +4395,19 @@ makeDeclareStmt(TSqlParser::Declare_statementContext *ctx)
 			{
 				std::string typeStr = ::getFullText(local->data_type());
 				PLtsql_type *type = parse_datatype(typeStr.c_str(), 0);  // FIXME: the second arg should be 'location'
+<<<<<<< HEAD
 				if (is_tsql_text_ntext_or_image_datatype(type->typoid))
+=======
+				
+				/* (N)(VAR)CHAR and BINARY datatype length is treated as 1 when nothing is provided */
+				if (type->atttypmod == -1 && (is_tsql_any_char_datatype(type->typoid)
+					|| is_tsql_binary_or_varbinary_datatype(type->typoid)))
+				{
+					std::string newTypeStr = typeStr + "(1)";
+					type = parse_datatype(newTypeStr.c_str(), 0);
+				}
+				else if (is_tsql_text_ntext_or_image_datatype(type->typoid))
+>>>>>>> 8c3b3865 (Fix typmod for sys.binary datatype (#2037))
 				{
 					throw PGErrorWrapperException(ERROR, ERRCODE_DATATYPE_MISMATCH, "The text, ntext, and image data types are invalid for local variables.", getLineAndPos(local->data_type()));
 				}

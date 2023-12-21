@@ -39,7 +39,7 @@ bool		is_tsql_varchar_or_char_datatype(Oid oid); /* sys.char / sys.varchar */
 bool		is_tsql_nchar_or_nvarchar_datatype(Oid oid); /* sys.nchar / sys.nvarchar */
 bool		is_tsql_binary_or_varbinary_datatype(Oid oid); /* sys.binary / sys.varbinary */
 bool		is_tsql_text_ntext_or_image_datatype(Oid oid);
-
+bool		is_tsql_binary_or_varbinary_datatype(Oid oid);
 
 bool
 pltsql_createFunction(ParseState *pstate, PlannedStmt *pstmt, const char *queryString, ProcessUtilityContext context, 
@@ -1104,6 +1104,12 @@ is_tsql_text_ntext_or_image_datatype(Oid oid)
 	return (*common_utility_plugin_ptr->is_tsql_text_datatype) (oid) ||
 		(*common_utility_plugin_ptr->is_tsql_ntext_datatype) (oid) ||
 		(*common_utility_plugin_ptr->is_tsql_image_datatype) (oid);
+}
+
+bool is_tsql_binary_or_varbinary_datatype(Oid oid)
+{
+	return (*common_utility_plugin_ptr->is_tsql_sys_binary_datatype) (oid) ||
+		(*common_utility_plugin_ptr->is_tsql_sys_varbinary_datatype) (oid);
 }
 
 /*

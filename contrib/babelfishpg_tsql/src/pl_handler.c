@@ -483,7 +483,8 @@ pltsql_pre_parse_analyze(ParseState *pstate, RawStmt *parseTree)
 				 */
 				if (relid == sysdatabases_oid ||
 					relid == namespace_ext_oid ||
-					relid == bbf_view_def_oid)
+					relid == bbf_view_def_oid ||
+					relid == get_bbf_extended_properties_oid())
 				{
 					int16		dbid = 0;
 					ResTarget  *dbidCol;

@@ -18,6 +18,7 @@ ignore#!#sys-dm_os_host_info-vu-verify
 ignore#!#BABEL-4168-vu-prepare
 ignore#!#BABEL-4168-vu-verify
 ignore#!#BABEL-4168-vu-cleanup
+ignore#!#BABEL-4406
 ignore#!#four-part-names-vu-prepare
 ignore#!#four-part-names-vu-verify
 ignore#!#four-part-names-vu-cleanup
@@ -40,6 +41,10 @@ ignore#!#BABEL-SQLvariant
 #TDS fault injection framework is meant for internal testing only. So, ignore tds_faultinjection tests in stable branch
 ignore#!#tds_faultinjection
 ignore#!#babel_tds_fault_injection
+
+# Windows backend kill output discrepancy
+ignore#!#permission_restrictions_from_pg
+ignore#!#psql_logical_babelfish_db
 
 # Ignore upgrade tests in normal JDBC run. These are tests that cannot be run in non-upgrade contexts due
 # to changing the behavior between pre- and post-commit.

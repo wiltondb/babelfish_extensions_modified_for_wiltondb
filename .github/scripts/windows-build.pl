@@ -24,7 +24,7 @@ use LWP::Simple qw(getstore);
 
 my $pg_tag = "WILTON_3_3";
 my $pg_hint_plan_tag = "PG15_WILTON";
-my $pgwin_deps_version = "2023_10_27-1";
+my $pgwin_deps_version = "2023_12_29-1";
 my $flexbison_version = "flex-2.6.4_bison-3.8.2-1";
 my $diff_version = "v3.6-1";
 

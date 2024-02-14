@@ -19,9 +19,11 @@
 #include "commands/copy.h"
 #include "commands/explain.h"
 #include "commands/tablecmds.h"
+#include "commands/trigger.h"
 #include "commands/view.h"
 #include "common/logging.h"
 #include "funcapi.h"
+#include "fmgr.h"
 #include "miscadmin.h"
 #include "nodes/makefuncs.h"
 #include "nodes/nodeFuncs.h"
@@ -41,6 +43,7 @@
 #include "parser/scanner.h"
 #include "parser/scansup.h"
 #include "replication/logical.h"
+#include "pgstat.h"
 #include "rewrite/rewriteHandler.h"
 #include "tcop/utility.h"
 #include "utils/builtins.h"
@@ -162,6 +165,9 @@ extern Datum pltsql_exec_tsql_cast_value(Datum value, bool *isnull,
 							 Oid valtype, int32 valtypmod,
 							 Oid reqtype, int32 reqtypmod);
 static char *get_local_schema_for_bbf_functions(Oid proc_nsp_oid);
+static void is_function_pg_stat_valid(FunctionCallInfo fcinfo,
+									  PgStat_FunctionCallUsage *fcu,
+									  char prokind, bool finalize);
 
 /*****************************************
  * 			Replication Hooks
@@ -226,6 +232,7 @@ static drop_relation_refcnt_hook_type prev_drop_relation_refcnt_hook = NULL;
 static set_local_schema_for_func_hook_type prev_set_local_schema_for_func_hook = NULL;
 static called_from_tsql_insert_exec_hook_type pre_called_from_tsql_insert_exec_hook = NULL;
 static exec_tsql_cast_value_hook_type pre_exec_tsql_cast_value_hook = NULL;
+static pltsql_pgstat_end_function_usage_hook_type prev_pltsql_pgstat_end_function_usage_hook = NULL;
 
 /*****************************************
  * 			Install / Uninstall
@@ -385,6 +392,9 @@ InstallExtendedHooks(void)
 
 	pre_exec_tsql_cast_value_hook = exec_tsql_cast_value_hook;
 	exec_tsql_cast_value_hook = pltsql_exec_tsql_cast_value;
+
+	prev_pltsql_pgstat_end_function_usage_hook = pltsql_pgstat_end_function_usage_hook;
+	pltsql_pgstat_end_function_usage_hook = is_function_pg_stat_valid;
 }
 
 void
@@ -445,6 +455,7 @@ UninstallExtendedHooks(void)
 	drop_relation_refcnt_hook = prev_drop_relation_refcnt_hook;
 	set_local_schema_for_func_hook = prev_set_local_schema_for_func_hook;
 	called_from_tsql_insert_exec_hook = pre_called_from_tsql_insert_exec_hook;
+	pltsql_pgstat_end_function_usage_hook = prev_pltsql_pgstat_end_function_usage_hook;
 }
 
 /*****************************************
@@ -3910,4 +3921,33 @@ get_local_schema_for_bbf_functions(Oid proc_nsp_oid)
 		ReleaseSysCache(tuple);
 	}
 	return new_search_path;
+}
+
+/*
+ * Pltsql allows rolling back parent transaction/sub-transaction while executing
+ * a procedure. The rollback will result into drop of all objects created in
+ * parent transaction/sub-transaction including the procedure itself if it is
+ * part of the active transaction. Also, PG will drop pg_stat entry for a
+ * procedure as part of rollback if the procedure is created in the same
+ * transaction. As a result, we can have a scenario where pg_stat entry for a
+ * procedure becomes invalid by the time it ends due to rollback inside it.
+ * This hook will validate if a pg_stat entry is valid before touching it.
+ */
+static void
+is_function_pg_stat_valid(FunctionCallInfo fcinfo, PgStat_FunctionCallUsage *fcu, char prokind, bool finalize)
+{
+	/* stats not wanted */
+	if (fcu->fs == NULL)
+		return;
+
+	/* check local hash entry if procedure or trigger */
+	if ((prokind == PROKIND_PROCEDURE || CALLED_AS_TRIGGER(fcinfo))
+	    && !lookup_pgstat_entry_in_cache(PGSTAT_KIND_FUNCTION,
+										 MyDatabaseId,
+										 fcinfo->flinfo->fn_oid))
+	{
+		return;
+	}
+
+	pgstat_end_function_usage(fcu, finalize);
 }

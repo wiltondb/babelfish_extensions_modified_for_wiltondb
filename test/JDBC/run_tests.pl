@@ -67,6 +67,7 @@ runcmd("$openssl req -config $openssl_cnf -new -x509 -days 3650 -nodes -text -ou
 chdir($cwd_dir);
 append_file($postgresql_auto_conf, "ssl = 'on'\n");
 append_file($postgresql_auto_conf, "shared_preload_libraries = 'babelfishpg_tds,pg_stat_statements'\n");
+append_file($postgresql_auto_conf, "track_functions = 'pl'\n");
 
 make_path($pg_log_dir);
 runcmd("$pg_ctl start -D $pg_data -l $pg_log");

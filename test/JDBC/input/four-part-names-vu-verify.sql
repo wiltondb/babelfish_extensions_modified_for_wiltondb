@@ -1,4 +1,4 @@
--- sla 60000
+-- sla 200000
 CREATE TABLE fpn_table (a int, b varchar(10))
 GO
 

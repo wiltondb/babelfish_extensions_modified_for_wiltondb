@@ -249,18 +249,21 @@ target_include_directories ( ${PROJECT_NAME} PRIVATE
     $ENV{PGWIN_DEPS_DIR}/openssl/include
     $ENV{PGWIN_DEPS_DIR}/antlr4_cpp_runtime/include/antlr4-runtime
     $ENV{PGWIN_DEPS_DIR}/utf8cpp/include/utf8cpp
+    $ENV{PGWIN_DEPS_DIR}/freetds/include
     $ENV{PGWIN_SRC_DIR} )
 
 target_compile_options ( ${PROJECT_NAME} PRIVATE
     /bigobj
     /wd4267
-    /wd4996 )
+    /wd4996
+    /wd4003 )
 
 target_compile_definitions ( ${PROJECT_NAME} PRIVATE
     _CRT_SECURE_NO_WARNINGS
     ANTLR4CPP_STATIC
     USE_UTF8_INSTEAD_OF_CODECVT
-    BABELFISH_EXTENSION_BUILD )
+    BABELFISH_EXTENSION_BUILD
+    ENABLE_TDS_LIB )
 
 target_link_libraries ( ${PROJECT_NAME} PRIVATE
     $ENV{PGWIN_INSTALL_DIR}/lib/postgres.lib
@@ -269,6 +272,7 @@ target_link_libraries ( ${PROJECT_NAME} PRIVATE
     $ENV{PGWIN_DEPS_DIR}/openssl/lib/libssl.lib
     $ENV{PGWIN_DEPS_DIR}/openssl/lib/libcrypto.lib
     $ENV{PGWIN_DEPS_DIR}/antlr4_cpp_runtime/lib/antlr4-runtime-static.lib
+    $ENV{PGWIN_DEPS_DIR}/freetds/lib/sybdb.lib
     shlwapi
     ws2_32 )
 

@@ -300,7 +300,7 @@ EXEC sp_testlinkedserver 'test_server'
 GO
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: TDS client library error: DB #: 20012, DB Msg: server name not found in configuration files, OS #: 0, OS Msg: Success, Level: 2)~~
+~~ERROR (Message: TDS client library error: DB #: 20012, DB Msg: server name not found in configuration files, OS #: 0, OS Msg: No error, Level: 2)~~
 
 
 EXEC sp_dropserver @server = 'test_server', @droplogins = 'droplogins'

@@ -57,6 +57,7 @@ sub build_cmake_project {
 my $parent_dir = dirname($root_dir);
 my $contrib_dir = catfile($root_dir, "contrib");
 my $pg_hint_plan_dir = catfile($parent_dir, "pg_hint_plan");
+my $tds_fdw_dir = catfile($parent_dir, "tds_fdw");
 print("Cleaning up repos\n");
 chdir($contrib_dir);
 0 == system("git clean -dxf") or die("$!");
@@ -70,7 +71,12 @@ build_cmake_project(catfile($contrib_dir, "babelfishpg_tsql"));
 chdir($pg_hint_plan_dir);
 0 == system("git clean -dxf") or die("$!");
 0 == system("git status") or die("$!");
-
 build_cmake_project($pg_hint_plan_dir);
 
+chdir($tds_fdw_dir);
+0 == system("git clean -dxf") or die("$!");
+0 == system("git status") or die("$!");
+build_cmake_project($tds_fdw_dir);
+
+chdir($root_dir);
 print("Build complete successfully\n");

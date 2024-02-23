@@ -845,6 +845,11 @@ linked_server_establish_connection(char *servername, LinkedServerProcess * lspro
 			LINKED_SERVER_SET_CONNECT_TIMEOUT(connect_timeout);
 		}
 
+		if (getenv("WILTONDB_USE_FREETDS_CONF_FOR_LINKED_SERVER_CHARSET") == NULL)
+		{
+			LINKED_SERVER_SET_CHARSET(login, "UTF-8");
+		}
+
 		LINKED_SERVER_DEBUG("LINKED SERVER: Connecting to remote server \"%s\"", data_src);
 
 		*lsproc = LINKED_SERVER_OPEN(login, data_src);

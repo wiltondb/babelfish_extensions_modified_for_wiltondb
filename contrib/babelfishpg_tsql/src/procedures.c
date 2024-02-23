@@ -2497,7 +2497,7 @@ update_bbf_server_options(char *servername, char *optname, char *optvalue, bool 
 			else
 				timeout = atoi(optvalue);
 
-			if (timeout < 0)
+			if (timeout < 0 || (INT_MAX == timeout && ERANGE == errno))
 				ereport(ERROR,
 					(errcode(ERRCODE_FDW_ERROR),
 					errmsg("%s value provided is out of range",optname)));

@@ -75,6 +75,7 @@ OBJS += src/linked_servers.o
 OBJS += src/table_variable_mvcc.o
 OBJS += src/extendedproperty.o
 
+export ANTLR4_JAVA_BIN=/usr/lib/jvm/java-11-openjdk/bin/java
 export ANTLR4_RUNTIME_LIB=-lantlr4-runtime
 export ANTLR4_RUNTIME_INCLUDE_DIR=/usr/include/antlr4-runtime
 
@@ -85,16 +86,19 @@ PG_CXXFLAGS += -Werror
 PG_CXXFLAGS += -Wno-deprecated -Wno-error=attributes -Wno-suggest-attribute=format # disable some warnings from ANTLR runtime header
 PG_CXXFLAGS += -Wno-undef -Wall -Wcpp
 PG_CXXFLAGS += -Wno-register # otherwise C++17 gags on PostgreSQL headers
-PG_CXXFLAGS += -Wno-error=overloaded-virtual
+PG_CXXFLAGS += -ggdb -O0 -fno-omit-frame-pointer
+PG_CXXFLAGS += -Wno-overloaded-virtual
 PG_CXXFLAGS += -std=gnu++$(CXXSTANDARD)
 PG_CXXFLAGS += -DUSE_UTF8_INSTEAD_OF_CODECVT
 PG_CXXFLAGS += -I$(ANTLR4_RUNTIME_INCLUDE_DIR)
 PG_CXXFLAGS += -Iantlr/antlr4cpp_generated_src/TSqlLexer
 PG_CXXFLAGS += -Iantlr/antlr4cpp_generated_src/TSqlParser
 PG_CFLAGS += -Werror
-PG_CFLAGS += -Wno-error=maybe-uninitialized
 PG_CFLAGS += -Wno-error=date-time
-PG_CPPFLAGS += -I$(TSQLSRC) -I$(PG_SRC)
+PG_CFLAGS += -fstack-protector-strong
+PG_CFLAGS += -Wno-error=format-security -Wno-error=maybe-uninitialized
+PG_CFLAGS += -ggdb -O0 -fno-omit-frame-pointer -Wno-error=infinite-recursion
+PG_CPPFLAGS += -I$(TSQLSRC) -I$(PG_SRC) -DFAULT_INJECTOR
 
 SHLIB_LINK += $(ANTLR4_RUNTIME_LIB) -lcrypto
 

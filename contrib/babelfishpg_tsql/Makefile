@@ -94,9 +94,11 @@ PG_CXXFLAGS += -Iantlr/antlr4cpp_generated_src/TSqlParser
 PG_CFLAGS += -Werror
 PG_CFLAGS += -Wno-error=maybe-uninitialized
 PG_CFLAGS += -Wno-error=date-time
+PG_CFLAGS += -Wno-error=address
+PG_CFLAGS += -DENABLE_TDS_LIB
 PG_CPPFLAGS += -I$(TSQLSRC) -I$(PG_SRC)
 
-SHLIB_LINK += $(ANTLR4_RUNTIME_LIB) -lcrypto
+SHLIB_LINK += $(ANTLR4_RUNTIME_LIB) -lcrypto -lsybdb
 
 UPGRADES = $(patsubst sql/upgrades/%.sql,sql/%.sql,$(wildcard sql/upgrades/*.sql))
 

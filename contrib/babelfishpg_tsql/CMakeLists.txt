@@ -18,7 +18,7 @@ project ( babelfishpg_tsql C CXX )
 
 set ( PGTSQL_MAJOR_VERSION 3 )
 set ( PGTSQL_MINOR_VERSION 3 )
-set ( PGTSQL_MICRO_VERSION 0 )
+set ( PGTSQL_MICRO_VERSION 1 )
 set ( EXTVERSION ${PGTSQL_MAJOR_VERSION}.${PGTSQL_MINOR_VERSION}.${PGTSQL_MICRO_VERSION} )
 set ( MODULEPATH $libdir/${PROJECT_NAME}-${PGTSQL_MAJOR_VERSION} )
 
@@ -349,6 +349,7 @@ install ( FILES
     sql/upgrades/${PROJECT_NAME}--3.0.0--3.1.0.sql
     sql/upgrades/${PROJECT_NAME}--3.1.0--3.2.0.sql
     sql/upgrades/${PROJECT_NAME}--3.2.0--3.3.0.sql
+    sql/upgrades/${PROJECT_NAME}--3.3.0--3.3.1.sql
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}--${EXTVERSION}.sql
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.control
     DESTINATION $ENV{PGWIN_INSTALL_DIR}/share/extension )

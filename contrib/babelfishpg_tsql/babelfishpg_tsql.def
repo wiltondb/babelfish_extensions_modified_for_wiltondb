@@ -236,6 +236,7 @@ EXPORTS
     drop_all_users
     initialize_logins
     is_rolemember
+    remove_createrole_from_logins
     role_id
     suser_id
     suser_name

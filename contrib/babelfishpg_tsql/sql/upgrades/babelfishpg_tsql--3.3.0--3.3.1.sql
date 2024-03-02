@@ -81,10 +81,10 @@ CREATE OR REPLACE FUNCTION sys.sp_tables_internal(
 		DECLARE opt_view sys.varchar(16) = '';
 		DECLARE cs_as_in_table_type varchar COLLATE "C" = in_table_type;
 	BEGIN
-		IF cs_as_in_table_type LIKE '%''TABLE''%' THEN
+		IF upper(cs_as_in_table_type) LIKE '%''TABLE''%' THEN
 			opt_table = 'TABLE';
 		END IF;
-		IF cs_as_in_table_type LIKE '%''VIEW''%' THEN
+		IF upper(cs_as_in_table_type) LIKE '%''VIEW''%' THEN
 			opt_view = 'VIEW';
 		END IF;
 		IF in_fusepattern = 1 THEN

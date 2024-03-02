@@ -316,6 +316,27 @@ db1#!#dbo#!#t_sptables2#!#TABLE#!#<NULL>
 db1#!#dbo#!#t_sptables5#!#VIEW#!#<NULL>
 ~~END~~
 
+-- table_type list without tables
+exec [sys].sp_tables NULL,NULL,NULL,'''VIEW'',''SYSTEM TABLE'''
+go
+~~START~~
+varchar#!#varchar#!#varchar#!#varchar#!#varchar
+db1#!#dbo#!#sysdatabases#!#VIEW#!#<NULL>
+db1#!#dbo#!#t_sptables5#!#VIEW#!#<NULL>
+~~END~~
+
+-- table_type list without views
+exec [sys].sp_tables NULL,NULL,NULL,'''TABLE'',''SYSTEM TABLE'''
+go
+~~START~~
+varchar#!#varchar#!#varchar#!#varchar#!#varchar
+db1#!#dbo#!#mytable1#!#TABLE#!#<NULL>
+db1#!#dbo#!#mytable2#!#TABLE#!#<NULL>
+db1#!#dbo#!#t_sotables2#!#TABLE#!#<NULL>
+db1#!#dbo#!#t_sptables#!#TABLE#!#<NULL>
+db1#!#dbo#!#t_sptables2#!#TABLE#!#<NULL>
+~~END~~
+
 -- table_type list with double-escaping
 exec [sys].sp_tables NULL,NULL,NULL,'''''''TABLE'''',''''VIEW'''',''''SYSTEM TABLE'''''''
 go
@@ -349,6 +370,20 @@ exec [sys].sp_tables NULL,NULL,NULL,'''TABLE '','' VIEW'',''SYSTEM TABLE'''
 go
 ~~START~~
 varchar#!#varchar#!#varchar#!#varchar#!#varchar
+~~END~~
+
+-- table_type list with mixed case
+exec [sys].sp_tables NULL,NULL,NULL,'''Table'',''View'',''System Table'''
+go
+~~START~~
+varchar#!#varchar#!#varchar#!#varchar#!#varchar
+db1#!#dbo#!#mytable1#!#TABLE#!#<NULL>
+db1#!#dbo#!#mytable2#!#TABLE#!#<NULL>
+db1#!#dbo#!#sysdatabases#!#VIEW#!#<NULL>
+db1#!#dbo#!#t_sotables2#!#TABLE#!#<NULL>
+db1#!#dbo#!#t_sptables#!#TABLE#!#<NULL>
+db1#!#dbo#!#t_sptables2#!#TABLE#!#<NULL>
+db1#!#dbo#!#t_sptables5#!#VIEW#!#<NULL>
 ~~END~~
 
 

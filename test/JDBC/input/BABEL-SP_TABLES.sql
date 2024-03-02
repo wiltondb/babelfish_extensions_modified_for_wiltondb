@@ -136,6 +136,12 @@ go
 -- table_type list with unsupported type
 exec [sys].sp_tables NULL,NULL,NULL,'''TABLE'',''VIEW'',''SYSTEM TABLE'''
 go
+-- table_type list without tables
+exec [sys].sp_tables NULL,NULL,NULL,'''VIEW'',''SYSTEM TABLE'''
+go
+-- table_type list without views
+exec [sys].sp_tables NULL,NULL,NULL,'''TABLE'',''SYSTEM TABLE'''
+go
 -- table_type list with double-escaping
 exec [sys].sp_tables NULL,NULL,NULL,'''''''TABLE'''',''''VIEW'''',''''SYSTEM TABLE'''''''
 go
@@ -144,6 +150,9 @@ exec [sys].sp_tables NULL,NULL,NULL,'''TABLE'''''',''''VIEW'',''SYSTEM TABLE'''
 go
 -- table_type list with spaces
 exec [sys].sp_tables NULL,NULL,NULL,'''TABLE '','' VIEW'',''SYSTEM TABLE'''
+go
+-- table_type list with mixed case
+exec [sys].sp_tables NULL,NULL,NULL,'''Table'',''View'',''System Table'''
 go
 
 drop view t_sptables5

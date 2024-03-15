@@ -18,7 +18,7 @@ project ( babelfishpg_common C )
 
 set ( BBFPGCMN_MAJOR_VERSION 3 )
 set ( BBFPGCMN_MINOR_VERSION 3 )
-set ( BBFPGCMN_MICRO_VERSION 0 )
+set ( BBFPGCMN_MICRO_VERSION 1 )
 set ( EXTVERSION ${BBFPGCMN_MAJOR_VERSION}.${BBFPGCMN_MINOR_VERSION}.${BBFPGCMN_MICRO_VERSION} )
 set ( MODULEPATH $libdir/${PROJECT_NAME}-${BBFPGCMN_MAJOR_VERSION} )
 
@@ -171,6 +171,7 @@ install ( FILES
     sql/upgrades/${PROJECT_NAME}--3.0.0--3.1.0.sql
     sql/upgrades/${PROJECT_NAME}--3.1.0--3.2.0.sql
     sql/upgrades/${PROJECT_NAME}--3.1.0--3.3.0.sql
+    sql/upgrades/${PROJECT_NAME}--3.3.0--3.3.1.sql
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}--${EXTVERSION}.sql
     ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.control
     DESTINATION $ENV{PGWIN_INSTALL_DIR}/share/extension )

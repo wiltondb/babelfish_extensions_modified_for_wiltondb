@@ -196,11 +196,10 @@ master#!#dbo#!#dbmeta_proc1;1#!#-1#!#-1#!#-1#!#<NULL>#!#2
 ~~END~~
 
 
-dbmeta#!#getSchemas#!#master
+dbmeta#!#getSchemas#!#master|db%
 ~~START~~
 varchar#!#text
 dbo#!#<NULL>
-guest#!#<NULL>
 ~~END~~
 
 dbmeta#!#getSchemas#!#master|dbo

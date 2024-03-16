@@ -48,7 +48,7 @@ dbmeta#!#getProcedureColumns#!#master|dbo|dbmeta_proc2|@par1
 dbmeta#!#getProcedures#!#master|dbo|dbmeta_%
 dbmeta#!#getProcedures#!#master|dbo|dbmeta_proc1
 
-dbmeta#!#getSchemas#!#master
+dbmeta#!#getSchemas#!#master|db%
 dbmeta#!#getSchemas#!#master|dbo
 
 dbmeta#!#getTablePrivileges#!#master|dbo|dbmeta_tab1

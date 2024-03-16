@@ -16,7 +16,7 @@ INSERT INTO babel_4797 VALUES (1)
 
 INSERT INTO babel_4797 VALUES ('a')
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]invalid input syntax for type integer: "a" (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]invalid input syntax for type integer: "a" (33557097) (SQLExecDirectW))~~
 
 INSERT INTO babel_4797 VALUES (2)
 ~~ROW COUNT: 1~~
@@ -56,7 +56,7 @@ INSERT INTO babel_4797 VALUES (1)
 
 INSERT INTO babel_4797 VALUES ('a')
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]invalid input syntax for type integer: "a" (33557097) (SQLExecDirectW))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]invalid input syntax for type integer: "a" (33557097) (SQLExecDirectW))~~
 
 INSERT INTO babel_4797 VALUES (2)
 ~~ROW COUNT: 1~~
@@ -104,7 +104,7 @@ EXEC babel_4797_p
 ~~ROW COUNT: 1~~
 
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]invalid input syntax for type integer: "a" (33557097) (SQLMoreResults))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]invalid input syntax for type integer: "a" (33557097) (SQLMoreResults))~~
 
 INSERT INTO babel_4797 VALUES (2)
 ~~ROW COUNT: 1~~
@@ -169,7 +169,7 @@ in exception block
 ~~END~~
 
 ~~ERROR (Code: 33557097)~~
-~~ERROR (Message: [42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Uncommittable transaction is detected at the end of the batch. The transaction is rolled back. (33557097) (SQLMoreResults))~~
+~~ERROR (Message: [42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Uncommittable transaction is detected at the end of the batch. The transaction is rolled back. (33557097) (SQLMoreResults))~~
 
 INSERT INTO babel_4797 VALUES (2)
 ~~ROW COUNT: 1~~

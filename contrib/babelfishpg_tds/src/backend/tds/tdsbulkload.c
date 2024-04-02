@@ -33,6 +33,7 @@ void		ProcessBCPRequest(TDSRequest request);
 static void FetchMoreBcpData(StringInfo *message, int dataLenToRead, bool freeMessageData);
 static void FetchMoreBcpPlpData(StringInfo *message, int dataLenToRead);
 static int	ReadBcpPlp(ParameterToken temp, StringInfo *message, TDSRequestBulkLoad request);
+static void FreePlpToken(ParameterToken token);
 uint64_t	offset = 0;
 
 #define COLUMNMETADATA_HEADER_LEN			sizeof(uint32_t) + sizeof(uint16) + 1
@@ -515,6 +516,7 @@ SetBulkLoadRowData(TDSRequestBulkLoad request, StringInfo message)
 
 		rowData->columnValues = palloc0(request->colCount * sizeof(Datum));
 		rowData->isNull = palloc0(request->colCount * sizeof(bool));
+		rowData->isPointer = palloc0(request->colCount * sizeof(bool));
 
 		offset++;
 		request->currentBatchSize++;
@@ -592,6 +594,7 @@ SetBulkLoadRowData(TDSRequestBulkLoad request, StringInfo message)
 								break;
 							case TDS_TYPE_DATETIMEOFFSET:
 								rowData->columnValues[i] = TdsTypeDatetimeoffsetToDatum(temp, colmetadata[i].scale, temp->len);
+								rowData->isPointer[i] = true;
 								break;
 							case TDS_TYPE_MONEYN:
 								if (colmetadata[i].maxLen == TDS_MAXLEN_SMALLMONEY)
@@ -601,6 +604,7 @@ SetBulkLoadRowData(TDSRequestBulkLoad request, StringInfo message)
 								break;
 							case TDS_TYPE_UNIQUEIDENTIFIER:
 								rowData->columnValues[i] = TdsTypeUIDToDatum(temp);
+								rowData->isPointer[i] = true;
 								break;
 						}
 
@@ -645,6 +649,7 @@ SetBulkLoadRowData(TDSRequestBulkLoad request, StringInfo message)
 						 * column.
 						 */
 						rowData->columnValues[i] = TdsTypeNumericToDatum(temp, colmetadata[i].scale);
+						rowData->isPointer[i] = true;
 
 						offset += len;
 						request->currentBatchSize += len;
@@ -697,14 +702,14 @@ SetBulkLoadRowData(TDSRequestBulkLoad request, StringInfo message)
 							{
 								rowData->isNull[i] = true;
 								i++;
-								token->isNull = false;
+								FreePlpToken(token);
 								continue;
 							}
 
 							/* Free the previously allocated temp. */
 							pfree(temp);
 							temp = TdsGetPlpStringInfoBufferFromToken(message->data, token);
-							pfree(token);
+							FreePlpToken(token);
 						}
 
 						/*
@@ -716,14 +721,17 @@ SetBulkLoadRowData(TDSRequestBulkLoad request, StringInfo message)
 							case TDS_TYPE_CHAR:
 							case TDS_TYPE_VARCHAR:
 								rowData->columnValues[i] = TdsTypeVarcharToDatum(temp, colmetadata[i].encoding, colmetadata[i].columnTdsType);
+								rowData->isPointer[i] = true;
 								break;
 							case TDS_TYPE_NCHAR:
 							case TDS_TYPE_NVARCHAR:
 								rowData->columnValues[i] = TdsTypeNCharToDatum(temp);
+								rowData->isPointer[i] = true;
 								break;
 							case TDS_TYPE_BINARY:
 							case TDS_TYPE_VARBINARY:
 								rowData->columnValues[i] = TdsTypeVarbinaryToDatum(temp);
+								rowData->isPointer[i] = true;
 								break;
 						}
 
@@ -793,12 +801,15 @@ SetBulkLoadRowData(TDSRequestBulkLoad request, StringInfo message)
 						{
 							case TDS_TYPE_TEXT:
 								rowData->columnValues[i] = TdsTypeVarcharToDatum(temp, colmetadata[i].encoding, colmetadata[i].columnTdsType);
+								rowData->isPointer[i] = true;
 								break;
 							case TDS_TYPE_NTEXT:
 								rowData->columnValues[i] = TdsTypeNCharToDatum(temp);
+								rowData->isPointer[i] = true;
 								break;
 							case TDS_TYPE_IMAGE:
 								rowData->columnValues[i] = TdsTypeVarbinaryToDatum(temp);
+								rowData->isPointer[i] = true;
 								break;
 						}
 
@@ -828,13 +839,14 @@ SetBulkLoadRowData(TDSRequestBulkLoad request, StringInfo message)
 						 * column.
 						 */
 						rowData->columnValues[i] = TdsTypeXMLToDatum(temp);
+						rowData->isPointer[i] = true;
 
 						/*
 						 * We do not free temp pointer since it can be re-used
 						 * for the next iteration.
 						 */
 						pfree(temp->data);
-						pfree(token);
+						FreePlpToken(token);
 					}
 					break;
 				case TDS_TYPE_SQLVARIANT:
@@ -867,6 +879,7 @@ SetBulkLoadRowData(TDSRequestBulkLoad request, StringInfo message)
 						 * column.
 						 */
 						rowData->columnValues[i] = TdsTypeSqlVariantToDatum(temp);
+						rowData->isPointer[i] = true;
 
 						offset += len;
 						request->currentBatchSize += len;
@@ -912,6 +925,7 @@ ProcessBCPRequest(TDSRequest request)
 	TdsErrorContext->err_text = "Processing Bulk Load Request";
 	pgstat_report_activity(STATE_RUNNING, "Processing Bulk Load Request");
 
+	//MemoryContextStats(MessageContext);
 	while (1)
 	{
 		int			nargs = 0;
@@ -982,8 +996,9 @@ ProcessBCPRequest(TDSRequest request)
 		{
 			PG_TRY();
 			{
-				retValue += pltsql_plugin_handler_ptr->bulk_load_callback(req->colCount,
-																		  req->rowCount, values, nulls);
+				//retValue += pltsql_plugin_handler_ptr->bulk_load_callback(req->colCount,
+				//														  req->rowCount, values, nulls);
+				retValue += req->rowCount;
 			}
 			PG_CATCH();
 			{
@@ -1018,6 +1033,18 @@ ProcessBCPRequest(TDSRequest request)
 			}
 			PG_END_TRY();
 			/* Free the List of Rows. */
+			foreach(lc, req->rowData)
+			{
+				BulkLoadRowData* row = (BulkLoadRowData*)lfirst(lc);
+				for (int currentColumn = 0; currentColumn < req->colCount; currentColumn++)
+				{
+					if (!row->isNull[currentColumn] && row->isPointer[currentColumn])
+						pfree((void*)row->columnValues[currentColumn]);
+				}
+				pfree(row->columnValues);
+				pfree(row->isNull);
+				pfree(row->isPointer);
+			}
 			list_free_deep(req->rowData);
 			req->rowData = NIL;
 			if (values)
@@ -1025,6 +1052,7 @@ ProcessBCPRequest(TDSRequest request)
 			if (nulls)
 				pfree(nulls);
 		}
+		//MemoryContextStats(MessageContext);
 	}
 
 	/*
@@ -1124,4 +1152,19 @@ ReadBcpPlp(ParameterToken temp, StringInfo *message, TDSRequestBulkLoad request)
 	}
 
 	return STATUS_OK;
+}
+
+static void
+FreePlpToken(ParameterToken token)
+{
+	Plp			temp = token->plp,
+				next;
+
+	while (temp != NULL)
+	{
+		next = temp->next;
+		pfree(temp);
+		temp = next;
+	}
+	pfree(token);
 }

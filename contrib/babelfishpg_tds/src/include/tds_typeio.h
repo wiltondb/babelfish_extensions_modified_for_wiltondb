@@ -303,6 +303,8 @@ typedef struct BulkLoadRowData
 	Datum	   *columnValues;
 
 	bool	   *isNull;
+
+	bool	   *isPointer;
 } BulkLoadRowData;
 
 /* Map TVP to its underlying table, either by relid or by table name. */

@@ -2998,7 +2998,7 @@ exec_stmt_insert_bulk(PLtsql_execstate *estate, PLtsql_stmt_insert_bulk *stmt)
 
 uint64
 execute_bulk_load_insert(int ncol, int nrow,
-						 Datum *Values, bool *Nulls)
+						 Datum *Values, bool *Nulls, bool *ValueAllocFlags)
 {
 	uint64		retValue = -1;
 	Snapshot	snap;
@@ -3012,7 +3012,7 @@ execute_bulk_load_insert(int ncol, int nrow,
 		/* Cleanup all the pointers. */
 		if (cstmt)
 		{
-			EndBulkCopy(cstmt->cstate);
+			EndBulkCopy(cstmt->cstate, cstmt->ncol);
 			if (cstmt->attlist)
 				list_free_deep(cstmt->attlist);
 			if (cstmt->relation)
@@ -3041,6 +3041,7 @@ execute_bulk_load_insert(int ncol, int nrow,
 		cstmt->ncol = ncol;
 		cstmt->Values = Values;
 		cstmt->Nulls = Nulls;
+		cstmt->ValueAllocFlags = ValueAllocFlags;
 
 		snap = GetTransactionSnapshot();
 		PushActiveSnapshot(snap);

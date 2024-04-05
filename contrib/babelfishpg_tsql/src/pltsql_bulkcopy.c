@@ -69,7 +69,7 @@ static BulkCopyState
 
 static uint64
 			ExecuteBulkCopy(BulkCopyState cstate, int rowCount, int colCount,
-							Datum *Values, bool *Nulls);
+							Datum *Values, bool *Nulls, bool *ValueAllocFlags);
 
 static List *BulkCopyGetAttnums(TupleDesc tupDesc, Relation rel, List *attnamelist);
 
@@ -104,9 +104,12 @@ BulkCopy(BulkCopyStmt *stmt, uint64 *processed)
 		if (!stmt->cstate)
 			stmt->cstate = BeginBulkCopy(rel, attnums);
 		else
+		{
 			stmt->cstate->rel = rel;
+			list_free(attnums);
+		}
 
-		*processed = ExecuteBulkCopy(stmt->cstate, stmt->nrow, stmt->ncol, stmt->Values, stmt->Nulls);
+		*processed = ExecuteBulkCopy(stmt->cstate, stmt->nrow, stmt->ncol, stmt->Values, stmt->Nulls, stmt->ValueAllocFlags);
 		stmt->rows_processed += *processed;
 	}
 	PG_CATCH();
@@ -511,6 +514,43 @@ CopyMultiInsertInfoNextFreeSlot(CopyMultiInsertInfo *miinfo,
 }
 
 /*
+ * Free Datums, that were allocated on heap with palloc, and trim the
+ * tracking lists.
+ * 
+ * After the final flush (called from EndBulkCopy) the lists are trimmed
+ * to NIL, so no need to free them explicitly.  
+ */
+static void
+CleanupBufferedValuesAfterFlush(BulkCopyStateData *cstate, int colCount,
+								int flushedRecordsCount)
+{
+	int   count,
+				isAllocated;
+	void	*value;
+	List	*trimmedValues,
+				*trimmedValueAllocFlags;
+
+	count = colCount * flushedRecordsCount;
+
+	for (int i = 0; i < count; i++)
+	{
+		value = list_nth(cstate->bufferedValues, i);
+		isAllocated = list_nth_int(cstate->bufferedValueAllocFlags, i);
+		if (1 == isAllocated)
+		{
+			pfree(value);
+		}
+	}
+
+	trimmedValues = list_copy_tail(cstate->bufferedValues, count);
+	trimmedValueAllocFlags = list_copy_tail(cstate->bufferedValueAllocFlags, count);
+	list_free(cstate->bufferedValues);
+	list_free(cstate->bufferedValueAllocFlags);
+	cstate->bufferedValues = trimmedValues;
+	cstate->bufferedValueAllocFlags = trimmedValueAllocFlags;
+}
+
+/*
  * Record the previously reserved TupleTableSlot that was reserved by
  * CopyMultiInsertInfoNextFreeSlot as being consumed.
  * Code is copied from src/backend/commands/copyfrom.c
@@ -539,10 +579,11 @@ CopyMultiInsertInfoStore(CopyMultiInsertInfo *miinfo, ResultRelInfo *rri,
  */
 static uint64
 ExecuteBulkCopy(BulkCopyState cstate, int rowCount, int colCount,
-				Datum *Values, bool *Nulls)
+				Datum *Values, bool *Nulls, bool *ValueAllocFlags)
 {
 	int			cur_index = 0;
 	int			cur_row_in_batch = 0;
+	int			bufferedRecordsCount = 0;
 
 	ExprContext *econtext;
 	MemoryContext oldcontext = CurrentMemoryContext;
@@ -585,6 +626,13 @@ ExecuteBulkCopy(BulkCopyState cstate, int rowCount, int colCount,
 					(errcode(ERRCODE_WRONG_OBJECT_TYPE),
 					 errmsg("cannot bulk copy to non-table relation \"%s\"",
 							RelationGetRelationName(cstate->rel))));
+	}
+
+	/* Track all incoming Datums to be able to free them after the flush */
+	for (int i = 0; i < rowCount * colCount; i++)
+	{
+		cstate->bufferedValues = lappend(cstate->bufferedValues, (void *) Values[i]);
+		cstate->bufferedValueAllocFlags = lappend_int(cstate->bufferedValueAllocFlags, ValueAllocFlags[i] ? 1 : 0);
 	}
 
 	ExecOpenIndices(cstate->resultRelInfo, false);
@@ -752,7 +800,11 @@ ExecuteBulkCopy(BulkCopyState cstate, int rowCount, int colCount,
 		 * table.
 		 */
 		if (CopyMultiInsertInfoIsFull(&cstate->multiInsertInfo))
+		{
+			bufferedRecordsCount = cstate->multiInsertInfo.bufferedTuples;
 			CopyMultiInsertInfoFlush(&cstate->multiInsertInfo, cstate->resultRelInfo);
+			CleanupBufferedValuesAfterFlush(cstate, colCount, bufferedRecordsCount);
+		}
 	}
 
 	/* Done, clean up. */
@@ -835,6 +887,8 @@ BeginBulkCopy(Relation rel,
 	cstate->cur_rowno = 0;
 	cstate->seq_index = -1;
 	cstate->rv_index = -1;
+	cstate->bufferedValues = NIL;
+	cstate->bufferedValueAllocFlags = NIL;
 
 	/* Assign range table. */
 	cstate->range_table = pstate->p_rtable;
@@ -942,13 +996,19 @@ BeginBulkCopy(Relation rel,
  * EndBulkCopy - Clean up storage and release resources for BULK COPY.
  */
 void
-EndBulkCopy(BulkCopyState cstate)
+EndBulkCopy(BulkCopyState cstate, int colCount)
 {
+	int   bufferedRecordsCount = 0;
+
 	if (cstate)
 	{
 		/* Flush any remaining bufferes out to the table. */
 		if (!CopyMultiInsertInfoIsEmpty(&cstate->multiInsertInfo))
+		{
+			bufferedRecordsCount = cstate->multiInsertInfo.bufferedTuples;
 			CopyMultiInsertInfoFlush(&cstate->multiInsertInfo, NULL);
+			CleanupBufferedValuesAfterFlush(cstate, colCount, bufferedRecordsCount);
+		}
 
 		if (cstate->bistate != NULL)
 			FreeBulkInsertState(cstate->bistate);

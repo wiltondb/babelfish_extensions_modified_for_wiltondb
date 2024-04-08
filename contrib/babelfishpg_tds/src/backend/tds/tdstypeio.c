@@ -1082,7 +1082,8 @@ TdsTypeNumericToDatum(StringInfo buf, int scale)
 	Numeric		res;
 	int			len,
 				sign;
-	char	   *decString;
+	char	   *decString,
+				*decStringOrig;
 	int			temp1,
 				temp2;
 #ifndef _MSC_VER
@@ -1110,6 +1111,7 @@ TdsTypeNumericToDatum(StringInfo buf, int scale)
 	}
 
 	decString = (char *) palloc0(sizeof(char) * 40);
+	decStringOrig = decString;
 
 #ifndef _MSC_VER
 	if (num != 0)
@@ -1148,8 +1150,10 @@ TdsTypeNumericToDatum(StringInfo buf, int scale)
 		 * index during shifting the scale part of the string.
 		 */
 		decString = psprintf("-%s%s.", zeros, tempString + 1);
+		decStringOrig = decString;
 		len = strlen(decString) - 1;
 		pfree(tempString);
+		pfree(zeros);
 	}
 #ifndef _MSC_VER
 	if (num != 0)
@@ -1184,6 +1188,7 @@ TdsTypeNumericToDatum(StringInfo buf, int scale)
 		decString++;
 
 	res = TdsSetVarFromStrWrapper(decString);
+	pfree(decStringOrig);
 	PG_RETURN_NUMERIC(res);
 }
 

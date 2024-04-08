@@ -4911,6 +4911,7 @@ keyword
     | SYSTEM_TIME
     | SYSTEM_VERSIONING
     | T
+    | TABLOCK
     | TAKE
     | TAPE
     | TARGET

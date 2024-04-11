@@ -2468,10 +2468,11 @@ TdsRecvTypeTable(const char *message, const ParameterToken token)
 			}
 
 			SPI_finish();
-			PopActiveSnapshot();
-			if (!xactStarted)
-				CommitTransactionCommand();
 		}
+
+		PopActiveSnapshot();
+		if (!xactStarted)
+			CommitTransactionCommand();
 
 		set_config_option("babelfishpg_tsql.sql_dialect", "tsql",
 						  GUC_CONTEXT_CONFIG,

@@ -492,3 +492,4 @@ SELECT_INTO_TEST
 charindex_replace_patindex
 BABEL-5186
 BABEL-2736
+BABEL-4707

@@ -19,6 +19,9 @@
 
 #include <regex>
 
+// override the global new and delete operators
+#include "mimalloc-new-delete.h"
+
 extern "C" {
   #include "src/tsql_win.h"
 }

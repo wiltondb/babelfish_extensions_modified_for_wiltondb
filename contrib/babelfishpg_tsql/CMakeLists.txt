@@ -234,7 +234,7 @@ add_library ( ${PROJECT_NAME} SHARED
 
     ${PROJECT_NAME}.def )
 
-add_dependencies( ${PROJECT_NAME} add_u8_prefix_to_fix_C4566 )
+add_dependencies ( ${PROJECT_NAME} add_u8_prefix_to_fix_C4566 )
 
 target_include_directories ( ${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}
@@ -250,6 +250,7 @@ target_include_directories ( ${PROJECT_NAME} PRIVATE
     $ENV{PGWIN_DEPS_DIR}/antlr4_cpp_runtime/include/antlr4-runtime
     $ENV{PGWIN_DEPS_DIR}/utf8cpp/include/utf8cpp
     $ENV{PGWIN_DEPS_DIR}/freetds/include
+    $ENV{PGWIN_DEPS_DIR}/mimalloc/include
     $ENV{PGWIN_SRC_DIR} )
 
 target_compile_options ( ${PROJECT_NAME} PRIVATE
@@ -273,6 +274,7 @@ target_link_libraries ( ${PROJECT_NAME} PRIVATE
     $ENV{PGWIN_DEPS_DIR}/openssl/lib/libcrypto.lib
     $ENV{PGWIN_DEPS_DIR}/antlr4_cpp_runtime/lib/antlr4-runtime-static.lib
     $ENV{PGWIN_DEPS_DIR}/freetds/lib/sybdb.lib
+    $ENV{PGWIN_DEPS_DIR}/mimalloc/bin/mimalloc-static.lib
     shlwapi
     ws2_32 )
 
@@ -332,6 +334,11 @@ install ( TARGETS ${PROJECT_NAME} RUNTIME
 
 install( FILES
     $<TARGET_PDB_FILE:${PROJECT_NAME}>
+    DESTINATION $ENV{PGWIN_INSTALL_DIR}/symbols )
+
+install ( FILES
+    $ENV{PGWIN_DEPS_DIR}/antlr4_cpp_runtime/lib/antlr4-runtime-static.pdb
+    $ENV{PGWIN_DEPS_DIR}/mimalloc/bin/mimalloc-static.pdb
     DESTINATION $ENV{PGWIN_INSTALL_DIR}/symbols )
 
 install ( FILES

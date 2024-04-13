@@ -25,7 +25,8 @@ use LWP::Simple qw(getstore);
 my $pg_tag = "WILTON_3_3";
 my $pg_hint_plan_tag = "REL15_1_5_1_WILTON";
 my $tds_fdw_tag = "v2.0.3-wilton";
-my $pgwin_deps_version = "2024_02_22-1";
+my $system_stats_tag = "v2.1";
+my $pgwin_deps_version = "2024_04_12-1";
 my $flexbison_version = "flex-2.6.4_bison-3.8.2-1";
 my $diff_version = "v3.6-1";
 
@@ -85,6 +86,12 @@ sub download_tds_fdw {
   0 == system("git clone --quiet --branch $tds_fdw_tag $url") or die("$!");
 }
 
+sub download_system_stats {
+  chdir($parent_dir);
+  my $url = "https://github.com/EnterpriseDB/system_stats.git";
+  0 == system("git clone --quiet --branch $system_stats_tag $url") or die("$!");
+}
+
 sub download_and_build_pg {
   chdir($parent_dir);
   my $url = "https://github.com/wiltondb/postgresql_modified_for_babelfish.git";
@@ -122,6 +129,7 @@ my $diff_dir = download_diff();
 $ENV{PATH} = "$diff_dir;$ENV{PATH}";
 download_pg_hint_plan();
 download_tds_fdw();
+download_system_stats();
 my ($pg_src_dir, $dist_dir) = download_and_build_pg();
 $ENV{PGWIN_SRC_DIR} = $pg_src_dir;
 $ENV{PGWIN_INSTALL_DIR} = $dist_dir;

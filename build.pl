@@ -16,6 +16,7 @@ use strict;
 use warnings;
 use Cwd qw(abs_path);
 use File::Basename qw(basename dirname);
+use File::Copy::Recursive qw(fcopy);
 use File::Path qw(make_path remove_tree);
 use File::Spec::Functions qw(catfile);
 
@@ -54,10 +55,34 @@ sub build_cmake_project {
   0 == system($install_cmd) or die("$!");
 }
 
+sub build_system_stats {
+  my $src_dir = shift;
+  my $src_dir_name = basename($src_dir);
+  print("\nBuilding project: [$src_dir_name]\n");
+  $ENV{PG_INCLUDE_DIR} = catfile($ENV{PGWIN_INSTALL_DIR}, "include");
+  $ENV{PG_LIB_DIR} = catfile($ENV{PGWIN_INSTALL_DIR}, "lib");
+  my $conf = "Debug" eq $cmake_build_type ? "Debug" : "Release"; 
+  my $build_cmd = "msbuild system_stats.vcxproj";
+  $build_cmd .= " /p:Configuration=$conf";
+  $build_cmd .= " /p:Platform=x64";
+  $build_cmd .= " /p:PlatformToolset=v143";
+  print("$build_cmd\n");
+  0 == system($build_cmd) or die("$!");
+  my $dist_dir = $ENV{PGWIN_INSTALL_DIR};
+  my $ext_dir = catfile($dist_dir, "share", "extension");
+  fcopy(catfile($src_dir, "x64", $conf, "system_stats.dll"), catfile($dist_dir, "lib", "system_stats.dll")) or die("$!");
+  fcopy(catfile($src_dir, "x64", $conf, "system_stats.pdb"), catfile($dist_dir, "symbols", "system_stats.pdb")) or die("$!");
+  fcopy(catfile($src_dir, "system_stats.control"), catfile($ext_dir, "system_stats.control")) or die("$!");
+  fcopy(catfile($src_dir, "system_stats--1.0.sql"), catfile($ext_dir, "system_stats--1.0.sql")) or die("$!");
+  fcopy(catfile($src_dir, "system_stats--1.0--2.0.sql"), catfile($ext_dir, "system_stats--1.0--2.0.sql")) or die("$!");
+  fcopy(catfile($src_dir, "system_stats--2.0.sql"), catfile($ext_dir, "system_stats--2.0.sql")) or die("$!");
+}
+
 my $parent_dir = dirname($root_dir);
 my $contrib_dir = catfile($root_dir, "contrib");
 my $pg_hint_plan_dir = catfile($parent_dir, "pg_hint_plan");
 my $tds_fdw_dir = catfile($parent_dir, "tds_fdw");
+my $system_stats_dir = catfile($parent_dir, "system_stats");
 print("Cleaning up repos\n");
 chdir($contrib_dir);
 0 == system("git clean -dxf") or die("$!");
@@ -77,6 +102,11 @@ chdir($tds_fdw_dir);
 0 == system("git clean -dxf") or die("$!");
 0 == system("git status") or die("$!");
 build_cmake_project($tds_fdw_dir);
+
+chdir($system_stats_dir);
+0 == system("git clean -dxf") or die("$!");
+0 == system("git status") or die("$!");
+build_system_stats($system_stats_dir);
 
 chdir($root_dir);
 print("Build complete successfully\n");

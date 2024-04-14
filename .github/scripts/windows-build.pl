@@ -53,20 +53,24 @@ sub download_pgwin_deps {
 }
 
 sub download_flexbison {
+  my $tools_dir = shift;
+  chdir($tools_dir);
   my $url = "https://github.com/wiltondb/winflexbison/releases/download/$flexbison_version/$flexbison_version.zip";
-  my $zip = catfile($parent_dir, "$flexbison_version.zip");
+  my $zip = catfile($tools_dir, "$flexbison_version.zip");
   print("Downloading file, url: [$url]\n");
   getstore($url, $zip) or die("$!");
   print("Unpacking file: [$zip]\n");
   my $ae = Archive::Extract->new(archive => $zip);
-  $ae->extract(to => $parent_dir) or die("$!");
+  $ae->extract(to => $tools_dir) or die("$!");
   my $dir_name = $ae->files->[0];
-  return catfile($parent_dir, $dir_name);
+  return catfile($tools_dir, $dir_name);
 }
 
 sub download_diff {
+  my $tools_dir = shift;
+  chdir($tools_dir);
   my $url = "https://github.com/wiltondb/diffutils_win/releases/download/$diff_version/diff.exe";
-  my $dir = catfile($parent_dir, "diff");
+  my $dir = catfile($tools_dir, "diff");
   ensure_dir_empty($dir);
   my $dest = catfile($dir, "diff.exe");
   print("Downloading file, url: [$url]\n");
@@ -75,19 +79,22 @@ sub download_diff {
 }
 
 sub download_pg_hint_plan {
-  chdir($parent_dir);
+  my $extension_dir = shift;
+  chdir($extension_dir);
   my $url = "https://github.com/wiltondb/pg_hint_plan.git";
   0 == system("git clone --quiet --branch $pg_hint_plan_tag $url") or die("$!");
 }
 
 sub download_tds_fdw {
-  chdir($parent_dir);
+  my $extension_dir = shift;
+  chdir($extension_dir);
   my $url = "https://github.com/wiltondb/tds_fdw.git";
   0 == system("git clone --quiet --branch $tds_fdw_tag $url") or die("$!");
 }
 
 sub download_system_stats {
-  chdir($parent_dir);
+  my $extension_dir = shift;
+  chdir($extension_dir);
   my $url = "https://github.com/EnterpriseDB/system_stats.git";
   0 == system("git clone --quiet --branch $system_stats_tag $url") or die("$!");
 }
@@ -123,13 +130,20 @@ sub run_jdbc_tests {
 
 my $pgwin_deps_dir = download_pgwin_deps();
 $ENV{PGWIN_DEPS_DIR} = "$pgwin_deps_dir/release";
-my $flexbison_dir = download_flexbison();
+
+my $tools_dir = catfile($parent_dir, "tools");
+ensure_dir_empty($tools_dir);
+my $flexbison_dir = download_flexbison($tools_dir);
 $ENV{PATH} = "$flexbison_dir;$ENV{PATH}";
-my $diff_dir = download_diff();
+my $diff_dir = download_diff($tools_dir);
 $ENV{PATH} = "$diff_dir;$ENV{PATH}";
-download_pg_hint_plan();
-download_tds_fdw();
-download_system_stats();
+
+my $extensions_dir = catfile($parent_dir, "extensions");
+ensure_dir_empty($extensions_dir);
+download_pg_hint_plan($extensions_dir);
+download_tds_fdw($extensions_dir);
+download_system_stats($extensions_dir);
+
 my ($pg_src_dir, $dist_dir) = download_and_build_pg();
 $ENV{PGWIN_SRC_DIR} = $pg_src_dir;
 $ENV{PGWIN_INSTALL_DIR} = $dist_dir;

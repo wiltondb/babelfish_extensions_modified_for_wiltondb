@@ -78,11 +78,11 @@ sub build_system_stats {
   fcopy(catfile($src_dir, "system_stats--2.0.sql"), catfile($ext_dir, "system_stats--2.0.sql")) or die("$!");
 }
 
-my $parent_dir = dirname($root_dir);
+my $extensions_dir = catfile(dirname($root_dir), "extensions");
 my $contrib_dir = catfile($root_dir, "contrib");
-my $pg_hint_plan_dir = catfile($parent_dir, "pg_hint_plan");
-my $tds_fdw_dir = catfile($parent_dir, "tds_fdw");
-my $system_stats_dir = catfile($parent_dir, "system_stats");
+my $pg_hint_plan_dir = catfile($extensions_dir, "pg_hint_plan");
+my $tds_fdw_dir = catfile($extensions_dir, "tds_fdw");
+my $system_stats_dir = catfile($extensions_dir, "system_stats");
 print("Cleaning up repos\n");
 chdir($contrib_dir);
 0 == system("git clean -dxf") or die("$!");

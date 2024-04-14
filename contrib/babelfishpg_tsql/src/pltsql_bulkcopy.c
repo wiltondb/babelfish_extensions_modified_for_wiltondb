@@ -1031,8 +1031,12 @@ EndBulkCopy(BulkCopyState cstate, int colCount)
 
 	if (cstate)
 	{
-		/* Flush any remaining bufferes out to the table. */
-		if (!CopyMultiInsertInfoIsEmpty(&cstate->multiInsertInfo))
+		/* 
+		 * Flush any remaining bufferes out to the table. -1 is passed as colCount
+		 * if the cleanup is called after the error has happened, in this case we
+		 * skip the flush.
+		 */
+		if (colCount != -1 && !CopyMultiInsertInfoIsEmpty(&cstate->multiInsertInfo))
 		{
 			bufferedRecordsCount = cstate->multiInsertInfo.bufferedTuples;
 			CopyMultiInsertInfoFlush(&cstate->multiInsertInfo, NULL);

@@ -1021,7 +1021,7 @@ ProcessBCPRequest(TDSRequest request)
 				RESUME_CANCEL_INTERRUPTS();
 
 				/* Using Same callback function to do the clean-up. */
-				pltsql_plugin_handler_ptr->bulk_load_callback(0, 0, NULL, NULL, NULL);
+				pltsql_plugin_handler_ptr->bulk_load_callback(-1, -1, NULL, NULL, NULL);
 
 				if (ret < 0)
 					TdsErrorContext->err_text = "EOF on TDS socket while fetching For Bulk Load Request";

@@ -3005,14 +3005,16 @@ execute_bulk_load_insert(int ncol, int nrow,
 
 	/*
 	 * Bulk Copy can be triggered with 0 rows. We can also use this to cleanup
-	 * after all rows are inserted.
+	 * after all rows are received. It is called with -1 columns and rows when
+	 * error has happened during previous call, in this case we skip the flush
+	 * of remaining records.
 	 */
-	if (nrow == 0 && ncol == 0)
+	if (nrow <= 0 && ncol <= 0)
 	{
 		/* Cleanup all the pointers. */
 		if (cstmt)
 		{
-			EndBulkCopy(cstmt->cstate, cstmt->ncol);
+			EndBulkCopy(cstmt->cstate, ncol == 0 ? cstmt->ncol : -1);
 			if (cstmt->attlist)
 				list_free_deep(cstmt->attlist);
 			if (cstmt->relation)

@@ -7,3 +7,6 @@ WITHOUT FUNCTION AS IMPLICIT;
 
 CREATE CAST (sys.BBF_VARBINARY AS sys.BBF_BINARY)
 WITHOUT FUNCTION AS IMPLICIT;
+
+-- Reset search_path to not affect any subsequent scripts
+SELECT set_config('search_path', trim(leading 'sys, ' from current_setting('search_path')), false);

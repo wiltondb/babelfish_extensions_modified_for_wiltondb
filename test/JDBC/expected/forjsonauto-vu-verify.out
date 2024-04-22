@@ -157,7 +157,7 @@ EXECUTE forjson_vu_p_6
 GO
 ~~START~~
 nvarchar
-[{"id": 1, "firstname": "j", "details": [{"productId": 1}, {"productId": 1}]}, {"id": 1, "firstname": "e", "details": [{"productId": 1}, {"productId": 1}]}]
+[{"id": 1, "firstname": "j", "details": [{"productid": 1}, {"productid": 1}]}, {"id": 1, "firstname": "e", "details": [{"productid": 1}, {"productid": 1}]}]
 ~~END~~
 
 
@@ -175,7 +175,7 @@ GO
 nvarchar
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: sub-select and values for json auto are not currently supported.)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). sub-select and values for json auto are not currently supported.)~~
 
 
 EXECUTE forjson_vu_p_9
@@ -190,7 +190,7 @@ EXECUTE forjson_vu_p_10
 GO
 ~~START~~
 nvarchar
-[{"Id": 1, "o": [{"orderdate": "2023-06-25"}]}]
+[{"id": 1, "o": [{"orderdate": "2023-06-25"}]}]
 ~~END~~
 
 
@@ -198,7 +198,7 @@ EXECUTE forjson_vu_p_11
 GO
 ~~START~~
 nvarchar
-[{"id": 1, "details": [{"productId": 1}]}]
+[{"id": 1, "details": [{"productid": 1}]}]
 ~~END~~
 
 
@@ -206,7 +206,7 @@ EXECUTE forjson_vu_p_12
 GO
 ~~START~~
 nvarchar
-[{"id": 1, "firstname": "j", "details": [{"lastname": "o", "productId": 1}, {"lastname": "o", "productId": 1}]}, {"id": 1, "firstname": "e", "details": [{"lastname": "l", "productId": 1}, {"lastname": "l", "productId": 1}]}]
+[{"id": 1, "firstname": "j", "details": [{"lastname": "o", "productid": 1}, {"lastname": "o", "productid": 1}]}, {"id": 1, "firstname": "e", "details": [{"lastname": "l", "productid": 1}, {"lastname": "l", "productid": 1}]}]
 ~~END~~
 
 
@@ -222,7 +222,7 @@ EXECUTE forjson_vu_p_14
 GO
 ~~START~~
 nvarchar
-[{"id": 1, "firstname": "j", "details": [{"o": [{"productId": 1}, {"productId": 1}], "price": "30"}, {"o": [{"productId": 1}, {"productId": 1}], "price": "20"}]}, {"id": 1, "firstname": "e", "details": [{"o": [{"productId": 1}, {"productId": 1}], "price": "30"}, {"o": [{"productId": 1}, {"productId": 1}], "price": "20"}]}]
+[{"id": 1, "firstname": "j", "details": [{"o": [{"productid": 1}, {"productid": 1}], "price": "30"}, {"o": [{"productid": 1}, {"productid": 1}], "price": "20"}]}, {"id": 1, "firstname": "e", "details": [{"o": [{"productid": 1}, {"productid": 1}], "price": "30"}, {"o": [{"productid": 1}, {"productid": 1}], "price": "20"}]}]
 ~~END~~
 
 
@@ -230,7 +230,7 @@ EXECUTE forjson_vu_p_15
 GO
 ~~START~~
 nvarchar
-[{"id": 1, "firstname": "j", "details": "[{\"price\": \"30\", \"o\": [{\"productId\": 1}, {\"productId\": 1}]}, {\"price\": \"20\", \"o\": [{\"productId\": 1}, {\"productId\": 1}]}]"}, {"id": 1, "firstname": "e", "details": "[{\"price\": \"30\", \"o\": [{\"productId\": 1}, {\"productId\": 1}]}, {\"price\": \"20\", \"o\": [{\"productId\": 1}, {\"productId\": 1}]}]"}]
+[{"id": 1, "firstname": "j", "details": "[{\"price\": \"30\", \"o\": [{\"productid\": 1}, {\"productid\": 1}]}, {\"price\": \"20\", \"o\": [{\"productid\": 1}, {\"productid\": 1}]}]"}, {"id": 1, "firstname": "e", "details": "[{\"price\": \"30\", \"o\": [{\"productid\": 1}, {\"productid\": 1}]}, {\"price\": \"20\", \"o\": [{\"productid\": 1}, {\"productid\": 1}]}]"}]
 ~~END~~
 
 

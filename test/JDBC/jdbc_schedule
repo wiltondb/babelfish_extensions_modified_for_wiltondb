@@ -179,3 +179,6 @@ ignore#!#load_student
 ignore#!#newid_before_14_12_or_15_7_or_16_3-vu-prepare
 ignore#!#newid_before_14_12_or_15_7_or_16_3-vu-verify
 ignore#!#newid_before_14_12_or_15_7_or_16_3-vu-cleanup
+ignore#!#babel_726-before-14_12-or-15_7-or-16_3-vu-prepare
+ignore#!#babel_726-before-14_12-or-15_7-or-16_3-vu-verify
+ignore#!#babel_726-before-14_12-or-15_7-or-16_3-vu-cleanup

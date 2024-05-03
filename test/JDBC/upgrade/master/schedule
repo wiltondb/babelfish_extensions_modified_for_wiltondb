@@ -108,6 +108,7 @@ babel_datetime
 BABEL-EXECUTE_AS_CALLER
 BABEL-EXTENDEDPROPERTY
 babelfish_cast_floor
+newid
 babelfish_inconsistent_metadata
 babelfish_integrity_checker
 babelfish_migration_mode

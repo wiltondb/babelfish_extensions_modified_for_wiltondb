@@ -357,10 +357,10 @@ TdsDefineGucs(void)
 
 	DefineCustomIntVariable(
 							"babelfishpg_tds.tds_debug_log_level",
-							gettext_noop("Sets the tds debug log level"),
+							gettext_noop("Sets the TDS debug log level from 0 to 3"),
 							NULL,
 							&tds_debug_log_level,
-							1, 0, 3,
+							0, 0, 3,
 							PGC_SIGHUP,
 							GUC_NOT_IN_SAMPLE,
 							NULL,

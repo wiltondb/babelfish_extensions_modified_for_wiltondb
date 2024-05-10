@@ -457,3 +457,4 @@ sys_availability_groups
 sys_availability_replicas
 BABEL-2999
 BABEL-4231
+babel_table_type

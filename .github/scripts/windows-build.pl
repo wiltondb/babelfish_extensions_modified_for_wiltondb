@@ -22,7 +22,7 @@ use File::Path qw(make_path remove_tree);
 use File::Spec::Functions qw(catfile);
 use LWP::Simple qw(getstore);
 
-my $pg_tag = "WILTON_3_3";
+my $pg_tag = "WILTON_3_3-8";
 my $pg_hint_plan_tag = "REL15_1_5_1_WILTON";
 my $tds_fdw_tag = "v2.0.3-wilton";
 my $system_stats_tag = "v2.1";

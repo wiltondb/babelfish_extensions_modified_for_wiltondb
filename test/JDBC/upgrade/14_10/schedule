@@ -412,7 +412,6 @@ smalldatetimefromparts-dep
 BABEL_4330
 BABEL-4231
 BABEL-4384
-<<<<<<< HEAD
 GRANT_SCHEMA
 default_params
 BABEL-3326
@@ -420,5 +419,4 @@ cast_eliminate
 TestDatatypeAggSort
 babel_index_nulls_order-before-15-5
 BABEL-2999
-=======
->>>>>>> c549c794 (Implemented fix for when column is enclosed in parens (round brackets) and single byte as well as multibyte table and column aliases.  (#1812))
+BABEL-4869

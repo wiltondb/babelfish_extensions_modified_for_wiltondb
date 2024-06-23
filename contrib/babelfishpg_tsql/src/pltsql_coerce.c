@@ -41,6 +41,7 @@
 #include "pltsql.h"
 
 /* Hooks for engine*/
+extern PGDLLIMPORT find_coercion_pathway_hook_type find_coercion_pathway_hook;
 extern PGDLLIMPORT determine_datatype_precedence_hook_type determine_datatype_precedence_hook;
 extern PGDLLIMPORT func_select_candidate_hook_type func_select_candidate_hook;
 extern PGDLLIMPORT coerce_string_literal_hook_type coerce_string_literal_hook;
@@ -51,9 +52,9 @@ extern PGDLLIMPORT handle_constant_literals_hook_type handle_constant_literals_h
 PG_FUNCTION_INFO_V1(init_tsql_coerce_hash_tab);
 PG_FUNCTION_INFO_V1(init_tsql_datatype_precedence_hash_tab);
 
-static Oid select_common_type_for_coalesce_function(ParseState *pstate, List *exprs);
 static Oid select_common_type_setop(ParseState *pstate, List *exprs, Node **which_expr);
 static Oid select_common_type_for_isnull(ParseState *pstate, List *exprs);
+static Oid select_common_type_for_coalesce_function(ParseState *pstate, List *exprs);
 
 /* Memory Context */
 static MemoryContext pltsql_coercion_context = NULL;

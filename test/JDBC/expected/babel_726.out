@@ -63,7 +63,7 @@ go
 int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: invalid input syntax for type integer: "I am a string")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid input syntax for type integer: "I am a string")~~
 
 
 -- precedence correctness
@@ -141,16 +141,15 @@ select coalesce(a1, a2) from babel_726_t1
 GO
 ~~START~~
 sql_variant
-true
+1
 ~~END~~
 
 select coalesce(a2, a1) from babel_726_t1
 GO
 ~~START~~
 sql_variant
-~~ERROR (Code: 0)~~
-
-~~ERROR (Message: Unexpected TDS type  DATETIMEOFFSETN  in SQL_VARIANT.)~~
+1900-01-01 00:00:00 +00:00
+~~END~~
 
 
 -- datetimeoffset and datetime2
@@ -465,7 +464,7 @@ GO
 uniqueidentifier
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: invalid input syntax for type uuid: "asdfgh")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid input syntax for type uuid: "asdfgh")~~
 
 
 -- nvarchar and nchar
@@ -558,7 +557,7 @@ GO
 numeric
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: invalid input syntax for type numeric: "asdfg")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid input syntax for type numeric: "asdfg")~~
 
 
 -- numeric and float
@@ -618,7 +617,7 @@ float
 1.02
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: invalid input syntax for type double precision: "abcde")~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). invalid input syntax for type double precision: "abcde")~~
 
 
 DECLARE @ID_UNDE INT = 7;

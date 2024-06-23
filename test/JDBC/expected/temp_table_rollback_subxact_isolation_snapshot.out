@@ -1,13 +1,9 @@
 SET TRANSACTION ISOLATION LEVEL SNAPSHOT
 
 CREATE VIEW enr_view AS
-    SELECT
-        CASE
-            WHEN relname LIKE '#pg_toast%' AND relname LIKE '%index%' THEN '#pg_toast_#oid_masked#_index'
-            WHEN relname LIKE '#pg_toast%' THEN '#pg_toast_#oid_masked#'
-            ELSE relname
-        END AS relname
+    SELECT relname
     FROM sys.babelfish_get_enr_list()
+    WHERE relname NOT LIKE '#pg_toast%'
 GO
 
 
@@ -170,8 +166,6 @@ text
 #t3
 #t4_a_seq
 #t4
-#pg_toast_#oid_masked#
-#pg_toast_#oid_masked#_index
 #t4_pkey
 ~~END~~
 
@@ -289,8 +283,6 @@ int#!#varchar
 ~~START~~
 text
 #t1_pkey
-#pg_toast_#oid_masked#_index
-#pg_toast_#oid_masked#
 #t1
 ~~END~~
 
@@ -348,8 +340,6 @@ text
 #t1_a_seq
 #t1
 #t3_pkey
-#pg_toast_#oid_masked#_index
-#pg_toast_#oid_masked#
 #t3_b_seq
 #t3
 #t5
@@ -499,8 +489,6 @@ GO
 ~~START~~
 text
 #temp_table_rollback_t5
-#pg_toast_#oid_masked#
-#pg_toast_#oid_masked#_index
 ~~END~~
 
 
@@ -679,8 +667,6 @@ text
 #t1_pkey
 #t3_b_seq
 #t3
-#pg_toast_#oid_masked#
-#pg_toast_#oid_masked#_index
 #t3_pkey
 ~~END~~
 

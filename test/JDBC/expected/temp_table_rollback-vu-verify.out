@@ -209,12 +209,8 @@ GO
 ~~START~~
 text
 #temp_table_rollback_t1_pkey
-#pg_toast_#oid_masked#_index
-#pg_toast_#oid_masked#
 #temp_table_rollback_t1_a_seq
 #temp_table_rollback_t1
-#pg_toast_#oid_masked#_index
-#pg_toast_#oid_masked#
 #temp_table_rollback_t2
 ~~END~~
 
@@ -565,8 +561,6 @@ GO
 ~~START~~
 text
 #temp_table_rollback_t5
-#pg_toast_#oid_masked#
-#pg_toast_#oid_masked#_index
 ~~END~~
 
 

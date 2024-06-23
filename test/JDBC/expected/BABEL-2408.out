@@ -2,7 +2,5 @@ EXEC sp_describe_undeclared_parameters 'COMMIT TRANSACTION;'
 GO
 ~~START~~
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
-~~ERROR (Code: 11506)~~
-
-~~ERROR (Message: An error occurred during the current command (Done status 0). Unsupported statement type for sp_describe_undeclared_parameters)~~
+~~END~~
 

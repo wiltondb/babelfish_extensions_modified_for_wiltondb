@@ -1,13 +1,9 @@
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 
 CREATE VIEW enr_view AS
-    SELECT
-        CASE
-            WHEN relname LIKE '#pg_toast%' AND relname LIKE '%index%' THEN '#pg_toast_#oid_masked#_index'
-            WHEN relname LIKE '#pg_toast%' THEN '#pg_toast_#oid_masked#'
-            ELSE relname
-        END AS relname
+    SELECT relname
     FROM sys.babelfish_get_enr_list()
+    WHERE relname NOT LIKE '#pg_toast%'
 GO
 
 CREATE TYPE temp_table_type FROM int
@@ -277,12 +273,8 @@ GO
 ~~START~~
 text
 #temp_table_rollback_t1_pkey
-#pg_toast_#oid_masked#_index
-#pg_toast_#oid_masked#
 #temp_table_rollback_t1_a_seq
 #temp_table_rollback_t1
-#pg_toast_#oid_masked#_index
-#pg_toast_#oid_masked#
 #temp_table_rollback_t2
 ~~END~~
 
@@ -633,8 +625,6 @@ GO
 ~~START~~
 text
 #temp_table_rollback_t5
-#pg_toast_#oid_masked#
-#pg_toast_#oid_masked#_index
 ~~END~~
 
 

@@ -14,13 +14,9 @@ smallint
 
 
 CREATE VIEW enr_view AS
-    SELECT
-        CASE
-            WHEN relname LIKE '@pg_toast%' AND relname LIKE '%index%' THEN '@pg_toast_#oid_masked#_index'
-            WHEN relname LIKE '@pg_toast%' THEN '@pg_toast_#oid_masked#'
-            ELSE relname
-        END AS relname
+    SELECT relname
     FROM sys.babelfish_get_enr_list()
+    WHERE relname NOT LIKE '@pg_toast%'
 GO
 
 
@@ -113,15 +109,9 @@ savepoint_t3
 ~~START~~
 text
 @table2_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 @table2_0_pkey
 @tv3_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 @tv1_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 ~~END~~
 
 
@@ -220,15 +210,9 @@ savepoint_t3
 text
 @table2_0_c1_seq
 @table2_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 @table2_0_pkey
 @tv3_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 @tv1_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 ~~END~~
 
 
@@ -334,8 +318,6 @@ int#!#char
 ~~START~~
 text
 @tvf_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 @tvf_0_pkey
 ~~END~~
 
@@ -407,8 +389,6 @@ int#!#char#!#int#!#int
 text
 @tvf_0_c4_seq
 @tvf_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 @tvf_0_pkey
 ~~END~~
 
@@ -496,7 +476,7 @@ GO
 
 ~~ROW COUNT: 1~~
 
-~~ROW COUNT: 13~~
+~~ROW COUNT: 7~~
 
 ~~ROW COUNT: 1~~
 
@@ -506,15 +486,15 @@ GO
 
 ~~ROW COUNT: 1~~
 
-~~ROW COUNT: 13~~
+~~ROW COUNT: 7~~
 
 ~~ROW COUNT: 2~~
 
-~~ROW COUNT: 8~~
+~~ROW COUNT: 4~~
 
 ~~ROW COUNT: 1~~
 
-~~ROW COUNT: 3~~
+~~ROW COUNT: 1~~
 
 
 SELECT * FROM MainTable
@@ -541,27 +521,15 @@ int#!#text
 3#!#inserted
 3#!#deleted
 3#!#@table_variable_in_trigger_3
-3#!#@pg_toast_#oid_masked#
-3#!#@pg_toast_#oid_masked#_index
 3#!#inserted
 3#!#deleted
 3#!#@table_variable_in_trigger_2
-3#!#@pg_toast_#oid_masked#
-3#!#@pg_toast_#oid_masked#_index
 3#!#@tv_1
-3#!#@pg_toast_#oid_masked#
-3#!#@pg_toast_#oid_masked#_index
 2#!#inserted
 2#!#deleted
 2#!#@table_variable_in_trigger_2
-2#!#@pg_toast_#oid_masked#
-2#!#@pg_toast_#oid_masked#_index
 2#!#@tv_1
-2#!#@pg_toast_#oid_masked#
-2#!#@pg_toast_#oid_masked#_index
 1#!#@tv_1
-1#!#@pg_toast_#oid_masked#
-1#!#@pg_toast_#oid_masked#_index
 ~~END~~
 
 
@@ -702,18 +670,10 @@ savepoint_t3
 ~~START~~
 text
 @accumulator_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 @table2_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 @table2_0_pkey
 @tv3_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 @tv1_0
-@pg_toast_#oid_masked#
-@pg_toast_#oid_masked#_index
 ~~END~~
 
 

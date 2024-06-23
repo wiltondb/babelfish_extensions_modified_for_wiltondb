@@ -45,7 +45,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: syntax error near '<EOF>' at line 1 and character position 65)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). syntax error near '<EOF>' at line 1 and character position 65)~~
 
 
 -- Boundary Case: No rows returned
@@ -87,7 +87,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: syntax error near '<EOF>' at line 1 and character position 63)~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). syntax error near '<EOF>' at line 1 and character position 63)~~
 
 
 -- Empty Parameters Case: No parameters declared
@@ -106,7 +106,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Procedure expects parameter '@tsql' of type 'nvarchar(max)')~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Procedure expects parameter '@tsql' of type 'nvarchar(max)')~~
 
 
 DECLARE @P0 FLOAT;
@@ -116,7 +116,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Procedure expects parameter '@tsql' of type 'nvarchar(max)')~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Procedure expects parameter '@tsql' of type 'nvarchar(max)')~~
 
 
 DECLARE @P0 VARCHAR(11);
@@ -126,7 +126,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Procedure expects parameter '@tsql' of type 'nvarchar(max)')~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Procedure expects parameter '@tsql' of type 'nvarchar(max)')~~
 
 
 DECLARE @P0 NVARCHAR(11);
@@ -136,7 +136,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Procedure expects parameter '@tsql' of type 'nvarchar(max)')~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Procedure expects parameter '@tsql' of type 'nvarchar(max)')~~
 
 
 DECLARE @P0 CHAR(11);
@@ -146,7 +146,7 @@ GO
 int#!#varchar#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#varchar#!#int#!#int
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: Procedure expects parameter '@tsql' of type 'nvarchar(max)')~~
+~~ERROR (Message: An error occurred during the current command (Done status 0). Procedure expects parameter '@tsql' of type 'nvarchar(max)')~~
 
 
 -- Update Query with Mixed Data Types

@@ -90,7 +90,7 @@ public class JDBCCrossDialect {
 
         try {
             // Use sqlserver JDBC driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            Class.forName(tdsConnectionDriverClassName());
 
             // if we already have opened a tsql connection then reuse that
             tsqlConnection = tsqlConnectionMap.get(newUser + newPassword + newDatabase);

@@ -1607,6 +1607,7 @@ PrepareRowDescription(TupleDesc typeinfo, List *targetlist, int16 *formats,
 		}
 
 		SetAttributesForColmetada(col);
+		col->atttypmod = atttypmod;
 
 		switch (finfo->sendFuncId)
 		{
@@ -1674,14 +1675,36 @@ PrepareRowDescription(TupleDesc typeinfo, List *targetlist, int16 *formats,
 												att->attcollation, (atttypmod - 4) * 2);
 				break;
 			case TDS_SEND_VARCHAR:
-				SetColMetadataForCharTypeHelper(col, TDS_TYPE_VARCHAR,
-												att->attcollation, (atttypmod == -1) ?
-												atttypmod : (atttypmod - 4));
+				/*
+				* If client being connected is using TDS version lower than or equal to
+				* 7.1 then TSQL treats varchar(max) as Text.
+				*/
+				if (tdsVersion <= TDS_VERSION_7_1_1 && atttypmod == -1)
+				{
+					SetColMetadataForTextTypeHelper(col, TDS_TYPE_TEXT,
+													att->attcollation, (atttypmod - 4));
+					sendTableName |= col->sendTableName;
+				}
+				else
+					SetColMetadataForCharTypeHelper(col, TDS_TYPE_VARCHAR,
+													att->attcollation, (atttypmod == -1) ?
+													atttypmod : (atttypmod - 4));
 				break;
 			case TDS_SEND_NVARCHAR:
-				SetColMetadataForCharTypeHelper(col, TDS_TYPE_NVARCHAR,
-												att->attcollation, (atttypmod == -1) ?
-												atttypmod : (atttypmod - 4) * 2);
+				/*
+				* If client being connected is using TDS version lower than or equal to
+				* 7.1 then TSQL treats nvarchar(max) as NText.
+				*/
+				if (tdsVersion <= TDS_VERSION_7_1_1 && atttypmod == -1)
+				{
+					SetColMetadataForTextTypeHelper(col, TDS_TYPE_NTEXT,
+													att->attcollation, (atttypmod - 4) * 2);
+					sendTableName |= col->sendTableName;
+				}
+				else
+					SetColMetadataForCharTypeHelper(col, TDS_TYPE_NVARCHAR,
+													att->attcollation, (atttypmod == -1) ?
+													atttypmod : (atttypmod - 4) * 2);
 				break;
 			case TDS_SEND_MONEY:
 				if (col->attNotNull)
@@ -1785,8 +1808,18 @@ PrepareRowDescription(TupleDesc typeinfo, List *targetlist, int16 *formats,
 			case TDS_SEND_VARBINARY:
 				if (atttypmod == -1 && tle != NULL)
 					atttypmod = resolve_varbinary_typmod_from_exp((Node *) tle->expr);
-				SetColMetadataForBinaryType(col, TDS_TYPE_VARBINARY, (atttypmod == -1) ?
-											atttypmod : atttypmod - VARHDRSZ);
+				/*
+				* If client being connected is using TDS version lower than or equal to
+				* 7.1 then TSQL treats varbinary(max) as Image.
+				*/
+				if (tdsVersion <= TDS_VERSION_7_1_1 && atttypmod == -1)
+				{
+					SetColMetadataForImageType(col, TDS_TYPE_IMAGE);
+					sendTableName |= col->sendTableName;
+				}
+				else
+					SetColMetadataForBinaryType(col, TDS_TYPE_VARBINARY, (atttypmod == -1) ?
+												atttypmod : atttypmod - VARHDRSZ);
 				break;
 			case TDS_SEND_UNIQUEIDENTIFIER:
 				SetColMetadataForFixedType(col, TDS_TYPE_UNIQUEIDENTIFIER, TDS_MAXLEN_UNIQUEIDENTIFIER);
@@ -1860,10 +1893,10 @@ PrepareRowDescription(TupleDesc typeinfo, List *targetlist, int16 *formats,
 					/*
 					 * If client being connected is using TDS version lower
 					 * than 7.3A then TSQL treats DATETIMEOFFSET as NVARCHAR.
-					 * Max len here would be 64('YYYY-MM-DD hh:mm:ss[.nnnnnnn]
+					 * Max len here would be 68('YYYY-MM-DD hh:mm:ss[.nnnnnnn]
 					 * [+|-]hh:mm'). and Making use of default collation Oid.
 					 */
-					SetColMetadataForCharTypeHelper(col, TDS_TYPE_NVARCHAR, serverCollationOid, 64);
+					SetColMetadataForCharTypeHelper(col, TDS_TYPE_NVARCHAR, serverCollationOid, 68);
 				else
 				{
 					if (atttypmod == -1)
@@ -2163,6 +2196,42 @@ SendReturnValueTokenInternal(ParameterToken token, uint8 status,
 
 	/* send the data */
 	(token->paramMeta.sendFunc) (finfo, datum, (void *) &token->paramMeta);
+}
+
+/*
+ * SendReturnValueIntInternal
+ *
+ * status - stored procedure (0x01) or UDF (0x02)
+ */
+void
+SendReturnValueIntInternal(uint8 status, int32 value)
+{
+	SendPendingDone(true);
+
+	/* token type */
+	TDS_DEBUG(TDS_DEBUG2, "SendReturnValueIntInternal: token=0x%02x", TDS_TOKEN_RETURNVALUE);
+
+	/*  TokenType */
+	TdsPutUInt8(TDS_TOKEN_RETURNVALUE);		
+	/* ParamOrdinal */
+	TdsPutUInt16LE(0x0d);		
+	/* ParamName */
+	TdsPutUInt8(0);		
+	/* Status */
+	TdsPutUInt8(status);		
+	/* UserType */
+	if (GetClientTDSVersion() <= TDS_VERSION_7_1_1)
+		TdsPutUInt16LE(0);		
+	else
+		TdsPutUInt32LE(0);		
+	/* Flags */
+	TdsPutUInt16LE(0);		
+	/* TypeInfo */
+	TdsPutUInt8(TDS_TYPE_INTEGER);
+	TdsPutUInt8(0x04);
+	/* Value */
+	TdsPutUInt8(0x04);
+	TdsPutInt32LE(value);		
 }
 
 int

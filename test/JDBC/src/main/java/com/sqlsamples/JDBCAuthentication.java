@@ -44,7 +44,11 @@ public class JDBCAuthentication {
             port = properties.getProperty("psql_port");
         }
 
-        connectionPropertiesBabel.put("url", "jdbc:sqlserver://" + properties.getProperty("URL") + ":" + port);
+        if (useJTDSInsteadOfMSSQLJDBC) {
+            connectionPropertiesBabel.put("url", "jdbc:jtds:sqlserver://" + properties.getProperty("URL") + ":" + port);
+        } else {
+            connectionPropertiesBabel.put("url", "jdbc:sqlserver://" + properties.getProperty("URL") + ":" + port);
+        }
 
         String other_prop = "";
 
@@ -79,11 +83,19 @@ public class JDBCAuthentication {
             }
         }
 
-        return connectionPropertiesBabel.get("url")
-                + ";" + "databaseName=" + connectionPropertiesBabel.get("database")
-                + ";" + "user=" + connectionPropertiesBabel.get("user")
-                + ";" + "password=" + connectionPropertiesBabel.get("password")
-                + ";encrypt=true;trustServerCertificate=true;loginTimeout=5"
-                + ";" + other_prop;
+        if (useJTDSInsteadOfMSSQLJDBC) {
+            return connectionPropertiesBabel.get("url")
+                    + "/" + connectionPropertiesBabel.get("database")
+                    + ";" + "user=" + connectionPropertiesBabel.get("user")
+                    + ";" + "password=" + connectionPropertiesBabel.get("password")
+                    + ";" + other_prop;
+        } else {
+            return connectionPropertiesBabel.get("url")
+                    + ";" + "databaseName=" + connectionPropertiesBabel.get("database")
+                    + ";" + "user=" + connectionPropertiesBabel.get("user")
+                    + ";" + "password=" + connectionPropertiesBabel.get("password")
+                    + ";encrypt=true;trustServerCertificate=true;loginTimeout=5"
+                    + ";" + other_prop;
+        }
     }
 }

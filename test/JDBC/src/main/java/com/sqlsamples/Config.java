@@ -25,6 +25,8 @@ public class Config {
     static boolean outputColumnName = Boolean.parseBoolean(properties.getProperty("outputColumnName"));
     static boolean outputErrorCode = Boolean.parseBoolean(properties.getProperty("outputErrorCode"));
     static String scheduleFileName = properties.getProperty("scheduleFile");
+    static boolean useJTDSInsteadOfMSSQLJDBC = Boolean.parseBoolean(properties.getProperty("useJTDSInsteadOfMSSQLJDBC"));
+    static String jTDSScheduleFileName = "./jtds_jdbc_schedule";
     static String testFileRoot = properties.getProperty("testFileRoot");
     static boolean isUpgradeTestMode =  Boolean.parseBoolean(properties.getProperty("isUpgradeTestMode"));
     static long defaultSLA = Long.parseLong(properties.getProperty("defaultSLA"));
@@ -115,14 +117,27 @@ public class Config {
     }
     
     static String createSQLServerConnectionString(String URL, String port, String databaseName, String user, String password) {
-        return "jdbc:sqlserver://" + URL + ":" + port + ";" + "databaseName="
-                + databaseName + ";" + "user=" + user + ";" + "password=" + password +
-                ";encrypt=true;trustServerCertificate=true";
+        if (useJTDSInsteadOfMSSQLJDBC) {
+            return "jdbc:jtds:sqlserver://" + URL + ":" + port + "/"
+                    + databaseName + ";" + "user=" + user + ";" + "password=" + password;
+        } else {
+            return "jdbc:sqlserver://" + URL + ":" + port + ";" + "databaseName="
+                    + databaseName + ";" + "user=" + user + ";" + "password=" + password +
+                    ";encrypt=true;trustServerCertificate=true";
+        }
     }
 
     static String createPostgreSQLConnectionString(String URL, String port, String databaseName, String user, String password) {
         return "jdbc:postgresql://" + URL + ":" + port + "/"
                 + databaseName + "?" + "user=" + user + "&" + "password=" + password;
+    }
+
+    static String tdsConnectionDriverClassName() {
+        if (useJTDSInsteadOfMSSQLJDBC) {
+            return "net.sourceforge.jtds.jdbc.Driver";
+        } else {
+            return "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+        }
     }
     
     private static String constructConnectionString() {

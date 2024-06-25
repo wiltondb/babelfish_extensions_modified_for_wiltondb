@@ -38,7 +38,11 @@ if [ "$1" == -n ]; then
 fi
 
 GH_USER=$1
-BRANCH=$2
+if [ -z "$2" ]; then
+    BRANCH=$DEFAULT_BRANCH
+else
+    BRANCH=$2
+fi
 
 # See if user has an engine repository with the same name and branch.
 # See https://unix.stackexchange.com/questions/474805/verify-if-a-url-exists

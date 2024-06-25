@@ -2,105 +2,11 @@ Could not find tests for function assemblyproperty
 Could not find tests for function pltsql_call_handler
 Could not find tests for function pltsql_inline_handler
 Could not find tests for function pltsql_validator
-Could not find tests for function sys.babelfish_conv_date_to_string
-Could not find tests for function sys.babelfish_conv_datetime_to_string
-Could not find tests for function sys.babelfish_conv_greg_to_hijri
-Could not find tests for function sys.babelfish_conv_helper_to_date
-Could not find tests for function sys.babelfish_conv_helper_to_datetime
-Could not find tests for function sys.babelfish_conv_helper_to_time
-Could not find tests for function sys.babelfish_conv_helper_to_varchar
-Could not find tests for function sys.babelfish_conv_hijri_to_greg
-Could not find tests for function sys.babelfish_conv_string_to_date
-Could not find tests for function sys.babelfish_conv_string_to_datetime
-Could not find tests for function sys.babelfish_conv_string_to_time
-Could not find tests for function sys.babelfish_conv_time_to_string
-Could not find tests for function sys.babelfish_conv_to_varchar
-Could not find tests for function sys.babelfish_cursor_list
-Could not find tests for function sys.babelfish_dbts
-Could not find tests for function sys.babelfish_get_datetimeoffset_tzoffset
-Could not find tests for function sys.babelfish_get_full_year
-Could not find tests for function sys.babelfish_get_id_by_name
-Could not find tests for function sys.babelfish_get_identity_current
-Could not find tests for function sys.babelfish_get_identity_param
-Could not find tests for function sys.babelfish_get_int_part
-Could not find tests for function sys.babelfish_get_jobs
-Could not find tests for function sys.babelfish_get_lang_metadata_json
-Could not find tests for function sys.babelfish_get_microsecs_from_fractsecs
-Could not find tests for function sys.babelfish_get_monthnum_by_name
-Could not find tests for function sys.babelfish_get_sequence_value
-Could not find tests for function sys.babelfish_get_service_setting
-Could not find tests for function sys.babelfish_get_timeunit_from_string
-Could not find tests for function sys.babelfish_get_version
-Could not find tests for function sys.babelfish_get_weekdaynum_by_name
-Could not find tests for function sys.babelfish_is_ossp_present
-Could not find tests for function sys.babelfish_is_spatial_present
-Could not find tests for function sys.babelfish_istime
-Could not find tests for function sys.babelfish_openxml
-Could not find tests for function sys.babelfish_parse_helper_to_date
-Could not find tests for function sys.babelfish_parse_helper_to_datetime
-Could not find tests for function sys.babelfish_parse_helper_to_time
-Could not find tests for function sys.babelfish_parse_to_date
-Could not find tests for function sys.babelfish_parse_to_datetime
-Could not find tests for function sys.babelfish_parse_to_time
-Could not find tests for function sys.babelfish_round3
-Could not find tests for function sys.babelfish_round_fractseconds
 Could not find tests for function sys.babelfish_runtime_error
-Could not find tests for function sys.babelfish_set_version
-Could not find tests for function sys.babelfish_single_unbracket_name
-Could not find tests for function sys.babelfish_sp_add_job
-Could not find tests for function sys.babelfish_sp_add_jobschedule
-Could not find tests for function sys.babelfish_sp_add_jobstep
-Could not find tests for function sys.babelfish_sp_add_schedule
-Could not find tests for function sys.babelfish_sp_attach_schedule
-Could not find tests for function sys.babelfish_sp_aws_add_jobschedule
-Could not find tests for function sys.babelfish_sp_aws_del_jobschedule
-Could not find tests for function sys.babelfish_sp_delete_job
-Could not find tests for function sys.babelfish_sp_delete_jobschedule
-Could not find tests for function sys.babelfish_sp_delete_jobstep
-Could not find tests for function sys.babelfish_sp_delete_schedule
-Could not find tests for function sys.babelfish_sp_detach_schedule
-Could not find tests for function sys.babelfish_sp_job_log
-Could not find tests for function sys.babelfish_sp_schedule_to_cron
-Could not find tests for function sys.babelfish_sp_sequence_get_range
-Could not find tests for function sys.babelfish_sp_set_next_run
-Could not find tests for function sys.babelfish_sp_update_job
-Could not find tests for function sys.babelfish_sp_update_jobschedule
-Could not find tests for function sys.babelfish_sp_update_jobstep
-Could not find tests for function sys.babelfish_sp_update_schedule
-Could not find tests for function sys.babelfish_sp_verify_job
-Could not find tests for function sys.babelfish_sp_verify_job_date
-Could not find tests for function sys.babelfish_sp_verify_job_identifiers
-Could not find tests for function sys.babelfish_sp_verify_job_time
-Could not find tests for function sys.babelfish_sp_verify_jobstep
-Could not find tests for function sys.babelfish_sp_verify_schedule
-Could not find tests for function sys.babelfish_sp_verify_schedule_identifiers
-Could not find tests for function sys.babelfish_sp_xml_preparedocument
-Could not find tests for function sys.babelfish_sp_xml_removedocument
-Could not find tests for function sys.babelfish_strpos3
-Could not find tests for function sys.babelfish_tomsbit
-Could not find tests for function sys.babelfish_truncate_identifier
 Could not find tests for function sys.babelfish_try_cast_floor_bigint
 Could not find tests for function sys.babelfish_try_cast_floor_int
 Could not find tests for function sys.babelfish_try_cast_floor_smallint
 Could not find tests for function sys.babelfish_try_cast_to_any
-Could not find tests for function sys.babelfish_try_conv_date_to_string
-Could not find tests for function sys.babelfish_try_conv_datetime_to_string
-Could not find tests for function sys.babelfish_try_conv_float_to_string
-Could not find tests for function sys.babelfish_try_conv_money_to_string
-Could not find tests for function sys.babelfish_try_conv_string_to_date
-Could not find tests for function sys.babelfish_try_conv_string_to_datetime
-Could not find tests for function sys.babelfish_try_conv_string_to_time
-Could not find tests for function sys.babelfish_try_conv_time_to_string
-Could not find tests for function sys.babelfish_try_conv_to_date
-Could not find tests for function sys.babelfish_try_conv_to_datetime
-Could not find tests for function sys.babelfish_try_conv_to_time
-Could not find tests for function sys.babelfish_try_conv_to_varchar
-Could not find tests for function sys.babelfish_try_parse_to_date
-Could not find tests for function sys.babelfish_try_parse_to_datetime
-Could not find tests for function sys.babelfish_try_parse_to_time
-Could not find tests for function sys.babelfish_update_job
-Could not find tests for function sys.babelfish_waitfor_delay
-Could not find tests for function sys.bbf_get_current_physical_schema_name
 Could not find tests for function sys.columns_internal
 Could not find tests for function sys.dateadd_internal
 Could not find tests for function sys.datediff_internal
@@ -109,11 +15,8 @@ Could not find tests for function sys.datepart_internal
 Could not find tests for function sys.default_domain
 Could not find tests for function sys.format_datetime
 Could not find tests for function sys.format_numeric
-Could not find tests for function sys.get_babel_server_collation_oid
 Could not find tests for function sys.get_current_full_xact_id
 Could not find tests for function sys.get_host_os
-Could not find tests for function sys.get_max_id_from_table
-Could not find tests for function sys.get_min_id_from_table
 Could not find tests for function sys.is_collated_ci_as
 Could not find tests for function sys.is_collated_ci_as_internal
 Could not find tests for function sys.is_rolemember_internal
@@ -143,10 +46,8 @@ Could not find tests for function sys.systypes_precision_helper
 Could not find tests for function sys.tsql_get_returntypmodvalue
 Could not find tests for function sys.tsql_query_to_json_ffunc
 Could not find tests for function sys.tsql_query_to_json_sfunc
-Could not find tests for function sys.tsql_query_to_xml
 Could not find tests for function sys.tsql_query_to_xml_ffunc
 Could not find tests for function sys.tsql_query_to_xml_sfunc
-Could not find tests for function sys.tsql_query_to_xml_text
 Could not find tests for function sys.tsql_query_to_xml_text_ffunc
 Could not find tests for function sys.tsql_stat_get_activity
 Could not find tests for function sys.tsql_type_length_for_sp_columns_helper
@@ -154,7 +55,6 @@ Could not find tests for function sys.tsql_type_max_length_helper
 Could not find tests for function sys.tsql_type_precision_helper
 Could not find tests for function sys.tsql_type_radix_for_sp_columns_helper
 Could not find tests for function sys.tsql_type_scale_helper
-Could not find tests for function sys.user_name_sysname
 Could not find tests for procedure babel_catalog_initializer
 Could not find tests for procedure babel_coercion_initializer
 Could not find tests for procedure babel_create_builtin_dbs
@@ -162,15 +62,10 @@ Could not find tests for procedure babel_datatype_precedence_initializer
 Could not find tests for procedure initialize_babel_extras
 Could not find tests for procedure initialize_babelfish
 Could not find tests for procedure remove_babelfish
-Could not find tests for procedure sys.babel_collation_initializer
 Could not find tests for procedure sys.babel_drop_all_dbs
 Could not find tests for procedure sys.babel_drop_all_logins
 Could not find tests for procedure sys.babel_initialize_logins
-Could not find tests for procedure sys.babel_like_ilike_info_initializer
-Could not find tests for procedure sys.init_server_collation_oid
 Could not find tests for procedure sys.printarg
-Could not find tests for table "#temp_schedules_to_delete"
-Could not find tests for table sys$openxml
 Could not find tests for table sys.babelfish_helpcollation
 Could not find tests for table sys.babelfish_syslanguages
 Could not find tests for table sys.service_settings
@@ -199,112 +94,11 @@ Could not find upgrade tests for function pltsql_inline_handler
 Could not find upgrade tests for function pltsql_validator
 Could not find upgrade tests for function serverproperty
 Could not find upgrade tests for function sessionproperty
-Could not find upgrade tests for function sys.babelfish_collation_list
-Could not find upgrade tests for function sys.babelfish_conv_date_to_string
-Could not find upgrade tests for function sys.babelfish_conv_datetime_to_string
-Could not find upgrade tests for function sys.babelfish_conv_greg_to_hijri
-Could not find upgrade tests for function sys.babelfish_conv_helper_to_date
-Could not find upgrade tests for function sys.babelfish_conv_helper_to_datetime
-Could not find upgrade tests for function sys.babelfish_conv_helper_to_time
-Could not find upgrade tests for function sys.babelfish_conv_helper_to_varchar
-Could not find upgrade tests for function sys.babelfish_conv_hijri_to_greg
-Could not find upgrade tests for function sys.babelfish_conv_string_to_date
-Could not find upgrade tests for function sys.babelfish_conv_string_to_datetime
-Could not find upgrade tests for function sys.babelfish_conv_string_to_time
-Could not find upgrade tests for function sys.babelfish_conv_time_to_string
-Could not find upgrade tests for function sys.babelfish_conv_to_varchar
-Could not find upgrade tests for function sys.babelfish_cursor_list
-Could not find upgrade tests for function sys.babelfish_dbts
-Could not find upgrade tests for function sys.babelfish_get_datetimeoffset_tzoffset
-Could not find upgrade tests for function sys.babelfish_get_enr_list
-Could not find upgrade tests for function sys.babelfish_get_full_year
-Could not find upgrade tests for function sys.babelfish_get_id_by_name
-Could not find upgrade tests for function sys.babelfish_get_identity_current
-Could not find upgrade tests for function sys.babelfish_get_identity_param
-Could not find upgrade tests for function sys.babelfish_get_int_part
-Could not find upgrade tests for function sys.babelfish_get_jobs
-Could not find upgrade tests for function sys.babelfish_get_lang_metadata_json
-Could not find upgrade tests for function sys.babelfish_get_login_default_db
-Could not find upgrade tests for function sys.babelfish_get_microsecs_from_fractsecs
-Could not find upgrade tests for function sys.babelfish_get_monthnum_by_name
-Could not find upgrade tests for function sys.babelfish_get_sequence_value
-Could not find upgrade tests for function sys.babelfish_get_service_setting
-Could not find upgrade tests for function sys.babelfish_get_timeunit_from_string
-Could not find upgrade tests for function sys.babelfish_get_version
-Could not find upgrade tests for function sys.babelfish_get_weekdaynum_by_name
-Could not find upgrade tests for function sys.babelfish_is_ossp_present
-Could not find upgrade tests for function sys.babelfish_is_spatial_present
-Could not find upgrade tests for function sys.babelfish_istime
-Could not find upgrade tests for function sys.babelfish_openxml
-Could not find upgrade tests for function sys.babelfish_parse_helper_to_date
-Could not find upgrade tests for function sys.babelfish_parse_helper_to_datetime
-Could not find upgrade tests for function sys.babelfish_parse_helper_to_time
-Could not find upgrade tests for function sys.babelfish_parse_to_date
-Could not find upgrade tests for function sys.babelfish_parse_to_datetime
-Could not find upgrade tests for function sys.babelfish_parse_to_time
-Could not find upgrade tests for function sys.babelfish_pltsql_cursor_show_textptr_only_column_indexes
-Could not find upgrade tests for function sys.babelfish_pltsql_get_last_cursor_handle
-Could not find upgrade tests for function sys.babelfish_pltsql_get_last_stmt_handle
-Could not find upgrade tests for function sys.babelfish_round3
-Could not find upgrade tests for function sys.babelfish_round_fractseconds
 Could not find upgrade tests for function sys.babelfish_runtime_error
-Could not find upgrade tests for function sys.babelfish_set_role
-Could not find upgrade tests for function sys.babelfish_set_version
-Could not find upgrade tests for function sys.babelfish_single_unbracket_name
-Could not find upgrade tests for function sys.babelfish_sp_add_job
-Could not find upgrade tests for function sys.babelfish_sp_add_jobschedule
-Could not find upgrade tests for function sys.babelfish_sp_add_jobstep
-Could not find upgrade tests for function sys.babelfish_sp_add_schedule
-Could not find upgrade tests for function sys.babelfish_sp_attach_schedule
-Could not find upgrade tests for function sys.babelfish_sp_aws_add_jobschedule
-Could not find upgrade tests for function sys.babelfish_sp_aws_del_jobschedule
-Could not find upgrade tests for function sys.babelfish_sp_delete_job
-Could not find upgrade tests for function sys.babelfish_sp_delete_jobschedule
-Could not find upgrade tests for function sys.babelfish_sp_delete_jobstep
-Could not find upgrade tests for function sys.babelfish_sp_delete_schedule
-Could not find upgrade tests for function sys.babelfish_sp_detach_schedule
-Could not find upgrade tests for function sys.babelfish_sp_job_log
-Could not find upgrade tests for function sys.babelfish_sp_schedule_to_cron
-Could not find upgrade tests for function sys.babelfish_sp_sequence_get_range
-Could not find upgrade tests for function sys.babelfish_sp_set_next_run
-Could not find upgrade tests for function sys.babelfish_sp_update_job
-Could not find upgrade tests for function sys.babelfish_sp_update_jobschedule
-Could not find upgrade tests for function sys.babelfish_sp_update_jobstep
-Could not find upgrade tests for function sys.babelfish_sp_update_schedule
-Could not find upgrade tests for function sys.babelfish_sp_verify_job
-Could not find upgrade tests for function sys.babelfish_sp_verify_job_date
-Could not find upgrade tests for function sys.babelfish_sp_verify_job_identifiers
-Could not find upgrade tests for function sys.babelfish_sp_verify_job_time
-Could not find upgrade tests for function sys.babelfish_sp_verify_jobstep
-Could not find upgrade tests for function sys.babelfish_sp_verify_schedule
-Could not find upgrade tests for function sys.babelfish_sp_verify_schedule_identifiers
-Could not find upgrade tests for function sys.babelfish_sp_xml_preparedocument
-Could not find upgrade tests for function sys.babelfish_sp_xml_removedocument
-Could not find upgrade tests for function sys.babelfish_strpos3
-Could not find upgrade tests for function sys.babelfish_tomsbit
-Could not find upgrade tests for function sys.babelfish_truncate_identifier
 Could not find upgrade tests for function sys.babelfish_try_cast_floor_bigint
 Could not find upgrade tests for function sys.babelfish_try_cast_floor_int
 Could not find upgrade tests for function sys.babelfish_try_cast_floor_smallint
 Could not find upgrade tests for function sys.babelfish_try_cast_to_any
-Could not find upgrade tests for function sys.babelfish_try_conv_date_to_string
-Could not find upgrade tests for function sys.babelfish_try_conv_datetime_to_string
-Could not find upgrade tests for function sys.babelfish_try_conv_float_to_string
-Could not find upgrade tests for function sys.babelfish_try_conv_money_to_string
-Could not find upgrade tests for function sys.babelfish_try_conv_string_to_date
-Could not find upgrade tests for function sys.babelfish_try_conv_string_to_datetime
-Could not find upgrade tests for function sys.babelfish_try_conv_string_to_time
-Could not find upgrade tests for function sys.babelfish_try_conv_time_to_string
-Could not find upgrade tests for function sys.babelfish_try_conv_to_date
-Could not find upgrade tests for function sys.babelfish_try_conv_to_datetime
-Could not find upgrade tests for function sys.babelfish_try_conv_to_time
-Could not find upgrade tests for function sys.babelfish_try_conv_to_varchar
-Could not find upgrade tests for function sys.babelfish_try_parse_to_date
-Could not find upgrade tests for function sys.babelfish_try_parse_to_datetime
-Could not find upgrade tests for function sys.babelfish_try_parse_to_time
-Could not find upgrade tests for function sys.babelfish_update_job
-Could not find upgrade tests for function sys.babelfish_waitfor_delay
-Could not find upgrade tests for function sys.bbf_get_current_physical_schema_name
 Could not find upgrade tests for function sys.ceiling
 Could not find upgrade tests for function sys.columns_internal
 Could not find upgrade tests for function sys.cursor_rows
@@ -326,11 +120,8 @@ Could not find upgrade tests for function sys.fn_helpcollations
 Could not find upgrade tests for function sys.format_datetime
 Could not find upgrade tests for function sys.format_numeric
 Could not find upgrade tests for function sys.formatmessage
-Could not find upgrade tests for function sys.get_babel_server_collation_oid
 Could not find upgrade tests for function sys.get_current_full_xact_id
 Could not find upgrade tests for function sys.get_host_os
-Could not find upgrade tests for function sys.get_max_id_from_table
-Could not find upgrade tests for function sys.get_min_id_from_table
 Could not find upgrade tests for function sys.ident_incr
 Could not find upgrade tests for function sys.ident_seed
 Could not find upgrade tests for function sys.is_collated_ci_as
@@ -371,10 +162,8 @@ Could not find upgrade tests for function sys.tsql_get_functiondef
 Could not find upgrade tests for function sys.tsql_get_returntypmodvalue
 Could not find upgrade tests for function sys.tsql_query_to_json_ffunc
 Could not find upgrade tests for function sys.tsql_query_to_json_sfunc
-Could not find upgrade tests for function sys.tsql_query_to_xml
 Could not find upgrade tests for function sys.tsql_query_to_xml_ffunc
 Could not find upgrade tests for function sys.tsql_query_to_xml_sfunc
-Could not find upgrade tests for function sys.tsql_query_to_xml_text
 Could not find upgrade tests for function sys.tsql_query_to_xml_text_ffunc
 Could not find upgrade tests for function sys.tsql_stat_get_activity
 Could not find upgrade tests for function sys.tsql_type_length_for_sp_columns_helper
@@ -382,7 +171,6 @@ Could not find upgrade tests for function sys.tsql_type_max_length_helper
 Could not find upgrade tests for function sys.tsql_type_precision_helper
 Could not find upgrade tests for function sys.tsql_type_radix_for_sp_columns_helper
 Could not find upgrade tests for function sys.tsql_type_scale_helper
-Could not find upgrade tests for function sys.user_name_sysname
 Could not find upgrade tests for function sys.version
 Could not find upgrade tests for procedure babel_catalog_initializer
 Could not find upgrade tests for procedure babel_coercion_initializer
@@ -391,12 +179,9 @@ Could not find upgrade tests for procedure babel_datatype_precedence_initializer
 Could not find upgrade tests for procedure initialize_babel_extras
 Could not find upgrade tests for procedure initialize_babelfish
 Could not find upgrade tests for procedure remove_babelfish
-Could not find upgrade tests for procedure sys.babel_collation_initializer
 Could not find upgrade tests for procedure sys.babel_drop_all_dbs
 Could not find upgrade tests for procedure sys.babel_drop_all_logins
 Could not find upgrade tests for procedure sys.babel_initialize_logins
-Could not find upgrade tests for procedure sys.babel_like_ilike_info_initializer
-Could not find upgrade tests for procedure sys.init_server_collation_oid
 Could not find upgrade tests for procedure sys.printarg
 Could not find upgrade tests for procedure sys.sp_column_privileges
 Could not find upgrade tests for procedure sys.sp_cursor_list
@@ -407,8 +192,6 @@ Could not find upgrade tests for procedure sys.sp_unprepare
 Could not find upgrade tests for procedure sys.sp_updatestats
 Could not find upgrade tests for procedure xp_instance_regread
 Could not find upgrade tests for procedure xp_qv
-Could not find upgrade tests for table "#temp_schedules_to_delete"
-Could not find upgrade tests for table sys$openxml
 Could not find upgrade tests for table sys.babelfish_configurations
 Could not find upgrade tests for table sys.babelfish_helpcollation
 Could not find upgrade tests for table sys.babelfish_syslanguages

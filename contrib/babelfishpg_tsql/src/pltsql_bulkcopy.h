@@ -64,7 +64,6 @@ typedef struct BulkCopyStateData
 	List	   *bufferedValueAllocFlags;			/* List of flags, set to true when
 								 * corresponding Datum in Values list was allocated on heap
 								 * with palloc */
-
 } BulkCopyStateData;
 
 /* ----------------------

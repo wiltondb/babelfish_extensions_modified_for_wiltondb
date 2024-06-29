@@ -88,7 +88,7 @@ $ENV{PG_SRC} = $ENV{PGWIN_SRC_DIR};
 if ($debug) {
   runcmd("mvn test -Dmaven.surefire.debug=true", "best effort");
 } else {
-  runcmd("mvn -B test", "best effort");
+  runcmd("mvn -B -ntp test", "best effort");
 }
 
 runcmd("$pg_ctl stop -D $pg_data -l $pg_log");

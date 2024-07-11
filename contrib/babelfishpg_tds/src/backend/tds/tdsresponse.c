@@ -26,8 +26,10 @@
 #include "catalog/pg_proc.h"
 #include "catalog/pg_type.h"
 #include "miscadmin.h"
+#include "nodes/makefuncs.h"
 #include "nodes/pathnodes.h"
 #include "parser/parse_coerce.h"
+#include "parser/parse_type.h"
 #include "utils/fmgroids.h"
 #include "utils/lsyscache.h"
 #include "utils/syscache.h"
@@ -125,6 +127,8 @@ static bool markErrorFlag = false;
 
 static TdsColumnMetaData *colMetaData = NULL;
 static List *relMetaDataInfoList = NULL;
+
+static Oid decimal_oid = InvalidOid;
 
 static void FillTabNameWithNumParts(StringInfo buf, uint8 numParts, TdsRelationMetaDataInfo relMetaDataInfo);
 static void FillTabNameWithoutNumParts(StringInfo buf, uint8 numParts, TdsRelationMetaDataInfo relMetaDataInfo);
@@ -404,6 +408,24 @@ PrintTupPrepareInfo(DR_printtup *myState, TupleDesc typeinfo, int numAttrs)
 	}
 }
 
+/*
+ * is_numeric_datatype - returns bool if given datatype is numeric or decimal.
+ */
+static bool
+is_numeric_datatype(Oid typid)
+{
+	if (typid == NUMERICOID)
+	{
+		return true;
+	}
+	if (!OidIsValid(decimal_oid))
+	{
+		TypeName *typename = makeTypeNameFromNameList(list_make2(makeString("sys"), makeString("decimal")));
+		decimal_oid = LookupTypeNameOid(NULL, typename, false);
+	}
+	return decimal_oid == typid;
+}
+
 /* look for a typmod to return from a numeric expression */
 static int32
 resolve_numeric_typmod_from_exp(Node *expr)
@@ -417,15 +439,10 @@ resolve_numeric_typmod_from_exp(Node *expr)
 				Const	   *con = (Const *) expr;
 				Numeric		num;
 
-				/*
-				 * TODO: We used a workaround here, that we will assume typmod
-				 * is 0 if the value we have is not numeric. See walkaround in
-				 * T_FuncExpr part of this function. JIRA: BABEL-1007
-				 */
-				if (con->consttype != NUMERICOID || con->constisnull)
+				if (!is_numeric_datatype(con->consttype) || con->constisnull)
 				{
-					return 0;
-					/* Typmod doesn 't really matter since it' s a const NULL. */
+					/* typmod is undefined */
+					return -1;
 				}
 				else
 				{

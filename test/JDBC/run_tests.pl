@@ -17,13 +17,17 @@ use warnings;
 use Cwd qw(abs_path cwd);
 use File::Basename qw(dirname);
 use File::Path qw(make_path remove_tree);
-use File::Slurp qw(append_file);
+use File::Slurp qw(append_file edit_file);
 use File::Spec::Functions qw(catfile);
 
 my $jdbc_dir = dirname(abs_path(__FILE__));
 my $debug = 0;
 if (defined($ARGV[0]) && (uc($ARGV[0]) eq 'DEBUG')) {
   $debug = 1;
+}
+my $init = 1;
+if (defined($ARGV[0]) && (uc($ARGV[0]) eq 'NOINIT')) {
+  $init = 0;
 }
 
 sub runcmd {
@@ -51,36 +55,52 @@ my $pg_data = catfile($ENV{PGWIN_INSTALL_DIR}, "data");
 my $pg_log_dir = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "log");
 my $pg_log = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "log", "postgresql.log");
 my $postmaster_pid = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "postmaster.pid");
-my $postgresql_auto_conf = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "postgresql.auto.conf");
+my $pg_hba_conf = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "pg_hba.conf");
 my $openssl = catfile($ENV{PGWIN_INSTALL_DIR}, "bin", "openssl.exe");
 my $openssl_cnf = catfile($ENV{PGWIN_INSTALL_DIR}, "share", "openssl.cnf");
 
 if (-f $postmaster_pid) {
   runcmd("$pg_ctl stop -D $pg_data -l $pg_log", "best effort");
 }
-remove_tree($pg_data);
-runcmd("$initdb -D $pg_data -E UTF8 --locale C");
 
-my $cwd_dir = cwd();
-chdir($pg_data);
-runcmd("$openssl req -config $openssl_cnf -new -x509 -days 3650 -nodes -text -out server.crt -keyout server.key -subj \"/CN=localhost\"");
-chdir($cwd_dir);
-append_file($postgresql_auto_conf, "ssl = 'on'\n");
-append_file($postgresql_auto_conf, "shared_preload_libraries = 'babelfishpg_tds,pg_stat_statements'\n");
-append_file($postgresql_auto_conf, "track_functions = 'pl'\n");
+if ($init) {
+  remove_tree($pg_data);
+  runcmd("$initdb -D $pg_data -E UTF8 --locale C");
 
-make_path($pg_log_dir);
-runcmd("$pg_ctl start -D $pg_data -l $pg_log");
+  my $cwd_dir = cwd();
+  chdir($pg_data);
+  runcmd("$openssl req -config $openssl_cnf -new -x509 -days 3650 -nodes -text -out server.crt -keyout server.key -subj \"/CN=localhost\"");
+  chdir($cwd_dir);
 
-runcmd("$psql -U $ENV{USERNAME} -d postgres    -c \"CREATE USER jdbc_user WITH SUPERUSER CREATEDB CREATEROLE PASSWORD '12345678' INHERIT;\"");
-runcmd("$psql -U $ENV{USERNAME} -d postgres    -c \"CREATE DATABASE jdbc_testdb OWNER jdbc_user;\"");
-runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"SET allow_system_table_mods = ON;\"");
-runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"CREATE EXTENSION IF NOT EXISTS babelfishpg_tds CASCADE;\"");
-runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"GRANT ALL ON SCHEMA sys to jdbc_user;\"");
-runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"ALTER SYSTEM SET babelfishpg_tsql.database_name = 'jdbc_testdb';\"");
-#runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"ALTER DATABASE jdbc_testdb SET babelfishpg_tsql.migration_mode = 'multi-db';\"");
-runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"SELECT pg_reload_conf();\"");
-runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"CALL sys.initialize_babelfish('jdbc_user');\"");
+  make_path($pg_log_dir);
+  runcmd("$pg_ctl start -D $pg_data -l $pg_log");
+
+  runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET max_connections = 256;\"");
+  runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET ssl = ON;\"");
+  runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET shared_preload_libraries = 'babelfishpg_tds','pg_stat_statements','system_stats';\"");
+  runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET track_functions = 'pl';\"");
+  #runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET logging_collector = 'on';\"");
+  #runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET log_filename = 'postgresql.log';\"");
+
+  runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET log_statement = 'all';\"");
+
+  runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"CREATE USER jdbc_user WITH SUPERUSER CREATEDB CREATEROLE PASSWORD '12345678' INHERIT;\"");
+  runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"CREATE DATABASE jdbc_testdb OWNER jdbc_user;\"");
+
+  edit_file(sub { s/trust/md5/g }, $pg_hba_conf);
+  runcmd("$pg_ctl restart -D $pg_data -l $pg_log");
+
+  $ENV{PGPASSWORD} = "12345678";
+  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"SET allow_system_table_mods = ON;\"");
+  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"CREATE EXTENSION IF NOT EXISTS babelfishpg_tds CASCADE;\"");
+  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"GRANT ALL ON SCHEMA sys to jdbc_user;\"");
+  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"ALTER SYSTEM SET babelfishpg_tsql.database_name = 'jdbc_testdb';\"");
+  #runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"ALTER DATABASE jdbc_testdb SET babelfishpg_tsql.migration_mode = 'multi-db';\"");
+  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"SELECT pg_reload_conf();\"");
+  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"CALL sys.initialize_babelfish('jdbc_user');\"");
+} else {
+  runcmd("$pg_ctl start -D $pg_data -l $pg_log");
+}
 
 $ENV{PATH} .= ";";
 $ENV{PATH} .= catfile($ENV{PGWIN_INSTALL_DIR}, "bin");

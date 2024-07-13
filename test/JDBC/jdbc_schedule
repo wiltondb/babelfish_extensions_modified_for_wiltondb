@@ -10,9 +10,12 @@
 
 all
 
-# dm_os_host_info
+# Windows/Linux discrepancies
 ignore#!#BABEL-2785
 ignore#!#sys-dm_os_host_info-vu-verify
+ignore#!#permission_restrictions_from_pg
+ignore#!#psql_logical_babelfish_db
+ignore#!#sspi_auth
 
 # JDBC bulk insert API seems to call SET FMTONLY ON without calling SET FMTONLY OFF, causing some spurious test failures.
 ignore#!#insertbulk
@@ -21,10 +24,6 @@ ignore#!#BABEL-SQLvariant
 #TDS fault injection framework is meant for internal testing only. So, ignore tds_faultinjection tests in stable branch
 ignore#!#tds_faultinjection
 ignore#!#babel_tds_fault_injection
-
-# Windows backend kill output discrepancy
-ignore#!#permission_restrictions_from_pg
-ignore#!#psql_logical_babelfish_db
 
 # Ignore upgrade tests in normal JDBC run. These are tests that cannot be run in non-upgrade contexts due
 # to changing the behavior between pre- and post-commit.

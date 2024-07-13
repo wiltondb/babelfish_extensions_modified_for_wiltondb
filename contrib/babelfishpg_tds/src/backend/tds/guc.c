@@ -45,6 +45,9 @@ char	   *product_version = "default";
 static bool TdsFaultInjectionEnabled = false;
 #endif
 bool		enable_drop_babelfish_role = false;
+#ifdef _WIN32
+char* wilton_winauth_os_user = NULL;
+#endif // _WIN32"
 
 const struct config_enum_entry ssl_protocol_versions_info[] = {
 	{"", PG_TLS_ANY, false},
@@ -398,4 +401,16 @@ TdsDefineGucs(void)
 		TdsFaultInjectionEnabled = true;
 	}
 #endif
+
+#ifdef _WIN32
+	DefineCustomStringVariable(
+							"wilton_winauth_os_user",
+							gettext_noop("User name of a Windows OS user that has opened current session using Windows Integrated Authentication"),
+							NULL,
+							&wilton_winauth_os_user,
+							NULL,
+							PGC_INTERNAL,
+							GUC_NOT_IN_SAMPLE | GUC_DISALLOW_IN_FILE | GUC_DISALLOW_IN_AUTO_FILE,
+							NULL, NULL, NULL);
+#endif // _WIN32
 }

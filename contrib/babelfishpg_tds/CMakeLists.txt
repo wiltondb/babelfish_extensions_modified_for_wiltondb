@@ -105,6 +105,7 @@ target_link_libraries ( ${PROJECT_NAME} PRIVATE
     $ENV{PGWIN_DEPS_DIR}/xml/lib/libxml2.lib
     $ENV{PGWIN_DEPS_DIR}/openssl/lib/libssl.lib
     $ENV{PGWIN_DEPS_DIR}/openssl/lib/libcrypto.lib
+    secur32
     shlwapi
     ws2_32 )
 

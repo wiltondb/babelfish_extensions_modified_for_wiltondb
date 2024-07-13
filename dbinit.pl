@@ -17,7 +17,7 @@ use warnings;
 use Cwd qw(abs_path cwd);
 use File::Basename qw(dirname);
 use File::Path qw(make_path remove_tree);
-use File::Slurp qw(append_file);
+use File::Slurp qw(append_file edit_file);
 use File::Spec::Functions qw(catfile);
 
 sub runcmd {
@@ -36,6 +36,7 @@ my $initdb = catfile($ENV{PGWIN_INSTALL_DIR}, "bin", "initdb.exe");
 my $postgres = catfile($ENV{PGWIN_INSTALL_DIR}, "bin", "postgres.exe");
 my $psql = catfile($ENV{PGWIN_INSTALL_DIR}, "bin", "psql.exe");
 my $pg_data = catfile($ENV{PGWIN_INSTALL_DIR}, "data");
+my $pg_hba_conf = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "pg_hba.conf");
 my $pg_log_dir = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "log");
 my $pg_log = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "log", "postgresql.log");
 my $postmaster_pid = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "postmaster.pid");
@@ -56,17 +57,22 @@ runcmd("$pg_ctl start -D $pg_data -l $pg_log");
 runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET max_connections = 256;\"");
 runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET ssl = ON;\"");
 runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET shared_preload_libraries = 'babelfishpg_tds','pg_stat_statements','system_stats';\"");
+runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET listen_addresses = '*';\"");
 runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"CREATE USER wilton WITH SUPERUSER CREATEDB CREATEROLE PASSWORD 'wilton' INHERIT;\"");
 runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"CREATE DATABASE wilton OWNER wilton;\"");
 
+edit_file(sub { s/trust/md5/g }, $pg_hba_conf);
+edit_file(sub { s/127.0.0.1\/32/0.0.0.0\/0/g }, $pg_hba_conf);
+edit_file(sub { s/::1\/128/::0\/0/g }, $pg_hba_conf);
 runcmd("$pg_ctl restart -D $pg_data -l $pg_log");
 
-runcmd("$psql -U $ENV{USERNAME} -d wilton -c \"CREATE EXTENSION IF NOT EXISTS babelfishpg_tds CASCADE;\"");
-runcmd("$psql -U $ENV{USERNAME} -d wilton -c \"GRANT ALL ON SCHEMA sys to wilton;\"");
-runcmd("$psql -U $ENV{USERNAME} -d wilton -c \"ALTER SYSTEM SET babelfishpg_tsql.database_name = 'wilton';\"");
-runcmd("$psql -U $ENV{USERNAME} -d wilton -c \"ALTER DATABASE wilton SET babelfishpg_tsql.migration_mode = 'multi-db';\"");
-runcmd("$psql -U $ENV{USERNAME} -d wilton -c \"SELECT pg_reload_conf();\"");
-runcmd("$psql -U $ENV{USERNAME} -d wilton -c \"CALL sys.initialize_babelfish('wilton');\"");
+$ENV{PGPASSWORD} = "wilton";
+runcmd("$psql -U wilton -c \"CREATE EXTENSION IF NOT EXISTS babelfishpg_tds CASCADE;\"");
+runcmd("$psql -U wilton -c \"GRANT ALL ON SCHEMA sys to wilton;\"");
+runcmd("$psql -U wilton -c \"ALTER SYSTEM SET babelfishpg_tsql.database_name = 'wilton';\"");
+runcmd("$psql -U wilton -c \"ALTER DATABASE wilton SET babelfishpg_tsql.migration_mode = 'multi-db';\"");
+runcmd("$psql -U wilton -c \"SELECT pg_reload_conf();\"");
+runcmd("$psql -U wilton -c \"CALL sys.initialize_babelfish('wilton');\"");
 
 runcmd("$pg_ctl stop -D $pg_data -l $pg_log");
 

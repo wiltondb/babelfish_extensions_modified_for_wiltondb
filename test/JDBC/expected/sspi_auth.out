@@ -1,0 +1,36 @@
+
+java_auth#!#user|-|jdbc_user#!#password|-|12345678
+~~SUCCESS~~
+java_auth#!#user|-|wilton_winauth#!#password|-|123
+~~ERROR (Code: 18456)~~
+
+~~ERROR (Message: Login failed for user "wilton_winauth" )~~
+
+java_auth#!#sspi
+~~ERROR (Code: 33557097)~~
+
+~~ERROR (Message: role "wilton_winauth" does not exist )~~
+
+
+create login wilton_winauth with password = '123'
+
+java_auth#!#user|-|wilton_winauth#!#password|-|wrong_password
+~~ERROR (Code: 18456)~~
+
+~~ERROR (Message: Login failed for user "wilton_winauth" )~~
+
+java_auth#!#user|-|wilton_winauth#!#password|-|123
+~~ERROR (Code: 33557097)~~
+
+~~ERROR (Message: Password authentication is not allowed for login 'wilton_winauth' )~~
+
+java_auth#!#user|-|Wilton_WinAuth#!#password|-|123
+~~ERROR (Code: 33557097)~~
+
+~~ERROR (Message: Password authentication is not allowed for login 'wilton_winauth' )~~
+
+java_auth#!#sspi
+~~SUCCESS~~
+~~SUCCESS (SSPI user GUC check)~~
+
+drop login wilton_winauth

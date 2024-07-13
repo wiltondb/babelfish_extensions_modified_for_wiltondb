@@ -1,0 +1,13 @@
+
+java_auth#!#user|-|jdbc_user#!#password|-|12345678
+java_auth#!#user|-|wilton_winauth#!#password|-|123
+java_auth#!#sspi
+
+create login wilton_winauth with password = '123'
+
+java_auth#!#user|-|wilton_winauth#!#password|-|wrong_password
+java_auth#!#user|-|wilton_winauth#!#password|-|123
+java_auth#!#user|-|Wilton_WinAuth#!#password|-|123
+java_auth#!#sspi
+
+drop login wilton_winauth

@@ -27,3 +27,6 @@ extern int32_t tds_default_packet_size;
 extern int	tds_debug_log_level;
 extern char *default_server_name;
 extern bool enable_drop_babelfish_role;
+#ifdef _WIN32
+extern char* wilton_winauth_os_user;
+#endif // _WIN32"

@@ -6,6 +6,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -50,9 +52,9 @@ public class JDBCAuthentication {
             connectionPropertiesBabel.put("url", "jdbc:sqlserver://" + properties.getProperty("URL") + ":" + port);
         }
 
-        String other_prop = "";
+        boolean useSspi = result.length > 1 && result[1].startsWith("sspi");
 
-        String connectionString_babel = createConnectionString(result, connectionPropertiesBabel, other_prop);
+        String connectionString_babel = createConnectionString(result, connectionPropertiesBabel, useSspi);
 
         try {
             bw.write(strLine);
@@ -64,6 +66,10 @@ public class JDBCAuthentication {
             bw.write("~~SUCCESS~~");
             bw.newLine();
 
+            if (useSspi) {
+                checkSspiUserGucEntry(connection, bw);
+            }
+
             connection.close();
                 
         } catch (SQLException e) {
@@ -73,10 +79,14 @@ public class JDBCAuthentication {
         }
     }
 
-    private String createConnectionString(String[] result, Properties connectionPropertiesBabel, String other_prop) {
+    private String createConnectionString(String[] result, Properties connectionPropertiesBabel, boolean useSspi) {
+        String other_prop = "";
+
         for (int i = 1; i < result.length; i++) {
             if (result[i].startsWith("others")) {
                 other_prop = result[i].replaceFirst("others\\|-\\|", "");
+            } else if (result[i].startsWith("sspi")) {
+                // pass
             } else {
                 String[] property = result[i].split("\\|-\\|", -1);
                 connectionPropertiesBabel.put(property[0], property[1]);
@@ -89,6 +99,12 @@ public class JDBCAuthentication {
                     + ";" + "user=" + connectionPropertiesBabel.get("user")
                     + ";" + "password=" + connectionPropertiesBabel.get("password")
                     + ";" + other_prop;
+        } else if (useSspi) {
+            return connectionPropertiesBabel.get("url")
+                    + ";" + "databaseName=" + connectionPropertiesBabel.get("database")
+                    + ";integratedSecurity=true"
+                    + ";encrypt=true;trustServerCertificate=true;loginTimeout=5"
+                    + ";" + other_prop;
         } else {
             return connectionPropertiesBabel.get("url")
                     + ";" + "databaseName=" + connectionPropertiesBabel.get("database")
@@ -96,6 +112,21 @@ public class JDBCAuthentication {
                     + ";" + "password=" + connectionPropertiesBabel.get("password")
                     + ";encrypt=true;trustServerCertificate=true;loginTimeout=5"
                     + ";" + other_prop;
+        }
+    }
+
+    private static void checkSspiUserGucEntry(Connection conn, BufferedWriter bw) throws IOException, SQLException {
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery("select setting from pg_settings where name = 'wilton_winauth_os_user'");
+            rs.next();
+            String osUserName = rs.getString(1);
+            if (osUserName.length() > 0) {
+                bw.write("~~SUCCESS (SSPI user GUC check)~~");
+                bw.newLine();
+            } else {
+                bw.write("~~ERROR (SSPI user GUC check)~~");
+                bw.newLine();
+            }
         }
     }
 }

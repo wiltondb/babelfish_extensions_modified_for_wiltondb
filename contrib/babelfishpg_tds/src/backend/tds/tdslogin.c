@@ -101,6 +101,7 @@ typedef struct
 } gss_buffer_desc;
 #endif // !_MSC_VER
 #endif
+#define WILTON_SSPI_LOGIN "wilton_winauth"
 #endif							/* ENABLE_SSPI */
 
 /*----------------------------------------------------------------
@@ -1624,15 +1625,185 @@ SendLoginError(Port *port, const char *logdetail)
 	LoginRequest request = loginInfo;
 
 	if (request->sspiLen > 0)
+#ifdef _WIN32
+		ereport(FATAL,
+				errcode(ERRCODE_INVALID_AUTHORIZATION_SPECIFICATION),
+				errmsg("Windows Integrated authentication failed, %s", logdetail));
+#else // !_WIN32
 		ereport(FATAL,
 				errcode(ERRCODE_INVALID_AUTHORIZATION_SPECIFICATION),
 				errmsg("GSSAPI authentication failed"));
+#endif // _WIN32
 	else
 		ereport(FATAL,
 				errcode(ERRCODE_SQLSERVER_REJECTED_ESTABLISHMENT_OF_SQLCONNECTION),
 				errmsg("Login failed for user \"%s\"",
 					   request->username));
 }
+
+#ifdef _WIN32
+static char* CreateLogDetail(const char* func, SECURITY_STATUS status)
+{
+	size_t buf_size = 1024;
+	char* buf = palloc0(buf_size);
+	snprintf(buf, buf_size - 1, "call: %s, status: 0x%08x", func, status);
+	return buf;
+}
+
+static int CheckSSPIAuth(Port *port)
+{
+	CredHandle cred_handle;
+	CtxtHandle ctx_handle;
+	SECURITY_STATUS status;
+	SecBuffer buf_in,
+				buf_out;
+	SecBufferDesc buf_in_desc,
+				buf_out_desc;
+	unsigned long ctx_attr;
+	int tds_status;
+	StringInfoData sspi_auth_msg,
+				sspi_os_user;
+	SecPkgContext_NamesA sspi_user_buf;
+
+	// init handle
+	cred_handle.dwLower = 0;
+	cred_handle.dwUpper = 0;
+	status = AcquireCredentialsHandleW(
+		NULL, // pszPrincipal
+		NEGOSSP_NAME_W, // pszPackage
+		SECPKG_CRED_INBOUND, // fCredentialUse
+		NULL, // pvLogonID
+		NULL, // pAuthData
+		NULL, // pGetKeyFn
+		NULL, // pvGetKeyArgument
+		&cred_handle, // phCredential
+		NULL // ptsExpiry
+	);
+	if (SEC_E_OK != status)
+		SendLoginError(port, CreateLogDetail("AcquireCredentialsHandle", status));
+
+	// check negotiate message
+	buf_in.BufferType = SECBUFFER_TOKEN;
+	buf_in.cbBuffer = loginInfo->sspiLen;
+	buf_in.pvBuffer = loginInfo->sspi;
+	buf_in_desc.ulVersion = SECBUFFER_VERSION;	
+	buf_in_desc.cBuffers = 1;
+	buf_in_desc.pBuffers = &buf_in;
+	ctx_handle.dwLower = 0;
+	ctx_handle.dwUpper = 0;
+	buf_out.BufferType = SECBUFFER_TOKEN;
+	buf_out.cbBuffer = 0;
+	buf_out.pvBuffer = NULL;
+	buf_out_desc.ulVersion = SECBUFFER_VERSION;
+	buf_out_desc.cBuffers = 1;
+	buf_out_desc.pBuffers = &buf_out;
+	ctx_attr = 0;
+	status = AcceptSecurityContext(
+		&cred_handle, // phCredential
+		NULL, // phContext
+		&buf_in_desc, // pInput
+		ASC_REQ_ALLOCATE_MEMORY, // fContextReq
+		SECURITY_NATIVE_DREP, // TargetDataRep
+		&ctx_handle, // phNewContext
+		&buf_out_desc, // pOutput
+		&ctx_attr, // pfContextAttr
+		NULL // ptsExpiry
+	);
+	if (SEC_I_CONTINUE_NEEDED != status)
+		SendLoginError(port, CreateLogDetail("AcceptSecurityContextNegotiate", status));
+
+	// send challenge message
+	TdsSetMessageType(TDS_RESPONSE);
+	tds_status = TdsPutInt8(TDS_TOKEN_SSPI);
+	if (tds_status)
+		SendLoginError(port, CreateLogDetail("TdsPutInt8", (SECURITY_STATUS) tds_status));
+	tds_status = TdsPutInt16LE(buf_out.cbBuffer);
+	if (tds_status)
+		SendLoginError(port, CreateLogDetail("TdsPutInt16LE", (SECURITY_STATUS) tds_status));
+	tds_status = TdsPutbytes(buf_out.pvBuffer, buf_out.cbBuffer);
+	if (tds_status)
+		SendLoginError(port, CreateLogDetail("TdsPutbytes", (SECURITY_STATUS) tds_status));
+	tds_status = TdsFlush();
+	if (tds_status)
+		SendLoginError(port, CreateLogDetail("TdsFlush", (SECURITY_STATUS) tds_status));
+
+	// clean up
+	status = FreeContextBuffer(buf_out.pvBuffer);
+	if (SEC_E_OK != status)
+		SendLoginError(port, CreateLogDetail("FreeContextBufferNegotiate", status));
+
+	// receive auth message
+	initStringInfo(&sspi_auth_msg);
+	tds_status = TdsReadMessage(&sspi_auth_msg, 0x11);
+	if (tds_status)
+		SendLoginError(port, CreateLogDetail("TdsReadMessage", (SECURITY_STATUS) tds_status));
+	
+	// check auth message
+	buf_in.BufferType = SECBUFFER_TOKEN;
+	buf_in.cbBuffer = sspi_auth_msg.len;
+	buf_in.pvBuffer = sspi_auth_msg.data;
+	buf_in_desc.ulVersion = SECBUFFER_VERSION;	
+	buf_in_desc.cBuffers = 1;
+	buf_in_desc.pBuffers = &buf_in;
+	buf_out.BufferType = SECBUFFER_TOKEN;
+	buf_out.cbBuffer = 0;
+	buf_out.pvBuffer = NULL;
+	buf_out_desc.ulVersion = SECBUFFER_VERSION;
+	buf_out_desc.cBuffers = 1;
+	buf_out_desc.pBuffers = &buf_out;
+	ctx_attr = 0;
+	status = AcceptSecurityContext(
+		&cred_handle, // phCredential
+		&ctx_handle, // phContext
+		&buf_in_desc, // pInput
+		ASC_REQ_ALLOCATE_MEMORY, // fContextReq
+		SECURITY_NATIVE_DREP, // TargetDataRep
+		&ctx_handle, // phNewContext
+		&buf_out_desc, // pOutput
+		&ctx_attr, // pfContextAttr
+		NULL // ptsExpiry
+	);
+	if (SEC_E_OK != status)
+		SendLoginError(port, CreateLogDetail("AcceptSecurityContextAuth", status));
+
+	// clean up
+	status = FreeContextBuffer(buf_out.pvBuffer);
+	if (SEC_E_OK != status)
+		SendLoginError(port, CreateLogDetail("FreeContextBufferAuth", status));
+	status = FreeCredentialsHandle(&cred_handle);
+	if (SEC_E_OK != status)
+		SendLoginError(port, CreateLogDetail("FreeCredentialsHandle", status));
+
+	// get user name
+	sspi_user_buf.sUserName = NULL;
+	status = QueryContextAttributesW(
+		&ctx_handle, // phContext
+		SECPKG_ATTR_NAMES, // ulAttribute
+		&sspi_user_buf // *pBuffer		
+	);
+	if (SEC_E_OK != status)
+		SendLoginError(port, CreateLogDetail("QueryContextAttributes", status));
+
+	// fill GUC entry
+	initStringInfo(&sspi_os_user);
+	TdsUTF16toUTF8StringInfo(&sspi_os_user, sspi_user_buf.sUserName, wcslen((wchar_t*) sspi_user_buf.sUserName) * 2);
+	wilton_winauth_os_user = pstrdup(sspi_os_user.data);
+
+	// clean up on success (on failure rely on process cleanup)
+	pfree(sspi_os_user.data);
+	status = FreeContextBuffer(sspi_user_buf.sUserName);
+	if (SEC_E_OK != status)
+		SendLoginError(port, CreateLogDetail("FreeContextBufferQuery", status));
+	status = DeleteSecurityContext(&ctx_handle);
+	if (SEC_E_OK != status)
+		SendLoginError(port, CreateLogDetail("DeleteSecurityContext", status));
+
+	// auth successful
+	port->user_name = WILTON_SSPI_LOGIN;
+	elog(LOG_SERVER_ONLY, "Windows integrated authentication successful for user: %s", wilton_winauth_os_user);
+	return STATUS_OK;
+}
+#endif // _WIN32
 
 /*
  * TdsClientAuthentication - Similar to ClientAuthentication, but specific
@@ -1689,10 +1860,12 @@ TdsClientAuthentication(Port *port)
 			appendStringInfo(&ps_data, "(%s)", port->remote_port);
 
 		init_ps_display(ps_data.data);
-#else
+#elif !defined(_WIN32) 
 		ereport(FATAL,
 				(errcode(ERRCODE_CONFIG_FILE_ERROR),
 				 errmsg("invalid authentication method \"GSSAPI\": not supported by this build")));
+#else // _WIN32
+		status = CheckSSPIAuth(port);
 #endif
 	}
 
@@ -1896,6 +2069,14 @@ TdsClientAuthentication(Port *port)
 
 			/* we've a password, let's verify it */
 			status = CheckAuthPassword(port, &logdetail);
+
+#ifdef _WIN32
+			if (status == STATUS_OK && !pg_strcasecmp(port->user_name, WILTON_SSPI_LOGIN))
+				ereport(FATAL,
+						errcode(ERRCODE_INVALID_AUTHORIZATION_SPECIFICATION),
+						errmsg("Password authentication is not allowed for login '%s'", WILTON_SSPI_LOGIN));
+#endif // _WIN32
+
 			break;
 		case uaTrust:
 			status = STATUS_OK;

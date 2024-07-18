@@ -39,4 +39,10 @@ char *strcasestr(const char *haystack, const char *needle);
 int regexec_win(const char *regex, const char *string, size_t nmatch,
             regmatch_t pmatch[], int eflags);
 
+void debuginfo_init();
+
+void debuginfo_shutdown();
+
+char* debuginfo_get_current_call_stack();
+
 #endif // TSQL_WIN_H 

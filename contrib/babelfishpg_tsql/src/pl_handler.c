@@ -4024,6 +4024,10 @@ _PG_init(void)
 
 	check_pltsql_support_tsql_transactions_hook = pltsql_support_tsql_transactions;
 
+#ifdef _MSC_VER
+	debuginfo_init();
+#endif // _MSC_VER
+
 	inited = true;
 }
 
@@ -4052,6 +4056,10 @@ _PG_fini(void)
 	tsql_has_linked_srv_permissions_hook = prev_tsql_has_linked_srv_permissions_hook;
 
 	UninstallExtendedHooks();
+
+#ifdef _MSC_VER
+	debuginfo_shutdown();
+#endif // _MSC_VER
 }
 
 /*

@@ -275,6 +275,8 @@ target_link_libraries ( ${PROJECT_NAME} PRIVATE
     $ENV{PGWIN_DEPS_DIR}/antlr4_cpp_runtime/lib/antlr4-runtime-static.lib
     $ENV{PGWIN_DEPS_DIR}/freetds/lib/sybdb.lib
     $ENV{PGWIN_DEPS_DIR}/mimalloc/bin/mimalloc-static.lib
+    dbghelp
+    pathcch
     shlwapi
     ws2_32 )
 

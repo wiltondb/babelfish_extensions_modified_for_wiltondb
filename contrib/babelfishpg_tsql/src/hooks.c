@@ -151,6 +151,7 @@ static bool pltsql_bbfCustomProcessUtility(ParseState *pstate,
 static void pltsql_bbfSelectIntoAddIdentity(IntoClause *into,  List *tableElts);
 extern void pltsql_bbfSelectIntoUtility(ParseState *pstate, PlannedStmt *pstmt, const char *queryString, 
 					QueryEnvironment *queryEnv, ParamListInfo params, QueryCompletion *qc);
+static void add_backtrace_to_edata(ErrorData *edata);
 
 /*****************************************
  * 			Executor Hooks
@@ -237,6 +238,7 @@ static set_local_schema_for_func_hook_type prev_set_local_schema_for_func_hook =
 static called_from_tsql_insert_exec_hook_type pre_called_from_tsql_insert_exec_hook = NULL;
 static exec_tsql_cast_value_hook_type pre_exec_tsql_cast_value_hook = NULL;
 static pltsql_pgstat_end_function_usage_hook_type prev_pltsql_pgstat_end_function_usage_hook = NULL;
+static emit_log_hook_type prev_emit_log_hook = NULL;
 
 
 /*****************************************
@@ -403,6 +405,9 @@ InstallExtendedHooks(void)
 
 	prev_pltsql_pgstat_end_function_usage_hook = pltsql_pgstat_end_function_usage_hook;
 	pltsql_pgstat_end_function_usage_hook = is_function_pg_stat_valid;
+
+	prev_emit_log_hook = emit_log_hook;
+	emit_log_hook = add_backtrace_to_edata;
 }
 
 void
@@ -465,6 +470,7 @@ UninstallExtendedHooks(void)
 	set_local_schema_for_func_hook = prev_set_local_schema_for_func_hook;
 	called_from_tsql_insert_exec_hook = pre_called_from_tsql_insert_exec_hook;
 	pltsql_pgstat_end_function_usage_hook = prev_pltsql_pgstat_end_function_usage_hook;
+	emit_log_hook = prev_emit_log_hook;
 }
 
 /*****************************************
@@ -4085,4 +4091,32 @@ is_function_pg_stat_valid(FunctionCallInfo fcinfo, PgStat_FunctionCallUsage *fcu
 	}
 
 	pgstat_end_function_usage(fcu, finalize);
+}
+
+static void add_backtrace_to_edata(ErrorData *edata)
+{
+#ifdef _MSC_VER
+	char* stacktrace;
+	StringInfoData buf;
+	char* ed_trace;
+	MemoryContext old_ctx;
+
+	if (edata->elevel != ERROR)
+		return;
+
+	stacktrace = debuginfo_get_current_call_stack();
+	if (!stacktrace)
+		return;
+
+	old_ctx = MemoryContextSwitchTo(edata->assoc_context);
+	initStringInfo(&buf);
+	appendStringInfoString(&buf, stacktrace);
+	ed_trace = edata->backtrace;
+	edata->backtrace = buf.data;
+	MemoryContextSwitchTo(old_ctx);
+
+	if (ed_trace)
+		pfree(ed_trace);
+	pfree(stacktrace);
+#endif // _MSC_VER
 }

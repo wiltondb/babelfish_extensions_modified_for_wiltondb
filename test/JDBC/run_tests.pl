@@ -58,12 +58,17 @@ my $postmaster_pid = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "postmaster.pid");
 my $pg_hba_conf = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "pg_hba.conf");
 my $openssl = catfile($ENV{PGWIN_INSTALL_DIR}, "bin", "openssl.exe");
 my $openssl_cnf = catfile($ENV{PGWIN_INSTALL_DIR}, "share", "openssl.cnf");
+my $symbols_dir = catfile($ENV{PGWIN_INSTALL_DIR}, "symbols");
 
 if (-f $postmaster_pid) {
   runcmd("$pg_ctl stop -D $pg_data -l $pg_log", "best effort");
 }
 
 if ($init) {
+  if (-d $symbols_dir) {
+    rename($symbols_dir, "${symbols_dir}_disabled");
+  }
+
   remove_tree($pg_data);
   runcmd("$initdb -D $pg_data -E UTF8 --locale C");
 
@@ -79,8 +84,6 @@ if ($init) {
   runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET ssl = ON;\"");
   runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET shared_preload_libraries = 'babelfishpg_tds','pg_stat_statements','system_stats';\"");
   runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET track_functions = 'pl';\"");
-  #runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET logging_collector = 'on';\"");
-  #runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET log_filename = 'postgresql.log';\"");
 
   runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET log_statement = 'all';\"");
 

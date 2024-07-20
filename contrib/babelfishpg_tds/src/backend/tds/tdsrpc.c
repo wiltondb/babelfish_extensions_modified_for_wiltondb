@@ -1398,6 +1398,7 @@ ReadParameters(TDSRequestSP request, uint64_t offset, StringInfo message, int *p
 	TdsIoFunctionInfo tempFuncInfo;
 	uint16		paramOrdinal = 0;
 	int			retStatus;
+	int32_t		maxLenTypeFuncLookup;
 
 	while (offset < message->len)
 	{
@@ -1801,7 +1802,8 @@ ReadParameters(TDSRequestSP request, uint64_t offset, StringInfo message, int *p
 								"Parameter %d (\"%s\"): Data type 0x%02X is unknown.",
 								paramOrdinal, temp->paramMeta.colName.data, tdsType)));
 		}
-		tempFuncInfo = TdsLookupTypeFunctionsByTdsId(tdsType, temp->maxLen);
+		maxLenTypeFuncLookup = tdsType != TDS_TYPE_BINARY ? temp->maxLen : -1;
+		tempFuncInfo = TdsLookupTypeFunctionsByTdsId(tdsType, maxLenTypeFuncLookup);
 
 		/*
 		 * We save the recvFunc address here, so that during the bind we can

@@ -238,7 +238,7 @@ static set_local_schema_for_func_hook_type prev_set_local_schema_for_func_hook =
 static called_from_tsql_insert_exec_hook_type pre_called_from_tsql_insert_exec_hook = NULL;
 static exec_tsql_cast_value_hook_type pre_exec_tsql_cast_value_hook = NULL;
 static pltsql_pgstat_end_function_usage_hook_type prev_pltsql_pgstat_end_function_usage_hook = NULL;
-static emit_log_hook_type prev_emit_log_hook = NULL;
+static emit_log_backtrace_hook_type prev_emit_log_backtrace_hook = NULL;
 
 
 /*****************************************
@@ -406,8 +406,8 @@ InstallExtendedHooks(void)
 	prev_pltsql_pgstat_end_function_usage_hook = pltsql_pgstat_end_function_usage_hook;
 	pltsql_pgstat_end_function_usage_hook = is_function_pg_stat_valid;
 
-	prev_emit_log_hook = emit_log_hook;
-	emit_log_hook = add_backtrace_to_edata;
+	prev_emit_log_backtrace_hook = emit_log_backtrace_hook;
+	emit_log_backtrace_hook = add_backtrace_to_edata;
 }
 
 void
@@ -470,7 +470,7 @@ UninstallExtendedHooks(void)
 	set_local_schema_for_func_hook = prev_set_local_schema_for_func_hook;
 	called_from_tsql_insert_exec_hook = pre_called_from_tsql_insert_exec_hook;
 	pltsql_pgstat_end_function_usage_hook = prev_pltsql_pgstat_end_function_usage_hook;
-	emit_log_hook = prev_emit_log_hook;
+	emit_log_backtrace_hook = prev_emit_log_backtrace_hook;
 }
 
 /*****************************************

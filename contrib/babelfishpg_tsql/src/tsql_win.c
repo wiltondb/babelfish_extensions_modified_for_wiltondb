@@ -20,7 +20,8 @@
 #include <pathcch.h>
 #include <shlwapi.h>
 
-#define MAX_FRAMES 1024
+#define BACKTRACE_MAX_FRAMES 1024
+#define BACKTRACE_SKIP_FRAMES 3
 
 HANDLE sym_handle = NULL;
 
@@ -135,13 +136,13 @@ char* debuginfo_get_current_call_stack()
   if (!sym_handle)
     return NULL;
 
-  stack_buf = palloc(MAX_FRAMES * sizeof(DWORD64));
-  frames_count = CaptureStackBackTrace(0, MAX_FRAMES, (void**) stack_buf, NULL);
+  stack_buf = palloc(BACKTRACE_MAX_FRAMES * sizeof(DWORD64));
+  frames_count = CaptureStackBackTrace(0, BACKTRACE_MAX_FRAMES, (void**) stack_buf, NULL);
 
   initStringInfo(&trace_buf);
   symbol_buf = palloc(sizeof(SYMBOL_INFO) + MAX_SYM_NAME);
 
-  for (i = 2; i < frames_count; i++) {
+  for (i = BACKTRACE_SKIP_FRAMES; i < frames_count; i++) {
     address = stack_buf[i];
 
     memset(&module, '\0', sizeof(IMAGEHLP_MODULE64));

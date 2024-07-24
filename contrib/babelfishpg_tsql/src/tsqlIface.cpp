@@ -199,6 +199,7 @@ static std::string getProcNameFromExecParam(TSqlParser::Execute_parameterContext
 static std::string getIDName(TerminalNode *dq, TerminalNode *sb, TerminalNode *id);
 static ANTLR_result antlr_parse_query(const char *sourceText, bool useSSLParsing);
 static PLtsql_stmt *makeChangeDbOwnerStatement(TSqlParser::Alter_authorizationContext *ctx);
+static void rewrite_function_trim_to_sys_trim(TSqlParser::TRIMContext *ctx);
 
 /*
  * Structure / Utility function for general purpose of query string modification
@@ -848,6 +849,29 @@ public:
 		// qualified identifier doesn't need delimiter
 		if (ctx->DOT().empty() && does_object_name_need_delimiter(ctx->id().back()))
 			rewritten_query_fragment.emplace(std::make_pair(ctx->id().back()->start->getStartIndex(), std::make_pair(::getFullText(ctx->id().back()), delimit_identifier(ctx->id().back()))));
+	}
+
+	void exitFunction_call(TSqlParser::Function_callContext *ctx) override
+	{
+		if (ctx->func_proc_name_server_database_schema())
+		{
+			auto fpnsds = ctx->func_proc_name_server_database_schema();
+
+			if (fpnsds->DOT().empty() && fpnsds->id().back()->keyword()) /* built-in functions */
+			{
+				auto id = fpnsds->id().back();
+
+				if (id->keyword()->TRIM())
+				{
+					rewritten_query_fragment.emplace(std::make_pair(id->keyword()->TRIM()->getSymbol()->getStartIndex(), std::make_pair(::getFullText(id->keyword()->TRIM()), "sys.trim")));
+				}
+			}
+		}
+	}
+
+	void exitTRIM(TSqlParser::TRIMContext *ctx) override
+	{
+		rewrite_function_trim_to_sys_trim(ctx);
 	}
 
 	void exitFull_column_name(TSqlParser::Full_column_nameContext *ctx) override
@@ -1917,6 +1941,11 @@ public:
 		clear_rewritten_query_fragment();
 	}
 
+	void exitTRIM(TSqlParser::TRIMContext *ctx) override
+	{
+		rewrite_function_trim_to_sys_trim(ctx);
+	}
+  
 	//////////////////////////////////////////////////////////////////////////////
 	// Special handling of non-statement context
 	//////////////////////////////////////////////////////////////////////////////
@@ -2073,7 +2102,11 @@ public:
                                               }
                                       }
                               }
-
+				
+				if (id->keyword()->TRIM())
+				{
+					rewritten_query_fragment.emplace(std::make_pair(id->keyword()->TRIM()->getSymbol()->getStartIndex(), std::make_pair(::getFullText(id->keyword()->TRIM()), "sys.trim")));
+				}
 			}
 
 			if (ctx->func_proc_name_server_database_schema()->procedure)
@@ -6820,6 +6853,20 @@ rewrite_column_name_with_omitted_schema_name(T ctx, GetCtxFunc<T> getSchema, Get
 			return name.substr(1);
 	}
 	return "";
+}
+
+/*
+ * In this function we Rewrite the Query for Trim function as follows
+ * TRIM '(' expression from expression ')' -> sys.TRIM '(' expression , expression ')'
+ */
+static void
+rewrite_function_trim_to_sys_trim(TSqlParser::TRIMContext *ctx)
+{
+	if (ctx->trim_from())
+	{	
+		rewritten_query_fragment.emplace(std::make_pair(ctx->trim_from()->start->getStartIndex(), std::make_pair(::getFullText(ctx->trim_from()), " , ")));
+	}
+	rewritten_query_fragment.emplace(std::make_pair(ctx->TRIM()->getSymbol()->getStartIndex(), std::make_pair(::getFullText(ctx->TRIM()), "sys.trim")));
 }
 
 static bool

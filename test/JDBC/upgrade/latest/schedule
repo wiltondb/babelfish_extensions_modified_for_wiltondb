@@ -461,6 +461,11 @@ sys_availability_replicas
 BABEL-2999
 BABEL-4231
 babel_table_type
+trim
+ltrim
+rtrim
+left
+right
 babel_726
 BABEL-4869
 Test_ISNULL

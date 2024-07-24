@@ -58,7 +58,7 @@ routines_definition
 column_domain_usage
 constraint_column_usage
 sp_describe_first_result_set
-sys-host_name
+sys-host_name-before-15_8-or-16_4
 SYSTEM_USER
 indexproperty
 sys-all_parameters
@@ -416,3 +416,8 @@ BABEL-4410
 AUTO_ANALYZE-before-15-5-or-14-10
 default_params
 BABEL-CASE_EXPR-before-16_5-or-15_9
+trim-before-15_8-or-16_4
+ltrim-before-15_8-or-16_4
+rtrim-before-15_8-or-16_4
+left-before-15_8-or-16_4
+right-before-15_8-or-16_4

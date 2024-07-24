@@ -132,7 +132,7 @@ static void fill_missing_values_in_copyfrom(Relation rel, Datum *values, bool *n
 /*****************************************
  * 			Utility Hooks
  *****************************************/
-static void pltsql_report_proc_not_found_error(List *names, List *argnames, int nargs, ParseState *pstate, int location, bool proc_call);
+static void pltsql_report_proc_not_found_error(List *names, List *argnames, Oid *input_typeids, int nargs, ParseState *pstate, int location, bool proc_call);
 extern PLtsql_execstate *get_outermost_tsql_estate(int *nestlevel);
 extern PLtsql_execstate *get_current_tsql_estate();
 static void pltsql_store_view_definition(const char *queryString, ObjectAddress address);
@@ -165,6 +165,7 @@ static bool plsql_TriggerRecursiveCheck(ResultRelInfo *resultRelInfo);
 static bool bbf_check_rowcount_hook(int es_processed);
 
 extern bool called_from_tsql_insert_exec();
+extern bool called_for_tsql_itvf_func();
 extern Datum pltsql_exec_tsql_cast_value(Datum value, bool *isnull,
 							 Oid valtype, int32 valtypmod,
 							 Oid reqtype, int32 reqtypmod);
@@ -236,6 +237,7 @@ static table_variable_satisfies_vacuum_horizon_hook_type prev_table_variable_sat
 static drop_relation_refcnt_hook_type prev_drop_relation_refcnt_hook = NULL;
 static set_local_schema_for_func_hook_type prev_set_local_schema_for_func_hook = NULL;
 static called_from_tsql_insert_exec_hook_type pre_called_from_tsql_insert_exec_hook = NULL;
+static called_for_tsql_itvf_func_hook_type prev_called_for_tsql_itvf_func_hook = NULL;
 static exec_tsql_cast_value_hook_type pre_exec_tsql_cast_value_hook = NULL;
 static pltsql_pgstat_end_function_usage_hook_type prev_pltsql_pgstat_end_function_usage_hook = NULL;
 static emit_log_backtrace_hook_type prev_emit_log_backtrace_hook = NULL;
@@ -400,6 +402,9 @@ InstallExtendedHooks(void)
 	pre_called_from_tsql_insert_exec_hook = called_from_tsql_insert_exec_hook;
 	called_from_tsql_insert_exec_hook = called_from_tsql_insert_exec;
 
+	prev_called_for_tsql_itvf_func_hook = called_for_tsql_itvf_func_hook;
+	called_for_tsql_itvf_func_hook = called_for_tsql_itvf_func;
+
 	pre_exec_tsql_cast_value_hook = exec_tsql_cast_value_hook;
 	exec_tsql_cast_value_hook = pltsql_exec_tsql_cast_value;
 
@@ -469,6 +474,7 @@ UninstallExtendedHooks(void)
 	drop_relation_refcnt_hook = prev_drop_relation_refcnt_hook;
 	set_local_schema_for_func_hook = prev_set_local_schema_for_func_hook;
 	called_from_tsql_insert_exec_hook = pre_called_from_tsql_insert_exec_hook;
+	called_for_tsql_itvf_func_hook = prev_called_for_tsql_itvf_func_hook;
 	pltsql_pgstat_end_function_usage_hook = prev_pltsql_pgstat_end_function_usage_hook;
 	emit_log_backtrace_hook = prev_emit_log_backtrace_hook;
 }
@@ -2037,7 +2043,7 @@ get_trigger_object_address(List *object, Relation *relp, bool missing_ok, bool o
 
 /* Generate similar error message with SQL Server when function/procedure is not found if possible. */
 void
-pltsql_report_proc_not_found_error(List *names, List *given_argnames, int nargs, ParseState *pstate, int location, bool proc_call)
+pltsql_report_proc_not_found_error(List *names, List *given_argnames, Oid *input_typeids, int nargs, ParseState *pstate, int location, bool proc_call)
 {
 	FuncCandidateList candidates = NULL,
 				current_candidate = NULL;
@@ -2045,6 +2051,8 @@ pltsql_report_proc_not_found_error(List *names, List *given_argnames, int nargs,
 	int			min_nargs = INT_MAX;
 	int			ncandidates = 0;
 	bool		found = false;
+	char	   *schemaname;
+	char	   *funcname;
 	const char *obj_type = proc_call ? "procedure" : "function";
 
 	candidates = FuncnameGetCandidates(names, -1, NIL, false, false, false, true);	/* search all possible
@@ -2084,6 +2092,18 @@ pltsql_report_proc_not_found_error(List *names, List *given_argnames, int nargs,
 		 */
 		if (found)
 		{
+			if (!proc_call)
+			{
+				/* deconstruct the names list */
+				DeconstructQualifiedName(names, &schemaname, &funcname);
+
+				/* 
+				 * Check whether function is an special function or not, and 
+				 * report appropriate error if applicable 
+				 */
+				validate_special_function(schemaname, funcname, nargs, input_typeids);
+			}
+
 			ereport(ERROR,
 					(errcode(ERRCODE_UNDEFINED_FUNCTION),
 					 errmsg("The %s %s is found but cannot be used. Possibly due to datatype mismatch and implicit casting is not allowed.", obj_type, NameListToString(names))),

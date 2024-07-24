@@ -53,3 +53,4 @@ Unexpected drop found for procedure sys.bbf_sleep_for in file babelfishpg_tsql--
 Unexpected drop found for procedure sys.bbf_sleep_until in file babelfishpg_tsql--3.3.0--3.3.1.sql
 Unexpected drop found for procedure sys.create_xp_qv_in_master_dbo in file babelfishpg_tsql--1.1.0--1.2.0.sql
 Unexpected drop found for procedure sys.sp_babelfish_grant_usage_to_all in file babelfishpg_tsql--1.1.0--1.2.0.sql
+Unexpected drop found for table "#temp_schedules_to_delete" in file babelfishpg_tsql--3.6.0--3.7.0.sql

@@ -308,7 +308,7 @@ sys-fulltext_stoplists
 sys-hash_indexes
 sys-has_perms_by_name
 sys-has_perms_by_name-dep
-sys-host_name
+sys-host_name-before-15_8-or-16_4
 sys-identity_columns
 sys-identity_columns-dep
 sys-index_columns
@@ -459,6 +459,11 @@ cast_eliminate
 TestDatatypeAggSort
 babel_index_nulls_order-before-15-5
 BABEL-2999
+trim-before-15_8-or-16_4
+ltrim-before-15_8-or-16_4
+rtrim-before-15_8-or-16_4
+left-before-15_8-or-16_4
+right-before-15_8-or-16_4
 BABEL-4869
 default_params
 BABEL-CASE_EXPR-before-16_5-or-15_9

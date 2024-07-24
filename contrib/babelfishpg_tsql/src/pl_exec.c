@@ -491,6 +491,19 @@ extern void exec_save_simple_expr(PLtsql_expr *expr, CachedPlan *cplan);
 extern int
 			execute_plan_and_push_result(PLtsql_execstate *estate, PLtsql_expr *expr, ParamListInfo paramLI);
 
+
+static bool	called_for_tsql_itvf_function = false;
+bool  		called_for_tsql_itvf_func(void);
+
+
+bool
+called_for_tsql_itvf_func()
+{
+	if (sql_dialect != SQL_DIALECT_TSQL)
+		return false;
+	return called_for_tsql_itvf_function;
+}
+
 /* ----------
  * pltsql_exec_function	Called by the call handler for
  *				function execution.
@@ -668,7 +681,13 @@ pltsql_exec_function(PLtsql_function *func, FunctionCallInfo fcinfo,
 		if (pltsql_trace_exec_time)
 			config.trace_mode |= TRACE_EXEC_TIME;
 
+		/* 
+		 * Following variable will be used inside exec_stmt_iterative function to 
+		 * identify whether the function is ITVF function or not 
+		 */
+		called_for_tsql_itvf_function = func->is_itvf;
 		rc = exec_stmt_iterative(&estate, func->exec_codes, &config);
+		called_for_tsql_itvf_function = false;
 
 		if (rc != PLTSQL_RC_RETURN)
 		{

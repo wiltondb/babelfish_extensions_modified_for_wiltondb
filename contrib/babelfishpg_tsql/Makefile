@@ -98,7 +98,7 @@ PG_CFLAGS += -Wno-error=address
 PG_CFLAGS += -DENABLE_TDS_LIB
 PG_CPPFLAGS += -I$(TSQLSRC) -I$(PG_SRC)
 
-SHLIB_LINK += $(ANTLR4_RUNTIME_LIB) -lcrypto -lsybdb
+SHLIB_LINK += $(ANTLR4_RUNTIME_LIB) -lcrypto -lsybdb -luuid
 
 UPGRADES = $(patsubst sql/upgrades/%.sql,sql/%.sql,$(wildcard sql/upgrades/*.sql))
 

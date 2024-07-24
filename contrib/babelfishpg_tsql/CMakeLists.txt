@@ -251,6 +251,7 @@ target_include_directories ( ${PROJECT_NAME} PRIVATE
     $ENV{PGWIN_DEPS_DIR}/utf8cpp/include/utf8cpp
     $ENV{PGWIN_DEPS_DIR}/freetds/include
     $ENV{PGWIN_DEPS_DIR}/mimalloc/include
+    $ENV{PGWIN_DEPS_DIR}/uuid/include
     $ENV{PGWIN_SRC_DIR} )
 
 target_compile_options ( ${PROJECT_NAME} PRIVATE
@@ -275,6 +276,7 @@ target_link_libraries ( ${PROJECT_NAME} PRIVATE
     $ENV{PGWIN_DEPS_DIR}/antlr4_cpp_runtime/lib/antlr4-runtime-static.lib
     $ENV{PGWIN_DEPS_DIR}/freetds/lib/sybdb.lib
     $ENV{PGWIN_DEPS_DIR}/mimalloc/bin/mimalloc-static.lib
+    $ENV{PGWIN_DEPS_DIR}/uuid/lib/uuid.lib
     dbghelp
     pathcch
     shlwapi

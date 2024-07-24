@@ -8,6 +8,12 @@
 
 #include "postgres.h"
 
+#ifdef _WIN32
+#include "uuid.h"
+#else // !_WIN32
+#include "uuid/uuid.h"
+#endif // !_WIN32
+
 #include "access/tupdesc.h"
 #include "access/printtup.h"
 #include "access/relation.h"
@@ -409,6 +415,29 @@ sp_describe_first_result_set_query(char *viewName)
 }
 
 /*
+ * Generates and returns UUIDv4 string that can be used as a suffix for a
+ * view name. Returned string must be pfree'd by the caller. 
+ */
+static char*
+gen_uid_suffix()
+{
+	char		*st;
+	uuid_t	uid;
+	size_t	i;
+
+	uuid_generate_time(uid);
+	st = palloc0(36 + 1);
+	uuid_unparse(uid, st);
+	for (i = 0; i < 36; i++)
+	{
+		if (st[i] == '-')
+			st[i] = '_';
+	}
+
+	return st;
+}
+
+/*
  * Internal function used by procedure sys.sp_describe_first_result_set.
  */
 Datum
@@ -426,7 +455,8 @@ sp_describe_first_result_set_internal(PG_FUNCTION_ARGS)
 	char	   *query;
 	int			rc;
 	ANTLR_result result;
-	char	   *parsedbatch = NULL;
+	char	   *parsedbatch = NULL,
+				*view_name_suffix = NULL;
 
 	/* stuff done only on the first call of the function */
 	if (SRF_IS_FIRSTCALL())
@@ -442,7 +472,9 @@ sp_describe_first_result_set_internal(PG_FUNCTION_ARGS)
 		 * TODO: params and browseMode has to be still implemented in this
 		 * C-type function
 		 */
-		sp_describe_first_result_set_view_name = psprintf("sp_describe_first_result_set_view_%d", rand());
+		view_name_suffix = gen_uid_suffix();
+		sp_describe_first_result_set_view_name = psprintf("sp_describe_first_r_s_view_%s", view_name_suffix);
+		pfree(view_name_suffix);
 
 		get_call_result_type(fcinfo, NULL, &tupdesc);
 		attinmeta = TupleDescGetAttInMetadata(tupdesc);

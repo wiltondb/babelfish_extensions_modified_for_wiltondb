@@ -308,7 +308,7 @@ GO
 ~~START~~
 nvarchar#!#nvarchar#!#varchar#!#varchar
 master#!#dbo#!#sp_rename_vu_table_delim#!#BASE TABLE
-master#!#dbo#!#sp_rename_vu_table1_case_insensitive2#!#BASE TABLE
+master#!#dbo#!#SP_RENAME_vu_TABLE1_case_insensitive2#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_table2#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_tabletype1#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_view1#!#VIEW
@@ -328,7 +328,7 @@ GO
 ~~START~~
 nvarchar#!#nvarchar#!#varchar#!#varchar
 master#!#dbo#!#sp_rename_vu_table_delim#!#BASE TABLE
-master#!#dbo#!#sp_rename_vu_table1_case_insensitive2#!#BASE TABLE
+master#!#dbo#!#SP_RENAME_vu_TABLE1_case_insensitive2#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_table2#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_tabletype1#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_view1_case_insensitive1#!#VIEW
@@ -368,7 +368,7 @@ GO
 ~~START~~
 nvarchar#!#nvarchar#!#varchar#!#varchar
 master#!#dbo#!#sp_rename_vu_table_delim#!#BASE TABLE
-master#!#dbo#!#sp_rename_vu_table1_case_insensitive2#!#BASE TABLE
+master#!#dbo#!#SP_RENAME_vu_TABLE1_case_insensitive2#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_table2#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_tabletype1#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_view1#!#VIEW
@@ -545,7 +545,7 @@ GO
 ~~START~~
 nvarchar#!#nvarchar#!#varchar#!#varchar
 master#!#dbo#!#sp_rename_vu_table_delim#!#BASE TABLE
-master#!#dbo#!#sp_rename_vu_table1_case_insensitive2#!#BASE TABLE
+master#!#dbo#!#SP_RENAME_vu_TABLE1_case_insensitive2#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_table2#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_tabletype1#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_view1#!#VIEW
@@ -579,7 +579,7 @@ GO
 ~~START~~
 nvarchar#!#nvarchar#!#varchar#!#varchar
 master#!#dbo#!#sp_rename_vu_table_delim#!#BASE TABLE
-master#!#dbo#!#sp_rename_vu_table1_case_insensitive2#!#BASE TABLE
+master#!#dbo#!#SP_RENAME_vu_TABLE1_case_insensitive2#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_table2#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_tabletype1_new#!#BASE TABLE
 master#!#dbo#!#sp_rename_vu_view1#!#VIEW
@@ -843,4 +843,21 @@ GO
 ~~ERROR (Code: 33557097)~~
 
 ~~ERROR (Message: Feature not supported: renaming object type Statistics)~~
+
+
+IF OBJECT_ID('babelfish_split_identifier_view') IS NULL
+BEGIN
+    EXEC sp_executesql N'
+        CREATE VIEW babelfish_split_identifier_view AS SELECT * FROM sys.babelfish_split_identifier(''ABC.DEF.GHI'')';
+END
+GO
+
+SELECT * FROM babelfish_split_identifier_view;
+GO
+~~START~~
+varchar
+ABC
+DEF
+GHI
+~~END~~
 

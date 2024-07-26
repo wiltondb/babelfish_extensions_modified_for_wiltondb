@@ -4166,3 +4166,47 @@ CREATE OR REPLACE FUNCTION SYS.TYPE_ID(IN type_name SYS.NVARCHAR)
 RETURNS INT AS
 'babelfishpg_tsql', 'type_id'
 LANGUAGE C STABLE;
+
+CREATE OR REPLACE FUNCTION sys.reverse(string sys.NCHAR)
+RETURNS sys.NVARCHAR
+AS
+$BODY$
+BEGIN
+    RETURN PG_CATALOG.reverse(string);
+END;
+$BODY$
+LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OR REPLACE FUNCTION sys.reverse(string sys.NVARCHAR)
+RETURNS sys.NVARCHAR
+AS
+$BODY$
+BEGIN
+    RETURN PG_CATALOG.reverse(string);
+END;
+$BODY$
+LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
+
+-- Adding following definition will make sure that reverse with text input
+-- will use following definition instead of PG reverse
+CREATE OR REPLACE FUNCTION sys.reverse(string TEXT)
+RETURNS sys.VARCHAR
+AS
+$BODY$
+BEGIN
+    RETURN PG_CATALOG.reverse(string);
+END;
+$BODY$
+LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE;
+
+-- Adding following definition will make sure that reverse with ntext input
+-- will use following definition instead of PG reverse
+CREATE OR REPLACE FUNCTION sys.reverse(string NTEXT)
+RETURNS sys.NVARCHAR
+AS
+$BODY$
+BEGIN
+    RETURN PG_CATALOG.reverse(string);
+END;
+$BODY$
+LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE;

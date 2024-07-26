@@ -459,6 +459,7 @@ cast_eliminate
 TestDatatypeAggSort
 babel_index_nulls_order-before-15-5
 BABEL-2999
+upper_lower-before-15_8-or-16_4
 trim-before-15_8-or-16_4
 ltrim-before-15_8-or-16_4
 rtrim-before-15_8-or-16_4

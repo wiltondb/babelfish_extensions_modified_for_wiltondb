@@ -461,6 +461,7 @@ sys_availability_replicas
 BABEL-2999
 BABEL-4231
 babel_table_type
+upper_lower
 trim
 ltrim
 rtrim

@@ -510,4 +510,5 @@ binary-datatype-operators
 cast-varchar-to-time
 BABEL-CASE_EXPR-before-16_5-or-15_9
 typeid-typename
+replicate-before-15_8-or-16_4
 reverse-before-15_8-or-16_4

@@ -497,6 +497,7 @@ babel_test_int4_numeric_oper_before_16_3_or_15_7
 babel_test_int8_numeric_oper_before_16_3_or_15_7
 babel_test_int2_numeric_oper_before_16_3_or_15_7
 BABEL-4869
+translate-before-15_8-or-16_4
 babel_726
 stuff-before-15_8-or-16_4
 replicate-before-15_8-or-16_4

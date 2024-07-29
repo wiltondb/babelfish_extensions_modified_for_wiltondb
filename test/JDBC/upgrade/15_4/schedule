@@ -468,5 +468,6 @@ right-before-15_8-or-16_4
 BABEL-4869
 default_params
 BABEL-CASE_EXPR-before-16_5-or-15_9
+translate-before-15_8-or-16_4
 replicate-before-15_8-or-16_4
 reverse-before-15_8-or-16_4

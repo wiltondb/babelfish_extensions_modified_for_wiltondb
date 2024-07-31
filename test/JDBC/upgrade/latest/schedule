@@ -472,6 +472,7 @@ BABEL-4869
 Test_ISNULL
 babel-4688
 translate
+substring
 BABEL-3820
 BABEL-4279
 BABEL-4484

@@ -467,6 +467,7 @@ ltrim
 rtrim
 left
 right
+replace
 babel_726
 BABEL-4869
 Test_ISNULL

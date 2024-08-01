@@ -224,6 +224,7 @@ ltrim-before-15_8-or-16_4
 rtrim-before-15_8-or-16_4
 left-before-15_8-or-16_4
 right-before-15_8-or-16_4
+replace-before-14_3
 BABEL-4869
 BABEL-CASE_EXPR-before-16_5-or-15_9
 translate-before-15_8-or-16_4

@@ -335,7 +335,7 @@ TestXML
 timefromparts
 triggers_with_transaction
 BABEL-4046
-BABEL_4330
+BABEL_4330-before-15_8-or-16_4
 permission_restrictions_from_pg
 BABEL-2999
 upper_lower-before-15_8-or-16_4
@@ -344,6 +344,7 @@ ltrim-before-15_8-or-16_4
 rtrim-before-15_8-or-16_4
 left-before-15_8-or-16_4
 right-before-15_8-or-16_4
+replace-before-15_8-or-16_4
 BABEL-4869
 babel_726-before-14_12-or-15_7-or-16_3
 BABEL-CASE_EXPR-before-16_5-or-15_9

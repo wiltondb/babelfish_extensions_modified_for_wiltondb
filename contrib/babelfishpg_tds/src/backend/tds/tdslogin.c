@@ -57,6 +57,7 @@
 #include "utils/memutils.h"
 #include "utils/ps_status.h"
 #include "utils/snapmgr.h"
+#include "utils/syscache.h"
 #include "utils/timestamp.h"
 
 #include "src/include/tds_debug.h"
@@ -1642,12 +1643,69 @@ SendLoginError(Port *port, const char *logdetail)
 }
 
 #ifdef _WIN32
-static char* CreateLogDetail(const char* func, SECURITY_STATUS status)
+static char*
+CreateLogDetail(const char* func, SECURITY_STATUS status)
 {
-	size_t buf_size = 1024;
-	char* buf = palloc0(buf_size);
-	snprintf(buf, buf_size - 1, "call: %s, status: 0x%08x", func, status);
+	char* buf;
+	buf = psprintf("call: %s, status: 0x%08x", func, status);
 	return buf;
+}
+
+/*
+ * OS user name transformation is adapted from convertToUPN and
+ * convertUsernameToCanonicalform.
+ */
+static char*
+DeriveDbLoginFromOsUser(Port *port, const char* os_user)
+{
+	size_t i;
+	char *username,
+				*domain,
+				*pg_role,
+				*log_detail_buf,
+				*pos_slash;
+	HeapTuple role_tup,
+				role_tup_wilton;
+	bool role_exists,
+				role_wilton_exists;
+
+	pos_slash = strchr(os_user, '\\');
+	if (!pos_slash || pos_slash != strrchr(os_user, '\\'))
+	{
+		log_detail_buf = psprintf("OS user invalid name: %s, expected: domain\\username", os_user);
+		SendLoginError(port, log_detail_buf);
+	}
+
+	domain = pnstrdup(os_user, pos_slash - os_user);
+	username = pstrdup(pos_slash + 1);
+	for (i = 0; i < strlen(username); i++)
+		if (username[i] == '@')
+			username[i] = '_';
+
+	pg_role = psprintf("%s@%s",
+						str_tolower(username, strlen(username), C_COLLATION_OID),
+						str_toupper(domain, strlen(domain), C_COLLATION_OID));
+	pfree(domain);
+	pfree(username);
+
+	role_tup = SearchSysCache1(AUTHNAME, PointerGetDatum(pg_role));
+	role_exists = HeapTupleIsValid(role_tup);
+	if (role_exists)
+		ReleaseSysCache(role_tup);
+
+	role_tup_wilton = SearchSysCache1(AUTHNAME, PointerGetDatum(WILTON_SSPI_LOGIN));
+	role_wilton_exists = HeapTupleIsValid(role_tup_wilton);
+	if (role_wilton_exists)
+		ReleaseSysCache(role_tup_wilton);
+
+	if (role_exists)
+		return pg_role;
+
+	if (role_wilton_exists)
+		return pstrdup(WILTON_SSPI_LOGIN);
+
+	log_detail_buf = psprintf("DB login not found for OS user: %s", os_user);
+	SendLoginError(port, log_detail_buf);
 }
 
 static int CheckSSPIAuth(Port *port)
@@ -1798,9 +1856,9 @@ static int CheckSSPIAuth(Port *port)
 	if (SEC_E_OK != status)
 		SendLoginError(port, CreateLogDetail("DeleteSecurityContext", status));
 
-	// auth successful
-	port->user_name = WILTON_SSPI_LOGIN;
-	elog(LOG_SERVER_ONLY, "Windows integrated authentication successful for user: %s", wilton_winauth_os_user);
+	// get DB login name
+	port->user_name = DeriveDbLoginFromOsUser(port, wilton_winauth_os_user);
+
 	return STATUS_OK;
 }
 #endif // _WIN32

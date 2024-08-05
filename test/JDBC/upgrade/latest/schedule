@@ -482,3 +482,4 @@ BABEL-CASE_EXPR
 replicate
 reverse
 babel-4475
+binary-datatype-operators

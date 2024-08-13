@@ -14,6 +14,7 @@ MODULE_big = $(EXTENSION)
 
 PG_CFLAGS += -g -Werror -Wfloat-conversion
 PG_CFLAGS += -fstack-protector-strong
+PG_CFLAGS += -ggdb -O0 -fno-omit-frame-pointer
 ifdef PREV_EXTVERSION
 DATA = sql/$(EXTENSION)--$(PREV_EXTVERSION).sql
 endif

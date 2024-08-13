@@ -78,10 +78,10 @@ OBJS += src/fts.o
 OBJS += src/fts_parser.o
 OBJS += src/pltsql_partition.o
 
-export ANTLR4_JAVA_BIN=java
+export ANTLR4_JAVA_BIN=/usr/lib/jvm/java-11-openjdk/bin/java
 export ANTLR4_RUNTIME_LIB=-lantlr4-runtime
-export ANTLR4_RUNTIME_INCLUDE_DIR=/usr/local/include/antlr4-runtime
-export ANTLR4_RUNTIME_LIB_DIR=/usr/local/lib
+export ANTLR4_RUNTIME_INCLUDE_DIR=/usr/include/antlr4-runtime
+export ANTLR4_RUNTIME_LIB_DIR=/usr/lib
 
 OBJS += src/pltsql_bulkcopy.o
 
@@ -89,9 +89,14 @@ PG_CXXFLAGS += -g -Werror -Wfloat-conversion
 PG_CXXFLAGS += -Wno-deprecated -Wno-error=attributes -Wno-suggest-attribute=format # disable some warnings from ANTLR runtime header
 PG_CXXFLAGS += -Wno-undef -Wall -Wcpp
 PG_CXXFLAGS += -Wno-register # otherwise C++17 gags on PostgreSQL headers
+PG_CXXFLAGS += -ggdb -O0 -fno-omit-frame-pointer
 PG_CXXFLAGS += -I$(ANTLR4_RUNTIME_INCLUDE_DIR)
+PG_CXXFLAGS += -Wno-error=overloaded-virtual -DUSE_UTF8_INSTEAD_OF_CODECVT
 PG_CFLAGS += -g -Werror -Wfloat-conversion
 PG_CFLAGS += -fstack-protector-strong
+PG_CFLAGS += -fcommon -Wno-error=format-security -Wno-error=maybe-uninitialized
+PG_CFLAGS += -ggdb -O0 -fno-omit-frame-pointer -Wno-error=infinite-recursion
+PG_CFLAGS += -Wno-error=deprecated-declarations
 PG_CPPFLAGS += -I$(TSQLSRC) -I$(PG_SRC) -DFAULT_INJECTOR -Wfloat-conversion
 
 SHLIB_LINK += -L$(ANTLR4_RUNTIME_LIB_DIR) $(ANTLR4_RUNTIME_LIB) -lcrypto $(ICU_LIBS)
@@ -172,7 +177,7 @@ GEN_KEYWORDLIST_DEPS = $(TOOLSDIR)/gen_keywordlist.pl $(TOOLSDIR)/PerfectHash.pm
 TSQLSRC = .
 
 antlr/Makefile: antlr/CMakeLists.txt antlr/TSqlLexer.g4 antlr/TSqlLexer.g4
-	cd antlr && $(cmake) . && cd ..
+	cd antlr && cmake . && cd ..
 
 .PHONY: antlr/libantlr_tsql.a  # to allow CMake's make check the build
 antlr/libantlr_tsql.a: antlr/Makefile

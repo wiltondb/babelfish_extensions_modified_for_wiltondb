@@ -1,17 +1,20 @@
 #find_package(Java QUIET COMPONENTS Runtime)
 
+set(ANTLR_EXECUTABLE /usr/share/java/antlr4/antlr4.jar)
 if(NOT ANTLR_EXECUTABLE)
   find_program(ANTLR_EXECUTABLE
                NAMES antlr.jar antlr4.jar antlr-4.jar antlr-4.9.3-complete.jar)
 endif()
 
 set(Java_JAVA_EXECUTABLE $ENV{ANTLR4_JAVA_BIN})
+set(ANTLR_RPM_CLASSPATH /usr/share/java/antlr4/antlr4-runtime.jar:/usr/share/java/antlr3-runtime.jar:/usr/share/java/stringtemplate4/ST4.jar)
+set(ANTLR_MAIN_CLASS org.antlr.v4.Tool)
 
 message(STATUS "java executable=${Java_JAVA_EXECUTABLE}")
 
 if(ANTLR_EXECUTABLE AND Java_JAVA_EXECUTABLE)
-  execute_process(
-      COMMAND ${Java_JAVA_EXECUTABLE} -jar ${ANTLR_EXECUTABLE}
+execute_process(
+      COMMAND ${Java_JAVA_EXECUTABLE} -cp ${ANTLR_EXECUTABLE}:${ANTLR_RPM_CLASSPATH} ${ANTLR_MAIN_CLASS}
       OUTPUT_VARIABLE ANTLR_COMMAND_OUTPUT
       ERROR_VARIABLE ANTLR_COMMAND_ERROR
       RESULT_VARIABLE ANTLR_COMMAND_RESULT
@@ -23,7 +26,7 @@ if(ANTLR_EXECUTABLE AND Java_JAVA_EXECUTABLE)
   else()
     message(
         SEND_ERROR
-        "Command '${Java_JAVA_EXECUTABLE} -jar ${ANTLR_EXECUTABLE}' "
+        "Command '${Java_JAVA_EXECUTABLE} -cp ${ANTLR_EXECUTABLE}:${ANTLR_RPM_CLASSPATH} ${ANTLR_MAIN_CLASS}' "
         "failed with the output '${ANTLR_COMMAND_ERROR}'")
   endif()
 
@@ -107,7 +110,7 @@ if(ANTLR_EXECUTABLE AND Java_JAVA_EXECUTABLE)
 
     add_custom_command(
         OUTPUT ${ANTLR_${Name}_OUTPUTS}
-        COMMAND ${Java_JAVA_EXECUTABLE} -jar ${ANTLR_EXECUTABLE}
+        COMMAND ${Java_JAVA_EXECUTABLE} -cp ${ANTLR_EXECUTABLE}:${ANTLR_RPM_CLASSPATH} ${ANTLR_MAIN_CLASS}
                 ${InputFile}
                 -o ${ANTLR_${Name}_OUTPUT_DIR}
                 -no-listener

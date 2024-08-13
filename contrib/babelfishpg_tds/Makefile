@@ -11,6 +11,7 @@ TSQL_SRC = ../babelfishpg_tsql
 
 PG_CFLAGS += -Werror -Wfloat-conversion
 PG_CFLAGS += -fstack-protector-strong
+PG_CFLAGS += -ggdb -O0 -fno-omit-frame-pointer
 PG_CPPFLAGS += -I$(TSQL_SRC) -I$(PG_SRC) -I$(tds_top_dir) -DFAULT_INJECTOR
 
 # Exclude the following files from the build (sometimes these

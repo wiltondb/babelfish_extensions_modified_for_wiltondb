@@ -48,6 +48,9 @@ serverCollationName = default
 # WHETHER TEST IS RUN FOR DB LEVEL COLLATION
 isdbCollationMode = false
 
+# WHETHER TO USE JTDS DRIVER FOR TDS CONNECTIONS
+useJTDSInsteadOfMSSQLJDBC = false
+
 # Where to find the input, output, expected, etc.
 testFileRoot = ./
 

@@ -375,3 +375,4 @@ ignore#!#jtds-TestSimpleErrors
 ignore#!#jtds-TestErrorsWithTryCatch
 ignore#!#jtds-TestStoredProcedures
 ignore#!#jtds-TestTransactionSupportForProcedure
+ignore#!#jtds-TestVarChar

@@ -1874,14 +1874,36 @@ PrepareRowDescription(TupleDesc typeinfo, PlannedStmt *plannedstmt, List *target
 				if (is_this_a_vector_datatype(col->pgTypeOid))
 					atttypmod = -1;
 
-				SetColMetadataForCharTypeHelper(col, TDS_TYPE_VARCHAR,
-												att->attcollation, (atttypmod == -1) ?
-												atttypmod : (atttypmod - 4));
+				/*
+				* If client being connected is using TDS version lower than or equal to
+				* 7.1 then TSQL treats varchar(max) as Text.
+				*/
+				if (tdsVersion <= TDS_VERSION_7_1_1 && atttypmod == -1)
+				{
+					SetColMetadataForTextTypeHelper(col, TDS_TYPE_TEXT,
+													att->attcollation, (atttypmod - 4));
+					sendTableName |= col->sendTableName;
+				}
+				else
+					SetColMetadataForCharTypeHelper(col, TDS_TYPE_VARCHAR,
+													att->attcollation, (atttypmod == -1) ?
+													atttypmod : (atttypmod - 4));
 				break;
 			case TDS_SEND_NVARCHAR:
-				SetColMetadataForCharTypeHelper(col, TDS_TYPE_NVARCHAR,
-												att->attcollation, (atttypmod == -1) ?
-												atttypmod : (atttypmod - 4) * 2);
+				/*
+				* If client being connected is using TDS version lower than or equal to
+				* 7.1 then TSQL treats nvarchar(max) as NText.
+				*/
+				if (tdsVersion <= TDS_VERSION_7_1_1 && atttypmod == -1)
+				{
+					SetColMetadataForTextTypeHelper(col, TDS_TYPE_NTEXT,
+													att->attcollation, (atttypmod - 4) * 2);
+					sendTableName |= col->sendTableName;
+				}
+				else
+					SetColMetadataForCharTypeHelper(col, TDS_TYPE_NVARCHAR,
+													att->attcollation, (atttypmod == -1) ?
+													atttypmod : (atttypmod - 4) * 2);
 				break;
 			case TDS_SEND_MONEY:
 				if (col->attNotNull)

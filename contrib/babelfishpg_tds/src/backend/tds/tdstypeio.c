@@ -2775,9 +2775,18 @@ TdsSendTypeVarchar(FmgrInfo *finfo, Datum value, void *vMetaData)
 								 * store given string in given encoding. */
 				maxLen;			/* max size of given column in bytes */
 	char	   *destBuf,
-			   *buf = OutputFunctionCall(finfo, value);
+			   *buf;
 	TdsColumnMetaData *col = (TdsColumnMetaData *) vMetaData;
 
+	/*
+	* If client being connected is using TDS version lower than or equal to
+	* 7.1 then TSQL treats varchar(max) as Text.
+	*/
+	if (GetClientTDSVersion() <= TDS_VERSION_7_1_1 && 
+			col->metaEntry.type3.tdsTypeId == TDS_TYPE_TEXT)
+		return TdsSendTypeText(finfo, value, vMetaData);
+
+	buf = OutputFunctionCall(finfo, value);
 	len = strlen(buf);
 
 	destBuf = TdsEncodingConversion(buf, len, PG_UTF8, col->encoding, &actualLen);
@@ -2957,10 +2966,19 @@ TdsSendTypeNVarchar(FmgrInfo *finfo, Datum value, void *vMetaData)
 
 	int			rc,
 				maxlen;
-	char	   *out = OutputFunctionCall(finfo, value);
+	char	   *out;
 	TdsColumnMetaData *col = (TdsColumnMetaData *) vMetaData;
 	StringInfoData buf;
 
+	/*
+	* If client being connected is using TDS version lower than or equal to
+	* 7.1 then TSQL treats nvarchar(max) as NText.
+	*/
+	if (GetClientTDSVersion() <= TDS_VERSION_7_1_1 &&
+			col->metaEntry.type3.tdsTypeId == TDS_TYPE_NTEXT)
+		return TdsSendTypeNText(finfo, value, vMetaData);
+
+	out = OutputFunctionCall(finfo, value);
 	initStringInfo(&buf);
 	TdsUTF8toUTF16StringInfo(&buf, out, strlen(out));
 	maxlen = col->metaEntry.type2.maxSize;

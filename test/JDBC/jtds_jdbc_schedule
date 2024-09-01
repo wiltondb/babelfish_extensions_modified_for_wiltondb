@@ -22,6 +22,9 @@
 # datatypes
 TestChar
 TestText
+# Varchar(max) column type is reported as text and nvarchar(max) - as ntext,
+# this behaviour is consistent on both MSSQL and Babelfish.
+jtds-TestVarChar
 
 # sqlBatch
 # jTDS reports column type as nvarchar instead of date, behavior on MSSQL and Babelfish is the same

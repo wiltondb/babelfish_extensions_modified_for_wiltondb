@@ -19,6 +19,9 @@
 #
 # This jTDS behaviour is the same with both Babelfish and MSSQL.
 
+# datatypes
+TestChar
+
 # sqlBatch
 # jTDS reports column type as nvarchar instead of date, behavior on MSSQL and Babelfish is the same
 jtds-TestSQLQueries

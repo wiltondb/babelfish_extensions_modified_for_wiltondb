@@ -21,6 +21,7 @@
 
 # datatypes
 TestChar
+TestText
 
 # sqlBatch
 # jTDS reports column type as nvarchar instead of date, behavior on MSSQL and Babelfish is the same

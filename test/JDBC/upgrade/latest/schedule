@@ -483,5 +483,6 @@ stuff
 replicate
 reverse
 babel-4475
+string_agg
 binary-datatype-operators
 SELECT_INTO_TEST

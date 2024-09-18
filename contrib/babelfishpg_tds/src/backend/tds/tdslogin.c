@@ -1660,7 +1660,9 @@ DeriveDbLoginFromOsUser(Port *port, const char* os_user)
 {
 	size_t i;
 	char *username,
+				*username_lower,
 				*domain,
+				*domain_upper,
 				*pg_role,
 				*log_detail_buf,
 				*pos_slash;
@@ -1677,16 +1679,21 @@ DeriveDbLoginFromOsUser(Port *port, const char* os_user)
 	}
 
 	domain = pnstrdup(os_user, pos_slash - os_user);
+	for (i = 0; i < strlen(domain); i++)
+		if (domain[i] == ' ')
+			domain[i] = '-';
 	username = pstrdup(pos_slash + 1);
 	for (i = 0; i < strlen(username); i++)
 		if (username[i] == '@')
 			username[i] = '_';
 
-	pg_role = psprintf("%s@%s",
-						str_tolower(username, strlen(username), C_COLLATION_OID),
-						str_toupper(domain, strlen(domain), C_COLLATION_OID));
+	domain_upper = str_toupper(domain, strlen(domain), C_COLLATION_OID);
 	pfree(domain);
+	username_lower = str_tolower(username, strlen(username), C_COLLATION_OID);
 	pfree(username);
+	pg_role = psprintf("%s@%s", username_lower, domain_upper);
+	pfree(domain_upper);
+	pfree(username_lower);
 
 	role_tup = SearchSysCache1(AUTHNAME, PointerGetDatum(pg_role));
 	role_exists = HeapTupleIsValid(role_tup);
@@ -1700,6 +1707,8 @@ DeriveDbLoginFromOsUser(Port *port, const char* os_user)
 
 	if (role_exists)
 		return pg_role;
+
+	pfree(pg_role);
 
 	if (role_wilton_exists)
 		return pstrdup(WILTON_SSPI_LOGIN);

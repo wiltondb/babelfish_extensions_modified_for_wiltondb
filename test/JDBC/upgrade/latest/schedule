@@ -485,6 +485,8 @@ replicate
 reverse
 babel-4475
 string_agg
+concat
+concat_ws
 binary-datatype-operators
 SELECT_INTO_TEST
 charindex_replace_patindex

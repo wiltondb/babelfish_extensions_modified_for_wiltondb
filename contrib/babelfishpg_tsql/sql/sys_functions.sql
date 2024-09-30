@@ -756,7 +756,7 @@ BEGIN
             ELSE '-'
         END
     );
-    v_string := CONCAT(v_resdatetime::pg_catalog.text,v_sign,abs(p_hour_offset)::SMALLINT::text,':',
+    v_string := PG_CATALOG.CONCAT(v_resdatetime::pg_catalog.text,v_sign,abs(p_hour_offset)::SMALLINT::text,':',
                                                           abs(p_minute_offset)::SMALLINT::text);
     RETURN CAST(v_string AS sys.DATETIMEOFFSET);
 EXCEPTION
@@ -2804,7 +2804,7 @@ BEGIN
     END IF;
 
     -- Surround with double-quotes to handle names that contain periods/spaces
-    qualified_name := concat('"', pg_schema, '"."', object_name, '"');
+    qualified_name := PG_CATALOG.concat('"', pg_schema, '"."', object_name, '"');
 
     SELECT oid INTO namespace_id FROM pg_catalog.pg_namespace WHERE nspname = pg_schema COLLATE sys.database_default;
 
@@ -3817,6 +3817,84 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql IMMUTABLE STRICT PARALLEL SAFE;
 
+-- wrapper functions for concat --
+CREATE OR REPLACE FUNCTION sys.concat(VARIADIC args sys.VARCHAR[] DEFAULT '{}')
+RETURNS sys.VARCHAR
+AS $$
+DECLARE
+    arr_len INTEGER;
+BEGIN
+    arr_len := array_length(args, 1);
+
+    -- PG has limitation for max number of args = 100
+    IF arr_len IS NULL OR arr_len < 2 OR arr_len > 100 THEN
+        RAISE EXCEPTION 'The concat function requires 2 to 100 arguments.';
+    END IF;
+
+    RETURN (PG_CATALOG.ARRAY_TO_STRING(args, ''));
+END;
+$$ LANGUAGE plpgsql STABLE PARALLEL SAFE;
+
+CREATE OR REPLACE FUNCTION sys.concat(VARIADIC args sys.NVARCHAR[])
+RETURNS sys.NVARCHAR
+AS $$
+DECLARE
+    arr_len INTEGER;
+BEGIN
+    arr_len := array_length(args, 1);
+
+    -- PG has limitation for max number of args = 100
+    IF arr_len < 2 OR arr_len > 100 THEN
+        RAISE EXCEPTION 'The concat function requires 2 to 100 arguments.';
+    END IF;
+
+    RETURN (PG_CATALOG.ARRAY_TO_STRING(args, ''));
+END;
+$$ LANGUAGE plpgsql STABLE PARALLEL SAFE;
+
+-- wrapper functions for concat_ws --
+CREATE OR REPLACE FUNCTION sys.concat_ws(seperator sys.VARCHAR DEFAULT '', VARIADIC args sys.VARCHAR[] DEFAULT '{}')
+RETURNS sys.VARCHAR
+AS $$
+DECLARE
+    arr_len INTEGER;
+BEGIN
+    arr_len := array_length(args, 1);
+
+    -- PG has limitation for max number of args = 100
+    IF arr_len IS NULL OR arr_len < 2 OR arr_len > 99 THEN
+        RAISE EXCEPTION 'The concat_ws function requires 3 to 100 arguments.';
+    END IF;
+
+    IF seperator IS NULL THEN
+        RETURN (PG_CATALOG.ARRAY_TO_STRING(args, ''));
+    END IF;
+
+    RETURN (PG_CATALOG.ARRAY_TO_STRING(args, seperator));
+END;
+$$ LANGUAGE plpgsql STABLE PARALLEL SAFE;
+
+CREATE OR REPLACE FUNCTION sys.concat_ws(seperator sys.NVARCHAR, VARIADIC args sys.NVARCHAR[])
+RETURNS sys.NVARCHAR
+AS $$
+DECLARE
+    arr_len INTEGER;
+BEGIN
+    arr_len := array_length(args, 1);
+
+    -- PG has limitation for max number of args = 100
+    IF arr_len < 2 OR arr_len > 99 THEN
+        RAISE EXCEPTION 'The concat_ws function requires 3 to 100 arguments.';
+    END IF;
+
+    IF seperator IS NULL THEN
+        RETURN (PG_CATALOG.ARRAY_TO_STRING(args, ''));
+    END IF;
+
+    RETURN (PG_CATALOG.ARRAY_TO_STRING(args, seperator));
+END;
+$$ LANGUAGE plpgsql STABLE PARALLEL SAFE;
+
 -- For getting host os from PG_VERSION_STR
 CREATE OR REPLACE FUNCTION sys.get_host_os()
 RETURNS sys.NVARCHAR
@@ -3964,7 +4042,7 @@ BEGIN
     -- To convert input jsonpath to the required jsonb_path format
     json_path_convert = regexp_replace(json_path, '\$\.|]|\$\[' , '' , 'ig'); -- To remove "$." and "]" sign from the string 
     json_path_convert = regexp_replace(json_path_convert, '\.|\[' , ',' , 'ig'); -- To replace "." and "[" with "," to change into required format
-    new_jsonb_path = CONCAT('{',json_path_convert,'}'); -- Final required format of path by jsonb_set
+    new_jsonb_path = PG_CATALOG.CONCAT('{',json_path_convert,'}'); -- Final required format of path by jsonb_set
 
     key_exists = jsonb_path_exists(json_expression,json_path::jsonpath); -- To check if key exist in the given path
 
@@ -4476,6 +4554,38 @@ CREATE OR REPLACE FUNCTION SYS.TYPE_ID(IN type_name SYS.NVARCHAR)
 RETURNS INT AS
 'babelfishpg_tsql', 'type_id'
 LANGUAGE C STABLE;
+
+-- wrapper functions for reverse
+CREATE OR REPLACE FUNCTION sys.reverse(string ANYELEMENT)
+RETURNS sys.VARCHAR
+AS
+$BODY$
+DECLARE
+    string_arg_datatype text;
+    string_arg_typeid oid;
+    string_basetype oid;
+BEGIN
+    string_arg_typeid := pg_typeof(string)::oid;
+    string_arg_datatype := sys.translate_pg_type_to_tsql(string_arg_typeid);
+    IF string_arg_datatype IS NULL THEN
+        -- for User Defined Datatype, use immediate base type to check for argument datatype validation
+        string_basetype := sys.bbf_get_immediate_base_type_of_UDT(string_arg_typeid);
+        string_arg_datatype := sys.translate_pg_type_to_tsql(string_basetype);
+    END IF;
+
+    -- restricting arguments with invalid datatypes for reverse function
+    IF string_arg_datatype IN ('image', 'sql_variant', 'xml', 'geometry', 'geography') THEN
+        RAISE EXCEPTION 'Argument data type % is invalid for argument 1 of reverse function.', string_arg_datatype;
+    END IF;
+
+    IF string IS NULL THEN
+        RETURN NULL;
+    END IF;
+
+    RETURN PG_CATALOG.reverse(string::sys.varchar);
+END;
+$BODY$
+LANGUAGE plpgsql IMMUTABLE PARALLEL SAFE;
 
 CREATE OR REPLACE FUNCTION sys.reverse(string sys.NCHAR)
 RETURNS sys.NVARCHAR

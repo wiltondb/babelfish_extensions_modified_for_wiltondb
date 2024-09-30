@@ -2,7 +2,7 @@
 SELECT reverse(NULL)
 GO
 ~~START~~
-nvarchar
+varchar
 <NULL>
 ~~END~~
 
@@ -11,7 +11,7 @@ nvarchar
 SELECT reverse('')
 GO
 ~~START~~
-nvarchar
+varchar
 
 ~~END~~
 
@@ -21,7 +21,7 @@ DECLARE @inputString CHAR(25) = 'abc🙂defghi🙂🙂'
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
              ??ihgfed?cba
 ~~END~~
 
@@ -30,7 +30,7 @@ DECLARE @inputString CHAR(25) = '比尔·拉莫斯'
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
                    ???·??
 ~~END~~
 
@@ -39,7 +39,7 @@ DECLARE @inputString CHAR(25) = '比尔·拉莫斯'
 SELECT reverse(@inputString) COLLATE CHINESE_PRC_CI_AS
 GO
 ~~START~~
-nvarchar
+varchar
                    ???·??
 ~~END~~
 
@@ -49,8 +49,8 @@ DECLARE @inputString VARCHAR(25) = 'abc🙂defghi🙂🙂'
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
-🙂🙂ihgfed🙂cba
+varchar
+??ihgfed?cba
 ~~END~~
 
 
@@ -58,8 +58,8 @@ DECLARE @inputString VARCHAR(25) = '比尔·拉莫斯'
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
-斯莫拉·尔比
+varchar
+???·??
 ~~END~~
 
 
@@ -67,7 +67,7 @@ DECLARE @inputString VARCHAR(25) = '比尔·拉莫斯'
 SELECT reverse(@inputString) COLLATE CHINESE_PRC_CI_AS
 GO
 ~~START~~
-nvarchar
+varchar
 斯莫拉·尔比
 ~~END~~
 
@@ -76,7 +76,7 @@ nvarchar
 SELECT reverse(a) FROM babel_4839_reverse_chinese_prc_ci_as
 GO
 ~~START~~
-nvarchar
+varchar
 斯莫拉·尔比
 ~~END~~
 
@@ -84,7 +84,7 @@ nvarchar
 SELECT reverse(a) COLLATE CHINESE_PRC_CI_AS FROM babel_4839_reverse_chinese_prc_ci_as
 GO
 ~~START~~
-nvarchar
+varchar
 斯莫拉·尔比
 ~~END~~
 
@@ -93,7 +93,7 @@ nvarchar
 SELECT reverse(a) FROM babel_4839_reverse_chinese_prc_cs_as
 GO
 ~~START~~
-nvarchar
+varchar
 斯莫拉·尔比
 ~~END~~
 
@@ -101,7 +101,7 @@ nvarchar
 SELECT reverse(a) COLLATE CHINESE_PRC_CS_AS FROM babel_4839_reverse_chinese_prc_cs_as
 GO
 ~~START~~
-nvarchar
+varchar
 斯莫拉·尔比
 ~~END~~
 
@@ -110,7 +110,7 @@ nvarchar
 SELECT reverse(a) FROM babel_4839_reverse_chinese_prc_ci_ai
 GO
 ~~START~~
-nvarchar
+varchar
 斯莫拉·尔比
 ~~END~~
 
@@ -118,7 +118,7 @@ nvarchar
 SELECT reverse(a) COLLATE CHINESE_PRC_CI_AI FROM babel_4839_reverse_chinese_prc_ci_ai
 GO
 ~~START~~
-nvarchar
+varchar
 斯莫拉·尔比
 ~~END~~
 
@@ -127,7 +127,7 @@ nvarchar
 SELECT reverse(a) FROM babel_4839_reverse_arabic_ci_as
 GO
 ~~START~~
-nvarchar
+varchar
 نيقتملا عم هللا
 ~~END~~
 
@@ -135,7 +135,7 @@ nvarchar
 SELECT reverse(a) COLLATE ARABIC_CI_AS FROM babel_4839_reverse_arabic_ci_as
 GO
 ~~START~~
-nvarchar
+varchar
 نيقتملا عم هللا
 ~~END~~
 
@@ -144,7 +144,7 @@ nvarchar
 SELECT reverse(a) FROM babel_4839_reverse_arabic_cs_as
 GO
 ~~START~~
-nvarchar
+varchar
 نيقتملا عم هللا
 ~~END~~
 
@@ -152,7 +152,7 @@ nvarchar
 SELECT reverse(a) COLLATE ARABIC_CS_AS FROM babel_4839_reverse_arabic_cs_as
 GO
 ~~START~~
-nvarchar
+varchar
 نيقتملا عم هللا
 ~~END~~
 
@@ -161,7 +161,7 @@ nvarchar
 SELECT reverse(a) FROM babel_4839_reverse_arabic_ci_ai
 GO
 ~~START~~
-nvarchar
+varchar
 نيقتملا عم هللا
 ~~END~~
 
@@ -169,7 +169,7 @@ nvarchar
 SELECT reverse(a) COLLATE ARABIC_CI_AI FROM babel_4839_reverse_arabic_ci_ai
 GO
 ~~START~~
-nvarchar
+varchar
 نيقتملا عم هللا
 ~~END~~
 
@@ -227,8 +227,8 @@ DECLARE @inputString BINARY(10) = 0x6162636465666768
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
-00008676665646362616x0
+varchar
+hgfedcba
 ~~END~~
 
 
@@ -237,8 +237,8 @@ DECLARE @inputString VARBINARY(10) = 0x6162636465666768
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
-8676665646362616x0
+varchar
+hgfedcba
 ~~END~~
 
 
@@ -295,7 +295,7 @@ nvarchar
 SELECT * FROM babel_4839_reverse_dep_view_3
 GO
 ~~START~~
-nvarchar
+varchar
                                          ihgfedcba
 ~~END~~
 
@@ -303,7 +303,7 @@ nvarchar
 SELECT * FROM babel_4839_reverse_dep_view_4
 GO
 ~~START~~
-nvarchar
+varchar
 ihgfedcba
 ~~END~~
 
@@ -311,8 +311,8 @@ ihgfedcba
 SELECT * FROM babel_4839_reverse_dep_view_5
 GO
 ~~START~~
-nvarchar
-0202463626160202x0
+varchar
+  dcba  
 ~~END~~
 
 
@@ -337,15 +337,16 @@ nvarchar
 SELECT reverse(a) FROM babel_4839_reverse_UDT
 GO
 ~~START~~
-nvarchar
-665646362616x0
-~~END~~
+varchar
+~~ERROR (Code: 33557097)~~
+
+~~ERROR (Message: An error occurred during the current command (Done status 0). Argument data type image is invalid for argument 1 of reverse function.)~~
 
 
 SELECT reverse(b) FROM babel_4839_reverse_UDT
 GO
 ~~START~~
-nvarchar
+varchar
 fedcba
 ~~END~~
 
@@ -355,7 +356,7 @@ DECLARE @inputString date = '2016-12-21';
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 12-21-6102
 ~~END~~
 
@@ -365,7 +366,7 @@ DECLARE @inputString datetime = @date;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 00:00:00 12-21-6102
 ~~END~~
 
@@ -374,7 +375,7 @@ DECLARE @inputString smalldatetime = '1955-12-13 12:43:10';
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 00:34:21 31-21-5591
 ~~END~~
 
@@ -383,7 +384,7 @@ DECLARE @inputString time(4) = '12:10:05.1237';
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 7321.50:01:21
 ~~END~~
 
@@ -392,7 +393,7 @@ DECLARE @inputString datetimeoffset(4) = '1968-10-23 12:45:37.1234 +10:0';
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 00:01+ 4321.73:54:21 32-01-8691
 ~~END~~
 
@@ -401,7 +402,7 @@ DECLARE @inputString datetime2(4) = '1968-10-23 12:45:37.1237';
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 7321.73:54:21 32-01-8691
 ~~END~~
 
@@ -410,7 +411,7 @@ DECLARE @inputString decimal = 123456;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 654321
 ~~END~~
 
@@ -419,7 +420,7 @@ DECLARE @inputString numeric = 12345.12;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 54321
 ~~END~~
 
@@ -428,7 +429,7 @@ DECLARE @inputString float = 12345.1;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 1.54321
 ~~END~~
 
@@ -437,7 +438,7 @@ DECLARE @inputString real = 12345.1;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 1.54321
 ~~END~~
 
@@ -446,7 +447,7 @@ DECLARE @inputString bigint = 12345678;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 87654321
 ~~END~~
 
@@ -455,7 +456,7 @@ DECLARE @inputString int = 12345678;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 87654321
 ~~END~~
 
@@ -464,7 +465,7 @@ DECLARE @inputString smallint = 12356;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 65321
 ~~END~~
 
@@ -473,7 +474,7 @@ DECLARE @inputString tinyint = 235;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 532
 ~~END~~
 
@@ -482,7 +483,7 @@ DECLARE @inputString money = 12356;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 0000.65321
 ~~END~~
 
@@ -491,7 +492,7 @@ DECLARE @inputString smallmoney = 12356;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 0000.65321
 ~~END~~
 
@@ -500,7 +501,7 @@ DECLARE @inputString bit = 1;
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 1
 ~~END~~
 
@@ -509,7 +510,7 @@ DECLARE @inputString uniqueidentifier = CAST ('6F9619FF-8B86-D011-B42D-00C04FC96
 SELECT reverse(@inputString)
 GO
 ~~START~~
-nvarchar
+varchar
 FF469CF40C00-D24B-110D-68B8-FF9169F6
 ~~END~~
 
@@ -517,9 +518,10 @@ FF469CF40C00-D24B-110D-68B8-FF9169F6
 SELECT reverse(a) from babel_4839_reverse_image;
 GO
 ~~START~~
-nvarchar
-646443639334644303340303d244234324d213130344d263832483d26464931363936463x0
-~~END~~
+varchar
+~~ERROR (Code: 33557097)~~
+
+~~ERROR (Message: An error occurred during the current command (Done status 0). Argument data type image is invalid for argument 1 of reverse function.)~~
 
 
 -- input datatype text
@@ -543,18 +545,17 @@ nvarchar
 DECLARE @inputString sql_variant = CAST ('6F9619FF-8B86-D011-B42D-00C04FC964FF' AS sql_variant)
 SELECT reverse(@inputString)
 GO
-~~START~~
-varchar
-FF469CF40C00-D24B-110D-68B8-FF9169F6
-~~END~~
+~~ERROR (Code: 33557097)~~
+
+~~ERROR (Message: Argument data type sql_variant is invalid for argument 1 of reverse function.)~~
 
 
 DECLARE @inputString xml = CAST ('<body><fruit/></body>' AS xml)
 SELECT reverse(@inputString)
 GO
-~~ERROR (Code: 206)~~
+~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: The function reverse is found but cannot be used. Possibly due to datatype mismatch and implicit casting is not allowed.)~~
+~~ERROR (Message: Argument data type xml is invalid for argument 1 of reverse function.)~~
 
 
 DECLARE @inputString geometry = geometry::STGeomFromText('POINT (1 2)', 0);
@@ -577,7 +578,7 @@ DECLARE @inputString sql_variant = CAST ('6F9619FF-8B86-D011-B42D-00C04FC964FF' 
 SELECT reverse(CAST(@inputString AS VARCHAR(50)))
 GO
 ~~START~~
-nvarchar
+varchar
 FF469CF40C00-D24B-110D-68B8-FF9169F6
 ~~END~~
 
@@ -586,7 +587,7 @@ DECLARE @inputString xml = CAST ('<body><fruit/></body>' AS xml)
 SELECT reverse(CAST(@inputString AS VARCHAR(50)))
 GO
 ~~START~~
-nvarchar
+varchar
 >ydob/<>/tiurf<>ydob<
 ~~END~~
 

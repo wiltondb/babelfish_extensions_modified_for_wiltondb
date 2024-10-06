@@ -409,6 +409,27 @@ PG_FUNCTION_INFO_V1(bigint_sum);
 PG_FUNCTION_INFO_V1(bigint_avg);
 PG_FUNCTION_INFO_V1(int4int2_sum);
 PG_FUNCTION_INFO_V1(int4int2_avg);
+PG_FUNCTION_INFO_V1(tinyintin);
+PG_FUNCTION_INFO_V1(tinyintout);
+PG_FUNCTION_INFO_V1(tinyintrecv);
+PG_FUNCTION_INFO_V1(tinyintsend);
+PG_FUNCTION_INFO_V1(tinyint_eq);
+PG_FUNCTION_INFO_V1(tinyint_ne);
+PG_FUNCTION_INFO_V1(tinyint_lt);
+PG_FUNCTION_INFO_V1(tinyint_le);
+PG_FUNCTION_INFO_V1(tinyint_gt);
+PG_FUNCTION_INFO_V1(tinyint_ge);
+PG_FUNCTION_INFO_V1(tinyint_cmp);
+PG_FUNCTION_INFO_V1(tinyint_hash);
+PG_FUNCTION_INFO_V1(tinyint_smaller);
+PG_FUNCTION_INFO_V1(tinyint_larger);
+PG_FUNCTION_INFO_V1(smalint_to_tinyint);
+PG_FUNCTION_INFO_V1(tinyintup);
+PG_FUNCTION_INFO_V1(tinyintum);
+PG_FUNCTION_INFO_V1(tinyintand);
+PG_FUNCTION_INFO_V1(tinyintor);
+PG_FUNCTION_INFO_V1(tinyintxor);
+PG_FUNCTION_INFO_V1(tinyintnot);
 
 static void alloc_var(NumericVar *var, int ndigits);
 static void free_var(NumericVar *var);
@@ -1114,4 +1135,278 @@ Datum
 bigint_avg(PG_FUNCTION_ARGS)
 {
 	return bigint_poly_aggr_final(fcinfo, TSQL_AVG);
+}
+
+void
+tinyint_range_check(int16 val)
+{
+	if (val < 0 || val > PG_UINT8_MAX)
+		ereport(ERROR,
+			(errcode(ERRCODE_NUMERIC_VALUE_OUT_OF_RANGE),
+			 errmsg("value \"%hi\" is out of range for type %s",
+					val, "tinyint")));
+}
+
+/*
+ *		tinyintin			- converts "num" to tinyint
+ */
+Datum
+tinyintin(PG_FUNCTION_ARGS)
+{
+	char	   *num = PG_GETARG_CSTRING(0);
+	const char *ptr = num;
+	int16		val = 0;
+
+  /* skip leading spaces */
+	while (*ptr && isspace((unsigned char) *ptr))
+		ptr++;	
+	
+	if (!(*ptr))
+		return val;
+
+	val = pg_strtoint16(num);
+	tinyint_range_check(val);
+
+	PG_RETURN_INT16(val);
+}
+
+/*
+ *		tinyintout			- converts tinyint to "num"
+ */
+Datum
+tinyintout(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	char	   *result = NULL;
+
+	tinyint_range_check(arg1);
+	result = (char *) palloc(7);	/* sign, 5 digits, '\0' */
+	pg_itoa(arg1, result);
+
+	PG_RETURN_CSTRING(result);
+}
+
+/*
+ *		tinyintrecv			- converts external binary format to tinyint
+ */
+Datum
+tinyintrecv(PG_FUNCTION_ARGS)
+{
+	StringInfo	buf = (StringInfo) PG_GETARG_POINTER(0);
+	int16		val = (int16) pq_getmsgint(buf, sizeof(int16));
+
+	tinyint_range_check(val);
+
+	PG_RETURN_INT16(val);
+}
+
+/*
+ *		tinyintsend			- converts tinyint to binary format
+ */
+Datum
+tinyintsend(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	StringInfoData buf;
+
+	tinyint_range_check(arg1);
+	pq_begintypsend(&buf);
+	pq_sendint16(&buf, arg1);
+
+	PG_RETURN_BYTEA_P(pq_endtypsend(&buf));
+}
+
+Datum
+tinyint_eq(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_BOOL(arg1 == arg2);
+}
+
+Datum
+tinyint_ne(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_BOOL(arg1 != arg2);
+}
+
+Datum
+tinyint_lt(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_BOOL(arg1 < arg2);
+}
+
+Datum
+tinyint_le(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_BOOL(arg1 <= arg2);
+}
+
+Datum
+tinyint_gt(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_BOOL(arg1 > arg2);
+}
+
+Datum
+tinyint_ge(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_BOOL(arg1 >= arg2);
+}
+
+Datum
+tinyint_cmp(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_INT32((arg1 < arg2) ? -1 : ((arg1 > arg2) ? 1 : 0));
+}
+
+Datum
+tinyint_hash(PG_FUNCTION_ARGS)
+{
+	int16		val = PG_GETARG_INT16(0);
+
+	tinyint_range_check(val);
+
+	return UInt32GetDatum(hash_bytes_uint32((int32) val));
+}
+
+Datum
+tinyint_smaller(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_INT16(arg1 > arg2 ? arg1 : arg2);
+}
+
+Datum
+tinyint_larger(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_INT16(arg1 < arg2 ? arg1 : arg2);
+}
+
+Datum
+smalint_to_tinyint(PG_FUNCTION_ARGS)
+{
+	int16		val = PG_GETARG_INT16(0);
+
+	tinyint_range_check(val);
+
+	PG_RETURN_INT16(val);
+}
+
+
+Datum
+tinyintup(PG_FUNCTION_ARGS)
+{
+	int16		val = PG_GETARG_INT16(0);
+
+	tinyint_range_check(val);
+
+	PG_RETURN_INT16(val);
+}
+
+Datum
+tinyintum(PG_FUNCTION_ARGS)
+{
+	int16		val = PG_GETARG_INT16(0);
+
+	tinyint_range_check(val);
+
+	PG_RETURN_INT16(-val);
+}
+
+Datum
+tinyintand(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_INT16(((uint8) arg1) & ((uint8) arg2));
+}
+
+Datum
+tinyintor(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_INT16(((uint8) arg1) | ((uint8) arg2));
+}
+
+Datum
+tinyintxor(PG_FUNCTION_ARGS)
+{
+	int16		arg1 = PG_GETARG_INT16(0);
+	int16		arg2 = PG_GETARG_INT16(1);
+
+	tinyint_range_check(arg1);
+	tinyint_range_check(arg2);
+
+	PG_RETURN_INT16(((uint8) arg1) ^ ((uint8) arg2));
+}
+
+Datum
+tinyintnot(PG_FUNCTION_ARGS)
+{
+	int16		val = PG_GETARG_INT16(0);
+
+	tinyint_range_check(val);
+
+	PG_RETURN_INT16(~((uint8) val));
 }

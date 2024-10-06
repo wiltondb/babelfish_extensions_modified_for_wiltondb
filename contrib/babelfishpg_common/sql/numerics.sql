@@ -1,4 +1,37 @@
-CREATE DOMAIN sys.TINYINT AS SMALLINT CHECK (VALUE >= 0 AND VALUE <= 255);
+CREATE TYPE sys.TINYINT;
+
+CREATE OR REPLACE FUNCTION sys.tinyintin(cstring)
+RETURNS sys.TINYINT
+AS 'babelfishpg_common', 'tinyintin'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OR REPLACE FUNCTION sys.tinyintout(sys.TINYINT)
+RETURNS cstring
+AS 'babelfishpg_common', 'tinyintout'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OR REPLACE FUNCTION sys.tinyintrecv(internal)
+RETURNS sys.TINYINT
+AS 'babelfishpg_common', 'tinyintrecv'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OR REPLACE FUNCTION sys.tinyintsend(sys.TINYINT)
+RETURNS bytea
+AS 'babelfishpg_common', 'tinyintsend'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE TYPE sys.TINYINT(
+	INPUT          = sys.tinyintin,
+	OUTPUT         = sys.tinyintout,
+	RECEIVE        = sys.tinyintrecv,
+	SEND           = sys.tinyintsend,
+	INTERNALLENGTH = 2,
+	ALIGNMENT      = 'int2',
+	STORAGE        = 'plain',
+	CATEGORY       = 'N',
+  PASSEDBYVALUE
+);
+
 CREATE DOMAIN sys.INT AS INTEGER;
 CREATE DOMAIN sys.BIGINT AS BIGINT;
 CREATE DOMAIN sys.REAL AS REAL;
@@ -15,21 +48,6 @@ RETURNS sys.nchar
 AS 'numeric'
 LANGUAGE INTERNAL IMMUTABLE STRICT PARALLEL SAFE;
 
-
-CREATE OR REPLACE FUNCTION sys.tinyintxor(leftarg sys.tinyint, rightarg sys.tinyint)
-RETURNS sys.tinyint
-AS $$
-SELECT CAST(CAST(sys.bitxor(CAST(CAST(leftarg AS int4) AS pg_catalog.bit(16)),
-                    CAST(CAST(rightarg AS int4) AS pg_catalog.bit(16))) AS int4) AS sys.tinyint);
-$$
-LANGUAGE SQL STABLE;
-
-CREATE OPERATOR sys.^ (
-    LEFTARG = sys.tinyint,
-    RIGHTARG = sys.tinyint,
-    FUNCTION = sys.tinyintxor,
-    COMMUTATOR = ^
-);
 
 CREATE OR REPLACE FUNCTION sys.int2xor(leftarg int2, rightarg int2)
 RETURNS int2
@@ -76,17 +94,214 @@ CREATE OPERATOR sys.^ (
     COMMUTATOR = ^
 );
 
--- tinyint operator definitions to force return type to tinyyint
+-- tinyint cast definitions
+
+-- tinyint smallint
+
+CREATE OR REPLACE FUNCTION sys.smalint_to_tinyint(SMALLINT)
+RETURNS sys.TINYINT
+AS 'babelfishpg_common', 'smalint_to_tinyint'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (SMALLINT AS sys.TINYINT)
+WITH FUNCTION sys.smalint_to_tinyint(SMALLINT) AS IMPLICIT;
+
+CREATE CAST (sys.TINYINT AS SMALLINT)
+WITHOUT FUNCTION AS IMPLICIT;
+
+CREATE OR REPLACE FUNCTION sys.int2tinyint(INTEGER)
+RETURNS sys.TINYINT
+AS $$
+  SELECT $1::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (INTEGER AS sys.TINYINT)
+WITH FUNCTION sys.int2tinyint (INTEGER) AS IMPLICIT;
+
+CREATE OR REPLACE FUNCTION sys.tinyint2int(sys.TINYINT)
+RETURNS INTEGER
+AS $$
+  SELECT $1::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (sys.TINYINT AS INTEGER)
+WITH FUNCTION sys.tinyint2int (sys.TINYINT) AS IMPLICIT;
+
+-- tinyint - bigint
+
+CREATE OR REPLACE FUNCTION sys.tinyint2bigint(sys.TINYINT)
+RETURNS BIGINT
+AS $$
+  SELECT $1::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (sys.TINYINT AS BIGINT)
+WITH FUNCTION sys.tinyint2bigint (sys.TINYINT) AS IMPLICIT;
+
+-- tinyint - numeric
+
+CREATE OR REPLACE FUNCTION sys.tinyint2numeric(sys.TINYINT)
+RETURNS NUMERIC
+AS $$
+  SELECT $1::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (sys.TINYINT AS NUMERIC)
+WITH FUNCTION sys.tinyint2numeric (sys.TINYINT) AS IMPLICIT;
+
+CREATE OR REPLACE FUNCTION sys.numeric2tinyint(NUMERIC)
+RETURNS sys.TINYINT
+AS $$
+  SELECT $1::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (NUMERIC AS sys.TINYINT)
+WITH FUNCTION sys.numeric2tinyint (NUMERIC) AS IMPLICIT;
+
+
+-- tinyint - jsonb
+
+CREATE OR REPLACE FUNCTION sys.jsonb2tinyint(JSONB)
+RETURNS sys.TINYINT
+AS $$
+  SELECT $1::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (JSONB AS sys.TINYINT)
+WITH FUNCTION sys.jsonb2tinyint (JSONB) AS IMPLICIT;
+
+-- tinyint operator definitions to force return type to tinyint
+
+CREATE FUNCTION sys.tinyinteq(sys.TINYINT, sys.TINYINT)
+RETURNS bool
+AS 'babelfishpg_common', 'tinyint_eq'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE FUNCTION sys.tinyintne(sys.TINYINT, sys.TINYINT)
+RETURNS bool
+AS 'babelfishpg_common', 'tinyint_ne'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE FUNCTION sys.tinyintlt(sys.TINYINT, sys.TINYINT)
+RETURNS bool
+AS 'babelfishpg_common', 'tinyint_lt'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE FUNCTION sys.tinyintle(sys.TINYINT, sys.TINYINT)
+RETURNS bool
+AS 'babelfishpg_common', 'tinyint_le'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE FUNCTION sys.tinyintgt(sys.TINYINT, sys.TINYINT)
+RETURNS bool
+AS 'babelfishpg_common', 'tinyint_gt'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE FUNCTION sys.tinyintge(sys.TINYINT, sys.TINYINT)
+RETURNS bool
+AS 'babelfishpg_common', 'tinyint_ge'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OPERATOR sys.= (
+    LEFTARG    = sys.TINYINT,
+    RIGHTARG   = sys.TINYINT,
+    COMMUTATOR = =,
+    NEGATOR    = <>,
+    PROCEDURE  = sys.tinyinteq,
+    RESTRICT   = eqsel,
+    JOIN       = eqjoinsel,
+    MERGES
+);
+
+CREATE OPERATOR sys.<> (
+    LEFTARG    = sys.TINYINT,
+    RIGHTARG   = sys.TINYINT,
+    NEGATOR    = =,
+    COMMUTATOR = <>,
+    PROCEDURE  = sys.tinyintne,
+    RESTRICT   = neqsel,
+    JOIN       = neqjoinsel
+);
+
+CREATE OPERATOR sys.< (
+    LEFTARG    = sys.TINYINT,
+    RIGHTARG   = sys.TINYINT,
+    NEGATOR    = >=,
+    COMMUTATOR = >,
+    PROCEDURE  = sys.tinyintlt,
+    RESTRICT   = scalarltsel,
+    JOIN       = scalarltjoinsel
+);
+
+CREATE OPERATOR sys.<= (
+    LEFTARG    = sys.TINYINT,
+    RIGHTARG   = sys.TINYINT,
+    NEGATOR    = >,
+    COMMUTATOR = >=,
+    PROCEDURE  = sys.tinyintle,
+    RESTRICT   = scalarlesel,
+    JOIN       = scalarlejoinsel
+);
+
+CREATE OPERATOR sys.> (
+    LEFTARG    = sys.TINYINT,
+    RIGHTARG   = sys.TINYINT,
+    NEGATOR    = <=,
+    COMMUTATOR = <,
+    PROCEDURE  = sys.tinyintgt,
+    RESTRICT   = scalargtsel,
+    JOIN       = scalargtjoinsel
+);
+
+CREATE OPERATOR sys.>= (
+    LEFTARG    = sys.TINYINT,
+    RIGHTARG   = sys.TINYINT,
+    NEGATOR    = <,
+    COMMUTATOR = <=,
+    PROCEDURE  = sys.tinyintge,
+    RESTRICT   = scalargesel,
+    JOIN       = scalargejoinsel
+);
+
+CREATE FUNCTION tinyint_cmp(sys.TINYINT, sys.TINYINT)
+RETURNS INT4
+AS 'babelfishpg_common', 'tinyint_cmp'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE FUNCTION tinyint_hash(sys.TINYINT)
+RETURNS INT4
+AS 'babelfishpg_common', 'tinyint_hash'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OPERATOR CLASS sys.tinyint_ops
+DEFAULT FOR TYPE sys.TINYINT USING btree AS
+    OPERATOR    1   <  (sys.TINYINT, sys.TINYINT),
+    OPERATOR    2   <= (sys.TINYINT, sys.TINYINT),
+    OPERATOR    3   =  (sys.TINYINT, sys.TINYINT),
+    OPERATOR    4   >= (sys.TINYINT, sys.TINYINT),
+    OPERATOR    5   >  (sys.TINYINT, sys.TINYINT),
+    FUNCTION    1   tinyint_cmp(sys.TINYINT, sys.TINYINT);
+
+CREATE OPERATOR CLASS sys.tinyint_ops
+DEFAULT FOR TYPE sys.TINYINT USING hash AS
+    OPERATOR    1   =  (sys.TINYINT, sys.TINYINT),
+    FUNCTION    1   tinyint_hash(sys.TINYINT);
 
 CREATE OR REPLACE FUNCTION sys.tinyint_larger(sys.TINYINT, sys.TINYINT)
 RETURNS sys.TINYINT
-AS 'int2larger'
-LANGUAGE INTERNAL IMMUTABLE STRICT PARALLEL SAFE;
+AS 'babelfishpg_common', 'tinyint_larger'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
 
 CREATE OR REPLACE FUNCTION sys.tinyint_smaller(sys.TINYINT, sys.TINYINT)
 RETURNS sys.TINYINT
-AS 'int2smaller'
-LANGUAGE INTERNAL IMMUTABLE STRICT PARALLEL SAFE;
+AS 'babelfishpg_common', 'tinyint_smaller'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
 
 CREATE OR REPLACE AGGREGATE sys.max(sys.TINYINT)
 (
@@ -104,12 +319,71 @@ CREATE OR REPLACE AGGREGATE sys.min(sys.TINYINT)
     parallel = safe
 );
 
-CREATE FUNCTION sys.tinyintum(sys.TINYINT)
+CREATE OR REPLACE FUNCTION sys.tinyintand(sys.TINYINT, sys.TINYINT)
 RETURNS sys.TINYINT
-AS $$
-  SELECT int2um($1)::sys.TINYINT;
-$$
-LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+AS 'babelfishpg_common', 'tinyintand'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OR REPLACE FUNCTION sys.tinyintor(sys.TINYINT, sys.TINYINT)
+RETURNS sys.TINYINT
+AS 'babelfishpg_common', 'tinyintor'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OR REPLACE FUNCTION sys.tinyintxor(sys.TINYINT, sys.TINYINT)
+RETURNS sys.TINYINT
+AS 'babelfishpg_common', 'tinyintxor'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OR REPLACE FUNCTION sys.tinyintnot(sys.TINYINT)
+RETURNS sys.TINYINT
+AS 'babelfishpg_common', 'tinyintnot'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OPERATOR sys.& (
+    LEFTARG = sys.TINYINT,
+    RIGHTARG = sys.TINYINT,
+    FUNCTION = sys.tinyintand,
+    COMMUTATOR = &
+);
+
+CREATE OPERATOR sys.| (
+    LEFTARG = sys.TINYINT,
+    RIGHTARG = sys.TINYINT,
+    FUNCTION = sys.tinyintor,
+    COMMUTATOR = |
+);
+
+CREATE OPERATOR sys.^ (
+    LEFTARG = sys.TINYINT,
+    RIGHTARG = sys.TINYINT,
+    FUNCTION = sys.tinyintxor,
+    COMMUTATOR = ^
+);
+
+CREATE OPERATOR sys.~ (
+    RIGHTARG   = sys.TINYINT,
+    PROCEDURE  = sys.tinyintnot
+);
+
+CREATE FUNCTION sys.tinyintup(sys.TINYINT)
+RETURNS sys.TINYINT
+AS 'babelfishpg_common', 'tinyintup'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE FUNCTION sys.tinyintum(sys.TINYINT)
+RETURNS SMALLINT
+AS 'babelfishpg_common', 'tinyintum'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OPERATOR sys.+ (
+    RIGHTARG   = sys.TINYINT,
+    PROCEDURE  = sys.tinyintup
+);
+
+CREATE OPERATOR sys.- (
+    RIGHTARG   = sys.TINYINT,
+    PROCEDURE  = sys.tinyintum
+);
 
 CREATE FUNCTION sys.tinyintpl(sys.TINYINT, sys.TINYINT)
 RETURNS sys.TINYINT
@@ -139,6 +413,13 @@ AS $$
 $$
 LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
 
+CREATE FUNCTION sys.tinyintmod(sys.TINYINT, sys.TINYINT)
+RETURNS sys.TINYINT
+AS $$
+  SELECT int2mod($1,$2)::sys.TINYINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
 CREATE OPERATOR sys.+ (
     LEFTARG    = sys.TINYINT,
     RIGHTARG   = sys.TINYINT,
@@ -150,11 +431,6 @@ CREATE OPERATOR sys.- (
     LEFTARG    = sys.TINYINT,
     RIGHTARG   = sys.TINYINT,
     PROCEDURE  = sys.tinyintmi
-);
-
-CREATE OPERATOR sys.- (
-    RIGHTARG   = sys.TINYINT,
-    PROCEDURE  = sys.tinyintum
 );
 
 CREATE OPERATOR sys.* (
@@ -170,6 +446,79 @@ CREATE OPERATOR sys./ (
     PROCEDURE  = sys.tinyintdiv
 );
 
+CREATE OPERATOR sys.% (
+    LEFTARG    = sys.TINYINT,
+    RIGHTARG   = sys.TINYINT,
+    PROCEDURE  = sys.tinyintmod
+);
+
+-- tinyint - varchar
+
+CREATE OR REPLACE FUNCTION sys.varchar2tinyint(sys.VARCHAR)
+RETURNS sys.TINYINT
+AS 'babelfishpg_common', 'varchar2tinyint'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (sys.VARCHAR AS sys.TINYINT)
+WITH FUNCTION sys.varchar2tinyint(sys.VARCHAR) AS IMPLICIT;
+
+-- tinyint - int
+
+CREATE FUNCTION sys.tinyinteqint(sys.TINYINT, INTEGER)
+RETURNS BOOL
+AS $$
+  SELECT $1::SMALLINT = $2;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OPERATOR sys.= (
+    LEFTARG    = sys.TINYINT,
+    RIGHTARG   = INTEGER,
+    COMMUTATOR = =,
+    PROCEDURE  = sys.tinyinteqint
+);
+
+CREATE FUNCTION sys.inteqtinyint(INTEGER, sys.TINYINT)
+RETURNS BOOL
+AS $$
+  SELECT $1 = $2::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OPERATOR sys.= (
+    LEFTARG    = INTEGER,
+    RIGHTARG   = sys.TINYINT,
+    COMMUTATOR = =,
+    PROCEDURE  = sys.inteqtinyint
+);
+
+CREATE FUNCTION sys.tinyintltint(sys.TINYINT, INTEGER)
+RETURNS BOOL
+AS $$
+  SELECT $1::SMALLINT < $2;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OPERATOR sys.< (
+    LEFTARG    = sys.TINYINT,
+    RIGHTARG   = INTEGER,
+    COMMUTATOR = <,
+    PROCEDURE  = sys.tinyintltint
+);
+
+CREATE FUNCTION sys.intlttinyint(INTEGER, sys.TINYINT)
+RETURNS BOOL
+AS $$
+  SELECT $1 < $2::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE OPERATOR sys.< (
+    LEFTARG    = INTEGER,
+    RIGHTARG   = sys.TINYINT,
+    COMMUTATOR = <,
+    PROCEDURE  = sys.intlttinyint
+);
 
 CREATE FUNCTION sys.smallmoneytinyintpl(sys.SMALLMONEY, sys.TINYINT)
 RETURNS sys.SMALLMONEY

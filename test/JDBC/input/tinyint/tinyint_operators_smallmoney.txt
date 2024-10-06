@@ -1,0 +1,46 @@
+
+-- assignment
+declare @a tinyint = 1; declare @b smallmoney; set @b = @a; select @b;
+declare @a smallmoney = 1; declare @b tinyint; set @b = @a; select @b;
+
+-- arithmetic
+
+select cast(1 as tinyint) + cast(1 as smallmoney)
+select cast(1 as tinyint) - cast(1 as smallmoney)
+select cast(2 as tinyint) * cast(2 as smallmoney)
+select cast(4 as tinyint) / cast(2 as smallmoney)
+select cast(5 as tinyint) % cast(2 as smallmoney)
+
+select cast(1 as smallmoney) + cast(1 as tinyint)
+select cast(1 as smallmoney) - cast(1 as tinyint)
+select cast(1 as smallmoney) * cast(2 as tinyint)
+select cast(4 as smallmoney) / cast(2 as tinyint)
+select cast(5 as smallmoney) % cast(2 as tinyint)
+
+declare @a tinyint = 1; select @a += cast(1 as smallmoney); select @a;
+declare @a tinyint = 2; select @a -= cast(2 as smallmoney); select @a;
+declare @a tinyint = 4; select @a *= cast(2 as smallmoney); select @a;
+declare @a tinyint = 5; select @a /= cast(2 as smallmoney); select @a;
+
+declare @a smallmoney = 1; select @a += cast(1 as tinyint); select @a;
+declare @a smallmoney = 2; select @a -= cast(2 as tinyint); select @a;
+declare @a smallmoney = 4; select @a *= cast(2 as tinyint); select @a;
+declare @a smallmoney = 5; select @a /= cast(2 as tinyint); select @a;
+
+-- comparison
+
+select 1 where cast(2 as tinyint) >  cast(1 as smallmoney)
+select 1 where cast(1 as tinyint) >= cast(1 as smallmoney)
+select 1 where cast(1 as tinyint) =  cast(1 as smallmoney)
+select 1 where cast(1 as tinyint) <  cast(2 as smallmoney)
+select 1 where cast(1 as tinyint) <= cast(1 as smallmoney)
+select 1 where cast(1 as tinyint) <> cast(2 as smallmoney)
+select 1 where cast(1 as tinyint) != cast(2 as smallmoney)
+
+select 1 where cast(2 as smallmoney) >  cast(1 as tinyint)
+select 1 where cast(1 as smallmoney) >= cast(1 as tinyint)
+select 1 where cast(1 as smallmoney) =  cast(1 as tinyint)
+select 1 where cast(1 as smallmoney) <  cast(2 as tinyint)
+select 1 where cast(1 as smallmoney) <= cast(1 as tinyint)
+select 1 where cast(1 as smallmoney) <> cast(2 as tinyint)
+select 1 where cast(1 as smallmoney) != cast(2 as tinyint)

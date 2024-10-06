@@ -39,6 +39,7 @@
 #include "utils/uuid.h"
 #include "utils/timestamp.h"
 #include "utils/numeric.h"
+#include "numeric.h"
 #include "typecode.h"
 #include "varchar.h"
 
@@ -373,6 +374,7 @@ PG_FUNCTION_INFO_V1(varcharge);
 PG_FUNCTION_INFO_V1(varcharcmp);
 PG_FUNCTION_INFO_V1(hashvarchar);
 
+PG_FUNCTION_INFO_V1(varchar2tinyint);
 PG_FUNCTION_INFO_V1(varchar2int2);
 PG_FUNCTION_INFO_V1(varchar2int4);
 PG_FUNCTION_INFO_V1(varchar2int8);
@@ -672,6 +674,21 @@ varchar2cstring(const VarChar *source)
 	result[len] = '\0';
 
 	return result;
+}
+
+Datum
+varchar2tinyint(PG_FUNCTION_ARGS)
+{
+	VarChar    *source = PG_GETARG_VARCHAR_PP(0);
+	int16		val = 0;
+
+	if (varcharTruelen(source) == 0)
+		PG_RETURN_INT16(0);
+
+	val = pg_strtoint16(varchar2cstring(source));
+	tinyint_range_check(val);
+
+	PG_RETURN_INT16(val);
 }
 
 Datum

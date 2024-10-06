@@ -1,0 +1,46 @@
+
+-- assignment
+declare @a tinyint = 1; declare @b decimal; set @b = @a; select @b;
+declare @a decimal = 1; declare @b tinyint; set @b = @a; select @b;
+
+-- arithmetic
+
+select cast(1 as tinyint) + cast(1 as decimal)
+select cast(1 as tinyint) - cast(1 as decimal)
+select cast(2 as tinyint) * cast(2 as decimal)
+select cast(4 as tinyint) / cast(2 as decimal)
+select cast(5 as tinyint) % cast(2 as decimal)
+
+select cast(1 as decimal) + cast(1 as tinyint)
+select cast(1 as decimal) - cast(1 as tinyint)
+select cast(1 as decimal) * cast(2 as tinyint)
+select cast(4 as decimal) / cast(2 as tinyint)
+select cast(5 as decimal) % cast(2 as tinyint)
+
+declare @a tinyint = 1; select @a += cast(1 as decimal); select @a;
+declare @a tinyint = 2; select @a -= cast(2 as decimal); select @a;
+declare @a tinyint = 4; select @a *= cast(2 as decimal); select @a;
+--declare @a tinyint = 5; select @a /= cast(2 as decimal); select @a;
+
+declare @a decimal = 1; select @a += cast(1 as tinyint); select @a;
+declare @a decimal = 2; select @a -= cast(2 as tinyint); select @a;
+declare @a decimal = 4; select @a *= cast(2 as tinyint); select @a;
+--declare @a decimal = 5; select @a /= cast(2 as tinyint); select @a;
+
+-- comparison
+
+select 1 where cast(2 as tinyint) >  cast(1 as decimal)
+select 1 where cast(1 as tinyint) >= cast(1 as decimal)
+select 1 where cast(1 as tinyint) =  cast(1 as decimal)
+select 1 where cast(1 as tinyint) <  cast(2 as decimal)
+select 1 where cast(1 as tinyint) <= cast(1 as decimal)
+select 1 where cast(1 as tinyint) <> cast(2 as decimal)
+select 1 where cast(1 as tinyint) != cast(2 as decimal)
+
+select 1 where cast(2 as decimal) >  cast(1 as tinyint)
+select 1 where cast(1 as decimal) >= cast(1 as tinyint)
+select 1 where cast(1 as decimal) =  cast(1 as tinyint)
+select 1 where cast(1 as decimal) <  cast(2 as tinyint)
+select 1 where cast(1 as decimal) <= cast(1 as tinyint)
+select 1 where cast(1 as decimal) <> cast(2 as tinyint)
+select 1 where cast(1 as decimal) != cast(2 as tinyint)

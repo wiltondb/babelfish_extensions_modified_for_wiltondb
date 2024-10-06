@@ -1,0 +1,36 @@
+-- literals
+select cast(1 as tinyint)
+select cast(null as tinyint)
+select cast('' as tinyint)
+select cast('  ' as tinyint)
+select cast('   ' as tinyint)
+select cast('1' as tinyint)
+
+-- unary
+select +cast(1 as tinyint)
+select -cast(1 as tinyint)
+select ~cast(1 as tinyint)
+
+
+-- aggregate
+select avg(cast(1 as tinyint))
+select max(cast(1 as tinyint))
+select min(cast(1 as tinyint))
+--select stdev(cast(1 as tinyint))
+--select stdevp(cast(1 as tinyint))
+select sum(cast(1 as tinyint))
+--select var(cast(1 as tinyint))
+--select varp(cast(1 as tinyint))
+
+-- union
+select cast(0 as tinyint) union select null
+select cast(0 as tinyint) union select ''
+select cast(2 as tinyint) union select '2'
+select cast(0 as tinyint) union all select null
+select cast(0 as tinyint) union all select ''
+select cast(2 as tinyint) union all select '2'
+
+-- case
+select case when 1 > 0 then cast(1 as tinyint) else null end
+select case when 1 > 0 then cast(1 as tinyint) else '' end
+select case when 1 > 0 then cast(1 as tinyint) else '2' end

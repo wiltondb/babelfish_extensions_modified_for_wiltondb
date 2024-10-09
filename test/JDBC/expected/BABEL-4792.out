@@ -7,7 +7,7 @@ create proc [%%#%@$^$姓氏すず🤬🤯🫣🤗🫡🤔🫢🤭き,😀 鈴木
 go
 ~~ERROR (Code: 2714)~~
 
-~~ERROR (Message: Function '%%#%@$^$姓氏すず🤬🤯86d3db6066be0016789ff9cd274595b8' already exists with the same name)~~
+~~ERROR (Message: function "%%#%@$^$姓氏すず🤬🤯86d3db6066be0016789ff9cd274595b8" already exists with same argument types)~~
 
 
 -- Expect error for duplicate function
@@ -19,7 +19,7 @@ end
 go
 ~~ERROR (Code: 2714)~~
 
-~~ERROR (Message: Function '%%#%@$^$姓氏すず🤬🤯86d3db6066be0016789ff9cd274595b8' already exists with the same name)~~
+~~ERROR (Message: function "%%#%@$^$姓氏すず🤬🤯86d3db6066be0016789ff9cd274595b8" already exists with same argument types)~~
 
 
 -- Cleanup
@@ -43,7 +43,7 @@ end
 go
 ~~ERROR (Code: 2714)~~
 
-~~ERROR (Message: Function '%%#%@$^$姓氏すず🤬🤯86d3db6066be0016789ff9cd274595b8' already exists with the same name)~~
+~~ERROR (Message: function "%%#%@$^$姓氏すず🤬🤯86d3db6066be0016789ff9cd274595b8" already exists with same argument types)~~
 
 
 -- Cleanup

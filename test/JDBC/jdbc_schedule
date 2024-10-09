@@ -10,12 +10,6 @@
 
 all
 
-# tinyint temporary
-ignore#!#tinyint_operators_datetime
-ignore#!#tinyint_operators_money
-ignore#!#tinyint_operators_smallmoney
-ignore#!#tinyint_operators_bit
-
 # Windows/Linux discrepancies
 ignore#!#BABEL-2785
 ignore#!#sys-dm_os_host_info-vu-verify

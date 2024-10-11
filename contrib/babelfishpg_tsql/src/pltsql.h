@@ -2046,6 +2046,7 @@ extern Oid	tsql_get_trigger_rel_oid(Oid object_id);
 extern bool pltsql_createFunction(ParseState *pstate, PlannedStmt *pstmt, const char *queryString, ProcessUtilityContext context, 
                           ParamListInfo params);
 extern Oid get_sys_varcharoid(void);
+extern bool is_tsql_datatype_with_max_scale_expr_allowed(Oid oid); /* sys.varchar(max), sys.nvarchar(max), sys.varbinary(max) */
 
 typedef struct
 {

@@ -60,7 +60,7 @@ BABEL-3192
 BABEL-3204
 BABEL-3213
 BABEL-3215
-BABEL-3221
+BABEL-3221-before-16_4-or-15_9
 BABEL-3234
 BABEL-3249
 BABEL-3314
@@ -78,7 +78,7 @@ BABEL-3657
 BABEL-3725
 BABEL-3748-before-14_7
 BABEL-383
-BABEL-3938
+BABEL-3938-before-16_5-or-15_9
 BABEL-404
 BABEL-405
 BABEL-4078-before-14_8-or-15_3
@@ -108,7 +108,7 @@ BABEL_GRANT_CONNECT
 babel_isnumeric
 BABEL-LOGIN
 BABEL-LOGIN-USER-EXT
-BABEL_OBJECT_ID
+BABEL_OBJECT_ID-before-16_5-or-15_9
 BABEL_OBJECT_NAME
 BABEL-PG-SYSTEM-FUNCTIONS
 BABEL-PROCID
@@ -137,7 +137,7 @@ babel_trigger
 babel_try_parse
 BABEL-USER
 bbf_view_def-before-14_5
-case_insensitive_collation
+case_insensitive_collation-before-16_5-or-15_9
 collation_tests
 collation_tests_arabic
 collation_tests_greek
@@ -161,7 +161,7 @@ msdb-dbo-fn_syspolicy_is_automation_enabled
 msdb-dbo-syspolicy_system_health_state
 nested_trigger_inside_proc
 nested_trigger_with_dml
-objectpropertyex
+objectpropertyex-before-16_5-or-15_9
 routines_definition_before-14_7-or-15_2
 rowcount
 schema_resolution_func
@@ -323,3 +323,4 @@ permission_restrictions_from_pg
 BABEL-2999
 BABEL-4869
 babel_726-before-14_12-or-15_7-or-16_3
+BABEL-CASE_EXPR-before-16_5-or-15_9

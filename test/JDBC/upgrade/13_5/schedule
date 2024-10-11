@@ -49,7 +49,7 @@ BABEL-3192
 BABEL-3204
 BABEL-3213
 BABEL-3215
-BABEL-3221
+BABEL-3221-before-16_4-or-15_9
 BABEL-3249
 BABEL-3314
 BABEL-3347-before-14_6
@@ -62,7 +62,7 @@ BABEL-3588
 BABEL-3655
 BABEL-3657
 BABEL-3725
-BABEL-3938
+BABEL-3938-before-16_5-or-15_9
 BABEL-404
 BABEL-4078-before-14_8-or-15_3
 babel_417
@@ -119,7 +119,7 @@ msdb-dbo-fn_syspolicy_is_automation_enabled
 msdb-dbo-syspolicy_system_health_state
 nested_trigger_inside_proc
 nested_trigger_with_dml
-objectpropertyex
+objectpropertyex-before-16_5-or-15_9
 routines_definition_before-14_7-or-15_2
 rowcount
 schema_resolution_func
@@ -272,3 +272,5 @@ getdate
 permission_restrictions_from_pg
 BABEL-2999
 BABEL-4869
+BABEL-CASE_EXPR-before-16_5-or-15_9
+

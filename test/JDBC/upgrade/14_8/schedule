@@ -68,7 +68,7 @@ BABEL-3192
 BABEL-3204
 BABEL-3213
 BABEL-3215
-BABEL-3221
+BABEL-3221-before-16_4-or-15_9
 BABEL-3234
 BABEL-3249
 BABEL-3268
@@ -100,10 +100,10 @@ BABEL-3802
 BABEL-3818
 BABEL-383
 BABEL-3914
-BABEL-3938
+BABEL-3938-before-16_5-or-15_9
 BABEL-404
 BABEL-405
-BABEL-4078
+BABEL-4078-before-16_5-or-15_9
 BABEL-4098
 babel_417
 BABEL-493
@@ -138,7 +138,7 @@ BABEL-LOGIN
 BABEL-LOGIN-USER-EXT
 BABEL-NEXT-VALUE-FOR
 BABEL_OBJECT_DEFINITION
-BABEL_OBJECT_ID
+BABEL_OBJECT_ID-before-16_5-or-15_9
 BABEL_OBJECT_NAME
 BABEL-PG-SYSTEM-FUNCTIONS
 BABEL-PROCID
@@ -172,7 +172,7 @@ BABEL-USER
 bbf_view_def
 binary-index
 bitwise_not-operator
-case_insensitive_collation
+case_insensitive_collation-before-16_5-or-15_9
 cast_numeric_types_to_datetime
 cast_numeric_types_to_smalldatetime
 collation_tests
@@ -210,7 +210,7 @@ msdb-dbo-syspolicy_system_health_state
 nested_trigger_inside_proc
 nested_trigger_with_dml
 newid_before_14_12_or_15_7_or_16_3
-objectpropertyex
+objectpropertyex-before-16_5-or-15_9
 openjson
 routines_definition
 rowcount
@@ -415,3 +415,4 @@ babel_726-before-14_12-or-15_7-or-16_3
 BABEL-2619
 AUTO_ANALYZE-before-15-5-or-14-10
 default_params
+BABEL-CASE_EXPR-before-16_5-or-15_9

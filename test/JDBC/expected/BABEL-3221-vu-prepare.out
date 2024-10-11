@@ -45,7 +45,7 @@ go
 SELECT * FROM babel_3221_view_2;
 go
 ~~START~~
-text
+varchar
 Y
 ~~END~~
 

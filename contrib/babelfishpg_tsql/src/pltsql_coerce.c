@@ -863,6 +863,57 @@ run_tsql_best_match_heuristics(int nargs, Oid *input_typeids, FuncCandidateList 
 	return new_candidates;
 }
 
+/*
+ * get_immediate_base_type_of_UDT_internal()
+ * This function returns the Immediate base type for UDT.
+ * Returns InvalidOid if given type is not an UDT
+ */
+static Oid
+get_immediate_base_type_of_UDT_internal(Oid typeid)
+{
+	HeapTuple					tuple;
+	bool						isnull;
+	Datum						datum;
+	Datum                       tsql_typename;
+	Oid							base_type;
+	LOCAL_FCINFO(fcinfo, 1);
+
+	if (!OidIsValid(typeid))
+		ereport(ERROR,
+				(errcode(ERRCODE_INTERNAL_ERROR),
+					errmsg("typeid is invalid!")));
+
+	/* if common_utility_plugin_ptr is not initialised */
+	if (common_utility_plugin_ptr == NULL)
+		ereport(ERROR,
+				(errcode(ERRCODE_INTERNAL_ERROR),
+					errmsg("Failed to find common utility plugin.")));
+
+	/* if tsql_typename is NULL it implies that inputTypId corresponds to UDT */
+	InitFunctionCallInfoData(*fcinfo, NULL, 0, InvalidOid, NULL, NULL);
+	fcinfo->args[0].value = ObjectIdGetDatum(typeid);
+	fcinfo->args[0].isnull = false;
+	tsql_typename = (*common_utility_plugin_ptr->translate_pg_type_to_tsql) (fcinfo);
+
+	/* if given type is not an UDT then return InvalidOid */
+	if (tsql_typename)
+		return InvalidOid;
+
+	/* Get immediate base type id of given type id */
+	tuple = SearchSysCache1(TYPEOID, ObjectIdGetDatum(typeid));
+	if (!HeapTupleIsValid(tuple))
+		return InvalidOid;
+
+	datum = SysCacheGetAttr(TYPEOID, tuple, Anum_pg_type_typbasetype, &isnull);
+	if (isnull)
+		return InvalidOid;
+
+	base_type = DatumGetObjectId(datum);
+	ReleaseSysCache(tuple);
+
+	return base_type;
+}
+
 static FuncCandidateList
 tsql_func_select_candidate(int nargs,
 						   Oid *input_typeids,

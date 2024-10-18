@@ -14,6 +14,16 @@ GO
 CREATE TABLE isc_tables_sc1.t2(a INT,b INT)
 GO
 
+-- Table name which is prefix of schema name
+CREATE TABLE [ISC_TABLES_TABLE_SCHEMA]  .  [ISC_TABLES_TABLE] (a INT, b INT)
+GO
+
+CREATE TABLE [ISC_TABLES SCHEMA . WITH .. DOTS]  .  [ISC_TABLES TABLE . WITH .. DOTS] (a INT, b INT)
+GO
+
+CREATE TYPE isc_tables_sc1.isc_table_type2 AS TABLE(a INT)
+GO
+
 --Dep Proc
 CREATE PROCEDURE isc_tables_vu_prepare_p1 AS
 SELECT * FROM information_schema.tables WHERE TABLE_NAME = 'isc_tables_vu_prepare_t1'

@@ -24,11 +24,13 @@ GO
 ~~START~~
 nvarchar#!#nvarchar#!#varchar#!#varchar
 master#!#isc_tables_sc1#!#t2#!#BASE TABLE
+master#!#isc_tables_sc1#!#isc_table_type2#!#BASE TABLE
 ~~END~~
 
 ~~START~~
 nvarchar#!#nvarchar#!#varchar#!#varchar
 master#!#isc_tables_sc1#!#t2#!#BASE TABLE
+master#!#isc_tables_sc1#!#isc_table_type2#!#BASE TABLE
 ~~END~~
 
 

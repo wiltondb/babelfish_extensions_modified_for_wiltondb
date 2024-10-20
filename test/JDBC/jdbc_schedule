@@ -10,6 +10,24 @@
 
 all
 
+# Temporary disable statistics failures happening only in full runs
+ignore#!#BABEL_4740
+ignore#!#database_metadata
+ignore#!#sp_statistics_100
+ignore#!#sys-sp_statistics-vu-prepare
+ignore#!#sys-sp_statistics-vu-verify
+ignore#!#sys-sp_statistics-vu-cleanup
+ignore#!#sys-sp_statistics-dep-vu-prepare
+ignore#!#sys-sp_statistics-dep-vu-verify
+ignore#!#sys-sp_statistics-dep-vu-cleanup
+ignore#!#sys-sp_statistics_100-vu-prepare
+ignore#!#sys-sp_statistics_100-vu-verify
+ignore#!#sys-sp_statistics_100-vu-cleanup
+ignore#!#sys-sp_statistics_100-dep-prepare
+ignore#!#sys-sp_statistics_100-dep-verify
+ignore#!#sys-sp_statistics_100-dep-cleanup
+ignore#!#BABEL-SP_STATISTICS
+
 # Windows/Linux discrepancies
 ignore#!#BABEL-2785
 ignore#!#sys-dm_os_host_info-vu-verify

@@ -1,0 +1,24 @@
+name: 'Build tds_fdw Extension'
+
+inputs:
+  install_dir:
+    description: 'Engine install directory'
+    required: no
+    default: psql
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build tds_fdw Extension
+      run: |
+        cd ..
+        export PG_CONFIG_PATH=~/${{ inputs.install_dir }}/
+        git clone --branch https://github.com/wiltondb/pgagent.git
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_INSTALL_PREFIX=`pwd`/dist -DCMAKE_CXX_FLAGS='-ggdb3 -O0'
+        make
+        make install
+        cp ./dist/pgagent--4.2.sql ~/${{ inputs.install_dir }}/share/extension/
+        cp ./dist/pgagent.control ~/${{ inputs.install_dir }}/share/extension/
+      shell: bash

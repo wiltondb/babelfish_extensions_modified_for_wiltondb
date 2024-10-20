@@ -1,0 +1,9 @@
+-- psql
+create extension pgagent
+go
+
+select extname from pg_extension where extname = 'pgagent'
+go
+
+drop extension pgagent
+go

@@ -8,14 +8,7 @@
 #    new line
 # 6. If you want the framework to not run certain files, use: ignore#!#<test name>
 
-#all
-
-sys-views
-sys-types
-sys-tables
-sys-sysforeignkeys
-sys-key_constraints
-sys-data_spaces
+all
 
 # Windows/Linux discrepancies
 ignore#!#BABEL-2785
@@ -308,6 +301,9 @@ ignore#!#string_agg-before-15_9-or-16_5-vu-cleanup
 ignore#!#string_agg-before-14_5-vu-prepare
 ignore#!#string_agg-before-14_5-vu-verify
 ignore#!#string_agg-before-14_5-vu-cleanup
+ignore#!#BABEL_4330-before-15_8-or-16_4-vu-prepare
+ignore#!#BABEL_4330-before-15_8-or-16_4-vu-verify
+ignore#!#BABEL_4330-before-15_8-or-16_4-vu-cleanup
 
 # These tests are for jTDS driver
 ignore#!#jtds-TestBinary

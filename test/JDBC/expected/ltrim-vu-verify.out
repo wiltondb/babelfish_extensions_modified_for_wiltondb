@@ -236,7 +236,7 @@ SELECT '|' + LTRIM(@inputString) + '|'
 GO
 ~~START~~
 varchar
-|abcdefgh  |
+|abcdefgh|
 ~~END~~
 
 

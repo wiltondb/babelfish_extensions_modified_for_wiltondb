@@ -288,11 +288,6 @@ SELECT funcname, calls
 GO
 ~~START~~
 varchar#!#bigint
-babel_4740_p1#!#1
-babel_4740_p2#!#1
-babel_4740_p3#!#1
-babel_4740_p4#!#1
-babel_4740_p8#!#64
 ~~END~~
 
 

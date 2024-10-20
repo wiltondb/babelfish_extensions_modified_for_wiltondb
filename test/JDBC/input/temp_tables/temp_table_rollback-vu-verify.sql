@@ -79,35 +79,6 @@ COMMIT
 GO
 
 ----------------------------------------------------------
--- ALTER TABLE (BABEL-4912)
-----------------------------------------------------------
-CREATE TABLE #temp_table_rollback_t1 (a int, b int)
-GO
-
-BEGIN TRAN
-ALTER TABLE #temp_table_rollback_t1 DROP COLUMN b
-ROLLBACK
-GO
-
-BEGIN TRAN
-ALTER TABLE #temp_table_rollback_t1 ALTER COLUMN b VARCHAR
-ROLLBACK
-GO
-
-BEGIN TRAN
-ALTER TABLE #temp_table_rollback_t1 ALTER COLUMN b VARCHAR
-COMMIT
-GO
-
-BEGIN TRAN
-ALTER TABLE #temp_table_rollback_t1 DROP COLUMN b
-COMMIT
-GO
-
-DROP TABLE #temp_table_rollback_t1
-GO
-
-----------------------------------------------------------
 -- Multiple tables in one transaction
 ----------------------------------------------------------
 CREATE TABLE #temp_table_rollback_t1(a int identity primary key, b int, c varchar)

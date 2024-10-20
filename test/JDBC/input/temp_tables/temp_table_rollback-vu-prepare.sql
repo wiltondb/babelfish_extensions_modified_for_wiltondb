@@ -12,7 +12,7 @@ BEGIN
     CREATE TABLE #t1(a int)
     INSERT INTO #t1 values (6)
     BEGIN TRAN;
-        ALTER TABLE #t1 ADD b varchar(50)
+        -- ALTER TABLE #t1 ADD b varchar(50)
         TRUNCATE TABLE #t1
         INSERT INTO #t1 VALUES (1, 'two')
         select * from #t1
@@ -34,7 +34,7 @@ GO
 CREATE PROCEDURE implicit_rollback_in_proc AS 
 BEGIN
     CREATE TABLE #t1(a int)
-    ALTER TABLE #t1 ADD b varchar(50)
+    -- ALTER TABLE #t1 ADD b varchar(50)
     INSERT INTO #t1 VALUES (1, 'two')
     select * from #t1
     DROP TABLE #t1

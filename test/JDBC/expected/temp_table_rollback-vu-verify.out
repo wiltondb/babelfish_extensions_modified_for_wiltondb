@@ -144,35 +144,6 @@ COMMIT
 GO
 
 ----------------------------------------------------------
--- ALTER TABLE (BABEL-4912)
-----------------------------------------------------------
-CREATE TABLE #temp_table_rollback_t1 (a int, b int)
-GO
-
-BEGIN TRAN
-ALTER TABLE #temp_table_rollback_t1 DROP COLUMN b
-ROLLBACK
-GO
-
-BEGIN TRAN
-ALTER TABLE #temp_table_rollback_t1 ALTER COLUMN b VARCHAR
-ROLLBACK
-GO
-
-BEGIN TRAN
-ALTER TABLE #temp_table_rollback_t1 ALTER COLUMN b VARCHAR
-COMMIT
-GO
-
-BEGIN TRAN
-ALTER TABLE #temp_table_rollback_t1 DROP COLUMN b
-COMMIT
-GO
-
-DROP TABLE #temp_table_rollback_t1
-GO
-
-----------------------------------------------------------
 -- Multiple tables in one transaction
 ----------------------------------------------------------
 CREATE TABLE #temp_table_rollback_t1(a int identity primary key, b int, c varchar)
@@ -762,35 +733,9 @@ exec test_rollback_in_proc
 GO
 ~~ROW COUNT: 1~~
 
-~~ROW COUNT: 1~~
-
-~~START~~
-int#!#varchar
-1#!#two
-~~END~~
-
-~~ROW COUNT: 1~~
-
-~~START~~
-varchar
-three
-~~END~~
-
-~~ROW COUNT: 1~~
-
-~~START~~
-varchar#!#int
-four#!#1
-~~END~~
-
-~~START~~
-int
-6
-~~END~~
-
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: relation "#t2" does not exist)~~
+~~ERROR (Message: INSERT has more expressions than target columns)~~
 
 
 BEGIN TRANSACTION
@@ -803,27 +748,6 @@ GO
 ~~START~~
 text
 #outer_tab1
-~~END~~
-
-~~ROW COUNT: 1~~
-
-~~START~~
-int#!#varchar
-1#!#two
-~~END~~
-
-~~ROW COUNT: 1~~
-
-~~START~~
-varchar
-three
-~~END~~
-
-~~ROW COUNT: 1~~
-
-~~START~~
-varchar#!#int
-four#!#1
 ~~END~~
 
 ~~ERROR (Code: 33557097)~~

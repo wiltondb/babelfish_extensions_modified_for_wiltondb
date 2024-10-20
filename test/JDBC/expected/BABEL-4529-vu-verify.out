@@ -100,7 +100,7 @@ char
 SELECT * FROM babel_4529_types
 GO
 ~~START~~
-varchar#!#varchar#!#tinyint#!#tinyint#!#bit#!#bit#!#bit#!#int#!#int#!#int#!#int#!#int
+varchar#!#varchar#!#int#!#int#!#int#!#int#!#int#!#int#!#int#!#int#!#int#!#int
 ~~END~~
 
 

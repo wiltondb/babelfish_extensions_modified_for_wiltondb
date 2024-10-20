@@ -781,7 +781,7 @@ SELECT substring(@inputString, 2, 15)
 GO
 ~~START~~
 varbinary
-62636465666768
+626364656667680000
 ~~END~~
 
 

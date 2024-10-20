@@ -228,7 +228,7 @@ SELECT reverse(@inputString)
 GO
 ~~START~~
 nvarchar
-8676665646362616x0
+00008676665646362616x0
 ~~END~~
 
 

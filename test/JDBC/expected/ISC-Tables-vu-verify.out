@@ -18,8 +18,8 @@ master#!#dbo#!#isc_tables_vu_prepare_v1#!#VIEW
 ~~END~~
 
 
-SELECT * FROM information_schema.tables WHERE TABLE_SCHEMA = 'isc_tables_sc1'
-SELECT * FROM information_schema.tables WHERE TABLE_SCHEMA = 'ISC_TABLES_SC1'
+SELECT * FROM information_schema.tables WHERE TABLE_SCHEMA = 'isc_tables_sc1' ORDER BY TABLE_NAME DESC
+SELECT * FROM information_schema.tables WHERE TABLE_SCHEMA = 'ISC_TABLES_SC1' ORDER BY TABLE_NAME DESC
 GO
 ~~START~~
 nvarchar#!#nvarchar#!#varchar#!#varchar

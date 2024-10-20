@@ -26,7 +26,7 @@ my $pg_tag = "WILTON_3_3";
 my $pg_hint_plan_tag = "REL15_1_5_1_WILTON";
 my $tds_fdw_tag = "v2.0.3-wilton";
 my $system_stats_tag = "v2.1";
-my $pgwin_deps_version = "2024_06_23-1";
+my $pgwin_deps_version = "2024_09_26-1";
 my $flexbison_version = "flex-2.6.4_bison-3.8.2-1";
 my $diff_version = "v3.6-1";
 
@@ -129,7 +129,7 @@ sub run_jdbc_tests {
 }
 
 my $pgwin_deps_dir = download_pgwin_deps();
-$ENV{PGWIN_DEPS_DIR} = "$pgwin_deps_dir/release";
+$ENV{PGWIN_DEPS_DIR} = "$pgwin_deps_dir/release-icu73";
 
 my $tools_dir = catfile($parent_dir, "tools");
 ensure_dir_empty($tools_dir);

@@ -27,7 +27,7 @@ jobs:
         branch: ${{fromJson(needs.generate-branch-names.outputs.matrix)}} 
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         id: checkout
         with: 
           ref: ${{ matrix.branch }}
@@ -255,28 +255,28 @@ jobs:
           lcov --list lcov.info
       - name: Upload Coverage Report for babelfishpg_tsql extension
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage_tsql_${{ matrix.branch }}
           path: contrib/babelfishpg_tsql/coverage/
 
       - name: Upload Coverage Report for babelfishpg_tds extension
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage_tds_${{ matrix.branch }}
           path: contrib/babelfishpg_tds/coverage/
 
       - name: Upload Coverage Report for babelfishpg_common extension
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage_common_${{ matrix.branch }}
           path: contrib/babelfishpg_common/coverage/
 
       - name: Upload Coverage Report for babelfishpg_money extension
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage_money_${{ matrix.branch }}
           path: contrib/babelfishpg_money/coverage/
@@ -299,7 +299,7 @@ jobs:
 
       - name: Upload CSV report with latest coverage numbers
         if: (github.event_name == 'schedule')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: csv_${{ matrix.branch }}
           path: contrib/${{ matrix.branch }}.csv

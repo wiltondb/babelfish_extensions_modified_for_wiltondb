@@ -9,7 +9,7 @@ jobs:
       TIBERIUS_TEST_CONNECTION_STRING: "server=tcp:localhost,1433;user=jdbc_user;password=12345678;TrustServerCertificate=true"
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         id: checkout
 
       - name: Install Dependencies

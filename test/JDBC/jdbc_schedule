@@ -23,9 +23,9 @@ ignore#!#sys-sp_statistics-dep-vu-cleanup
 ignore#!#sys-sp_statistics_100-vu-prepare
 ignore#!#sys-sp_statistics_100-vu-verify
 ignore#!#sys-sp_statistics_100-vu-cleanup
-ignore#!#sys-sp_statistics_100-dep-prepare
-ignore#!#sys-sp_statistics_100-dep-verify
-ignore#!#sys-sp_statistics_100-dep-cleanup
+ignore#!#sys-sp_statistics_100-dep-vu-prepare
+ignore#!#sys-sp_statistics_100-dep-vu-verify
+ignore#!#sys-sp_statistics_100-dep-vu-cleanup
 ignore#!#BABEL-SP_STATISTICS
 
 # Windows/Linux discrepancies

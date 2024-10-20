@@ -8,7 +8,7 @@ jobs:
     outputs:
       dump-restore-path-list: ${{ steps.generate-dump-restore-path.outputs.dump-restore-path-list }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       - name: "Read and setup dump-restore path list from configuration"
         id: generate-dump-restore-path
@@ -27,7 +27,7 @@ jobs:
     name: Run Dump Restore Test for ${{ matrix.upgrade-path.title }}
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Install yq - yaml parser
         id: install-yq

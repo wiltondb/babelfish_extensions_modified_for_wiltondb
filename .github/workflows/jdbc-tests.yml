@@ -7,7 +7,7 @@ jobs:
       INSTALL_DIR: psql
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         id: checkout
 
       - name: Install Dependencies
@@ -37,7 +37,7 @@ jobs:
 
       - name: Install Extensions
         id: install-extensions
-        if: always() && steps.build-extensions.outcome == 'success'
+        if: always() && steps.build-pgagent-extension.outcome == 'success'
         uses: ./.github/composite-actions/install-extensions
 
       - name: Enable SSL

@@ -24,7 +24,11 @@ sub runcmd {
   my $cmd = shift;
   my $best_effort = shift;
   print("$cmd\n");
-  0 == system($cmd) or die("$!");
+  if (!$best_effort) {
+    0 == system($cmd) or die("$!");
+  } else {
+    system($cmd);
+  }
 }
 
 if (!(defined $ENV{PGWIN_INSTALL_DIR})) {
@@ -43,6 +47,7 @@ my $postmaster_pid = catfile($ENV{PGWIN_INSTALL_DIR}, "data", "postmaster.pid");
 my $openssl = catfile($ENV{PGWIN_INSTALL_DIR}, "bin", "openssl.exe");
 my $openssl_cnf = catfile($ENV{PGWIN_INSTALL_DIR}, "share", "openssl.cnf");
 
+runcmd("$pg_ctl stop -D $pg_data", "best effort");
 remove_tree($pg_data);
 runcmd("$initdb -D $pg_data -E UTF8 --locale C");
 

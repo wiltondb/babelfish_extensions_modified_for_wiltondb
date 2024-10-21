@@ -78,11 +78,38 @@ sub build_system_stats {
   fcopy(catfile($src_dir, "system_stats--2.0.sql"), catfile($ext_dir, "system_stats--2.0.sql")) or die("$!");
 }
 
+sub build_pgagent {
+  my $src_dir = shift;
+  my $src_dir_name = basename($src_dir);
+  print("\nBuilding project: [$src_dir_name]\n");
+  $ENV{PG_CONFIG_PATH} = catfile($ENV{PGWIN_INSTALL_DIR}, "bin", "pg_config.exe");
+  my $build_dir = catfile($src_dir, "build");
+  my $dist_dir = catfile($build_dir, "dist");
+  ensure_dir_empty($build_dir);
+  chdir($build_dir);
+  my $conf_cmd = "cmake ..";
+  $conf_cmd .= " -G \"$cmake_gen_name\"";
+  $conf_cmd .= " -DCMAKE_INSTALL_PREFIX=\"$dist_dir\"";
+  print("$conf_cmd\n");
+  0 == system($conf_cmd) or die("$!");
+  my $build_cmd = "cmake --build .";
+  $build_cmd .= " --config $cmake_build_type";
+  print("$build_cmd\n");
+  0 == system($build_cmd) or die("$!");
+  my $install_cmd = "$build_cmd --target install";
+  print("$install_cmd\n");
+  0 == system($install_cmd) or die("$!");
+  my $ext_dir = catfile($ENV{PGWIN_INSTALL_DIR}, "share", "extension");
+  fcopy(catfile($dist_dir, "pgagent--4.2.sql"), catfile($ext_dir, "pgagent--4.2.sql")) or die("$!");
+  fcopy(catfile($dist_dir, "pgagent.control"), catfile($ext_dir, "pgagent.control")) or die("$!");
+}
+
 my $extensions_dir = catfile(dirname($root_dir), "extensions");
 my $contrib_dir = catfile($root_dir, "contrib");
 my $pg_hint_plan_dir = catfile($extensions_dir, "pg_hint_plan");
 my $tds_fdw_dir = catfile($extensions_dir, "tds_fdw");
 my $system_stats_dir = catfile($extensions_dir, "system_stats");
+my $pgagent_dir = catfile($extensions_dir, "pgagent");
 print("Cleaning up repos\n");
 chdir($contrib_dir);
 0 == system("git clean -dxf") or die("$!");
@@ -107,6 +134,11 @@ chdir($system_stats_dir);
 0 == system("git clean -dxf") or die("$!");
 0 == system("git status") or die("$!");
 build_system_stats($system_stats_dir);
+
+chdir($pgagent_dir);
+0 == system("git clean -dxf") or die("$!");
+0 == system("git status") or die("$!");
+build_pgagent($pgagent_dir);
 
 chdir($root_dir);
 print("Build complete successfully\n");

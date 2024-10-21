@@ -72,6 +72,8 @@ EXPORTS
     tsql_random
     tsql_stat_get_activity
     tsql_stat_get_activity_deprecated_in_2_2_0
+    type_id
+    type_name
     user_id_noarg
     version
     xact_state
@@ -178,6 +180,7 @@ EXPORTS
     ftrunci2
     ftrunci4
     ftrunci8
+    get_immediate_base_type_of_UDT
     init_tsql_coerce_hash_tab
     init_tsql_datatype_precedence_hash_tab
     pltsql_bpchar_name
@@ -195,6 +198,7 @@ EXPORTS
     
     ; pltsql_utils.c
     get_pltsql_function_signature
+    split_identifier_internal
     
     ; procedures.c
     create_xp_instance_regread_in_master_dbo_internal
@@ -255,6 +259,7 @@ EXPORTS
     hashbytes
     quotename
     string_escape
+    tsql_varbinary_substr
     tsql_varchar_substr
     
     ; tsql_for/forjson.c

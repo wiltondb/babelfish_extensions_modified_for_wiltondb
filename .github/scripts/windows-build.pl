@@ -26,6 +26,7 @@ my $pg_tag = "WILTON_3_3";
 my $pg_hint_plan_tag = "REL15_1_5_1_WILTON";
 my $tds_fdw_tag = "v2.0.3-wilton";
 my $system_stats_tag = "v2.1";
+my $pgagent_tag = "wilton";
 my $pgwin_deps_version = "2024_09_26-1";
 my $flexbison_version = "flex-2.6.4_bison-3.8.2-1";
 my $diff_version = "v3.6-1";
@@ -99,6 +100,13 @@ sub download_system_stats {
   0 == system("git clone --quiet --branch $system_stats_tag $url") or die("$!");
 }
 
+sub download_pgagent {
+  my $extension_dir = shift;
+  chdir($extension_dir);
+  my $url = "https://github.com/wiltondb/pgagent.git";
+  0 == system("git clone --quiet --branch $pgagent_tag $url") or die("$!");
+}
+
 sub download_and_build_pg {
   chdir($parent_dir);
   my $url = "https://github.com/wiltondb/postgresql_modified_for_babelfish.git";
@@ -143,6 +151,7 @@ ensure_dir_empty($extensions_dir);
 download_pg_hint_plan($extensions_dir);
 download_tds_fdw($extensions_dir);
 download_system_stats($extensions_dir);
+download_pgagent($extensions_dir);
 
 my ($pg_src_dir, $dist_dir) = download_and_build_pg();
 $ENV{PGWIN_SRC_DIR} = $pg_src_dir;

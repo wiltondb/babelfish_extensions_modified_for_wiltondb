@@ -90,17 +90,18 @@ if ($init) {
   runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"CREATE USER jdbc_user WITH SUPERUSER CREATEDB CREATEROLE PASSWORD '12345678' INHERIT;\"");
   runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"CREATE DATABASE jdbc_testdb OWNER jdbc_user;\"");
 
-  edit_file(sub { s/trust/md5/g }, $pg_hba_conf);
   runcmd("$pg_ctl restart -D $pg_data -l $pg_log");
 
-  $ENV{PGPASSWORD} = "12345678";
-  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"SET allow_system_table_mods = ON;\"");
-  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"CREATE EXTENSION IF NOT EXISTS babelfishpg_tds CASCADE;\"");
-  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"GRANT ALL ON SCHEMA sys to jdbc_user;\"");
-  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"ALTER SYSTEM SET babelfishpg_tsql.database_name = 'jdbc_testdb';\"");
-  #runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"ALTER DATABASE jdbc_testdb SET babelfishpg_tsql.migration_mode = 'multi-db';\"");
-  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"SELECT pg_reload_conf();\"");
-  runcmd("$psql -U jdbc_user -d jdbc_testdb -c \"CALL sys.initialize_babelfish('jdbc_user');\"");
+  runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"SET allow_system_table_mods = ON;\"");
+  runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"CREATE EXTENSION IF NOT EXISTS babelfishpg_tds CASCADE;\"");
+  runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"GRANT ALL ON SCHEMA sys to jdbc_user;\"");
+  runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"ALTER SYSTEM SET babelfishpg_tsql.database_name = 'jdbc_testdb';\"");
+  #runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"ALTER DATABASE jdbc_testdb SET babelfishpg_tsql.migration_mode = 'multi-db';\"");
+  runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"SELECT pg_reload_conf();\"");
+  runcmd("$psql -U $ENV{USERNAME} -d jdbc_testdb -c \"CALL sys.initialize_babelfish('jdbc_user');\"");
+
+  edit_file(sub { s/trust/md5/g }, $pg_hba_conf);
+  runcmd("$pg_ctl restart -D $pg_data -l $pg_log");
 } else {
   runcmd("$pg_ctl start -D $pg_data -l $pg_log");
 }

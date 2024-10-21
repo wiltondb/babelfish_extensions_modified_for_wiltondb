@@ -135,10 +135,10 @@ chdir($system_stats_dir);
 0 == system("git status") or die("$!");
 build_system_stats($system_stats_dir);
 
-chdir($pgagent_dir);
-0 == system("git clean -dxf") or die("$!");
-0 == system("git status") or die("$!");
-build_pgagent($pgagent_dir);
+#chdir($pgagent_dir);
+#0 == system("git clean -dxf") or die("$!");
+#0 == system("git status") or die("$!");
+#build_pgagent($pgagent_dir);
 
 chdir($root_dir);
 print("Build complete successfully\n");

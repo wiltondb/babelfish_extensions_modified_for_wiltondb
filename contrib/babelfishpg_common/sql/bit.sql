@@ -34,6 +34,30 @@ CREATE TYPE sys.BIT (
 	   COLLATABLE     = false
 	 );
 
+-- tinyint -- bit
+
+CREATE OR REPLACE FUNCTION sys.tinyint2bit(sys.TINYINT)
+RETURNS sys.BIT
+AS $$
+  SELECT $1::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (sys.TINYINT AS sys.BIT)
+WITH FUNCTION sys.tinyint2bit (sys.TINYINT) AS IMPLICIT;
+
+CREATE OR REPLACE FUNCTION sys.bit2tinyint(sys.BIT)
+RETURNS sys.TINYINT
+AS $$
+  SELECT $1::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (sys.BIT AS sys.TINYINT)
+WITH FUNCTION sys.bit2tinyint (sys.BIT) AS IMPLICIT;
+
+-- end tinyint -- bit
+
 CREATE OR REPLACE FUNCTION sys.int2bit(INT2)
 RETURNS sys.BIT
 AS 'babelfishpg_common', 'int2bit'

@@ -1,0 +1,145 @@
+
+select cast(1 as tinyint) + cast('2024-01-31' as date)
+~~START~~
+date
+2024-02-01
+~~END~~
+
+select cast(1 as tinyint) - cast('2024-01-31' as date)
+~~START~~
+datetime
+1775-12-03 00:00:00.0
+~~END~~
+
+select cast(1 as tinyint) + cast('12:59' as time)
+~~START~~
+datetime
+1900-01-02 12:59:00.0
+~~END~~
+
+select cast(1 as tinyint) - cast('12:59' as time)
+~~START~~
+datetime
+1900-01-01 11:01:00.0
+~~END~~
+
+select cast(1 as tinyint) + cast('2024-01-31 12:59' as datetime)
+~~START~~
+datetime
+2024-02-01 12:59:00.0
+~~END~~
+
+select cast(1 as tinyint) - cast('2024-01-31 12:59' as datetime)
+~~START~~
+datetime
+1775-12-02 11:01:00.0
+~~END~~
+
+select cast(1 as tinyint) + cast('2024-01-31 12:59' as datetime2)
+~~START~~
+datetime
+2024-02-01 12:59:00.0
+~~END~~
+
+select cast(1 as tinyint) - cast('2024-01-31 12:59' as datetime2)
+~~START~~
+datetime
+1775-12-02 11:01:00.0
+~~END~~
+
+select cast(1 as tinyint) + cast('2024-01-31 12:59' as smalldatetime)
+~~START~~
+smalldatetime
+2024-02-01 12:59:00.0
+~~END~~
+
+select cast(1 as tinyint) - cast('2024-01-31 12:59' as smalldatetime)
+~~ERROR (Code: 33557097)~~
+
+~~ERROR (Message: data out of range for smalldatetime)~~
+
+select cast(1 as tinyint) + cast('2024-01-31 12:59' as datetimeoffset)
+~~START~~
+datetime
+2024-02-01 12:59:00.0
+~~END~~
+
+select cast(1 as tinyint) - cast('2024-01-31 12:59' as datetimeoffset)
+~~START~~
+datetime
+1775-12-02 11:01:00.0
+~~END~~
+
+
+select cast('2024-01-31' as date) + cast(1 as tinyint)
+~~START~~
+date
+2024-02-01
+~~END~~
+
+select cast('2024-01-31' as date) - cast(1 as tinyint)
+~~START~~
+date
+2024-01-30
+~~END~~
+
+select cast('12:59' as time) - cast(1 as tinyint)
+~~START~~
+datetime
+1899-12-31 12:59:00.0
+~~END~~
+
+select cast('12:59' as time) + cast(1 as tinyint)
+~~START~~
+datetime
+1900-01-02 12:59:00.0
+~~END~~
+
+select cast('2024-01-31 12:59' as datetime) + cast(1 as tinyint)
+~~START~~
+datetime
+2024-02-01 12:59:00.0
+~~END~~
+
+select cast('2024-01-31 12:59' as datetime) - cast(1 as tinyint)
+~~START~~
+datetime
+2024-01-30 12:59:00.0
+~~END~~
+
+select cast('2024-01-31 12:59' as datetime2) + cast(1 as tinyint)
+~~START~~
+datetime
+2024-02-01 12:59:00.0
+~~END~~
+
+select cast('2024-01-31 12:59' as datetime2) - cast(1 as tinyint)
+~~START~~
+datetime
+2024-01-30 12:59:00.0
+~~END~~
+
+select cast('2024-01-31 12:59' as smalldatetime) + cast(1 as tinyint)
+~~START~~
+smalldatetime
+2024-02-01 12:59:00.0
+~~END~~
+
+select cast('2024-01-31 12:59' as smalldatetime) - cast(1 as tinyint)
+~~START~~
+smalldatetime
+2024-01-30 12:59:00.0
+~~END~~
+
+select cast('2024-01-31 12:59' as datetimeoffset) + cast(1 as tinyint)
+~~START~~
+datetime
+2024-02-01 12:59:00.0
+~~END~~
+
+select cast('2024-01-31 12:59' as datetimeoffset) - cast(1 as tinyint)
+~~START~~
+datetime
+2024-01-30 12:59:00.0
+~~END~~
+

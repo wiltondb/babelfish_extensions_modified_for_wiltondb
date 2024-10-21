@@ -1,0 +1,216 @@
+
+-- assignment
+declare @a tinyint = 1; declare @b float; set @b = @a; select @b;
+~~START~~
+float
+1.0
+~~END~~
+
+declare @a float = 1; declare @b tinyint; set @b = @a; select @b;
+~~START~~
+tinyint
+1
+~~END~~
+
+
+-- arithmetic
+
+select cast(1 as tinyint) + cast(1 as float)
+~~START~~
+float
+2.0
+~~END~~
+
+select cast(1 as tinyint) - cast(1 as float)
+~~START~~
+float
+0.0
+~~END~~
+
+select cast(2 as tinyint) * cast(2 as float)
+~~START~~
+float
+4.0
+~~END~~
+
+select cast(4 as tinyint) / cast(2 as float)
+~~START~~
+float
+2.0
+~~END~~
+
+select cast(5 as tinyint) % cast(2 as float)
+~~START~~
+tinyint
+1
+~~END~~
+
+
+select cast(1 as float) + cast(1 as tinyint)
+~~START~~
+float
+2.0
+~~END~~
+
+select cast(1 as float) - cast(1 as tinyint)
+~~START~~
+float
+0.0
+~~END~~
+
+select cast(1 as float) * cast(2 as tinyint)
+~~START~~
+float
+2.0
+~~END~~
+
+select cast(4 as float) / cast(2 as tinyint)
+~~START~~
+float
+2.0
+~~END~~
+
+select cast(5 as float) % cast(2 as tinyint)
+~~START~~
+tinyint
+1
+~~END~~
+
+
+declare @a tinyint = 1; select @a += cast(1 as float); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+declare @a tinyint = 2; select @a -= cast(2 as float); select @a;
+~~START~~
+tinyint
+0
+~~END~~
+
+declare @a tinyint = 4; select @a *= cast(2 as float); select @a;
+~~START~~
+tinyint
+8
+~~END~~
+
+declare @a tinyint = 5; select @a /= cast(2 as float); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+
+declare @a float = 1; select @a += cast(1 as tinyint); select @a;
+~~START~~
+float
+2.0
+~~END~~
+
+declare @a float = 2; select @a -= cast(2 as tinyint); select @a;
+~~START~~
+float
+0.0
+~~END~~
+
+declare @a float = 4; select @a *= cast(2 as tinyint); select @a;
+~~START~~
+float
+8.0
+~~END~~
+
+declare @a float = 5; select @a /= cast(2 as tinyint); select @a;
+~~START~~
+float
+2.5
+~~END~~
+
+
+-- comparison
+
+select 1 where cast(2 as tinyint) >  cast(1 as float)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) >= cast(1 as float)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) =  cast(1 as float)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <  cast(2 as float)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <= cast(1 as float)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <> cast(2 as float)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) != cast(2 as float)
+~~START~~
+int
+1
+~~END~~
+
+
+select 1 where cast(2 as float) >  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as float) >= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as float) =  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as float) <  cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as float) <= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as float) <> cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as float) != cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+

@@ -1,0 +1,216 @@
+
+-- assignment
+declare @a tinyint = 1; declare @b numeric; set @b = @a; select @b;
+~~START~~
+numeric
+1
+~~END~~
+
+declare @a numeric = 1; declare @b tinyint; set @b = @a; select @b;
+~~START~~
+tinyint
+1
+~~END~~
+
+
+-- arithmetic
+
+select cast(1 as tinyint) + cast(1 as numeric)
+~~START~~
+numeric
+2
+~~END~~
+
+select cast(1 as tinyint) - cast(1 as numeric)
+~~START~~
+numeric
+0
+~~END~~
+
+select cast(2 as tinyint) * cast(2 as numeric)
+~~START~~
+numeric
+4
+~~END~~
+
+select cast(4 as tinyint) / cast(2 as numeric)
+~~START~~
+numeric
+2
+~~END~~
+
+select cast(5 as tinyint) % cast(2 as numeric)
+~~START~~
+numeric
+1
+~~END~~
+
+
+select cast(1 as numeric) + cast(1 as tinyint)
+~~START~~
+numeric
+2
+~~END~~
+
+select cast(1 as numeric) - cast(1 as tinyint)
+~~START~~
+numeric
+0
+~~END~~
+
+select cast(1 as numeric) * cast(2 as tinyint)
+~~START~~
+numeric
+2
+~~END~~
+
+select cast(4 as numeric) / cast(2 as tinyint)
+~~START~~
+numeric
+2.0000000000000000
+~~END~~
+
+select cast(5 as numeric) % cast(2 as tinyint)
+~~START~~
+numeric
+1
+~~END~~
+
+
+declare @a tinyint = 1; select @a += cast(1 as numeric); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+declare @a tinyint = 2; select @a -= cast(2 as numeric); select @a;
+~~START~~
+tinyint
+0
+~~END~~
+
+declare @a tinyint = 4; select @a *= cast(2 as numeric); select @a;
+~~START~~
+tinyint
+8
+~~END~~
+
+declare @a tinyint = 5; select @a /= cast(2 as numeric); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+
+declare @a numeric = 1; select @a += cast(1 as tinyint); select @a;
+~~START~~
+numeric
+2
+~~END~~
+
+declare @a numeric = 2; select @a -= cast(2 as tinyint); select @a;
+~~START~~
+numeric
+0
+~~END~~
+
+declare @a numeric = 4; select @a *= cast(2 as tinyint); select @a;
+~~START~~
+numeric
+8
+~~END~~
+
+declare @a numeric = 5; select @a /= cast(2 as tinyint); select @a;
+~~START~~
+numeric
+3
+~~END~~
+
+
+-- comparison
+
+select 1 where cast(2 as tinyint) >  cast(1 as numeric)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) >= cast(1 as numeric)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) =  cast(1 as numeric)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <  cast(2 as numeric)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <= cast(1 as numeric)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <> cast(2 as numeric)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) != cast(2 as numeric)
+~~START~~
+int
+1
+~~END~~
+
+
+select 1 where cast(2 as numeric) >  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as numeric) >= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as numeric) =  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as numeric) <  cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as numeric) <= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as numeric) <> cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as numeric) != cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+

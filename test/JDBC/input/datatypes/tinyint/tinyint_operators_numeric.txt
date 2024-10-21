@@ -1,0 +1,46 @@
+
+-- assignment
+declare @a tinyint = 1; declare @b numeric; set @b = @a; select @b;
+declare @a numeric = 1; declare @b tinyint; set @b = @a; select @b;
+
+-- arithmetic
+
+select cast(1 as tinyint) + cast(1 as numeric)
+select cast(1 as tinyint) - cast(1 as numeric)
+select cast(2 as tinyint) * cast(2 as numeric)
+select cast(4 as tinyint) / cast(2 as numeric)
+select cast(5 as tinyint) % cast(2 as numeric)
+
+select cast(1 as numeric) + cast(1 as tinyint)
+select cast(1 as numeric) - cast(1 as tinyint)
+select cast(1 as numeric) * cast(2 as tinyint)
+select cast(4 as numeric) / cast(2 as tinyint)
+select cast(5 as numeric) % cast(2 as tinyint)
+
+declare @a tinyint = 1; select @a += cast(1 as numeric); select @a;
+declare @a tinyint = 2; select @a -= cast(2 as numeric); select @a;
+declare @a tinyint = 4; select @a *= cast(2 as numeric); select @a;
+declare @a tinyint = 5; select @a /= cast(2 as numeric); select @a;
+
+declare @a numeric = 1; select @a += cast(1 as tinyint); select @a;
+declare @a numeric = 2; select @a -= cast(2 as tinyint); select @a;
+declare @a numeric = 4; select @a *= cast(2 as tinyint); select @a;
+declare @a numeric = 5; select @a /= cast(2 as tinyint); select @a;
+
+-- comparison
+
+select 1 where cast(2 as tinyint) >  cast(1 as numeric)
+select 1 where cast(1 as tinyint) >= cast(1 as numeric)
+select 1 where cast(1 as tinyint) =  cast(1 as numeric)
+select 1 where cast(1 as tinyint) <  cast(2 as numeric)
+select 1 where cast(1 as tinyint) <= cast(1 as numeric)
+select 1 where cast(1 as tinyint) <> cast(2 as numeric)
+select 1 where cast(1 as tinyint) != cast(2 as numeric)
+
+select 1 where cast(2 as numeric) >  cast(1 as tinyint)
+select 1 where cast(1 as numeric) >= cast(1 as tinyint)
+select 1 where cast(1 as numeric) =  cast(1 as tinyint)
+select 1 where cast(1 as numeric) <  cast(2 as tinyint)
+select 1 where cast(1 as numeric) <= cast(1 as tinyint)
+select 1 where cast(1 as numeric) <> cast(2 as tinyint)
+select 1 where cast(1 as numeric) != cast(2 as tinyint)

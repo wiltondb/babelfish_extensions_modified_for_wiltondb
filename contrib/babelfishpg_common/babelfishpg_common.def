@@ -147,6 +147,27 @@ EXPORTS
     bigint_avg
     int4int2_sum
     int4int2_avg
+    tinyintin
+    tinyintout
+    tinyintrecv
+    tinyintsend
+    tinyint_eq
+    tinyint_ne
+    tinyint_lt
+    tinyint_le
+    tinyint_gt
+    tinyint_ge
+    tinyint_cmp
+    tinyint_hash
+    tinyint_smaller
+    tinyint_larger
+    smalint_to_tinyint
+    tinyintup
+    tinyintum
+    tinyintand
+    tinyintor
+    tinyintxor
+    tinyintnot
 
     ; smalldtetime.c
     smalldatetime_in
@@ -317,6 +338,7 @@ EXPORTS
     varcharge
     varcharcmp
     hashvarchar
+    varchar2tinyint
     varchar2int2
     varchar2int4
     varchar2int8

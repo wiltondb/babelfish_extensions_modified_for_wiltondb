@@ -1,0 +1,293 @@
+
+-- assignment
+declare @a tinyint = 1; declare @b bigint; set @b = @a; select @b;
+~~START~~
+bigint
+1
+~~END~~
+
+declare @a bigint = 1; declare @b tinyint; set @b = @a; select @b;
+~~START~~
+tinyint
+1
+~~END~~
+
+
+-- arithmetic
+
+select cast(1 as tinyint) + cast(1 as bigint)
+~~START~~
+bigint
+2
+~~END~~
+
+select cast(1 as tinyint) - cast(1 as bigint)
+~~START~~
+bigint
+0
+~~END~~
+
+select cast(2 as tinyint) * cast(2 as bigint)
+~~START~~
+bigint
+4
+~~END~~
+
+select cast(4 as tinyint) / cast(2 as bigint)
+~~START~~
+bigint
+2
+~~END~~
+
+select cast(5 as tinyint) % cast(2 as bigint)
+~~START~~
+bigint
+1
+~~END~~
+
+
+select cast(1 as bigint) + cast(1 as tinyint)
+~~START~~
+bigint
+2
+~~END~~
+
+select cast(1 as bigint) - cast(1 as tinyint)
+~~START~~
+bigint
+0
+~~END~~
+
+select cast(1 as bigint) * cast(2 as tinyint)
+~~START~~
+bigint
+2
+~~END~~
+
+select cast(4 as bigint) / cast(2 as tinyint)
+~~START~~
+bigint
+2
+~~END~~
+
+select cast(5 as bigint) % cast(2 as tinyint)
+~~START~~
+bigint
+1
+~~END~~
+
+
+declare @a tinyint = 1; select @a += cast(1 as bigint); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+declare @a tinyint = 2; select @a -= cast(2 as bigint); select @a;
+~~START~~
+tinyint
+0
+~~END~~
+
+declare @a tinyint = 4; select @a *= cast(2 as bigint); select @a;
+~~START~~
+tinyint
+8
+~~END~~
+
+declare @a tinyint = 5; select @a /= cast(2 as bigint); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+
+declare @a bigint = 1; select @a += cast(1 as tinyint); select @a;
+~~START~~
+bigint
+2
+~~END~~
+
+declare @a bigint = 2; select @a -= cast(2 as tinyint); select @a;
+~~START~~
+bigint
+0
+~~END~~
+
+declare @a bigint = 4; select @a *= cast(2 as tinyint); select @a;
+~~START~~
+bigint
+8
+~~END~~
+
+declare @a bigint = 5; select @a /= cast(2 as tinyint); select @a;
+~~START~~
+bigint
+2
+~~END~~
+
+
+-- bitwise
+
+select cast(3 as tinyint) & cast(6 as bigint)
+~~START~~
+bigint
+2
+~~END~~
+
+select cast(3 as tinyint) | cast(5 as bigint)
+~~START~~
+bigint
+7
+~~END~~
+
+select cast(3 as tinyint) ^ cast(5 as bigint)
+~~START~~
+bigint
+6
+~~END~~
+
+
+select cast(3 as bigint) & cast(6 as tinyint)
+~~START~~
+bigint
+2
+~~END~~
+
+select cast(3 as bigint) | cast(5 as tinyint)
+~~START~~
+bigint
+7
+~~END~~
+
+select cast(3 as bigint) ^ cast(5 as tinyint)
+~~START~~
+bigint
+6
+~~END~~
+
+
+declare @a tinyint = 3; select @a &= cast(6 as bigint); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+declare @a tinyint = 3; select @a |= cast(5 as bigint); select @a;
+~~START~~
+tinyint
+7
+~~END~~
+
+declare @a tinyint = 3; select @a ^= cast(5 as bigint); select @a;
+~~START~~
+tinyint
+6
+~~END~~
+
+declare @a bigint = 3; select @a &= cast(6 as tinyint); select @a;
+~~START~~
+bigint
+2
+~~END~~
+
+declare @a bigint = 3; select @a |= cast(5 as tinyint); select @a;
+~~START~~
+bigint
+7
+~~END~~
+
+declare @a bigint = 3; select @a ^= cast(5 as tinyint); select @a;
+~~START~~
+bigint
+6
+~~END~~
+
+
+-- comparison
+
+select 1 where cast(2 as tinyint) >  cast(1 as bigint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) >= cast(1 as bigint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) =  cast(1 as bigint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <  cast(2 as bigint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <= cast(1 as bigint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <> cast(2 as bigint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) != cast(2 as bigint)
+~~START~~
+int
+1
+~~END~~
+
+
+select 1 where cast(2 as bigint) >  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as bigint) >= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as bigint) =  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as bigint) <  cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as bigint) <= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as bigint) <> cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as bigint) != cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+

@@ -1,0 +1,236 @@
+
+-- arithmetic
+
+select cast(1 as tinyint) + cast(1 as tinyint)
+~~START~~
+tinyint
+2
+~~END~~
+
+select cast(1 as tinyint) - cast(1 as tinyint)
+~~START~~
+tinyint
+0
+~~END~~
+
+select cast(2 as tinyint) * cast(2 as tinyint)
+~~START~~
+tinyint
+4
+~~END~~
+
+select cast(4 as tinyint) / cast(2 as tinyint)
+~~START~~
+tinyint
+2
+~~END~~
+
+select cast(5 as tinyint) % cast(2 as tinyint)
+~~START~~
+tinyint
+1
+~~END~~
+
+
+select cast(1 as tinyint) + cast(1 as tinyint)
+~~START~~
+tinyint
+2
+~~END~~
+
+select cast(1 as tinyint) - cast(1 as tinyint)
+~~START~~
+tinyint
+0
+~~END~~
+
+select cast(1 as tinyint) * cast(2 as tinyint)
+~~START~~
+tinyint
+2
+~~END~~
+
+select cast(4 as tinyint) / cast(2 as tinyint)
+~~START~~
+tinyint
+2
+~~END~~
+
+select cast(5 as tinyint) % cast(2 as tinyint)
+~~START~~
+tinyint
+1
+~~END~~
+
+
+declare @a tinyint = 1; select @a += cast(1 as tinyint); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+declare @a tinyint = 2; select @a -= cast(2 as tinyint); select @a;
+~~START~~
+tinyint
+0
+~~END~~
+
+declare @a tinyint = 4; select @a *= cast(2 as tinyint); select @a;
+~~START~~
+tinyint
+8
+~~END~~
+
+declare @a tinyint = 5; select @a /= cast(2 as tinyint); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+
+-- bitwise
+
+select cast(3 as tinyint) & cast(6 as tinyint)
+~~START~~
+tinyint
+2
+~~END~~
+
+select cast(3 as tinyint) | cast(5 as tinyint)
+~~START~~
+tinyint
+7
+~~END~~
+
+select cast(3 as tinyint) ^ cast(5 as tinyint)
+~~START~~
+tinyint
+6
+~~END~~
+
+
+select cast(3 as tinyint) & cast(6 as tinyint)
+~~START~~
+tinyint
+2
+~~END~~
+
+select cast(3 as tinyint) | cast(5 as tinyint)
+~~START~~
+tinyint
+7
+~~END~~
+
+select cast(3 as tinyint) ^  cast(5 as tinyint)
+~~START~~
+tinyint
+6
+~~END~~
+
+
+declare @a tinyint = 3; select @a &= cast(6 as tinyint); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+declare @a tinyint = 3; select @a |= cast(5 as tinyint); select @a;
+~~START~~
+tinyint
+7
+~~END~~
+
+declare @a tinyint = 3; select @a ^= cast(5 as tinyint); select @a;
+~~START~~
+tinyint
+6
+~~END~~
+
+
+-- comparison
+
+select 1 where cast(2 as tinyint) >  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) >= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) =  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <  cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <> cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) != cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+
+select 1 where cast(2 as tinyint) >  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) >= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) =  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <  cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <> cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) != cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+

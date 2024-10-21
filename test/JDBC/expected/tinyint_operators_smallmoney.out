@@ -1,0 +1,201 @@
+
+-- assignment
+declare @a tinyint = 1; declare @b smallmoney; set @b = @a; select @b;
+~~START~~
+smallmoney
+1.0000
+~~END~~
+
+declare @a smallmoney = 1; declare @b tinyint; set @b = @a; select @b;
+~~START~~
+tinyint
+1
+~~END~~
+
+
+-- arithmetic
+
+select cast(1 as tinyint) + cast(1 as smallmoney)
+~~START~~
+smallmoney
+2.0000
+~~END~~
+
+select cast(1 as tinyint) - cast(1 as smallmoney)
+~~START~~
+smallmoney
+0.0000
+~~END~~
+
+select cast(2 as tinyint) * cast(2 as smallmoney)
+~~START~~
+smallmoney
+4.0000
+~~END~~
+
+select cast(4 as tinyint) / cast(2 as smallmoney)
+~~START~~
+smallmoney
+2.0000
+~~END~~
+
+--select cast(5 as tinyint) % cast(2 as smallmoney)
+
+select cast(1 as smallmoney) + cast(1 as tinyint)
+~~START~~
+smallmoney
+2.0000
+~~END~~
+
+select cast(1 as smallmoney) - cast(1 as tinyint)
+~~START~~
+smallmoney
+0.0000
+~~END~~
+
+select cast(1 as smallmoney) * cast(2 as tinyint)
+~~START~~
+smallmoney
+2.0000
+~~END~~
+
+select cast(4 as smallmoney) / cast(2 as tinyint)
+~~START~~
+smallmoney
+2.0000
+~~END~~
+
+--select cast(5 as smallmoney) % cast(2 as tinyint)
+
+declare @a tinyint = 1; select @a += cast(1 as smallmoney); select @a;
+~~START~~
+tinyint
+2
+~~END~~
+
+declare @a tinyint = 2; select @a -= cast(2 as smallmoney); select @a;
+~~START~~
+tinyint
+0
+~~END~~
+
+declare @a tinyint = 4; select @a *= cast(2 as smallmoney); select @a;
+~~START~~
+tinyint
+8
+~~END~~
+
+--declare @a tinyint = 5; select @a /= cast(2 as smallmoney); select @a;
+
+declare @a smallmoney = 1; select @a += cast(1 as tinyint); select @a;
+~~START~~
+smallmoney
+2.0000
+~~END~~
+
+declare @a smallmoney = 2; select @a -= cast(2 as tinyint); select @a;
+~~START~~
+smallmoney
+0.0000
+~~END~~
+
+declare @a smallmoney = 4; select @a *= cast(2 as tinyint); select @a;
+~~START~~
+smallmoney
+8.0000
+~~END~~
+
+declare @a smallmoney = 5; select @a /= cast(2 as tinyint); select @a;
+~~START~~
+smallmoney
+2.5000
+~~END~~
+
+
+-- comparison
+
+select 1 where cast(2 as tinyint) >  cast(1 as smallmoney)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) >= cast(1 as smallmoney)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) =  cast(1 as smallmoney)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <  cast(2 as smallmoney)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <= cast(1 as smallmoney)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) <> cast(2 as smallmoney)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as tinyint) != cast(2 as smallmoney)
+~~START~~
+int
+1
+~~END~~
+
+
+select 1 where cast(2 as smallmoney) >  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as smallmoney) >= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as smallmoney) =  cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as smallmoney) <  cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as smallmoney) <= cast(1 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as smallmoney) <> cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+
+select 1 where cast(1 as smallmoney) != cast(2 as tinyint)
+~~START~~
+int
+1
+~~END~~
+

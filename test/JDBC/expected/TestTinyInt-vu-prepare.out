@@ -3,9 +3,9 @@ prepst#!# INSERT INTO TINYINT_dt(a) values(?) #!#TINYINT|-|a|-|0
 ~~ROW COUNT: 1~~
 
 prepst#!#exec#!#TINYINT|-|a|-|-10
-~~ERROR (Code: 220)~~
+~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: value "-10" is out of range for type tinyint)~~
 
 prepst#!#exec#!#TINYINT|-|a|-|100
 ~~ROW COUNT: 1~~
@@ -53,9 +53,9 @@ INSERT INTO TINYINT_dt(a) values(86)
 ~~ROW COUNT: 1~~
 
 INSERT INTO TINYINT_dt(a) values(1000)
-~~ERROR (Code: 220)~~
+~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: value "1000" is out of range for type tinyint)~~
 
 INSERT INTO TINYINT_dt(a) values(255)
 ~~ROW COUNT: 1~~

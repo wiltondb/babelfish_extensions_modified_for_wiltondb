@@ -33,7 +33,7 @@ Insert into testsqlvariant_sourceTable2 values (cast (255 as TINYINT),cast (1000
 go
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: tinyint out of range)~~
 
 Insert into testsqlvariant_sourceTable2 values (cast (NULL as TINYINT), cast (100 as TINYINT));
 go

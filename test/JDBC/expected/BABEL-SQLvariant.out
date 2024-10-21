@@ -66,7 +66,7 @@ Insert into sourceTable values (cast (255 as TINYINT),cast (1000 as TINYINT));
 go
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: tinyint out of range)~~
 
 Insert into sourceTable values (cast (NULL as TINYINT), cast (100 as TINYINT));
 go

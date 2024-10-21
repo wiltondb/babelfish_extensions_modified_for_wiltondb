@@ -158,18 +158,16 @@ RETURNS sys.SQL_VARIANT
 AS 'babelfishpg_common', 'smallint2sqlvariant'
 LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
 
-CREATE OR REPLACE FUNCTION sys.smallint_sqlvariant(smallint)
-RETURNS sys.SQL_VARIANT
-AS 'babelfishpg_common', 'smallint2sqlvariant'
-LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+CREATE CAST (SMALLINT AS sys.SQL_VARIANT)
+WITH FUNCTION sys.smallint_sqlvariant (SMALLINT) AS IMPLICIT;
 
-CREATE OR REPLACE FUNCTION sys.tinyint_sqlvariant(sys.tinyint)
+CREATE OR REPLACE FUNCTION sys.tinyint_sqlvariant(sys.TINYINT)
 RETURNS sys.SQL_VARIANT
 AS 'babelfishpg_common', 'tinyint2sqlvariant'
 LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
 
-CREATE CAST (SMALLINT AS sys.SQL_VARIANT)
-WITH FUNCTION sys.smallint_sqlvariant (SMALLINT) AS IMPLICIT;
+CREATE CAST (sys.TINYINT AS sys.SQL_VARIANT)
+WITH FUNCTION sys.tinyint_sqlvariant (sys.TINYINT) AS IMPLICIT;
 
 CREATE OR REPLACE FUNCTION sys.bit_sqlvariant(sys.BIT)
 RETURNS sys.SQL_VARIANT
@@ -353,13 +351,16 @@ RETURNS SMALLINT
 AS 'babelfishpg_common', 'sqlvariant2smallint'
 LANGUAGE C VOLATILE STRICT PARALLEL SAFE;
 
-CREATE OR REPLACE FUNCTION sys.sqlvariant_tinyint(sys.SQL_VARIANT)
-RETURNS sys.TINYINT
-AS 'babelfishpg_common', 'sqlvariant2smallint'
-LANGUAGE C VOLATILE STRICT PARALLEL SAFE;
-
 CREATE CAST (sys.SQL_VARIANT AS SMALLINT)
 WITH FUNCTION sys.sqlvariant_smallint (sys.SQL_VARIANT) AS ASSIGNMENT;
+
+CREATE OR REPLACE FUNCTION sys.sqlvariant_tinyint(sys.SQL_VARIANT)
+RETURNS sys.TINYINT
+AS 'babelfishpg_common', 'sqlvariant2tinyint'
+LANGUAGE C VOLATILE STRICT PARALLEL SAFE;
+
+CREATE CAST (sys.SQL_VARIANT AS sys.TINYINT)
+WITH FUNCTION sys.sqlvariant_tinyint (sys.SQL_VARIANT) AS ASSIGNMENT;
 
 CREATE OR REPLACE FUNCTION sys.sqlvariant_bit(sys.SQL_VARIANT)
 RETURNS sys.BIT

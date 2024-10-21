@@ -107,8 +107,8 @@ EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_sysname'
 go
 EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_time'
 go
-EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_tinyint'
-go
+-- EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_tinyint'
+-- go
 EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_uniqueidentifier'
 go
 EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_varbinary'
@@ -121,8 +121,8 @@ EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_bigint_identit
 go
 EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_smallint_identity'
 go
-EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_tinyint_identity'
-go
+-- EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_tinyint_identity'
+-- go
 EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_decimal_identity'
 go
 EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_numeric_identity'

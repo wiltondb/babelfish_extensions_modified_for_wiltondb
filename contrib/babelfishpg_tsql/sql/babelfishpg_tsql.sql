@@ -308,11 +308,11 @@ CREATE OR REPLACE VIEW sys.sp_columns_100_view AS
   CASE WHEN t4."CHARACTER_MAXIMUM_LENGTH" = -1 THEN 0::INT
     WHEN a.atttypmod != -1
     THEN
-    CAST(coalesce(t4."NUMERIC_PRECISION", t4."CHARACTER_MAXIMUM_LENGTH", sys.tsql_type_precision_helper(t4."DATA_TYPE", a.atttypmod)) AS INT)
+    CAST(coalesce(t4."NUMERIC_PRECISION"::INT, t4."CHARACTER_MAXIMUM_LENGTH", sys.tsql_type_precision_helper(t4."DATA_TYPE", a.atttypmod)) AS INT)
     WHEN tsql_type_name = 'timestamp'
     THEN 8
     ELSE
-    CAST(coalesce(t4."NUMERIC_PRECISION", t4."CHARACTER_MAXIMUM_LENGTH", sys.tsql_type_precision_helper(t4."DATA_TYPE", t.typtypmod)) AS INT)
+    CAST(coalesce(t4."NUMERIC_PRECISION"::INT, t4."CHARACTER_MAXIMUM_LENGTH", sys.tsql_type_precision_helper(t4."DATA_TYPE", t.typtypmod)) AS INT)
   END AS PRECISION,
 
   CASE WHEN a.atttypmod != -1

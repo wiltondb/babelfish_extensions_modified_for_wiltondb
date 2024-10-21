@@ -30,6 +30,28 @@ select cast(0 as tinyint) union all select null
 select cast(0 as tinyint) union all select ''
 select cast(2 as tinyint) union all select '2'
 
+select cast(2 as tinyint) union all select cast(3 as smallint)
+select cast(2 as tinyint) union all select cast(3 as int)
+select cast(2 as tinyint) union all select cast(3 as bigint)
+select cast(2 as tinyint) union all select cast(3 as numeric)
+select cast(2 as tinyint) union all select cast(3 as decimal)
+select cast(2 as tinyint) union all select cast(3 as float)
+select cast(2 as tinyint) union all select cast(3 as real)
+select cast(2 as tinyint) union all select cast(3 as smallmoney)
+select cast(2 as tinyint) union all select cast(3 as money)
+select cast(2 as tinyint) union all select cast(3 as bit)
+
+select cast(2 as int)        union all select cast(3 as tinyint)
+select cast(2 as smallint)   union all select cast(3 as tinyint)
+select cast(2 as bigint)     union all select cast(3 as tinyint)
+select cast(2 as numeric)    union all select cast(3 as tinyint)
+select cast(2 as decimal)    union all select cast(3 as tinyint)
+select cast(2 as float)      union all select cast(3 as tinyint)
+select cast(2 as real)       union all select cast(3 as tinyint)
+select cast(2 as smallmoney) union all select cast(3 as tinyint)
+select cast(2 as money)      union all select cast(3 as tinyint)
+select cast(1 as bit)        union all select cast(3 as tinyint)
+
 -- case
 select case when 1 > 0 then cast(1 as tinyint) else null end
 select case when 1 > 0 then cast(1 as tinyint) else '' end

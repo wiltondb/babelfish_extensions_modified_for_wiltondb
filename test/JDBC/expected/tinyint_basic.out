@@ -129,6 +129,148 @@ tinyint
 ~~END~~
 
 
+select cast(2 as tinyint) union all select cast(3 as smallint)
+~~START~~
+smallint
+2
+3
+~~END~~
+
+select cast(2 as tinyint) union all select cast(3 as int)
+~~START~~
+int
+2
+3
+~~END~~
+
+select cast(2 as tinyint) union all select cast(3 as bigint)
+~~START~~
+bigint
+2
+3
+~~END~~
+
+select cast(2 as tinyint) union all select cast(3 as numeric)
+~~START~~
+numeric
+2.00000000
+3.00000000
+~~END~~
+
+select cast(2 as tinyint) union all select cast(3 as decimal)
+~~START~~
+numeric
+2.00000000
+3.00000000
+~~END~~
+
+select cast(2 as tinyint) union all select cast(3 as float)
+~~START~~
+float
+2.0
+3.0
+~~END~~
+
+select cast(2 as tinyint) union all select cast(3 as real)
+~~START~~
+real
+2.0
+3.0
+~~END~~
+
+select cast(2 as tinyint) union all select cast(3 as smallmoney)
+~~START~~
+money
+2.0000
+3.0000
+~~END~~
+
+select cast(2 as tinyint) union all select cast(3 as money)
+~~START~~
+money
+2.0000
+3.0000
+~~END~~
+
+select cast(2 as tinyint) union all select cast(3 as bit)
+~~START~~
+tinyint
+2
+1
+~~END~~
+
+
+select cast(2 as int)        union all select cast(3 as tinyint)
+~~START~~
+int
+2
+3
+~~END~~
+
+select cast(2 as smallint)   union all select cast(3 as tinyint)
+~~START~~
+smallint
+2
+3
+~~END~~
+
+select cast(2 as bigint)     union all select cast(3 as tinyint)
+~~START~~
+bigint
+2
+3
+~~END~~
+
+select cast(2 as numeric)    union all select cast(3 as tinyint)
+~~START~~
+numeric
+2.00000000
+3.00000000
+~~END~~
+
+select cast(2 as decimal)    union all select cast(3 as tinyint)
+~~START~~
+numeric
+2.00000000
+3.00000000
+~~END~~
+
+select cast(2 as float)      union all select cast(3 as tinyint)
+~~START~~
+float
+2.0
+3.0
+~~END~~
+
+select cast(2 as real)       union all select cast(3 as tinyint)
+~~START~~
+real
+2.0
+3.0
+~~END~~
+
+select cast(2 as smallmoney) union all select cast(3 as tinyint)
+~~START~~
+money
+2.0000
+3.0000
+~~END~~
+
+select cast(2 as money)      union all select cast(3 as tinyint)
+~~START~~
+money
+2.0000
+3.0000
+~~END~~
+
+select cast(1 as bit)        union all select cast(3 as tinyint)
+~~START~~
+bit
+1
+1
+~~END~~
+
+
 -- case
 select case when 1 > 0 then cast(1 as tinyint) else null end
 ~~START~~

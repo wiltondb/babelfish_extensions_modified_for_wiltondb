@@ -45,3 +45,6 @@ GO
 
 DROP TABLE test_identity_vu_prepare_t6
 GO
+
+DROP VIEW scope_identity_view
+GO

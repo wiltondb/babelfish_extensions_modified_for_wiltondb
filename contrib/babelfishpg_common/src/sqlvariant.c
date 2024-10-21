@@ -910,6 +910,7 @@ PG_FUNCTION_INFO_V1(sqlvariant2fixeddecimal);
 PG_FUNCTION_INFO_V1(sqlvariant2bigint);
 PG_FUNCTION_INFO_V1(sqlvariant2int);
 PG_FUNCTION_INFO_V1(sqlvariant2smallint);
+PG_FUNCTION_INFO_V1(sqlvariant2tinyint);
 PG_FUNCTION_INFO_V1(sqlvariant2bit);
 PG_FUNCTION_INFO_V1(sqlvariant2varchar);
 PG_FUNCTION_INFO_V1(sqlvariant2char);
@@ -1063,6 +1064,18 @@ sqlvariant2smallint(PG_FUNCTION_ARGS)
 	int16		result;
 
 	result = DatumGetInt16(gen_type_datum_from_sqlvariant_bytea(sv, SMALLINT_T, -1, coll));
+
+	PG_RETURN_INT16(result);
+}
+
+Datum
+sqlvariant2tinyint(PG_FUNCTION_ARGS)
+{
+	bytea	   *sv = PG_GETARG_BYTEA_PP(0);
+	Oid			coll = PG_GET_COLLATION();
+	int16		result;
+
+	result = DatumGetInt16(gen_type_datum_from_sqlvariant_bytea(sv, TINYINT_T, -1, coll));
 
 	PG_RETURN_INT16(result);
 }

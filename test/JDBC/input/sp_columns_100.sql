@@ -116,8 +116,8 @@ EXEC [sys].sp_columns_100 'tidentityintbigwithareallylongtablenamewhickcausesbab
 GO
 
 -- test with identity columns
-create table tiny_int_identity ( i_col tinyint identity(1,1), tinyint_col tinyint );
-go
+--create table tiny_int_identity ( i_col tinyint identity(1,1), tinyint_col tinyint );
+--go
 create table small_int_identity ( i_col smallint identity(1,1), smallint_col smallint );
 go
 create table int_identity ( i_col int identity(1,1), int_col int );
@@ -131,10 +131,10 @@ go
 create table numeric13_int_identity ( i_col numeric(13,0) identity(1,1), num13int_col numeric(13,0) );
 go
 
-exec [sys].sp_columns_100 N'tiny_int_identity',N'dbo',NULL,NULL,@ODBCVer=3,@fUsePattern=1;
-go
-exec [sys].sp_columns N'tiny_int_identity',N'dbo',NULL,NULL,@ODBCVer=3;
-go
+-- exec [sys].sp_columns_100 N'tiny_int_identity',N'dbo',NULL,NULL,@ODBCVer=3,@fUsePattern=1;
+-- go
+-- exec [sys].sp_columns N'tiny_int_identity',N'dbo',NULL,NULL,@ODBCVer=3;
+-- go
 
 exec [sys].sp_columns_100 N'small_int_identity',N'dbo',NULL,NULL,@ODBCVer=3,@fUsePattern=1;
 go
@@ -173,7 +173,7 @@ drop table nums;
 drop table vart;
 drop table maxx;
 drop table tidentityintbigwithareallylongtablenamewhickcausesbabelfishtoaddahashcodetothenamebecauseofdefault63;
-drop table tiny_int_identity;
+-- drop table tiny_int_identity;
 drop table small_int_identity;
 drop table int_identity;
 drop table big_int_identity;

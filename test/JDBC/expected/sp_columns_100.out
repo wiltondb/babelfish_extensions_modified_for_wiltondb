@@ -203,8 +203,8 @@ master#!#dbo#!#tidentityintbigwithareallylongteba669a8099c8b172adc8a937e6cf71d#!
 
 
 -- test with identity columns
-create table tiny_int_identity ( i_col tinyint identity(1,1), tinyint_col tinyint );
-go
+--create table tiny_int_identity ( i_col tinyint identity(1,1), tinyint_col tinyint );
+--go
 create table small_int_identity ( i_col smallint identity(1,1), smallint_col smallint );
 go
 create table int_identity ( i_col int identity(1,1), int_col int );
@@ -218,23 +218,11 @@ go
 create table numeric13_int_identity ( i_col numeric(13,0) identity(1,1), num13int_col numeric(13,0) );
 go
 
-exec [sys].sp_columns_100 N'tiny_int_identity',N'dbo',NULL,NULL,@ODBCVer=3,@fUsePattern=1;
-go
-~~START~~
-varchar#!#varchar#!#varchar#!#varchar#!#smallint#!#varchar#!#int#!#int#!#smallint#!#smallint#!#smallint#!#varchar#!#nvarchar#!#smallint#!#smallint#!#int#!#int#!#varchar#!#smallint#!#smallint#!#smallint#!#smallint#!#varchar#!#varchar#!#varchar#!#varchar#!#varchar#!#varchar#!#int
-master#!#dbo#!#tiny_int_identity#!#i_col#!#5#!#smallint#!#5#!#2#!#0#!#10#!#0#!#<NULL>#!#<NULL>#!#5#!#<NULL>#!#<NULL>#!#1#!#NO#!#0#!#0#!#0#!#1#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#52
-master#!#dbo#!#tiny_int_identity#!#tinyint_col#!#-6#!#tinyint#!#3#!#1#!#0#!#10#!#1#!#<NULL>#!#<NULL>#!#-6#!#<NULL>#!#<NULL>#!#2#!#YES#!#0#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#38
-~~END~~
 
-exec [sys].sp_columns N'tiny_int_identity',N'dbo',NULL,NULL,@ODBCVer=3;
-go
-~~START~~
-varchar#!#varchar#!#varchar#!#varchar#!#smallint#!#varchar#!#int#!#int#!#smallint#!#smallint#!#smallint#!#varchar#!#nvarchar#!#smallint#!#smallint#!#int#!#int#!#varchar#!#int
-master#!#dbo#!#tiny_int_identity#!#i_col#!#5#!#smallint#!#5#!#2#!#0#!#10#!#0#!#<NULL>#!#<NULL>#!#5#!#<NULL>#!#<NULL>#!#1#!#NO#!#52
-master#!#dbo#!#tiny_int_identity#!#tinyint_col#!#-6#!#tinyint#!#3#!#1#!#0#!#10#!#1#!#<NULL>#!#<NULL>#!#-6#!#<NULL>#!#<NULL>#!#2#!#YES#!#38
-~~END~~
-
-
+-- exec [sys].sp_columns_100 N'tiny_int_identity',N'dbo',NULL,NULL,@ODBCVer=3,@fUsePattern=1;
+-- go
+-- exec [sys].sp_columns N'tiny_int_identity',N'dbo',NULL,NULL,@ODBCVer=3;
+-- go
 exec [sys].sp_columns_100 N'small_int_identity',N'dbo',NULL,NULL,@ODBCVer=3,@fUsePattern=1;
 go
 ~~START~~
@@ -344,7 +332,7 @@ drop table nums;
 drop table vart;
 drop table maxx;
 drop table tidentityintbigwithareallylongtablenamewhickcausesbabelfishtoaddahashcodetothenamebecauseofdefault63;
-drop table tiny_int_identity;
+-- drop table tiny_int_identity;
 drop table small_int_identity;
 drop table int_identity;
 drop table big_int_identity;

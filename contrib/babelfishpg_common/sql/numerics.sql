@@ -241,6 +241,26 @@ LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
 CREATE CAST (sys.TINYINT AS sys.FIXEDDECIMAL)
 WITH FUNCTION sys.tinyint2fixeddecimal (sys.TINYINT) AS IMPLICIT;
 
+-- tinyint - varchar
+
+CREATE OR REPLACE FUNCTION sys.varchar2tinyint(sys.VARCHAR)
+RETURNS sys.TINYINT
+AS 'babelfishpg_common', 'varchar2tinyint'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (sys.VARCHAR AS sys.TINYINT)
+WITH FUNCTION sys.varchar2tinyint(sys.VARCHAR) AS IMPLICIT;
+
+CREATE OR REPLACE FUNCTION sys.tinyint2varchar(sys.TINYINT)
+RETURNS sys.VARCHAR
+AS $$
+  SELECT $1::SMALLINT;
+$$
+LANGUAGE SQL IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (sys.TINYINT AS sys.VARCHAR)
+WITH FUNCTION sys.tinyint2varchar(sys.TINYINT) AS IMPLICIT;
+
 -- tinyint - jsonb
 
 CREATE OR REPLACE FUNCTION sys.jsonb2tinyint(JSONB)
@@ -528,16 +548,6 @@ CREATE OPERATOR sys.% (
     RIGHTARG   = sys.TINYINT,
     PROCEDURE  = sys.tinyintmod
 );
-
--- tinyint - varchar
-
-CREATE OR REPLACE FUNCTION sys.varchar2tinyint(sys.VARCHAR)
-RETURNS sys.TINYINT
-AS 'babelfishpg_common', 'varchar2tinyint'
-LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
-
-CREATE CAST (sys.VARCHAR AS sys.TINYINT)
-WITH FUNCTION sys.varchar2tinyint(sys.VARCHAR) AS ASSIGNMENT;
 
 -- tinyint - int
 

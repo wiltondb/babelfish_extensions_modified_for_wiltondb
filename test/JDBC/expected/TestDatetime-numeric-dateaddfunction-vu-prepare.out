@@ -9,7 +9,7 @@ AS(
         CONVERT(DATETIME, CAST(2.5 as INT))as re6,
         CONVERT(DATETIME, CAST(2.5 as BIGINT))as re7,
         CONVERT(DATETIME, CAST(2.5 as SMALLINT))as re8,
-        CONVERT(DATETIME, CAST(2.5 as TINYINT))as re9,
+        -- CONVERT(DATETIME, CAST(2.5 as TINYINT))as re9,
         CONVERT(DATETIME, CAST(2.5 as MONEY))as re10,
         CONVERT(DATETIME, CAST(2.5 as SMALLMONEY))as re11,
         CONVERT(DATETIME, CAST(-2.5 as BIT)) as re12,

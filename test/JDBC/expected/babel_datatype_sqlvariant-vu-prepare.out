@@ -141,7 +141,7 @@ insert into babel_datatype_sqlvariant_vu_prepare_t1 (a) values ( cast(256 as tin
 go
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: tinyint out of range)~~
 
 insert into babel_datatype_sqlvariant_vu_prepare_t1 (a) values ( cast(255 as tinyint) );
 go

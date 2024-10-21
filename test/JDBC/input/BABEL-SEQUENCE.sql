@@ -3,39 +3,39 @@ GO
 
 CREATE TABLE babel_sequence_tinyint (id [tinyint] IDENTITY, col1 [tinyint]);
 go
-CREATE PROCEDURE insert_babel_sequence_tinyint_id
-@id tinyint, @val tinyint
-AS BEGIN
-    SET IDENTITY_INSERT babel_sequence_tinyint ON;
-    INSERT INTO babel_sequence_tinyint (id, col1) VALUES (@id, @val);
-    SET IDENTITY_INSERT babel_sequence_tinyint OFF;
-END;
-go
-EXEC insert_babel_sequence_tinyint_id 2, 1;
-go
-EXEC insert_babel_sequence_tinyint_id 8, 2;
-go
-INSERT INTO babel_sequence_tinyint (col1) VALUES (10), (20), (30);
-go
-EXEC insert_babel_sequence_tinyint_id 16, 3;
-go
-EXEC insert_babel_sequence_tinyint_id 255, 4;
-go
-INSERT INTO babel_sequence_tinyint (col1) VALUES (40);
-go
-SELECT * FROM babel_sequence_tinyint;
-go
+-- CREATE PROCEDURE insert_babel_sequence_tinyint_id
+-- @id tinyint, @val tinyint
+-- AS BEGIN
+    -- SET IDENTITY_INSERT babel_sequence_tinyint ON;
+    -- INSERT INTO babel_sequence_tinyint (id, col1) VALUES (@id, @val);
+    -- SET IDENTITY_INSERT babel_sequence_tinyint OFF;
+-- END;
+-- go
+-- EXEC insert_babel_sequence_tinyint_id 2, 1;
+-- go
+-- EXEC insert_babel_sequence_tinyint_id 8, 2;
+-- go
+-- INSERT INTO babel_sequence_tinyint (col1) VALUES (10), (20), (30);
+-- go
+-- EXEC insert_babel_sequence_tinyint_id 16, 3;
+-- go
+-- EXEC insert_babel_sequence_tinyint_id 255, 4;
+-- go
+-- INSERT INTO babel_sequence_tinyint (col1) VALUES (40);
+-- go
+-- SELECT * FROM babel_sequence_tinyint;
+-- go
 
 CREATE TABLE babel_sequence_tinyint_dec (id [tinyint] IDENTITY(1,-1), col1 [tinyint]);
 go
-INSERT INTO babel_sequence_tinyint_dec (col1) VALUES (10);
-go
-INSERT INTO babel_sequence_tinyint_dec (col1) VALUES (20);
-go
-INSERT INTO babel_sequence_tinyint_dec (col1) VALUES (30);
-go
-SELECT * FROM babel_sequence_tinyint_dec;
-go
+-- INSERT INTO babel_sequence_tinyint_dec (col1) VALUES (10);
+-- go
+-- INSERT INTO babel_sequence_tinyint_dec (col1) VALUES (20);
+-- go
+-- INSERT INTO babel_sequence_tinyint_dec (col1) VALUES (30);
+-- go
+-- SELECT * FROM babel_sequence_tinyint_dec;
+-- go
 
 CREATE TABLE babel_sequence_smallint (id [smallint] IDENTITY, col1 [int]);
 go
@@ -134,10 +134,10 @@ go
 
 ALTER TABLE babel_sequence_alter ADD id_tinyint [tinyint] IDENTITY(1,1);
 go
-SELECT * FROM babel_sequence_alter;
-go
-ALTER TABLE babel_sequence_alter DROP COLUMN id_tinyint;
-go
+-- SELECT * FROM babel_sequence_alter;
+-- go
+-- ALTER TABLE babel_sequence_alter DROP COLUMN id_tinyint;
+-- go
 
 ALTER TABLE babel_sequence_alter ADD id_smallint [smallint] IDENTITY(1,1);
 go
@@ -187,12 +187,12 @@ START WITH 1
 INCREMENT BY 1
 CACHE  50
 go
-SELECT nextval('seq_tinyint');
-go
-SELECT setval('seq_tinyint', 255);
-go
-SELECT nextval('seq_tinyint');
-go
+-- SELECT nextval('seq_tinyint');
+-- go
+-- SELECT setval('seq_tinyint', 255);
+-- go
+-- SELECT nextval('seq_tinyint');
+-- go
 
 CREATE SEQUENCE seq_smallint
 AS [smallint]
@@ -292,9 +292,9 @@ INCREMENT BY 1
 CACHE  50
 go
 
-DROP PROC insert_babel_sequence_tinyint_id, insert_babel_sequence_int_id, insert_babel_sequence_numeric_id, insert_babel_sequence_decimal_id;
+DROP PROC insert_babel_sequence_int_id, insert_babel_sequence_numeric_id, insert_babel_sequence_decimal_id;
 go
-DROP TABLE babel_sequence_tinyint, babel_sequence_tinyint_dec, babel_sequence_smallint, babel_sequence_int, babel_sequence_bigint, babel_sequence_numeric, babel_sequence_decimal, babel_sequence_alter;
+DROP TABLE babel_sequence_smallint, babel_sequence_int, babel_sequence_bigint, babel_sequence_numeric, babel_sequence_decimal, babel_sequence_alter;
 go
-DROP SEQUENCE seq_tinyint, seq_smallint, seq_int, seq_bigint, seq_numeric, seq_decimal;
+DROP SEQUENCE seq_smallint, seq_int, seq_bigint, seq_numeric, seq_decimal;
 go

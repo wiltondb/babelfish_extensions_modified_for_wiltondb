@@ -6,9 +6,9 @@ go
 drop sequence isc_sequences_sc1.isc_sequences_seq1;
 go
 
-drop sequence isc_sequences_sc1.isc_sequences_seq2;
-go
 
+--drop sequence isc_sequences_sc1.isc_sequences_seq2;
+--go
 drop sequence isc_sequences_sc1.isc_sequences_seq3;
 go
 

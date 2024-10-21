@@ -14,8 +14,8 @@ go
 create sequence jira_babel_3504_sch1.jira_babel_3504_seq1 start with 1 minvalue 1 maxvalue 5 cycle;
 go
 
-create sequence jira_babel_3504_sch1.jira_babel_3504_seq2 as tinyint start with 2 minvalue 1 maxvalue 5 cycle;
-go
+--create sequence jira_babel_3504_sch1.jira_babel_3504_seq2 as tinyint start with 2 minvalue 1 maxvalue 5 cycle;
+--go
 
 create sequence jira_babel_3504_sch1.jira_babel_3504_seq3 as smallint start with 3 increment by 3 minvalue 3 maxvalue 10;
 go
@@ -36,8 +36,8 @@ go
 create sequence jira_babel_3504_sch1.jira_babel_3504_seq8 as varchar(10) start with 3 increment by 3 minvalue 3 maxvalue 12 cycle;
 go
 
-create type jira_babel_3504_sch2.jira_babel_3504_tinyint from tinyint;
-go
+--create type jira_babel_3504_sch2.jira_babel_3504_tinyint from tinyint;
+--go
 
 create type jira_babel_3504_sch2.jira_babel_3504_smallint from smallint;
 go
@@ -57,8 +57,8 @@ go
 create type jira_babel_3504_varchar from varchar(10);
 go
 
-create sequence jira_babel_3504_sch2.jira_babel_3504_udtseq1 as jira_babel_3504_sch2.jira_babel_3504_tinyint start with 2 minvalue 1 maxvalue 5 cycle;
-go
+--create sequence jira_babel_3504_sch2.jira_babel_3504_udtseq1 as jira_babel_3504_sch2.jira_babel_3504_tinyint start with 2 minvalue 1 maxvalue 5 cycle;
+--go
 
 create sequence jira_babel_3504_sch2.jira_babel_3504_udtseq2 as jira_babel_3504_sch2.jira_babel_3504_smallint start with 3 increment by 3 minvalue 3 maxvalue 10;
 go

@@ -1634,11 +1634,9 @@ tinyint
 
 SELECT babel_637_add_one_tinyint(cast(123456789012.1 as fixeddecimal));
 GO
-~~START~~
-tinyint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
+~~ERROR (Message: smallint out of range)~~
 
 
 SELECT babel_637_add_one_tinyint(cast(41.9 as numeric(8,4)));
@@ -1651,11 +1649,9 @@ tinyint
 
 SELECT babel_637_add_one_tinyint(cast(123456789012.1 as numeric(18,4)));
 GO
-~~START~~
-tinyint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: An error occurred during the current command (Done status 0). smallint out of range)~~
+~~ERROR (Message: smallint out of range)~~
 
 
 SELECT babel_637_add_one_tinyint(cast(41.9 as money));
@@ -1732,11 +1728,9 @@ tinyint
 
 SELECT babel_637_add_one_tinyint(cast(32766 as smallint));
 GO
-~~START~~
-tinyint
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: tinyint out of range)~~
 
 
 SELECT babel_637_add_one_tinyint(cast(41 as tinyint));

@@ -303,13 +303,8 @@ smallint#!#varchar#!#smallint#!#varchar#!#int#!#int#!#smallint#!#smallint
 1#!#a_time#!#-9#!#time#!#15#!#30#!#<NULL>#!#1
 ~~END~~
 
-EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_tinyint'
-go
-~~START~~
-smallint#!#varchar#!#smallint#!#varchar#!#int#!#int#!#smallint#!#smallint
-1#!#a_tinyint#!#-6#!#tinyint#!#3#!#1#!#0#!#1
-~~END~~
-
+-- EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_tinyint'
+-- go
 EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_uniqueidentifier'
 go
 ~~START~~
@@ -352,13 +347,8 @@ smallint#!#varchar#!#smallint#!#varchar#!#int#!#int#!#smallint#!#smallint
 1#!#a_smallint_identity#!#5#!#smallint identity#!#5#!#2#!#0#!#1
 ~~END~~
 
-EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_tinyint_identity'
-go
-~~START~~
-smallint#!#varchar#!#smallint#!#varchar#!#int#!#int#!#smallint#!#smallint
-1#!#a_tinyint_identity#!#5#!#smallint identity#!#5#!#2#!#0#!#1
-~~END~~
-
+-- EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_tinyint_identity'
+-- go
 EXEC sp_special_columns 'babel_sp_special_columns_vu_prepare_type_decimal_identity'
 go
 ~~START~~

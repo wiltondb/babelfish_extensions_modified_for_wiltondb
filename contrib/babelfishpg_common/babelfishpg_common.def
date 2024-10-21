@@ -231,6 +231,7 @@ EXPORTS
     sqlvariant2bigint
     sqlvariant2int
     sqlvariant2smallint
+    sqlvariant2tinyint
     sqlvariant2bit
     sqlvariant2varchar
     sqlvariant2char

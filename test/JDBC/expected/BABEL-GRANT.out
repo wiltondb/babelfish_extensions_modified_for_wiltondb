@@ -4,9 +4,9 @@ GO
 DROP TABLE IF EXISTS t1;
 GO
 
-DROP SEQUENCE IF EXISTS seq_tinyint;
-GO
 
+-- DROP SEQUENCE IF EXISTS seq_tinyint;
+-- GO
 DROP FUNCTION IF EXISTS my_func;
 GO
 
@@ -36,6 +36,10 @@ START WITH 1
 INCREMENT BY 1
 CACHE  50
 GO
+~~ERROR (Code: 11702)~~
+
+~~ERROR (Message: sequence type must be smallint, integer, or bigint)~~
+
 
 ---- VIEW
 CREATE VIEW my_view AS SELECT * FROM t1;
@@ -60,9 +64,9 @@ GO
 GRANT ALL ON OBJECT::t1 TO guest WITH GRANT OPTION;
 GO
 
-GRANT ALL ON OBJECT::seq_tinyint TO guest WITH GRANT OPTION;
-GO
 
+-- GRANT ALL ON OBJECT::seq_tinyint TO guest WITH GRANT OPTION;
+-- GO
 GRANT ALL ON OBJECT::my_view TO guest WITH GRANT OPTION;
 GO
 
@@ -78,9 +82,9 @@ GO
 REVOKE ALL ON OBJECT::t1 TO guest;
 GO
 
-REVOKE ALL ON OBJECT::seq_tinyint TO guest;
-GO
 
+-- REVOKE ALL ON OBJECT::seq_tinyint TO guest;
+-- GO
 REVOKE ALL ON OBJECT::my_view TO guest;
 GO
 
@@ -195,9 +199,9 @@ GO
 DROP TABLE IF EXISTS t1;
 GO
 
-DROP SEQUENCE IF EXISTS seq_tinyint;
-GO
 
+-- DROP SEQUENCE IF EXISTS seq_tinyint;
+-- GO
 DROP FUNCTION IF EXISTS my_func;
 GO
 

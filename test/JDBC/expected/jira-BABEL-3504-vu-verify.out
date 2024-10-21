@@ -9,13 +9,11 @@ go
 ~~START~~
 nvarchar#!#nvarchar#!#nvarchar#!#nvarchar
 jira_babel_3504_dbone#!#jira_babel_3504_sch1#!#jira_babel_3504_seq1#!#bigint
-jira_babel_3504_dbone#!#jira_babel_3504_sch1#!#jira_babel_3504_seq2#!#smallint
 jira_babel_3504_dbone#!#jira_babel_3504_sch1#!#jira_babel_3504_seq3#!#smallint
 jira_babel_3504_dbone#!#jira_babel_3504_sch1#!#jira_babel_3504_seq4#!#int
 jira_babel_3504_dbone#!#jira_babel_3504_sch1#!#jira_babel_3504_seq5#!#bigint
 jira_babel_3504_dbone#!#jira_babel_3504_sch1#!#jira_babel_3504_seq6#!#bigint
 jira_babel_3504_dbone#!#jira_babel_3504_sch1#!#jira_babel_3504_seq7#!#bigint
-jira_babel_3504_dbone#!#jira_babel_3504_sch2#!#jira_babel_3504_udtseq1#!#smallint
 jira_babel_3504_dbone#!#jira_babel_3504_sch2#!#jira_babel_3504_udtseq2#!#smallint
 jira_babel_3504_dbone#!#jira_babel_3504_sch2#!#jira_babel_3504_udtseq3#!#int
 jira_babel_3504_dbone#!#jira_babel_3504_sch2#!#jira_babel_3504_udtseq4#!#bigint

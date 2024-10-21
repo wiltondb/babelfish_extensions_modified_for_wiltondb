@@ -73,8 +73,8 @@ CREATE TABLE babel_sp_special_columns_vu_prepare_type_sysname (a_sysname sysname
 go
 CREATE TABLE babel_sp_special_columns_vu_prepare_type_time (a_time time primary key)
 go
-CREATE TABLE babel_sp_special_columns_vu_prepare_type_tinyint (a_tinyint tinyint primary key)
-go
+-- CREATE TABLE babel_sp_special_columns_vu_prepare_type_tinyint (a_tinyint tinyint primary key)
+-- go
 CREATE TABLE babel_sp_special_columns_vu_prepare_type_uniqueidentifier (a_uniqueidentifier uniqueidentifier primary key)
 go
 CREATE TABLE babel_sp_special_columns_vu_prepare_type_varbinary (a_varbinary varbinary primary key)
@@ -87,8 +87,8 @@ CREATE TABLE babel_sp_special_columns_vu_prepare_type_bigint_identity (a_bigint_
 go
 CREATE TABLE babel_sp_special_columns_vu_prepare_type_smallint_identity (a_smallint_identity smallint identity primary key)
 go
-CREATE TABLE babel_sp_special_columns_vu_prepare_type_tinyint_identity (a_tinyint_identity tinyint identity primary key)
-go
+-- CREATE TABLE babel_sp_special_columns_vu_prepare_type_tinyint_identity (a_tinyint_identity tinyint identity primary key)
+-- go
 CREATE TABLE babel_sp_special_columns_vu_prepare_type_decimal_identity (a_decimal_identity decimal identity primary key)
 go
 CREATE TABLE babel_sp_special_columns_vu_prepare_type_numeric_identity (a_numeric_identity numeric identity primary key)

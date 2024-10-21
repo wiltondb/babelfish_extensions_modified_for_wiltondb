@@ -1143,8 +1143,7 @@ tinyint_range_check(int16 val)
 	if (val < 0 || val > PG_UINT8_MAX)
 		ereport(ERROR,
 			(errcode(ERRCODE_NUMERIC_VALUE_OUT_OF_RANGE),
-			 errmsg("value \"%hi\" is out of range for type %s",
-					val, "tinyint")));
+			 errmsg("tinyint out of range")));
 }
 
 /*

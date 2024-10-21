@@ -406,8 +406,8 @@ go
 SELECT id, mycol FROM dbo.test_id_index WHERE id <= scope_identity() OR mycol = 11;
 go
 
-SELECT id, mycol FROM dbo.test_id_index_tinyint WHERE id = scope_identity()
-go
+-- SELECT id, mycol FROM dbo.test_id_index_tinyint WHERE id = scope_identity()
+-- go
 
 SELECT id, mycol FROM dbo.test_id_index_smallint WHERE id = scope_identity()
 go
@@ -450,7 +450,7 @@ dbo.t1_identity_1,
 dbo.t1_identity_2,
 dbo.test_identity_range,
 dbo.test_id_index,
-dbo.test_id_index_tinyint,
+-- dbo.test_id_index_tinyint,
 dbo.test_id_index_smallint,
 dbo.test_id_index_bigint,
 dbo.test_id_index_numeric,

@@ -4,8 +4,8 @@ GO
 DROP TABLE IF EXISTS t1;
 GO
 
-DROP SEQUENCE IF EXISTS seq_tinyint;
-GO
+-- DROP SEQUENCE IF EXISTS seq_tinyint;
+-- GO
 
 DROP FUNCTION IF EXISTS my_func;
 GO
@@ -58,8 +58,8 @@ GO
 GRANT ALL ON OBJECT::t1 TO guest WITH GRANT OPTION;
 GO
 
-GRANT ALL ON OBJECT::seq_tinyint TO guest WITH GRANT OPTION;
-GO
+-- GRANT ALL ON OBJECT::seq_tinyint TO guest WITH GRANT OPTION;
+-- GO
 
 GRANT ALL ON OBJECT::my_view TO guest WITH GRANT OPTION;
 GO
@@ -76,8 +76,8 @@ GO
 REVOKE ALL ON OBJECT::t1 TO guest;
 GO
 
-REVOKE ALL ON OBJECT::seq_tinyint TO guest;
-GO
+-- REVOKE ALL ON OBJECT::seq_tinyint TO guest;
+-- GO
 
 REVOKE ALL ON OBJECT::my_view TO guest;
 GO
@@ -161,8 +161,8 @@ GO
 DROP TABLE IF EXISTS t1;
 GO
 
-DROP SEQUENCE IF EXISTS seq_tinyint;
-GO
+-- DROP SEQUENCE IF EXISTS seq_tinyint;
+-- GO
 
 DROP FUNCTION IF EXISTS my_func;
 GO

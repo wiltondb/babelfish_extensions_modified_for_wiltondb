@@ -768,7 +768,7 @@ GO
 truncate table ErrorWithTryCatchTable
 GO
 
--- Error: "value for domain tinyint violates check constraint "tinyint_check""
+-- Error: "tinyint out of range"
 -- Simple error inside try-catch
 BEGIN TRY
     SELECT xact_state();

@@ -1843,7 +1843,7 @@ EXEC Datetime_proc9 '1900-09-13 00:00:00.000', 256
 GO
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: tinyint out of range)~~
 
 DROP PROCEDURE Datetime_proc9
 GO
@@ -2133,7 +2133,7 @@ EXEC SMALLDatetime_proc9 '1900-09-13 00:00:00.000', 256
 GO
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: tinyint out of range)~~
 
 DROP PROCEDURE SMALLDatetime_proc9
 GO

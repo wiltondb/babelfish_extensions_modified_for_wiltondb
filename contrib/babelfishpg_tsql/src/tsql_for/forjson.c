@@ -567,7 +567,8 @@ tsql_row_to_json(JsonbValue* jsonbArray, Datum record, bool include_null_values)
 			}
 			/* convert money and smallmoney to numeric */
 			else if (strcmp(typename, "money") == 0 ||
-					 strcmp(typename, "smallmoney") == 0)
+					 strcmp(typename, "smallmoney") == 0 ||
+					 strcmp(typename, "tinyint") == 0)
 			{
 				char	   *val = SPI_getvalue(tuple, tupdesc, i + 1);
 

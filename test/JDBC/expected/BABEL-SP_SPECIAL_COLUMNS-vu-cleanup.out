@@ -63,8 +63,8 @@ DROP TABLE babel_sp_special_columns_vu_prepare_type_sysname
 go
 DROP TABLE babel_sp_special_columns_vu_prepare_type_time 
 go
-DROP TABLE babel_sp_special_columns_vu_prepare_type_tinyint
-go
+-- DROP TABLE babel_sp_special_columns_vu_prepare_type_tinyint
+-- go
 DROP TABLE babel_sp_special_columns_vu_prepare_type_uniqueidentifier
 go
 DROP TABLE babel_sp_special_columns_vu_prepare_type_varbinary
@@ -77,8 +77,8 @@ DROP TABLE babel_sp_special_columns_vu_prepare_type_bigint_identity
 go
 DROP TABLE babel_sp_special_columns_vu_prepare_type_smallint_identity
 go
-DROP TABLE babel_sp_special_columns_vu_prepare_type_tinyint_identity
-go
+-- DROP TABLE babel_sp_special_columns_vu_prepare_type_tinyint_identity
+-- go
 DROP TABLE babel_sp_special_columns_vu_prepare_type_decimal_identity
 go
 DROP TABLE babel_sp_special_columns_vu_prepare_type_numeric_identity

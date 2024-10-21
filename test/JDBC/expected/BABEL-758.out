@@ -172,7 +172,7 @@ SELECT @ret;
 GO
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: tinyint out of range)~~
 
 ~~START~~
 tinyint

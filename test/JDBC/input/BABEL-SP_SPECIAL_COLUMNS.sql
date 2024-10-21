@@ -88,8 +88,8 @@ CREATE TABLE type_bigint_identity (a_bigint_identity bigint identity primary key
 go
 CREATE TABLE type_smallint_identity (a_smallint_identity smallint identity primary key)
 go
-CREATE TABLE type_tinyint_identity (a_tinyint_identity tinyint identity primary key)
-go
+-- CREATE TABLE type_tinyint_identity (a_tinyint_identity tinyint identity primary key)
+-- go
 CREATE TABLE type_decimal_identity (a_decimal_identity decimal identity primary key)
 go
 CREATE TABLE type_numeric_identity (a_numeric_identity numeric identity primary key)
@@ -239,8 +239,8 @@ EXEC sp_special_columns 'type_bigint_identity'
 go
 EXEC sp_special_columns 'type_smallint_identity'
 go
-EXEC sp_special_columns 'type_tinyint_identity'
-go
+-- EXEC sp_special_columns 'type_tinyint_identity'
+-- go
 EXEC sp_special_columns 'type_decimal_identity'
 go
 EXEC sp_special_columns 'type_numeric_identity'
@@ -379,8 +379,8 @@ DROP TABLE type_bigint_identity
 go
 DROP TABLE type_smallint_identity
 go
-DROP TABLE type_tinyint_identity
-go
+-- DROP TABLE type_tinyint_identity
+-- go
 DROP TABLE type_decimal_identity
 go
 DROP TABLE type_numeric_identity

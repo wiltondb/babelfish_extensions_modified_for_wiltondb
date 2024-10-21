@@ -100,7 +100,7 @@ smallint
 ~~END~~
 
 ~~START~~
-smallint
+bigint
 4
 ~~END~~
 
@@ -147,7 +147,7 @@ smallint
 ~~END~~
 
 ~~START~~
-smallint
+bigint
 29
 ~~END~~
 
@@ -202,7 +202,7 @@ smallint
 ~~END~~
 
 ~~START~~
-smallint
+bigint
 25
 ~~END~~
 

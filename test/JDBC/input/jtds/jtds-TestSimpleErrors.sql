@@ -2135,7 +2135,7 @@ GO
 if @@trancount > 0 commit tran;
 GO
 
--- Error: value for domain tinyint violates check constraint "tinyint_check"
+-- Error: tinyint out of range
 INSERT INTO simpleErrorTable VALUES ('Apple', N'red', 1, 'Delhi', N'Sad😞',  '2000-12-13 12:58:23.123', 123.1);
 DECLARE @a tinyint = 1000;
 INSERT INTO simpleErrorTable(a, b, c, e, f, g) VALUES ('Orange', NULL, 3, N'Happy😀',  '1900-02-28 23:59:59.989', 342.5);

@@ -127,6 +127,14 @@ LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
 CREATE CAST (INT2 AS sys.BBF_VARBINARY)
 WITH FUNCTION sys.int2varbinary (INT2, integer, boolean) AS ASSIGNMENT;
 
+CREATE OR REPLACE FUNCTION sys.tinyintvarbinary(sys.TINYINT, integer, boolean)
+RETURNS sys.BBF_VARBINARY
+AS 'babelfishpg_common', 'int2varbinary'
+LANGUAGE C IMMUTABLE STRICT PARALLEL SAFE;
+
+CREATE CAST (sys.TINYINT AS sys.BBF_VARBINARY)
+WITH FUNCTION sys.tinyintvarbinary (sys.TINYINT, integer, boolean) AS ASSIGNMENT;
+
 CREATE OR REPLACE FUNCTION sys.int4varbinary(INT4, integer, boolean)
 RETURNS sys.BBF_VARBINARY
 AS 'babelfishpg_common', 'int4varbinary'

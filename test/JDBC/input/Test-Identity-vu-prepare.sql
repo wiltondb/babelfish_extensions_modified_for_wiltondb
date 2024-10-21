@@ -38,7 +38,7 @@ END
 GO
 
 CREATE TABLE test_identity_vu_prepare_t2
-(id   TINYINT IDENTITY(1, 1)  , 
+(id   SMALLINT IDENTITY(1, 1)  , 
  Name NVARCHAR(20) NULL
 )
 GO

@@ -157,6 +157,7 @@ XX000#!#no owned sequence found#!##!#550
 3B001#!#savepoint "%s" does not exist#!##!#6401
 22023#!#sequence type must be smallint, integer, or bigint#!##!#11702
 22003#!#smallint out of range#!##!#220
+22003#!#tinyint out of range#!##!#220
 54001#!#stack depth limit exceeded#!##!#217
 0A000#!#SP_PREPEXECRPC not supported yet#!##!#16901
 22023#!#START value (%lld) cannot be greater than MAXVALUE (%lld)#!##!#11703

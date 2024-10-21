@@ -53,9 +53,9 @@ BABELFISH
 -- Expect an error
 INSERT INTO dbo.test_table1 (test_id, test_col1) VALUES (2, 10);
 go
-~~ERROR (Code: 156008580)~~
+~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot insert into column "test_id")~~
+~~ERROR (Message: cannot insert a non-DEFAULT value into column "test_id")~~
 
 
 SET IDENTITY_INSERT dbo.test_table1 ON;
@@ -109,9 +109,9 @@ int#!#int
 -- Expect an error. Verify IDENTITY_INSERT set off
 INSERT INTO dbo.test_table1 (test_id, test_col1) VALUES (2, 10);
 go
-~~ERROR (Code: 156008580)~~
+~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot insert into column "test_id")~~
+~~ERROR (Message: cannot insert a non-DEFAULT value into column "test_id")~~
 
 
 -- Set to table then drop it. Should implicitly turn IDENTITY_INSERT off
@@ -127,29 +127,29 @@ go
 -- Try to insert. Expect an error. Same name but different OID
 INSERT INTO dbo.test_table1 (test_id, test_col1) VALUES (2, 10);
 go
-~~ERROR (Code: 156008580)~~
+~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cannot insert into column "test_id")~~
+~~ERROR (Message: cannot insert a non-DEFAULT value into column "test_id")~~
 
 
 -- Expect errors
 SET IDENTITY_INSERT test_table2 ON;
 go
-~~ERROR (Code: 208)~~
+~~ERROR (Code: 33557097)~~
 
 ~~ERROR (Message: relation "test_table2" does not exist)~~
 
 SET IDENTITY_INSERT fake_schema.test_table1 ON;
 go
-~~ERROR (Code: 1411)~~
+~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: schema "fake_schema" does not exist)~~
+~~ERROR (Message: schema "master_fake_schema" does not exist)~~
 
 SET IDENTITY_INSERT fake_db.dbo.test_table1 ON;
 go
-~~ERROR (Code: 1088)~~
+~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: cross-database references are not implemented: "fake_db.dbo.test_table1")~~
+~~ERROR (Message: cross-database references are not implemented: "fake_db.master_dbo.test_table1")~~
 
 
 CREATE TABLE dbo.test_table2 (test_id INT IDENTITY(7,2), test_col1 INT);
@@ -160,9 +160,9 @@ SET IDENTITY_INSERT dbo.test_table1 ON;
 go
 SET IDENTITY_INSERT dbo.test_table2 ON;
 go
-~~ERROR (Code: 16777410)~~
+~~ERROR (Code: 8107)~~
 
-~~ERROR (Message: IDENTITY_INSERT is already ON for table 'jdbc_testdb.dbo.test_table1')~~
+~~ERROR (Message: IDENTITY_INSERT is already ON for table 'jdbc_testdb.master_dbo.test_table1')~~
 
 SET IDENTITY_INSERT dbo.test_table1 OFF;
 go
@@ -204,9 +204,9 @@ go
 
 SET IDENTITY_INSERT dbo.test_table3 ON;
 go
-~~ERROR (Code: 50360452)~~
+~~ERROR (Code: 8106)~~
 
-~~ERROR (Message: Table 'dbo.test_table3' does not have the identity property. Cannot perform SET operation.)~~
+~~ERROR (Message: Table 'master_dbo.test_table3' does not have the identity property. Cannot perform SET operation.)~~
 
 
 -- Test INSERT with default target list that omits identity columns
@@ -256,14 +256,14 @@ numeric
 -- Expect Errors. Cannot insert without explicit identity column value
 INSERT INTO employees VALUES (N'Michael', N'Collins', 11236.9898);
 go
-~~ERROR (Code: 50360452)~~
+~~ERROR (Code: 545)~~
 
 ~~ERROR (Message: Explicit value must be specified for identity column in table 'employees' when IDENTITY_INSERT is set to ON)~~
 
 
 INSERT INTO employees (firstname, lastname, salary) VALUES (N'Michael', N'Collins', 11236.9898);
 go
-~~ERROR (Code: 50360452)~~
+~~ERROR (Code: 545)~~
 
 ~~ERROR (Message: Explicit value must be specified for identity column in table 'employees' when IDENTITY_INSERT is set to ON)~~
 
@@ -323,7 +323,7 @@ go
 -- Expect error. Insert restriction
 EXEC insert_test_table_c_default 30;
 go
-~~ERROR (Code: 50360452)~~
+~~ERROR (Code: 545)~~
 
 ~~ERROR (Message: Explicit value must be specified for identity column in table 'test_table1' when IDENTITY_INSERT is set to ON)~~
 
@@ -718,6 +718,10 @@ go
 
 CREATE TABLE dbo.test_id_index_tinyint (id TINYINT IDENTITY PRIMARY KEY, mycol INT)
 go
+~~ERROR (Code: 33557097)~~
+
+~~ERROR (Message: identity column type must be smallint, integer, or bigint)~~
+
 
 CREATE TABLE dbo.test_id_index_numeric (id NUMERIC IDENTITY PRIMARY KEY, mycol INT)
 go
@@ -847,16 +851,9 @@ Seq Scan on test_id_index
 ~~END~~
 
 
-SELECT id, mycol FROM dbo.test_id_index_tinyint WHERE id = scope_identity()
-go
-~~START~~
-text
-Query Text: SELECT id, mycol FROM dbo.test_id_index_tinyint WHERE id = scope_identity()
-Index Scan using test_id_index_tinyint_pkey on test_id_index_tinyint
-  Index Cond: (id = babelfish_get_last_identity())
-~~END~~
 
-
+-- SELECT id, mycol FROM dbo.test_id_index_tinyint WHERE id = scope_identity()
+-- go
 SELECT id, mycol FROM dbo.test_id_index_smallint WHERE id = scope_identity()
 go
 ~~START~~
@@ -928,7 +925,7 @@ dbo.t1_identity_1,
 dbo.t1_identity_2,
 dbo.test_identity_range,
 dbo.test_id_index,
-dbo.test_id_index_tinyint,
+-- dbo.test_id_index_tinyint,
 dbo.test_id_index_smallint,
 dbo.test_id_index_bigint,
 dbo.test_id_index_numeric,

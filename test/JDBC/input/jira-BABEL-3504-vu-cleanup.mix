@@ -22,8 +22,8 @@ go
 drop sequence jira_babel_3504_sch1.jira_babel_3504_seq1;
 go
 
-drop sequence jira_babel_3504_sch1.jira_babel_3504_seq2;
-go
+--drop sequence jira_babel_3504_sch1.jira_babel_3504_seq2;
+--go
 
 drop sequence jira_babel_3504_sch1.jira_babel_3504_seq3;
 go
@@ -40,8 +40,8 @@ go
 drop sequence jira_babel_3504_sch1.jira_babel_3504_seq7;
 go
 
-drop sequence jira_babel_3504_sch2.jira_babel_3504_udtseq1;
-go
+--drop sequence jira_babel_3504_sch2.jira_babel_3504_udtseq1;
+--go
 
 drop sequence jira_babel_3504_sch2.jira_babel_3504_udtseq2;
 go
@@ -58,8 +58,8 @@ go
 drop sequence jira_babel_3504_sch2.jira_babel_3504_udtseq6;
 go
 
-drop type jira_babel_3504_sch2.jira_babel_3504_tinyint;
-go
+--drop type jira_babel_3504_sch2.jira_babel_3504_tinyint;
+--go
 
 drop type jira_babel_3504_sch2.jira_babel_3504_smallint;
 go

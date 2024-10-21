@@ -499,20 +499,16 @@ smalldatetime
 
 SELECT CAST(CAST (260.5937465072345996348935531215926 as TINYINT) as SMALLDATETIME)
 GO
-~~START~~
-smalldatetime
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: tinyint out of range)~~
 
 
 SELECT CAST(CAST (-1 as TINYINT) as SMALLDATETIME)
 GO
-~~START~~
-smalldatetime
 ~~ERROR (Code: 220)~~
 
-~~ERROR (Message: An error occurred during the current command (Done status 0). value for domain tinyint violates check constraint "tinyint_check")~~
+~~ERROR (Message: tinyint out of range)~~
 
 
 --=== Test casting MONEY to SMALLDATETIME ===--

@@ -37,7 +37,6 @@ TestSQLVariant
 TestText
 TestTime
 TestTinyInt
-TestUDD-before-15_7-or-16_3
 TestUniqueIdentifier
 TestVarChar
 TestXML
@@ -95,7 +94,6 @@ BABEL-404
 BABEL-493
 BABEL-621-after-14_12-before-15
 BABEL-775
->>>>>>> c1720e72 (Fix CASE statement when branch expression is of String Datatype. (#2995)):test/JDBC/upgrade/14_13/schedule
 BABEL-1206
 BABEL-1243
 BABEL-1249

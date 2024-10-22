@@ -490,3 +490,4 @@ concat_ws
 binary-datatype-operators
 SELECT_INTO_TEST
 charindex_replace_patindex
+BABEL-5186

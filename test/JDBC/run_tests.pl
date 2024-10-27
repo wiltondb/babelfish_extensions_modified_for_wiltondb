@@ -108,6 +108,7 @@ if ($init) {
 
 $ENV{PATH} .= ";";
 $ENV{PATH} .= catfile($ENV{PGWIN_INSTALL_DIR}, "bin");
+$ENV{PGPASSWORD} = "12345678";
 $ENV{PG_SRC} = $ENV{PGWIN_SRC_DIR};
 if ($debug) {
   runcmd("mvn test -Dmaven.surefire.debug=true", "best effort");

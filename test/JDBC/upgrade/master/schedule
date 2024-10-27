@@ -63,7 +63,7 @@ column_domain_usage
 constraint_column_usage
 select-strip-parens-before-15_5
 sp_describe_first_result_set
-sys-host_name-before-15_8-or-16_4
+#sys-host_name-before-15_8-or-16_4
 SYSTEM_USER
 indexproperty
 sys-all_parameters
@@ -75,7 +75,7 @@ fulltextserviceproperty
 is_srvrolemember
 msdb-dbo-fn_syspolicy_is_automation_enabled
 objectproperty
-objectpropertyex-before-16_5-or-15_9
+#objectpropertyex-before-16_5-or-15_9
 sys-column-property
 sys-configurations
 sys-datefirst
@@ -336,7 +336,7 @@ sys-table_types_internal
 BABEL-3640
 sys-sysindexes
 ISC-Views
-ISC-Tables-before_16_4_or_15_8_or_14_13
+#ISC-Tables-before_16_4_or_15_8_or_14_13
 ISC-Columns
 #ISC-Check-Constraints
 ISC-Table_Constraints
@@ -352,7 +352,7 @@ BABEL_OBJECT_NAME
 sys-systypes
 BABEL_OBJECT_DEFINITION
 BABEL-733
-BABEL-3938-before-16_5-or-15_9
+#BABEL-3938-before-16_5-or-15_9
 BABEL-4098
 BABEL-4078-before-16_5-or-15_9
 BABEL-3215
@@ -365,7 +365,7 @@ BABEL_4330-before-15_8-or-16_4
 BABEL-4231
 BABEL-4384
 default_params
-permission_restrictions_from_pg
+#permission_restrictions_from_pg
 babel-4475
 upper_lower-before-15_8-or-16_4
 trim-before-15_8-or-16_4

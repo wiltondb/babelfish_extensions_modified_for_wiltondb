@@ -24,6 +24,10 @@ go
 
 drop sequence jira_babel_3504_sch1.jira_babel_3504_seq2;
 go
+~~ERROR (Code: 33557097)~~
+
+~~ERROR (Message: sequence "jira_babel_3504_seq2" does not exist)~~
+
 
 drop sequence jira_babel_3504_sch1.jira_babel_3504_seq3;
 go
@@ -42,6 +46,10 @@ go
 
 drop sequence jira_babel_3504_sch2.jira_babel_3504_udtseq1;
 go
+~~ERROR (Code: 33557097)~~
+
+~~ERROR (Message: sequence "jira_babel_3504_udtseq1" does not exist)~~
+
 
 drop sequence jira_babel_3504_sch2.jira_babel_3504_udtseq2;
 go

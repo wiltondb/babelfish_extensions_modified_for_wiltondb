@@ -75,38 +75,33 @@ GRANT SELECT ON information_schema_tsql.table_constraints TO PUBLIC;
 CREATE OR REPLACE PROCEDURE sys.create_db_roles_during_upgrade()
 LANGUAGE C
 AS 'babelfishpg_tsql', 'create_db_roles_during_upgrade';
-
 CALL sys.create_db_roles_during_upgrade();
-
 DROP PROCEDURE sys.create_db_roles_during_upgrade();
-
 DO
 LANGUAGE plpgsql
 $$
-DECLARE 
-	existing_server_roles TEXT;
+DECLARE
+    existing_server_roles TEXT;
 BEGIN
     SELECT STRING_AGG(rolname::text, ', ')
     INTO existing_server_roles FROM pg_catalog.pg_roles
     WHERE rolname IN ('securityadmin', 'dbcreator');
         
     IF existing_server_roles IS NOT NULL THEN
-            RAISE EXCEPTION 'The following role(s) already exist(s): %', existing_server_roles; 
+            RAISE EXCEPTION 'The following role(s) already exist(s): %', existing_server_roles;   
     ELSE
         EXECUTE format('CREATE ROLE securityadmin CREATEROLE INHERIT PASSWORD NULL');
         EXECUTE format('GRANT securityadmin TO bbf_role_admin WITH ADMIN TRUE');
         CALL sys.babel_initialize_logins('securityadmin');
-	EXECUTE format('CREATE ROLE dbcreator CREATEDB INHERIT PASSWORD NULL');
+        EXECUTE format('CREATE ROLE dbcreator CREATEDB INHERIT PASSWORD NULL');
         EXECUTE format('GRANT dbcreator TO bbf_role_admin WITH ADMIN TRUE');
         CALL sys.babel_initialize_logins('dbcreator');
     END IF;
 END;
 $$;
-
 CREATE OR REPLACE FUNCTION sys.bbf_is_member_of_role_nosuper(OID, OID)
 RETURNS BOOLEAN AS 'babelfishpg_tsql', 'bbf_is_member_of_role_nosuper'
 LANGUAGE C STABLE STRICT PARALLEL SAFE;
-
 -- SERVER_PRINCIPALS
 CREATE OR REPLACE VIEW sys.server_principals
 AS SELECT
@@ -152,9 +147,7 @@ CAST(NULL AS SYS.SYSNAME) AS default_language_name,
 CAST(NULL AS INT) AS credential_id,
 CAST(1 AS INT) AS owning_principal_id,
 CAST(0 AS sys.BIT) AS is_fixed_role;
-
 GRANT SELECT ON sys.server_principals TO PUBLIC;
-
 -- login_token
 CREATE OR REPLACE VIEW sys.login_token
 AS SELECT
@@ -178,9 +171,7 @@ CAST ('GRANT OR DENY' as sys.nvarchar(128)) as usage
 FROM pg_catalog.pg_roles AS Base INNER JOIN sys.babelfish_authid_login_ext AS Ext ON Base.rolname = Ext.rolname
 WHERE Ext.type = 'R'
 AND bbf_is_member_of_role_nosuper(sys.suser_id(), Base.oid);
-
 GRANT SELECT ON sys.login_token TO PUBLIC;
-
 CREATE OR REPLACE FUNCTION is_srvrolemember(role sys.SYSNAME, login sys.SYSNAME DEFAULT suser_name())
 RETURNS INTEGER AS
 $$
@@ -189,7 +180,6 @@ DECLARE login_valid BOOLEAN;
 BEGIN
 	role  := TRIM(trailing from LOWER(role));
 	login := TRIM(trailing from LOWER(login));
-	
 	login_valid = (login = suser_name() COLLATE sys.database_default) OR 
 		(EXISTS (SELECT name
 	 			FROM sys.server_principals
@@ -203,7 +193,7 @@ BEGIN
     ELSIF role = 'public' COLLATE sys.database_default THEN
     	RETURN 1;
 	
-    ELSIF role COLLATE sys.database_default IN ('sysadmin', 'securityadmin', 'dbcreator') THEN
+ 	ELSIF role COLLATE sys.database_default IN ('sysadmin', 'securityadmin', 'dbcreator') THEN
 	  	has_role = (pg_has_role(login::TEXT, role::TEXT, 'MEMBER')
                         OR ((login COLLATE sys.database_default NOT IN ('sysadmin', 'securityadmin', 'dbcreator'))
 					        AND pg_has_role(login::TEXT, 'sysadmin'::TEXT, 'MEMBER')));
@@ -223,12 +213,13 @@ BEGIN
  	
     ELSE
  		  RETURN NULL;
-    END IF;
+ 	END IF;
 	
  	EXCEPTION WHEN OTHERS THEN
 	 	  RETURN NULL;
 END;
 $$ LANGUAGE plpgsql STABLE;
+
 
 -- SYSLOGINS
 CREATE OR REPLACE VIEW sys.syslogins
@@ -293,9 +284,7 @@ AS INT) AS dbcreator,
 CAST(0 AS INT) AS bulkadmin
 FROM sys.server_principals AS Base
 WHERE Base.type in ('S', 'U');
-
 GRANT SELECT ON sys.syslogins TO PUBLIC;
-
 CREATE OR REPLACE FUNCTION sys.is_member(IN role sys.SYSNAME)
 RETURNS INT AS
 $$
@@ -360,7 +349,7 @@ ON Base.rolname = Ext.rolname
 LEFT OUTER JOIN pg_catalog.pg_roles Base2
 ON Ext.login_name = Base2.rolname
 WHERE Ext.database_name = DB_NAME()
-  AND (Ext.orig_username IN ('dbo', 'db_owner', 'db_accessadmin', 'db_datareader', 'db_datawriter', 'guest') -- system users should always be visible
+  AND (Ext.orig_username IN ('dbo', 'db_owner', 'db_securityadmin', 'db_accessadmin', 'db_datareader', 'db_datawriter', 'guest') -- system users should always be visible
   OR pg_has_role(Ext.rolname, 'MEMBER')) -- Current user should be able to see users it has permission of
 UNION ALL
 SELECT
@@ -388,23 +377,23 @@ CAST(-1 AS INT) AS default_language_lcid,
 CAST(0 AS SYS.BIT) AS allow_encrypted_value_modifications
 FROM (VALUES ('public', 'R'), ('sys', 'S'), ('INFORMATION_SCHEMA', 'S')) as dummy_principals(name, type);
 GRANT SELECT ON sys.database_principals TO PUBLIC;
-
 CREATE OR REPLACE PROCEDURE sys.sp_helpdbfixedrole("@rolename" sys.SYSNAME = NULL) AS
 $$
 BEGIN
 	-- Returns a list of the fixed database roles. 
-	IF LOWER(RTRIM(@rolename)) IS NULL OR LOWER(RTRIM(@rolename)) IN ('db_owner', 'db_accessadmin', 'db_datareader', 'db_datawriter')
+	IF LOWER(RTRIM(@rolename)) IS NULL OR LOWER(RTRIM(@rolename)) IN ('db_owner', 'db_accessadmin', 'db_securityadmin', 'db_datareader', 'db_datawriter')
 	BEGIN
 		SELECT CAST(DbFixedRole as sys.SYSNAME) AS DbFixedRole, CAST(Description AS sys.nvarchar(70)) AS Description FROM (
 			VALUES ('db_owner', 'DB Owners'),
 			('db_accessadmin', 'DB Access Administrators'),
+			('db_securityadmin', 'DB Security Administrators'),
 			('db_datareader', 'DB Data Reader'),
 			('db_datawriter', 'DB Data Writer')) x(DbFixedRole, Description)
 			WHERE LOWER(RTRIM(@rolename)) IS NULL OR LOWER(RTRIM(@rolename)) = DbFixedRole;
 	END
 	ELSE IF LOWER(RTRIM(@rolename)) IN (
-			'db_securityadmin','db_ddladmin', 'db_backupoperator', 
-			'db_datareader', 'db_datawriter', 'db_denydatareader', 'db_denydatawriter')
+			'db_ddladmin', 'db_backupoperator',
+			'db_denydatareader', 'db_denydatawriter')
 	BEGIN
 		-- Return an empty result set instead of raising an error
 		SELECT CAST(NULL AS sys.SYSNAME) AS DbFixedRole, CAST(NULL AS sys.nvarchar(70)) AS Description
@@ -449,8 +438,7 @@ BEGIN
 		LEFT OUTER JOIN pg_catalog.pg_roles AS Base4 ON Base4.rolname = Bsdb.owner
 		WHERE Ext1.database_name = DB_NAME()
 		AND (Ext1.type != 'R' OR Ext1.type != 'A')
-		AND Ext1.orig_username != 'db_owner'
-		AND Ext1.orig_username NOT IN ('db_owner', 'db_accessadmin', 'db_datareader', 'db_datawriter')
+		AND Ext1.orig_username NOT IN ('db_owner', 'db_securityadmin', 'db_accessadmin', 'db_datareader', 'db_datawriter')
 		ORDER BY UserName, RoleName;
 	END
 	-- If the security account is the db fixed role - db_owner
@@ -482,8 +470,7 @@ BEGIN
 		WHERE Ext1.database_name = DB_NAME()
 		AND Ext2.database_name = DB_NAME()
 		AND Ext1.type = 'R'
-		AND Ext2.orig_username != 'db_owner'
-		AND Ext2.orig_username NOT IN ('db_owner', 'db_accessadmin', 'db_datareader', 'db_datawriter')
+		AND Ext2.orig_username NOT IN ('db_owner', 'db_securityadmin', 'db_accessadmin', 'db_datareader', 'db_datawriter')
 		AND (Ext1.orig_username = @name_in_db OR pg_catalog.lower(Ext1.orig_username) = pg_catalog.lower(@name_in_db))
 		ORDER BY Role_name, Users_in_role;
 	END
@@ -521,8 +508,7 @@ BEGIN
 		LEFT OUTER JOIN pg_catalog.pg_roles AS Base4 ON Base4.rolname = Bsdb.owner
 		WHERE Ext1.database_name = DB_NAME()
 		AND (Ext1.type != 'R' OR Ext1.type != 'A')
-		AND Ext1.orig_username != 'db_owner'
-		AND Ext1.orig_username NOT IN ('db_owner', 'db_accessadmin', 'db_datareader', 'db_datawriter')
+		AND Ext1.orig_username NOT IN ('db_owner', 'db_securityadmin', 'db_accessadmin', 'db_datareader', 'db_datawriter')
 		AND (Ext1.orig_username = @name_in_db OR pg_catalog.lower(Ext1.orig_username) = pg_catalog.lower(@name_in_db))
 		ORDER BY UserName, RoleName;
 	END
@@ -629,7 +615,6 @@ END;
 $$
 LANGUAGE 'pltsql';
 GRANT EXECUTE ON PROCEDURE sys.sp_column_privileges TO PUBLIC;
-
 CREATE OR REPLACE VIEW sys.sp_table_privileges_view AS
 -- Will use sp_column_priivleges_view to get information from SELECT, INSERT and REFERENCES (only need permission from 1 column in table)
 SELECT DISTINCT
@@ -641,7 +626,6 @@ CAST(GRANTEE AS sys.sysname) AS GRANTEE,
 CAST(PRIVILEGE AS sys.sysname) COLLATE sys.database_default AS PRIVILEGE,
 CAST(IS_GRANTABLE AS sys.sysname) COLLATE sys.database_default AS IS_GRANTABLE
 FROM sys.sp_column_privileges_view
-
 UNION 
 -- We need these set of joins only for the DELETE privilege
 SELECT

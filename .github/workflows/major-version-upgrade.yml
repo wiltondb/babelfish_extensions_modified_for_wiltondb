@@ -27,7 +27,7 @@ jobs:
           cd postgresql_modified_for_babelfish
           ./configure --prefix=$HOME/${{env.OLD_INSTALL_DIR}} --with-python PYTHON=/usr/bin/python3.8 --enable-cassert CFLAGS="-ggdb" --with-libxml --with-uuid=ossp --with-icu
           make clean
-          make -j 4 2>error.txt
+          make -j 4
           make install
           make check
           cd contrib && make && sudo make install
@@ -58,10 +58,10 @@ jobs:
           retries=0
           until [ $retries -ge $max_retries ]
           do
-            wget http://postgis.net/stuff/postgis-3.4.0.tar.gz && break
+            wget http://postgis.net/stuff/postgis-3.5.0.tar.gz && break
             retries=$((retries+1))
           done
-          tar -xvzf postgis-3.4.0.tar.gz
+          tar -xvzf postgis-3.5.0.tar.gz
           retries1=0
           until [ $retries1 -ge $max_retries ]
           do
@@ -77,7 +77,7 @@ jobs:
           cmake -DCMAKE_INSTALL_LIBDIR="lib/x86_64-linux-gnu" -DCMAKE_INSTALL_PREFIX="/usr" ..
           cmake --build .
           sudo cmake --build . --target install
-          cd ../../postgis-3.4.0
+          cd ../../postgis-3.5.0
           ./configure --without-protobuf --without-raster --with-pgconfig=$HOME/psql_source/bin/pg_config
           make USE_PGXS=1 PG_CONFIG=~/psql_source/bin/pg_config
           sudo make USE_PGXS=1 PG_CONFIG=~/psql_source/bin/pg_config install
@@ -209,6 +209,7 @@ jobs:
           && steps.check-babelfish-inconsistency.outputs.check_result == 0
         run: |
           cd test/JDBC/
+          echo "" >> jdbc_schedule
           echo 'ignore#!#babel_tds_fault_injection' >> jdbc_schedule
           echo 'ignore#!#tds_faultinjection' >> jdbc_schedule
           echo jdbc_schedule

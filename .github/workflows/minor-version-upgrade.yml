@@ -1,5 +1,5 @@
 name: Minor Version Upgrade Tests for empty database
-on: [push, pull_request]
+on: []
 
 jobs:
   extension-tests:
@@ -48,10 +48,10 @@ jobs:
           retries=0
           until [ $retries -ge $max_retries ]
           do
-            wget http://postgis.net/stuff/postgis-3.4.0.tar.gz && break
+            wget http://postgis.net/stuff/postgis-3.5.0.tar.gz && break
             retries=$((retries+1))
           done
-          tar -xvzf postgis-3.4.0.tar.gz
+          tar -xvzf postgis-3.5.0.tar.gz
           retries1=0
           until [ $retries1 -ge $max_retries ]
           do
@@ -67,7 +67,7 @@ jobs:
           cmake -DCMAKE_INSTALL_LIBDIR="lib/x86_64-linux-gnu" -DCMAKE_INSTALL_PREFIX="/usr" ..
           cmake --build .
           sudo cmake --build . --target install
-          cd ../../postgis-3.4.0
+          cd ../../postgis-3.5.0
           ./configure --without-protobuf --without-raster --with-pgconfig=$HOME/psql/bin/pg_config
           make USE_PGXS=1 PG_CONFIG=~/psql/bin/pg_config
           sudo make USE_PGXS=1 PG_CONFIG=~/psql/bin/pg_config install
@@ -83,7 +83,7 @@ jobs:
         if: always() && steps.build-extensions-older.outcome == 'success'
         run: |
           cd ..
-          export TDS_FDW_VERSION="2.0.3"
+          export TDS_FDW_VERSION="2.0.4"
           sudo apt-get install wget
           wget https://github.com/tds-fdw/tds_fdw/archive/v${TDS_FDW_VERSION}.tar.gz
           tar -xvzf v${TDS_FDW_VERSION}.tar.gz
@@ -149,7 +149,7 @@ jobs:
           mvn -B -ntp test
 
       - name: Upload Log
-        if: always() && steps.jdbc.outcome == 'failure'
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: postgres-log

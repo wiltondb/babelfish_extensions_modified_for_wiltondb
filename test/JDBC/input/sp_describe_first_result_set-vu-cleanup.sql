@@ -2,4 +2,5 @@ DROP TABLE test_table1;
 DROP TABLE sp_describe_first_result_set_vu_prepare_t1;
 DROP PROCEDURE sp_describe_first_result_set_vu_prepare_procedure;
 DROP PROCEDURE sp_describe_first_result_set_vu_prepare_procedure2;
+drop table sp_describe_first_result_set_vu_prepare_scale;
 GO

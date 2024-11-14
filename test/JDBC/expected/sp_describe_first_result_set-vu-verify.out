@@ -37,3 +37,19 @@ bit#!#int#!#varchar#!#bit#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#varc
 0#!#5#!#col_e#!#1#!#25#!#text#!#-1#!#0#!#0#!#bbf_unicode_cp1_ci_as#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#<NULL>#!#1#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#35#!#16#!#13632521#!#52
 ~~END~~
 
+
+EXEC sp_describe_first_result_set N'select * from sp_describe_first_result_set_vu_prepare_scale'
+GO
+~~START~~
+bit#!#int#!#varchar#!#bit#!#int#!#nvarchar#!#smallint#!#tinyint#!#tinyint#!#varchar#!#int#!#varchar#!#varchar#!#varchar#!#nvarchar#!#int#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#varchar#!#varchar#!#varchar#!#varchar#!#varchar#!#bit#!#bit#!#bit#!#bit#!#bit#!#smallint#!#smallint#!#smallint#!#int#!#int#!#int#!#tinyint
+0#!#1#!#col_time#!#1#!#1083#!#time#!#5#!#15#!#7#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#<NULL>#!#1#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#41#!#5#!#<NULL>#!#<NULL>
+0#!#2#!#col_time_7#!#1#!#1083#!#time#!#5#!#15#!#6#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#<NULL>#!#1#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#41#!#5#!#<NULL>#!#<NULL>
+0#!#3#!#col_time_6#!#1#!#1083#!#time#!#5#!#15#!#7#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#<NULL>#!#1#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#41#!#5#!#<NULL>#!#<NULL>
+0#!#4#!#col_datetime2#!#1#!#17655#!#datetime2#!#8#!#26#!#7#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#<NULL>#!#1#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#42#!#8#!#<NULL>#!#<NULL>
+0#!#5#!#col_datetime2_6#!#1#!#17655#!#datetime2#!#8#!#26#!#6#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#<NULL>#!#1#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#42#!#8#!#<NULL>#!#<NULL>
+0#!#6#!#col_datetime2_7#!#1#!#17655#!#datetime2#!#8#!#26#!#7#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#<NULL>#!#1#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#42#!#8#!#<NULL>#!#<NULL>
+0#!#7#!#col_datetimeoffset#!#1#!#17655#!#datetime2#!#8#!#26#!#7#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#<NULL>#!#1#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#42#!#8#!#<NULL>#!#<NULL>
+0#!#8#!#col_datetimeoffset_6#!#1#!#17655#!#datetime2#!#8#!#26#!#6#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#<NULL>#!#1#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#42#!#8#!#<NULL>#!#<NULL>
+0#!#9#!#col_datetimeoffset_7#!#1#!#17655#!#datetime2#!#8#!#26#!#7#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#<NULL>#!#0#!#<NULL>#!#1#!#0#!#0#!#<NULL>#!#<NULL>#!#<NULL>#!#42#!#8#!#<NULL>#!#<NULL>
+~~END~~
+

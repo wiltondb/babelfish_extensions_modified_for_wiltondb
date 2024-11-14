@@ -109,13 +109,13 @@ BEGIN
 		WHEN 'date' THEN scale = 0;
 		WHEN 'datetime' THEN scale = 3;
 		WHEN 'smalldatetime' THEN scale = 0;
-		WHEN 'datetime2' THEN scale = 6;
-		WHEN 'datetimeoffset' THEN scale = 6;
+		WHEN 'datetime2' THEN scale = 7;
+		WHEN 'datetimeoffset' THEN scale = 7;
 		WHEN 'decimal' THEN scale = 38;
 		WHEN 'numeric' THEN scale = 38;
 		WHEN 'money' THEN scale = 4;
 		WHEN 'smallmoney' THEN scale = 4;
-		WHEN 'time' THEN scale = 6;
+		WHEN 'time' THEN scale = 7;
 		WHEN 'tinyint' THEN scale = 0;
 		ELSE
 			IF return_null_for_rest

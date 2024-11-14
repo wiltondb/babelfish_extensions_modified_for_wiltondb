@@ -2891,14 +2891,14 @@ date
 SELECT * FROM OPENQUERY(bbf_server, 'SELECT * from TestDatetimeoffset_vu_prepare_testing');
 ~~START~~
 datetimeoffset
-1900-01-01 23:40:29.998000 +00:00
-1900-01-01 00:00:00.000000 +00:00
-0001-01-01 00:00:00.000000 +00:00
-2020-03-15 09:00:00.000000 +08:00
-2020-03-15 09:00:00.000000 +09:00
-1800-03-15 09:00:00.000000 +12:00
-2020-03-15 09:00:00.000000 -08:20
-1992-03-15 09:00:00.000000 +00:00
+1900-01-01 23:40:29.9980000 +00:00
+1900-01-01 00:00:00.0000000 +00:00
+0001-01-01 00:00:00.0000000 +00:00
+2020-03-15 09:00:00.0000000 +08:00
+2020-03-15 09:00:00.0000000 +09:00
+1800-03-15 09:00:00.0000000 +12:00
+2020-03-15 09:00:00.0000000 -08:20
+1992-03-15 09:00:00.0000000 +00:00
 ~~END~~
 
 
@@ -3524,7 +3524,7 @@ bbf_server_2#!#1
 SELECT * FROM OPENQUERY(bbf_server_2, 'select 1')
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: TDS client library error: DB #: 20009, DB Msg: Unable to connect: server is unavailable or does not exist (1.2.3.4), OS #: 110, OS Msg: Connection timed out, Level: 9)~~
+~~ERROR (Message: TDS client library error: DB #: 20009, DB Msg: Unable to connect: server is unavailable or does not exist (1.2.3.4), OS #: 113, OS Msg: Connection timed out, Level: 9)~~
 
 
 # Test procedure dependent on OPENQUERY

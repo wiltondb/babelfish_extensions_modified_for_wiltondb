@@ -14,7 +14,7 @@ EXEC sp_columns @table_name = 'babel_sp_columns_vu_prepare_t_time'
 GO
 ~~START~~
 varchar#!#varchar#!#varchar#!#varchar#!#smallint#!#varchar#!#int#!#int#!#smallint#!#smallint#!#smallint#!#varchar#!#nvarchar#!#smallint#!#smallint#!#int#!#int#!#varchar#!#int
-babel_sp_columns_vu_prepare_mydb1#!#dbo#!#babel_sp_columns_vu_prepare_t_time#!#a#!#-154#!#time#!#15#!#12#!#6#!#<NULL>#!#1#!#<NULL>#!#<NULL>#!#-154#!#0#!#<NULL>#!#1#!#YES#!#0
+babel_sp_columns_vu_prepare_mydb1#!#dbo#!#babel_sp_columns_vu_prepare_t_time#!#a#!#-154#!#time#!#15#!#12#!#7#!#<NULL>#!#1#!#<NULL>#!#<NULL>#!#-154#!#0#!#<NULL>#!#1#!#YES#!#0
 ~~END~~
 
 

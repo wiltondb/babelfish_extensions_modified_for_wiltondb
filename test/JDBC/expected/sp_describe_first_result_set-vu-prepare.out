@@ -22,14 +22,17 @@ GO
 
 -- #91
 create table sp_describe_first_result_set_vu_prepare_scale (
-    col_time             time,
-    col_time_7           time(6),
-    col_time_6           time(7),
-    col_datetime2        datetime2,
-    col_datetime2_6      datetime2(6),
-    col_datetime2_7      datetime2(7),
-    col_datetimeoffset   datetime2,
-    col_datetimeoffset_6 datetime2(6),
-    col_datetimeoffset_7 datetime2(7)
+    col_time              time,
+    col_time_6            time(6),
+    col_time_7            time(7),
+    col_time_7b           [time](7),
+    col_datetime2         datetime2,
+    col_datetime2_6       datetime2(6),
+    col_datetime2_7       datetime2(7),
+    col_datetime2_7b      [datetime2](7),
+    col_datetimeoffset    datetimeoffset,
+    col_datetimeoffset_6  datetimeoffset(6),
+    col_datetimeoffset_7  datetimeoffset(7),
+    col_datetimeoffset_7b [datetimeoffset](7)
 )
 go

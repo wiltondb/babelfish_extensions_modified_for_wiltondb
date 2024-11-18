@@ -142,7 +142,7 @@ static bool pltsql_detect_numeric_overflow(int weight, int dscale, int first_blo
 static void insert_pltsql_function_defaults(HeapTuple func_tuple, List *defaults, Node **argarray);
 static int	print_pltsql_function_arguments(StringInfo buf, HeapTuple proctup, bool print_table_args, bool print_defaults);
 static void pltsql_GetNewObjectId(VariableCache variableCache);
-static void pltsql_validate_var_datatype_scale(const TypeName *typeName, Type typ);
+static int32 *pltsql_validate_var_datatype_scale(const TypeName *typeName, Type typ);
 static bool pltsql_bbfCustomProcessUtility(ParseState *pstate,
 									  PlannedStmt *pstmt,
 									  const char *queryString,
@@ -3878,7 +3878,7 @@ transform_like_in_add_constraint(Node *node)
  * - Checks whether variable length datatypes like numeric, decimal, time, datetime2, datetimeoffset
  * are declared with permissible datalength at the time of table or stored procedure creation
  */
-void
+int32*
 pltsql_validate_var_datatype_scale(const TypeName *typeName, Type typ)
 {
 	Oid			datatype_oid = InvalidOid;
@@ -3887,6 +3887,7 @@ pltsql_validate_var_datatype_scale(const TypeName *typeName, Type typ)
 	int			scale[2] = {-1, -1};
 	char	   *dataTypeName,
 			   *schemaName;
+	int32		*result = NULL;
 
 	DeconstructQualifiedName(typeName->names, &schemaName, &dataTypeName);
 
@@ -3920,13 +3921,20 @@ pltsql_validate_var_datatype_scale(const TypeName *typeName, Type typ)
 	}
 	else if ((datatype_oid == TIMEOID ||
 			  (*common_utility_plugin_ptr->is_tsql_datetime2_datatype) (datatype_oid) ||
-			  (*common_utility_plugin_ptr->is_tsql_datetimeoffset_datatype) (datatype_oid)) &&
-			 (scale[0] < 0 || scale[0] > 7))
+			  (*common_utility_plugin_ptr->is_tsql_datetimeoffset_datatype) (datatype_oid)))
 	{
-		ereport(ERROR,
-				(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
-				 errmsg("Specified scale %d is invalid. \'%s\' datatype must have scale between 0 and 7",
-						scale[0], dataTypeName)));
+		if (scale[0] < 0 || scale[0] > 7)
+			ereport(ERROR,
+					(errcode(ERRCODE_INVALID_PARAMETER_VALUE),
+					errmsg("Specified scale %d is invalid. \'%s\' datatype must have scale between 0 and 7",
+							scale[0], dataTypeName)));
+		// https://github.com/wiltondb/wiltondb/issues/91
+		if (sql_dialect == SQL_DIALECT_TSQL && scale[0] == 7)
+		{
+			result = palloc(sizeof(int32));
+			*result = typeName->typemod;
+			return result;
+		}
 	}
 	else if (datatype_oid == NUMERICOID ||
 			 (*common_utility_plugin_ptr->is_tsql_decimal_datatype) (datatype_oid))
@@ -3947,6 +3955,8 @@ pltsql_validate_var_datatype_scale(const TypeName *typeName, Type typ)
 					 errmsg("The scale %d for \'%s\' datatype must be within the range 0 to precision %d",
 							scale[1], dataTypeName, scale[0])));
 	}
+
+	return NULL;
 }
 
 /*

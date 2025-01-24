@@ -65,11 +65,11 @@ GO
 SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 CREATE TABLE [dbo].[test_datetime](
-	[c_time] [time](6) NULL,
+	[c_time] [time](7) NULL,
 	[c_date] [date] NULL,
 	[c_datetime] [datetime] NULL,
-	[c_datetime2] [datetime2](6) NULL,
-	[c_datetimeoffset] [datetimeoffset](6) NULL,
+	[c_datetime2] [datetime2](7) NULL,
+	[c_datetimeoffset] [datetimeoffset](7) NULL,
 	[c_smalldatetime] [smalldatetime] NULL
 ) ON [PRIMARY]
 

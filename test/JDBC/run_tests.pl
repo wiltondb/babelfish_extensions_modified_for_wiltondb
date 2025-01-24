@@ -80,7 +80,6 @@ if ($init) {
   make_path($pg_log_dir);
   runcmd("$pg_ctl start -D $pg_data -l $pg_log");
 
-  runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET max_connections = 256;\"");
   runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET ssl = ON;\"");
   runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET shared_preload_libraries = 'babelfishpg_tds','pg_stat_statements','system_stats';\"");
   runcmd("$psql -U $ENV{USERNAME} -d postgres -c \"ALTER SYSTEM SET track_functions = 'pl';\"");

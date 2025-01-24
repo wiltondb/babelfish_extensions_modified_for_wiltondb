@@ -3524,7 +3524,7 @@ bbf_server_2#!#1
 SELECT * FROM OPENQUERY(bbf_server_2, 'select 1')
 ~~ERROR (Code: 33557097)~~
 
-~~ERROR (Message: TDS client library error: DB #: 20009, DB Msg: Unable to connect: server is unavailable or does not exist (1.2.3.4), OS #: 113, OS Msg: Connection timed out, Level: 9)~~
+~~ERROR (Message: TDS client library error: DB #: 20009, DB Msg: Unable to connect: server is unavailable or does not exist (1.2.3.4), OS #: 110, OS Msg: Connection timed out, Level: 9)~~
 
 
 # Test procedure dependent on OPENQUERY

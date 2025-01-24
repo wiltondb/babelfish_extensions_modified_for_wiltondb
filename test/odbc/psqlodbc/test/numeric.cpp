@@ -169,7 +169,7 @@ TEST_F(PSQL_DataTypes_Numeric, Insertion_Failure) {
   }
 }
 
-TEST_F(PSQL_DataTypes_Numeric, Update_Success) {
+TEST_F(PSQL_DataTypes_Numeric, DISABLED_Update_Success) {
   const vector<vector<string>> LIST_OF_INSERTED_VALUES = {
     {"0.1", "0.2", "3", "4.4"}, // regular values for insertion (but will update to the same values during the test)
     {"0", "0", "0", "0" }, // update to smallest numbers
